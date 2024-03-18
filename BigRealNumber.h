@@ -24,9 +24,12 @@ public:
 
     BigRealNumber(const string& n);
 
+    ~BigRealNumber();
+
     string toString() const;
 
-    bool negative() const;
+    // Перегрузка оператора присваивания (=)
+    BigRealNumber& operator=(const BigRealNumber &other);
 
     // Перегрузка оператора сложения (+)
     BigRealNumber operator+(const BigRealNumber &other) const;
@@ -67,8 +70,17 @@ public:
     // Вычисления факториала
     BigRealNumber factorial(int fact);
 
+    short addArraysToBRL(
+            const BigRealNumber &other,
+            BigRealNumber &res,
+            bool addToFract,
+            short transfer
+    ) const;
+
+
 };
 
 #endif //UNTITLED1_BigRealNumber_H
+
 
 
