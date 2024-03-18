@@ -65,27 +65,15 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     BigRealNumber res;
     res.isNegative = isNegative;
 
+    // 100.001
+    //  90.09
+
+    // 001.100
+    // 09.  90
+
     short trans = 0;
     // сложение дробных частей
-    for (int i = 0; i < max(fractPrtLen, other.fractPrtLen); i++) {
-        short n = fractPrt[i] + other.fractPrt[i] + trans;
-        trans = n > 9;
-        n %= 10;
-        if (res.appendToFract(n)) {
-            break;
-        }
-    }
 
-    // сложение целых частей
-    for (int i = 0; i < max(intPrtLen, other.intPrtLen); i++) {
-        short n = intPrt[i] + other.intPrt[i] + trans;
-        trans = n > 9;
-        n %= 10;
-        res.appendToInt(n);
-    }
-    if (trans) {
-        res.appendToInt(trans);
-    }
 
     return res;
 }
