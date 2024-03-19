@@ -6,6 +6,7 @@
 #define UNTITLED1_BIGREALNUMBER_H
 #include "string"
 #include "stdexcept"
+#include "math.h"
 using namespace std;
 
 class BigRealNumber {
@@ -71,13 +72,13 @@ public:
     BigRealNumber factorial(int fact);
 
     short addArraysToBRL(
-            const BigRealNumber &other,
+            const BigRealNumber &term1,
+            const BigRealNumber &term2,
             BigRealNumber &res,
             bool addToFract,
+            bool minusTerm2,
             short transfer
     ) const;
-
-
 };
 
 #endif //UNTITLED1_BigRealNumber_H

@@ -56,7 +56,7 @@ string BigRealNumber::toString() const {
     return numb;
 }
 
-BigRealNumber& BigRealNumber::operator=(const BigRealNumber &other) {
+BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     isNegative = other.isNegative;
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
@@ -90,9 +90,13 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     res.isNegative = isNegative;
 
     // сложение дробных частей
-    short trans = addArraysToBRL(other, res, true, 0);
+    short trans = addArraysToBRL(*this, other,
+                                 res, true,
+                                 false, 0);
     // сложение целых частей
-    addArraysToBRL(other, res, false, trans);
+    addArraysToBRL(*this, other,
+                   res, false,
+                   false, trans);
 
     return res;
 }
@@ -114,9 +118,6 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     }
 
     BigRealNumber res;
-
-
-
 }
 
 // -------- вспомогательные методы --------------
@@ -137,56 +138,66 @@ bool BigRealNumber::appendToFract(short number) {
 }
 
 short BigRealNumber::addArraysToBRL(
-        const BigRealNumber &other,
+        const BigRealNumber &term1,
+        const BigRealNumber &term2,
         BigRealNumber &res,
         bool addToFract,
+        bool minusTerm2,
         short transfer
 ) const {
     int len1;
     int len2;
     if (addToFract) {
-        len1 = fractPrtLen;
-        len2 = other.fractPrtLen;
+        len1 = term1.fractPrtLen;
+        len2 = term2.fractPrtLen;
     } else {
-        len1 = intPrtLen;
-        len2 = other.intPrtLen;
+        len1 = term1.intPrtLen;
+        len2 = term2.intPrtLen;
     }
 
     short *bg; // больший массив
     short *sm; // меньший массив
+    // если term2 наименьший массив
+    bool minIsTerm2;
+    // распределить массивы по длине
     if (len1 > len2) {
-        bg = addToFract ? fractPrt : intPrt;
-        sm = addToFract ? other.fractPrt : other.intPrt;
+        bg = addToFract ? term1.fractPrt : intPrt;
+        sm = addToFract ? term2.fractPrt : term2.intPrt;
+        minIsTerm2 = true;
     } else {
-        bg = addToFract ? other.fractPrt : other.intPrt;
-        sm = addToFract ? fractPrt : intPrt;
+        bg = addToFract ? term2.fractPrt : term2.intPrt;
+        sm = addToFract ? term1.fractPrt : intPrt;
+        minIsTerm2 = false;
     }
 
+    // распределить длинны
     if (addToFract) {
-        len1 = max(fractPrtLen, other.fractPrtLen);
-        len2 = min(fractPrtLen, other.fractPrtLen);
+        len1 = max(term1.fractPrtLen, term2.fractPrtLen);
+        len2 = min(term1.fractPrtLen, term2.fractPrtLen);
     } else {
-        len1 = max(intPrtLen, other.intPrtLen);
-        len2 = min(intPrtLen, other.intPrtLen);
+        len1 = max(term1.intPrtLen, term2.intPrtLen);
+        len2 = min(term1.intPrtLen, term2.intPrtLen);
     }
-
-
 
     for (int i = 0, j = 0; i < len1; i++) {
-        //90.90; 1000.001 пример
-        // 0001.100
-        // 09  . 09
-
         short n = transfer;
         // при сложении целых частей, начало меньшего массива прикладывается
         // к началу большего
         // при сложении дробных частей, конец меньшего массива прикладывается к
         // концу большего
+        // пример 90.90; 1000.001
+        // 0001.100
+        // 09  . 09
         if ((i < len2 && !addToFract) || (i >= len1 - len2 && addToFract)) {
-            n += sm[j++];
+            n += sm[j++] * std::pow(-1, minIsTerm2 && minusTerm2);
         }
-        n += bg[i];
-        transfer = n > 9 || n < -9;
+        n += bg[i] * std::pow(-1, !minIsTerm2 && minusTerm2);
+
+        transfer = n > 9;
+        if (n < 0 && (addToFract || i < len1 - 1)) {
+            n += 10;
+            transfer = -1;
+        }
         n %= 10;
         if (addToFract) {
             if (!res.appendToFract(n)) {
@@ -197,10 +208,12 @@ short BigRealNumber::addArraysToBRL(
         }
     }
 
-    if (transfer && !addToFract) {
+    if (transfer > 0 && !addToFract) {
         res.appendToInt(transfer);
     }
 
     return transfer;
 }
 
+// 0.0 - 1.0
+// 0-0
