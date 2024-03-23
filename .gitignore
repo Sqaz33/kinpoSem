@@ -1,0 +1,9 @@
+### Example user template template
+### Example user template
+
+.idea/
+*.iml
+cmake-build-debug/
+CMakeLists.txt
+out
+gen
