@@ -77,9 +77,6 @@ public:
     // Возведение в степень
     BigRealNumber pw(int pow);
 
-    // Извлечение корня
-    BigRealNumber sqrt();
-
     // Вычисления факториала
     BigRealNumber factorial(int fact);
 };
