@@ -156,6 +156,10 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     }
 }
 
+BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
+
+}
+
 bool BigRealNumber::operator==(const BigRealNumber& other) const {
     if (fractPrtLen != other.fractPrtLen ||
         intPrtLen != other.intPrtLen ||
@@ -176,6 +180,14 @@ bool BigRealNumber::operator==(const BigRealNumber& other) const {
     return true;
 }
 
+bool BigRealNumber::operator!=(const BigRealNumber& other) const {
+    return !(*this == other);
+}
+
+bool BigRealNumber::operator<(const BigRealNumber& other) const {
+    return *this != other && !(*this > other);
+}
+
 bool BigRealNumber::operator>(const BigRealNumber& other) const {
     if (intPrtLen > other.intPrtLen) {
         return true;
@@ -192,7 +204,7 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
             return false;
         }
     }
-    // сравниваем дробные части ---------- переделать
+    // сравниваем дробные части
     bool fractEqual = true;
     for (int i = fractPrtLen - 1; i >= 0; i--) {
         if (fractEqual) {
@@ -206,6 +218,13 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
         return false;
     }
     return true;
+}
+
+bool BigRealNumber::operator<=(const BigRealNumber& other) const {
+    if (*this == other) {
+        return true;
+    }
+    return *this < other;
 }
 
 bool BigRealNumber::operator>=(const BigRealNumber& other) const {

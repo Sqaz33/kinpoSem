@@ -129,7 +129,6 @@
   <ItemGroup>
     <ClCompile Include="BigRealNumber.cpp" />
     <ClCompile Include="kinpoSem.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BigRealNumber.h" />
