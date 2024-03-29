@@ -115,7 +115,7 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     // сложение целых частей
     addArraysToBRL(*this, other,
                    res, false,
-                   false, trans);
+                   true, trans);
 
     return res;
 }
@@ -146,7 +146,7 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
                                       res, true,
                                       true, 0);
         addArraysToBRL(*this, other,
-                        res, true,
+                        res, false,
                         true, trans);
         return res;
     } else {
@@ -289,7 +289,7 @@ short BigRealNumber::addArraysToBRL(
         n += bg[i] * pow(-1, !minIsTerm2 && minusTerm2);
 
         transfer = n > 9;
-        if (n < 0 && (addToFract || i < len1 - 1)) {
+        if (n < 0) {
             n += 10;
             transfer = -1;
         }
