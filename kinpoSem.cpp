@@ -4,7 +4,7 @@
 int main() {
     BigRealNumber n("1234.90001");
     BigRealNumber n1("9321.00000001");
-    BigRealNumber n2 = n + n1;
+    BigRealNumber n2 = n - n1;
     cout << n2.toString();
 
 }

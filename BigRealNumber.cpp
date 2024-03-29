@@ -51,27 +51,28 @@ BigRealNumber::BigRealNumber(const string &numb) {
     }
 }
 
-BigRealNumber::~BigRealNumber() {
-    delete fractPrt;
-    delete intPrt;
-}
-
 string BigRealNumber::toString() const {
     string numb;
     if (isNegative) {
         numb.append(1, '-');
     }
     for (int i = intPrtLen - 1; i >= 0; i--) {
-        numb.append(1, (char)('0' + (int) intPrt[i]));
+        numb.append(1, (char)('0' + (int)intPrt[i]));
     }
-    numb.append(1, '.'); 
+    numb.append(1, '.');
     for (int i = fractPrtLen - 1; i >= 0; i--) {
-         numb.append(1, (char) ('0' + (int) fractPrt[i]));
+        numb.append(1, (char)('0' + (int)fractPrt[i]));
     }
 
     return numb;
 }
 
+BigRealNumber::~BigRealNumber() {
+    delete fractPrt;
+    delete intPrt;
+}
+
+//-----------------------------------------------------
 BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     isNegative = other.isNegative;
     fractPrtLen = other.fractPrtLen;
@@ -124,24 +125,94 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // -this - other
     // -this - (-other)
     // this - (-other)
+
     BigRealNumber res{};
     if ((isNegative && other.isNegative) || (!(isNegative) && other.isNegative)) {
-        return *this + other; // -this - other; this - (-other)
+        // -this - other; 
+        // this - (-other) = this + other
+        res = *this + other;
+        res.isNegative = isNegative;
+        return  res;
     } else if (isNegative && other.isNegative) {
-        // -this - (-other)
+        // -this - (-other) = other - this
         res = other;
-        res.isNegative = false;
         res = res - *this;
         return res;
     }
 
-    //if (*this >= other) {
-    //    return *this - other;
-    //} else {
-    //    res = other - *this;
-    //    res.isNegative = true;
-    //    return res;
-    //}
+    // this - other
+    if (*this >= other) {
+        short trans = addArraysToBRL(*this, other,
+                                      res, true,
+                                      true, 0);
+        addArraysToBRL(*this, other,
+                        res, true,
+                        true, trans);
+        return res;
+    } else {
+        res = other - *this;
+        res.isNegative = true;
+        return res;
+    }
+}
+
+bool BigRealNumber::operator==(const BigRealNumber& other) const {
+    if (fractPrtLen != other.fractPrtLen ||
+        intPrtLen != other.intPrtLen ||
+        isNegative != other.isNegative) 
+    {
+        return false;
+    }
+    for (int i = 0; i < fractPrtLen; i++) {
+        if (fractPrt[i] != other.fractPrt[i]) {
+            return false;
+        }
+    }
+    for (int i = 0; i < intPrtLen; i++) {
+        if (intPrt[i] != other.intPrt[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool BigRealNumber::operator>(const BigRealNumber& other) const {
+    if (intPrtLen > other.intPrtLen) {
+        return true;
+    }
+    else if (intPrtLen < other.intPrtLen) {
+        return false;
+    }
+
+    // сравниваем целые части, длинны равны
+    for (int i = intPrtLen - 1; i >= 0; i--) {
+        if (intPrt[i] > other.intPrt[i]) {
+            return true;
+        } else if (intPrt[i] < other.intPrt[i]) {
+            return false;
+        }
+    }
+    // сравниваем дробные части ---------- переделать
+    bool fractEqual = true;
+    for (int i = fractPrtLen - 1; i >= 0; i--) {
+        if (fractEqual) {
+            fractEqual = fractPrt[i] == other.fractPrt[i];
+        }
+        if (fractPrt[i] < other.fractPrt[i]) {
+            return false;
+        }
+    }
+    if (fractEqual && other.fractPrtLen > fractPrtLen) {
+        return false;
+    }
+    return true;
+}
+
+bool BigRealNumber::operator>=(const BigRealNumber& other) const {
+    if (*this == other) {
+        return true;
+    }
+    return *this > other;
 }
 
 // -------- вспомогательные методы --------------
