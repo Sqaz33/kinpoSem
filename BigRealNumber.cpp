@@ -1,5 +1,21 @@
 #include "BigRealNumber.h"
 
+BigRealNumber::BigRealNumber(const BigRealNumber& p) {
+    isNegative = p.isNegative;
+    fractPrtLen = p.fractPrtLen;
+    intPrtLen = p.intPrtLen;
+
+    this->fractPrt = new short[1000];
+    this->intPrt = new short[1000];
+
+    for (int i = 0; i < fractPrtLen; i++) {
+        this->fractPrt[i] = p.fractPrt[i];
+    }
+    for (int i = 0; i < intPrtLen; i++) {
+        this->intPrt[i] = p.intPrt[i];
+    }
+}
+
 BigRealNumber::BigRealNumber() {
     intPrt = new short[1000];
     fractPrt = new short[1000];
@@ -68,7 +84,7 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
         this->fractPrt[i] = other.fractPrt[i];
     }
     for (int i = 0; i < intPrtLen; i++) {
-        this->fractPrt[i] = other.fractPrt[i];
+        this->intPrt[i] = other.intPrt[i];
     }
 
     return *this;
@@ -119,13 +135,13 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
         return res;
     }
 
-    if (*this >= other) {
-        return *this - other;
-    } else {
-        res = other - *this;
-        res.isNegative = true;
-        return res;
-    }
+    //if (*this >= other) {
+    //    return *this - other;
+    //} else {
+    //    res = other - *this;
+    //    res.isNegative = true;
+    //    return res;
+    //}
 }
 
 // -------- вспомогательные методы --------------
@@ -222,7 +238,3 @@ short BigRealNumber::addArraysToBRL(
 
     return transfer;
 }
-
-// 0.0 - 1.0
-// 0-0
-

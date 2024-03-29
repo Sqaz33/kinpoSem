@@ -19,9 +19,20 @@ private:
     int fractPrtLen;
     bool isNegative;
 
+    short addArraysToBRL(
+        const BigRealNumber& term1,
+        const BigRealNumber& term2,
+        BigRealNumber& res,
+        bool addToFract,
+        bool minusTerm2,
+        short transfer
+    ) const;
+
     void appendToInt(short number);
     bool appendToFract(short number);
 public:
+    BigRealNumber(const BigRealNumber& p);
+
     BigRealNumber();
 
     BigRealNumber(const string& n);
@@ -71,15 +82,6 @@ public:
 
     // Вычисления факториала
     BigRealNumber factorial(int fact);
-
-    short addArraysToBRL(
-            const BigRealNumber &term1,
-            const BigRealNumber &term2,
-            BigRealNumber &res,
-            bool addToFract,
-            bool minusTerm2,
-            short transfer
-    ) const;
 };
 
 #endif //UNTITLED1_BigRealNumber_H
