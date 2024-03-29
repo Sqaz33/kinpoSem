@@ -46,11 +46,11 @@ string BigRealNumber::toString() const {
         numb.append(1, '-');
     }
     for (int i = intPrtLen - 1; i >= 0; i--) {
-        numb.append(1, (char) ('0' + (int) intPrt[i]));
+        numb.append(1, (char)('0' + (int) intPrt[i]));
     }
-    numb.append(1, '.');
+    numb.append(1, '.'); 
     for (int i = fractPrtLen - 1; i >= 0; i--) {
-        numb.append(1, (char) ('0' + (int) fractPrt[i]));
+         numb.append(1, (char) ('0' + (int) fractPrt[i]));
     }
 
     return numb;
@@ -61,14 +61,14 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
 
-    fractPrt = new short[1000];
-    intPrt = new short[1000];
+    this->fractPrt = new short[1000];
+    this->intPrt = new short[1000];
 
     for (int i = 0; i < fractPrtLen; i++) {
-        fractPrt[i] = other.fractPrt[i];
+        this->fractPrt[i] = other.fractPrt[i];
     }
     for (int i = 0; i < intPrtLen; i++) {
-        fractPrt[i] = other.fractPrt[i];
+        this->fractPrt[i] = other.fractPrt[i];
     }
 
     return *this;
@@ -86,7 +86,9 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
         return other - *this;
     }
 
-    BigRealNumber res;
+    // this + other
+    // -this + (-other)
+    BigRealNumber res{};
     res.isNegative = isNegative;
 
     // сложение дробных частей
@@ -106,18 +108,24 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // -this - other
     // -this - (-other)
     // this - (-other)
-
+    BigRealNumber res{};
     if ((isNegative && other.isNegative) || (!(isNegative) && other.isNegative)) {
         return *this + other; // -this - other; this - (-other)
     } else if (isNegative && other.isNegative) {
         // -this - (-other)
-        BigRealNumber res = other;
+        res = other;
         res.isNegative = false;
         res = res - *this;
         return res;
     }
 
-    BigRealNumber res;
+    if (*this >= other) {
+        return *this - other;
+    } else {
+        res = other - *this;
+        res.isNegative = true;
+        return res;
+    }
 }
 
 // -------- вспомогательные методы --------------
@@ -189,9 +197,9 @@ short BigRealNumber::addArraysToBRL(
         // 0001.100
         // 09  . 09
         if ((i < len2 && !addToFract) || (i >= len1 - len2 && addToFract)) {
-            n += sm[j++] * std::pow(-1, minIsTerm2 && minusTerm2);
+            n += sm[j++] * pow(-1, minIsTerm2 && minusTerm2);
         }
-        n += bg[i] * std::pow(-1, !minIsTerm2 && minusTerm2);
+        n += bg[i] * pow(-1, !minIsTerm2 && minusTerm2);
 
         transfer = n > 9;
         if (n < 0 && (addToFract || i < len1 - 1)) {
@@ -217,3 +225,4 @@ short BigRealNumber::addArraysToBRL(
 
 // 0.0 - 1.0
 // 0-0
+

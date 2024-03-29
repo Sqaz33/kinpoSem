@@ -7,6 +7,7 @@
 #include "string"
 #include "stdexcept"
 #include "math.h"
+#include "iostream"
 using namespace std;
 
 class BigRealNumber {
@@ -63,7 +64,7 @@ public:
     bool operator>=(const BigRealNumber &other) const;
 
     // Возведение в степень
-    BigRealNumber pow(int pow);
+    BigRealNumber pw(int pow);
 
     // Извлечение корня
     BigRealNumber sqrt();
