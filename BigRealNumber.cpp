@@ -6,7 +6,9 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     intPrtLen = p.intPrtLen;
 
     this->fractPrt = new short[1000];
+    fillArrayWithZero(this->fractPrt, 1000);
     this->intPrt = new short[1000];
+    fillArrayWithZero(this->intPrt, 1000);
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = p.fractPrt[i];
@@ -18,37 +20,38 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
 
 BigRealNumber::BigRealNumber(const string &numb) {
     intPrt = new short[1000];
+    fillArrayWithZero(intPrt, 1000);
     fractPrt = new short[1000];
+    fillArrayWithZero(fractPrt, 1000);
     isNegative = numb[0] == '-';
 
     int point = (int) numb.find('.');
-    int start = getFirstNotZero(
-        numb, isNegative ? 1 : 0, point - 1, false
-    );
-    int stop = getFirstNotZero(
-        numb, numb.length() - 1, point + 1, true
-    );
-    start = start == -1 ? point - 1 : start;
-    stop = stop == -1 ? point + 1 : stop;
 
-
-    intPrtLen = point - start;
-    fractPrtLen = stop - point;
+    intPrtLen = point;
+    fractPrtLen = numb.length() - intPrtLen - 1;
+    if (isNegative) {
+        intPrt--;
+    }
 
     // копирование целой части
-    for (int j = start, i = intPrtLen - 1; j < point; j++, i--) {
-        intPrt[i] = (short) (numb.at(j) - '0');
+    int j = isNegative ? 1 : 0;
+    for (int i = intPrtLen - 1; i >= 0; i--, j++) {
+        intPrt[i] = (short)(numb.at(j) - '0');
     }
-
+    j++;
     // копирование дробной части
-    for (int j = point + 1, i = fractPrtLen - 1; j <= stop; j++, i--) {
-        fractPrt[i] = (short) (numb.at(j) - '0');
+    for (int i = 0; i < fractPrtLen; i++, j++) {
+        fractPrt[j] = (short)(numb.at(j) - '0');
     }
+    removeInsignDigits();
 }
 
 BigRealNumber::BigRealNumber(int n) {
     intPrt = new short[1000];
+    fillArrayWithZero(intPrt, 1000);
     fractPrt = new short[1000];
+    fillArrayWithZero(fractPrt, 1000);
+
     fractPrtLen = 0;
     isNegative = n < 0;
     
@@ -67,7 +70,9 @@ BigRealNumber::BigRealNumber(int n) {
 
 BigRealNumber::BigRealNumber() {
     intPrt = new short[1000];
+    fillArrayWithZero(intPrt, 1000);
     fractPrt = new short[1000];
+    fillArrayWithZero(fractPrt, 1000);
     intPrtLen = 0;
     fractPrtLen = 0;
     isNegative = false;
@@ -86,11 +91,16 @@ string BigRealNumber::toString() const {
     for (int i = intPrtLen - 1; i >= 0; i--) {
         numb.append(1, (char)('0' + (int)intPrt[i]));
     }
+    if (!intPrtLen) {
+        numb.append(1, '0');
+    }
     numb.append(1, '.');
-    for (int i = fractPrtLen - 1; i >= 0; i--) {
+    for (int i = 0; i < fractPrtLen; i++) {
         numb.append(1, (char)('0' + (int)fractPrt[i]));
     }
-
+    if (!fractPrtLen) {
+        numb.append(1, '0');
+    }
     return numb;
 }
 
@@ -101,7 +111,9 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     intPrtLen = other.intPrtLen;
 
     this->fractPrt = new short[1000];
+    fillArrayWithZero(this->fractPrt, 1000);
     this->intPrt = new short[1000];
+    fillArrayWithZero(this->intPrt, 1000);
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = other.fractPrt[i];
@@ -165,19 +177,18 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - other
     if (*this >= other) {
         short trans = attachArrays(*this, other,
-                                      res, true,
-                                      true, 0);
+                                    res, true,
+                                    true, 0);
         attachArrays(*this, other,
-                        res, false,
-                        true, trans);
+                     res, false,
+                     true, trans);
+        res.removeInsignDigits();
         return res;
     } else {
         res = other - *this;
         res.isNegative = true;
         return res;
     }
-
-    
 }
 // доделать
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
@@ -254,33 +265,25 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
             return false;
         }
     }
+    
     // сравниваем дробные части
-    const BigRealNumber *mn;
-    const BigRealNumber *mx;
-    if (fractPrt > other.fractPrt) {
-        mx = this;
-        mn = &other;
-    } else {
-        mx = &other;
-        mn = this;
-    }
-    int diff = mx->fractPrtLen - mn->fractPrtLen;
-    bool mnIsBigger = true;
     bool isEqual = true;
-    for (int i = mn->fractPrtLen - 1; i >= 0 && mnIsBigger; i--) {
-        mnIsBigger = mn->fractPrt[i] >= mx->fractPrt[i + diff];
+    for (int i = 0; i < fractPrtLen; i++) {
         if (isEqual) {
-            isEqual = mn->fractPrt[i] == mx->fractPrt[i + diff];
+            isEqual = fractPrt[i] == other.fractPrt[i];
+        }
+        if (fractPrt[i] > other.fractPrt[i]) {
+            return true;
+        }
+        else if (fractPrt[i] < other.fractPrt[i]) {
+            return false;
         }
     }
-    if (isEqual && mx->fractPrtLen > mn->fractPrtLen) {
-        mnIsBigger = false;
-    }
 
-    if (!mnIsBigger && mn == this) {
+    if (isEqual && other.fractPrtLen > fractPrtLen) {
         return false;
     }
-
+    
     return *this != other;
 }
 
@@ -299,6 +302,12 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 }
 
 // -------- вспомогательные методы --------------
+void BigRealNumber::fillArrayWithZero(short* arr, int len) {
+    for (int i = 0; i < len; i++) {
+        arr[i] = 0;
+    }
+}
+
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 >= 1000) {
         throw runtime_error("Ошибка вычисления: целая часть "
@@ -315,31 +324,20 @@ bool BigRealNumber::appendToFract(short number) {
     return true;
 }
 
-int BigRealNumber::getFirstNotZero(const string& numb, int start, int stop, bool revers) {
-    for (int i = start; i != stop; i += pow(-1, revers)) {
-        if (numb.at(i) != '0') {
+void BigRealNumber::removeInsignDigits() {
+    int signDigit = getFirstNotZero(intPrt, 999, 0, true);
+    intPrtLen = signDigit + 1;
+    signDigit = getFirstNotZero(fractPrt, 999, 0, true);
+    fractPrtLen = signDigit + 1;
+}
+
+int BigRealNumber::getFirstNotZero(short* arr, int start, int stop, bool backward) {
+    for (int i = start; i != stop; i += pow(-1, backward)) {
+        if (arr[i]) {
             return i;
         }
     }
     return -1;
-}
-
-void BigRealNumber::shiftDigitsLeft(short* arr, int arrLen, int shift) {
-    int wp = 0;
-    int rp = shift;
-    for (; rp < arrLen; wp++, rp++) {
-        arr[wp] = arr[rp];
-    }
-}
-
-void BigRealNumber::fillRangeWithZeros(short* arr, int start, int stop) {
-    for (int i = start; i <= stop; i++) {
-        arr[i] = 0;
-    }
-}
-
-int BigRealNumber::removeLeadingZeros(short* arr, int len) {
-    int start = getFirstNotZero(arr, )
 }
 
 short BigRealNumber::attachArrays(
@@ -350,66 +348,47 @@ short BigRealNumber::attachArrays(
         bool minusTerm2,
         short transfer
 ) const {
-    int len1;
-    int len2;
+    int start;
+    int stop;
+    int diff;
+    short *t1;
+    short *t2;
+
     if (addToFract) {
-        len1 = term1.fractPrtLen;
-        len2 = term2.fractPrtLen;
+        start = max(term1.fractPrtLen, term2.fractPrtLen) - 1;
+        start = max(0, start);
+        stop = 0;
+        diff = -1;
+        t1 = term1.fractPrt;
+        t2 = term2.fractPrt;
     } else {
-        len1 = term1.intPrtLen;
-        len2 = term2.intPrtLen;
+        start = 0;
+        stop = max(term1.intPrtLen, term2.intPrtLen) - 1;
+        stop = max(0, stop);
+        diff = 1;
+        t1 = term1.intPrt;
+        t2 = term2.intPrt;
     }
 
-    short *bg; // больший массив
-    short *sm; // меньший массив
-    // если term2 наименьший массив
-    bool minIsTerm2;
-    // распределить массивы по длине
-    if (len1 > len2) {
-        bg = addToFract ? term1.fractPrt : intPrt;
-        sm = addToFract ? term2.fractPrt : term2.intPrt;
-        minIsTerm2 = true;
-    } else {
-        bg = addToFract ? term2.fractPrt : term2.intPrt;
-        sm = addToFract ? term1.fractPrt : intPrt;
-        minIsTerm2 = false;
-    }
-
-    // распределить длинны
-    if (addToFract) {
-        len1 = max(term1.fractPrtLen, term2.fractPrtLen);
-        len2 = min(term1.fractPrtLen, term2.fractPrtLen);
-    } else {
-        len1 = max(term1.intPrtLen, term2.intPrtLen);
-        len2 = min(term1.intPrtLen, term2.intPrtLen);
-    }
-
-    for (int i = 0, j = 0; i < len1; i++) {
+    for (int i = start; ; i += diff) {
         short n = transfer;
-        // при сложении целых частей, начало меньшего массива прикладывается
-        // к началу большего
-        // при сложении дробных частей, конец меньшего массива прикладывается к
-        // концу большего
-        // пример 90.90; 1000.001
-        // 0001.100
-        // 09  . 09
-        if ((i < len2 && !addToFract) || (i >= len1 - len2 && addToFract)) {
-            n += sm[j++] * pow(-1, minIsTerm2 && minusTerm2);
-        }
-        n += bg[i] * pow(-1, !minIsTerm2 && minusTerm2);
-
+        n += t1[i] + t2[i] * pow(-1, minusTerm2);
         transfer = n > 9;
         if (n < 0) {
             n += 10;
             transfer = -1;
         }
         n %= 10;
+
         if (addToFract) {
             if (!res.appendToFract(n)) {
                 break;
             }
         } else {
             res.appendToInt(n);
+        }
+        if (i == stop) {
+            break;
         }
     }
 

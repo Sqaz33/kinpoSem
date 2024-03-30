@@ -19,13 +19,11 @@ private:
     int fractPrtLen;
     bool isNegative;
 
+    void fillArrayWithZero(short *arr, int len);
     void appendToInt(short number);
     bool appendToFract(short number);
-    int getFirstNotZero(const string& numb, int start, int stop, bool revers);
-
-    void shiftDigitsLeft(short* arr, int arrLen, int shift);
-    void fillRangeWithZeros(short* arr, int start, int stop);
-    int removeLeadingZeros(short* arr, int len);
+    void removeInsignDigits();
+    int getFirstNotZero(short* arr, int start, int stop, bool backward);
 
     short attachArrays(
         const BigRealNumber& term1,
