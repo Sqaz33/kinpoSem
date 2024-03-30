@@ -33,9 +33,11 @@ private:
 public:
     BigRealNumber(const BigRealNumber& p);
 
-    BigRealNumber();
-
     BigRealNumber(const string& n);
+
+    BigRealNumber(int n);
+
+    BigRealNumber();
 
     ~BigRealNumber();
 
@@ -52,6 +54,7 @@ public:
 
     // Перегрузка оператора умножения (*)
     BigRealNumber operator*(const BigRealNumber &other) const;
+    BigRealNumber operator*(int n) const;
 
     // Перегрузка оператора деления (/)
     BigRealNumber operator/(const BigRealNumber &other) const;
@@ -82,6 +85,3 @@ public:
 };
 
 #endif //UNTITLED1_BigRealNumber_H
-
-
-

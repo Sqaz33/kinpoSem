@@ -16,14 +16,6 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     }
 }
 
-BigRealNumber::BigRealNumber() {
-    intPrt = new short[1000];
-    fractPrt = new short[1000];
-    intPrtLen = 0;
-    fractPrtLen = 0;
-    isNegative = false;
-}
-
 BigRealNumber::BigRealNumber(const string &numb) {
     intPrt = new short[1000];
     fractPrt = new short[1000];
@@ -51,6 +43,38 @@ BigRealNumber::BigRealNumber(const string &numb) {
     }
 }
 
+BigRealNumber::BigRealNumber(int n) {
+    intPrt = new short[1000];
+    fractPrt = new short[1000];
+    fractPrtLen = 0;
+    isNegative = n < 0;
+    
+    int a[1000];
+    int len = 0;
+    while (n > 0) {
+        a[len++] = n % 10;
+        n /= 10;
+    }
+    intPrtLen = len;
+
+    for (int i = 0, j = len  - 1; j >= 0; i++, j--) {
+        intPrt[i] = a[j];
+    }
+}
+
+BigRealNumber::BigRealNumber() {
+    intPrt = new short[1000];
+    fractPrt = new short[1000];
+    intPrtLen = 0;
+    fractPrtLen = 0;
+    isNegative = false;
+}
+
+BigRealNumber::~BigRealNumber() {
+    delete fractPrt;
+    delete intPrt;
+}
+
 string BigRealNumber::toString() const {
     string numb;
     if (isNegative) {
@@ -65,11 +89,6 @@ string BigRealNumber::toString() const {
     }
 
     return numb;
-}
-
-BigRealNumber::~BigRealNumber() {
-    delete fractPrt;
-    delete intPrt;
 }
 
 //-----------------------------------------------------
@@ -157,8 +176,35 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
 }
 
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
+    // умножить на целую часть
+    // прибавлять к ответу множиемое пока целая часть множителя > 0
+    BigRealNumber cp = other;
+    BigRealNumber zero(0);
+    BigRealNumber one(1);
+    BigRealNumber res;
 
+    cp.fractPrtLen = 0;
+    while (cp > zero) {
+        res = res + *this;
+        cp = cp - one;
+    }
+
+    // умножить на дробную часть
+    // умножать множитель на 10, пока он имеет 
+    // умножить множиемое на множитель
+    // поделить множиемое, на 10**кол. для умножение множителя
+
+    // сложить
+    return res;
 }
+
+BigRealNumber BigRealNumber::operator*(int n) const {
+    return *this * BigRealNumber(10);
+}
+
+//BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
+//
+//}
 
 bool BigRealNumber::operator==(const BigRealNumber& other) const {
     if (fractPrtLen != other.fractPrtLen ||
@@ -191,8 +237,7 @@ bool BigRealNumber::operator<(const BigRealNumber& other) const {
 bool BigRealNumber::operator>(const BigRealNumber& other) const {
     if (intPrtLen > other.intPrtLen) {
         return true;
-    }
-    else if (intPrtLen < other.intPrtLen) {
+    } else if (intPrtLen < other.intPrtLen) {
         return false;
     }
 
@@ -219,6 +264,9 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
     }
     return true;
 }
+
+// .10000000000
+// .99999000001
 
 bool BigRealNumber::operator<=(const BigRealNumber& other) const {
     if (*this == other) {
