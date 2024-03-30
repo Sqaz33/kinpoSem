@@ -19,6 +19,10 @@ private:
     int fractPrtLen;
     bool isNegative;
 
+    void appendToInt(short number);
+    bool appendToFract(short number);
+    int getFirstInteger(const string& numb, int start, int stop, bool revers);
+
     short addArraysToBRL(
         const BigRealNumber& term1,
         const BigRealNumber& term2,
@@ -27,9 +31,6 @@ private:
         bool minusTerm2,
         short transfer
     ) const;
-
-    void appendToInt(short number);
-    bool appendToFract(short number);
 public:
     BigRealNumber(const BigRealNumber& p);
 

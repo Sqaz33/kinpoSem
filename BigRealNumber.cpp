@@ -21,7 +21,12 @@ BigRealNumber::BigRealNumber(const string &numb) {
     fractPrt = new short[1000];
 
     isNegative = numb[0] == '-';
-    intPrtLen = (int) numb.find('.');
+    int stop = (int) numb.find('.') - 1;
+    int start = isNegative ? 1 : 0;
+
+
+    ss
+
     if (isNegative) {
         intPrtLen--;
     }
@@ -41,6 +46,8 @@ BigRealNumber::BigRealNumber(const string &numb) {
     for (int i = fractPrtLen - 1; i >= 0; i--, j++) {
         fractPrt[i] = (short) (numb.at(j) - '0');
     }
+
+   //?0000start_целая.дробная_stop00000
 }
 
 BigRealNumber::BigRealNumber(int n) {
@@ -255,9 +262,12 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
         if (fractEqual) {
             fractEqual = fractPrt[i] == other.fractPrt[i];
         }
-        if (fractPrt[i] < other.fractPrt[i]) {
+        if (fractPrt[i] > other.fractPrt[i]) {
+            return true;
+        } else if (fractPrt[i] < other.fractPrt[i]) {
             return false;
         }
+
     }
     if (fractEqual && other.fractPrtLen > fractPrtLen) {
         return false;
@@ -297,6 +307,15 @@ bool BigRealNumber::appendToFract(short number) {
     }
     fractPrt[fractPrtLen++] = number;
     return true;
+}
+
+int BigRealNumber::getFirstInteger(const string& numb, int start, int stop, bool revers) {
+    for (int i = start; i != stop; i += pow(-1, revers)) {
+        if (numb.at(i) != '0') {
+            return i;
+        }
+    }
+    return -1;
 }
 
 short BigRealNumber::addArraysToBRL(
