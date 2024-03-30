@@ -176,6 +176,8 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
         res.isNegative = true;
         return res;
     }
+
+    
 }
 // доделать
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
@@ -322,7 +324,23 @@ int BigRealNumber::getFirstNotZero(const string& numb, int start, int stop, bool
     return -1;
 }
 
-void BigRealNumber::
+void BigRealNumber::shiftDigitsLeft(short* arr, int arrLen, int shift) {
+    int wp = 0;
+    int rp = shift;
+    for (; rp < arrLen; wp++, rp++) {
+        arr[wp] = arr[rp];
+    }
+}
+
+void BigRealNumber::fillRangeWithZeros(short* arr, int start, int stop) {
+    for (int i = start; i <= stop; i++) {
+        arr[i] = 0;
+    }
+}
+
+int BigRealNumber::removeLeadingZeros(short* arr, int len) {
+    int start = getFirstNotZero(arr, )
+}
 
 short BigRealNumber::attachArrays(
         const BigRealNumber &term1,

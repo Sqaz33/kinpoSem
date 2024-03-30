@@ -23,8 +23,9 @@ private:
     bool appendToFract(short number);
     int getFirstNotZero(const string& numb, int start, int stop, bool revers);
 
-    void shiftDigitsLeft(short* arr, int shift);
-    void fillRangeWithZero(short* arr, int start, int stop);
+    void shiftDigitsLeft(short* arr, int arrLen, int shift);
+    void fillRangeWithZeros(short* arr, int start, int stop);
+    int removeLeadingZeros(short* arr, int len);
 
     short attachArrays(
         const BigRealNumber& term1,
