@@ -19,35 +19,31 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
 BigRealNumber::BigRealNumber(const string &numb) {
     intPrt = new short[1000];
     fractPrt = new short[1000];
-
     isNegative = numb[0] == '-';
-    int stop = (int) numb.find('.') - 1;
-    int start = isNegative ? 1 : 0;
+
+    int point = (int) numb.find('.');
+    int start = getFirstNotZero(
+        numb, isNegative ? 1 : 0, point - 1, false
+    );
+    int stop = getFirstNotZero(
+        numb, numb.length() - 1, point + 1, true
+    );
+    start = start == -1 ? point - 1 : start;
+    stop = stop == -1 ? point + 1 : stop;
 
 
-    ss
+    intPrtLen = point - start;
+    fractPrtLen = stop - point;
 
-    if (isNegative) {
-        intPrtLen--;
-    }
-    fractPrtLen = (int) numb.length() - intPrtLen - 1;
-    if (isNegative) {
-        fractPrtLen--;
-    }
-
-    int j = isNegative ? 1 : 0;
     // копирование целой части
-    for (int i = intPrtLen - 1; i >= 0; i--, j++) {
+    for (int j = start, i = intPrtLen - 1; j < point; j++, i--) {
         intPrt[i] = (short) (numb.at(j) - '0');
     }
-    j++;
 
     // копирование дробной части
-    for (int i = fractPrtLen - 1; i >= 0; i--, j++) {
+    for (int j = point + 1, i = fractPrtLen - 1; j <= stop; j++, i--) {
         fractPrt[i] = (short) (numb.at(j) - '0');
     }
-
-   //?0000start_целая.дробная_stop00000
 }
 
 BigRealNumber::BigRealNumber(int n) {
@@ -309,7 +305,7 @@ bool BigRealNumber::appendToFract(short number) {
     return true;
 }
 
-int BigRealNumber::getFirstInteger(const string& numb, int start, int stop, bool revers) {
+int BigRealNumber::getFirstNotZero(const string& numb, int start, int stop, bool revers) {
     for (int i = start; i != stop; i += pow(-1, revers)) {
         if (numb.at(i) != '0') {
             return i;

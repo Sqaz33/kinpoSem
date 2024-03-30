@@ -21,7 +21,7 @@ private:
 
     void appendToInt(short number);
     bool appendToFract(short number);
-    int getFirstInteger(const string& numb, int start, int stop, bool revers);
+    int getFirstNotZero(const string& numb, int start, int stop, bool revers);
 
     short addArraysToBRL(
         const BigRealNumber& term1,
