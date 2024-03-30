@@ -23,7 +23,7 @@ private:
     bool appendToFract(short number);
     int getFirstNotZero(const string& numb, int start, int stop, bool revers);
 
-    short addArraysToBRL(
+    short attachArrays(
         const BigRealNumber& term1,
         const BigRealNumber& term2,
         BigRealNumber& res,

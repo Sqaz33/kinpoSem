@@ -131,11 +131,11 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     res.isNegative = isNegative;
 
     // сложение дробных частей
-    short trans = addArraysToBRL(*this, other,
+    short trans = attachArrays(*this, other,
                                  res, true,
                                  false, 0);
     // сложение целых частей
-    addArraysToBRL(*this, other,
+    attachArrays(*this, other,
                    res, false,
                    true, trans);
 
@@ -164,10 +164,10 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
 
     // this - other
     if (*this >= other) {
-        short trans = addArraysToBRL(*this, other,
+        short trans = attachArrays(*this, other,
                                       res, true,
                                       true, 0);
-        addArraysToBRL(*this, other,
+        attachArrays(*this, other,
                         res, false,
                         true, trans);
         return res;
@@ -177,7 +177,7 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
         return res;
     }
 }
-
+// доделать
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
     // умножить на целую часть
     // прибавлять к ответу множиемое пока целая часть множителя > 0
@@ -253,26 +253,34 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
         }
     }
     // сравниваем дробные части
-    bool fractEqual = true;
-    for (int i = fractPrtLen - 1; i >= 0; i--) {
-        if (fractEqual) {
-            fractEqual = fractPrt[i] == other.fractPrt[i];
-        }
-        if (fractPrt[i] > other.fractPrt[i]) {
-            return true;
-        } else if (fractPrt[i] < other.fractPrt[i]) {
-            return false;
-        }
-
+    const BigRealNumber *mn;
+    const BigRealNumber *mx;
+    if (fractPrt > other.fractPrt) {
+        mx = this;
+        mn = &other;
+    } else {
+        mx = &other;
+        mn = this;
     }
-    if (fractEqual && other.fractPrtLen > fractPrtLen) {
+    int diff = mx->fractPrtLen - mn->fractPrtLen;
+    bool mnIsBigger = true;
+    bool isEqual = true;
+    for (int i = mn->fractPrtLen - 1; i >= 0 && mnIsBigger; i--) {
+        mnIsBigger = mn->fractPrt[i] >= mx->fractPrt[i + diff];
+        if (isEqual) {
+            isEqual = mn->fractPrt[i] == mx->fractPrt[i + diff];
+        }
+    }
+    if (isEqual && mx->fractPrtLen > mn->fractPrtLen) {
+        mnIsBigger = false;
+    }
+
+    if (!mnIsBigger && mn == this) {
         return false;
     }
-    return true;
-}
 
-// .10000000000
-// .99999000001
+    return *this != other;
+}
 
 bool BigRealNumber::operator<=(const BigRealNumber& other) const {
     if (*this == other) {
@@ -314,7 +322,7 @@ int BigRealNumber::getFirstNotZero(const string& numb, int start, int stop, bool
     return -1;
 }
 
-short BigRealNumber::addArraysToBRL(
+short BigRealNumber::attachArrays(
         const BigRealNumber &term1,
         const BigRealNumber &term2,
         BigRealNumber &res,

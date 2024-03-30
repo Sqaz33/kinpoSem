@@ -2,18 +2,28 @@
 #include "BigRealNumber.h"
 
 int main() {
-    BigRealNumber n1("00000.90001000");
-    cout << n1.toString() << endl;
-    BigRealNumber n2("000009.000000010000000000000");
-    cout << n2.toString();
-    BigRealNumber n3 = n1 - n1;
-    //cout << n2.toString();
-
+    int p;
+    //BigRealNumber n1("10000.0");
+    //BigRealNumber n2("0.000100000");
+    //cout << n1.toString() << endl;
+    //cout << n2.toString() << endl;
+    //BigRealNumber n3(0);
     //while (n1 > BigRealNumber(0)) {
     //    n1 = n1 - BigRealNumber(1);
     //    cout << n1.toString() << endl;
+    //    if (n1 == n3) {
+    //        cin >> p;
+    //    }
     //}
     //bool i = n1 >= n2;
     //cout << i;
+
+    BigRealNumber n1("0.000000000000000000000000000000000001");
+    BigRealNumber n2("0.001001");
+    bool b = n1 > n2;
+
+    cout << b;
+    
+    
 
 }
