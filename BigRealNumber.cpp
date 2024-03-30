@@ -322,6 +322,8 @@ int BigRealNumber::getFirstNotZero(const string& numb, int start, int stop, bool
     return -1;
 }
 
+void BigRealNumber::
+
 short BigRealNumber::attachArrays(
         const BigRealNumber &term1,
         const BigRealNumber &term2,
