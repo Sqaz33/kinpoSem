@@ -5,9 +5,9 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     fractPrtLen = p.fractPrtLen;
     intPrtLen = p.intPrtLen;
 
-    this->fractPrt = new short[1000];
+    this->fractPrt = new short[1000] {};
     fillArrayWithZero(this->fractPrt, 1000);
-    this->intPrt = new short[1000];
+    this->intPrt = new short[1000] {};
     fillArrayWithZero(this->intPrt, 1000);
 
     for (int i = 0; i < fractPrtLen; i++) {
@@ -52,20 +52,13 @@ BigRealNumber::BigRealNumber(int n) {
     fillArrayWithZero(intPrt, 1000);
     fractPrt = new short[1000];
     fillArrayWithZero(fractPrt, 1000);
-
     fractPrtLen = 0;
+    intPrtLen = 0;
     isNegative = n < 0;
     
-    int a[1000];
-    int len = 0;
     while (n > 0) {
-        a[len++] = n % 10;
+        intPrt[intPrtLen++] = (short)n % 10;
         n /= 10;
-    }
-    intPrtLen = len;
-
-    for (int i = 0, j = len  - 1; j >= 0; i++, j--) {
-        intPrt[i] = a[j];
     }
 }
 
@@ -150,8 +143,9 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     // сложение целых частей
     attachArrays(*this, other,
                    res, false,
-                   true, trans);
+                   false, trans);
 
+    res.removeInsignDigits();
     return res;
 }
 
@@ -201,42 +195,48 @@ BigRealNumber BigRealNumber::operator-(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
-    BigRealNumber cp = other;
+    BigRealNumber oth = other;
     BigRealNumber ths = *this;
-    cp.isNegative = false;
+    oth.isNegative = false;
     ths.isNegative = false;
 
     // умножить на целую часть
     BigRealNumber resForInt{};
     // прибавлять к ответу множиемое пока целая часть множителя > 0
-    cp.fractPrtLen = 0;
-    cp.fractPrt = new short[1000];
-    short* a = cp.fractPrt;
-    fillArrayWithZero(cp.fractPrt, 1000);
-    while (cp > 0) {
+    oth.fractPrtLen = 0;
+    oth.fractPrt = new short[1000];
+    fillArrayWithZero(oth.fractPrt, 1000);
+    short* a = oth.fractPrt;
+    while (oth > 0) {
         resForInt = resForInt + ths;
-        cp = cp - 1;
+        oth = oth - 1;
     }
 
+    BigRealNumber res = resForInt;
+    res.isNegative = !(isNegative == other.isNegative);
+
+    if (!other.fractPrtLen) {
+        return res;
+    }
     // умножить на дробную часть
     BigRealNumber resForFract{};
     // умножать множитель на 10, пока он имеет дробную часть
-    cp = other;
-    cp.intPrt = a;
-    cp.intPrtLen = 0;
+    oth = other;
+    oth.intPrt = a;
+    oth.intPrtLen = 0;
+    oth.isNegative = false;
     int p = 0;
-    while (cp.fractPrtLen != 0) {
-        cp = cp * 10;
+    while (oth.fractPrtLen) {
+        oth = oth * 10;
         p++;
     }
     // умножить на полученный множитель
-    resForFract = ths * cp;
+    resForFract = ths * oth;
     // поделить на 10**p
     resForFract = resForFract / pow(10, p);
 
     // сложить
-    BigRealNumber res = resForInt + resForFract;
-    res.isNegative = !(this->isNegative == other.isNegative);
+    res = res + resForFract;
     return res;
 }
 
@@ -245,7 +245,37 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
+    BigRealNumber oth = other;
+    BigRealNumber ths = *this;
+    oth.isNegative = false;
+    ths.isNegative = false;
 
+    while (oth.fractPrtLen || ths.fractPrtLen) {
+        oth = oth * 10;
+        ths = ths * 10;
+    }
+
+    BigRealNumber quotient(0);
+    string p = "1.0";
+    int it = 0;
+    while (it < 1000 && ths > 0) {
+        if (ths < oth) {
+            ths = ths * 10;
+            if (p == "1.0") {
+                p = "0.1";
+            } else {
+                string cp = p.substr(2);
+                p = "0.0" + cp;
+            }
+            it++;
+        } else {
+            ths = ths - oth;
+            quotient = quotient + BigRealNumber(p);
+        }
+    }
+    quotient.isNegative = !(isNegative == other.isNegative);
+    
+    return quotient;
 }
 
 BigRealNumber BigRealNumber::operator/(int n) const {
@@ -351,9 +381,7 @@ BigRealNumber BigRealNumber::pw(int pow) {
 BigRealNumber BigRealNumber::factorial() {
     BigRealNumber res(1);
     BigRealNumber fact(1);
-    BigRealNumber one(1);
-    BigRealNumber zero(0);
-    if (*this == zero) {
+    if (*this == 0) {
         return res;
     }
 
@@ -383,9 +411,9 @@ bool BigRealNumber::appendToFract(short number) {
 }
 
 void BigRealNumber::removeInsignDigits() {
-    int signDigit = getFirstNotZero(intPrt, 999, 0, true);
+    int signDigit = getFirstNotZero(intPrt, 999, -1, true);
     intPrtLen = signDigit + 1;
-    signDigit = getFirstNotZero(fractPrt, 999, 0, true);
+    signDigit = getFirstNotZero(fractPrt, 999, -1, true);
     fractPrtLen = signDigit + 1;
 }
 

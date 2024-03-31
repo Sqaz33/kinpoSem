@@ -3,11 +3,8 @@
 
 int main() {
     int p;
-    BigRealNumber n1("10000.0");
-    BigRealNumber n2("0.000100000");
-    BigRealNumber n3 = n1 - n2;
-    
-    
-    
-
+    BigRealNumber n1("1.0");
+    BigRealNumber n2("3.0");
+    BigRealNumber n3 = n1 / n2;
+    cout << n3.toString();   
 }
