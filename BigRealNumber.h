@@ -91,6 +91,5 @@ public:
 
 
 int getFirstNotZero(short* arr, int start, int stop, bool backward);
-void fillArrayWithZero(short* arr, int len);
 
 #endif //UNTITLED1_BigRealNumber_H

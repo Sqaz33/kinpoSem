@@ -6,9 +6,7 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     intPrtLen = p.intPrtLen;
 
     this->fractPrt = new short[1000] {};
-    fillArrayWithZero(this->fractPrt, 1000);
     this->intPrt = new short[1000] {};
-    fillArrayWithZero(this->intPrt, 1000);
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = p.fractPrt[i];
@@ -19,10 +17,8 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
 }
 
 BigRealNumber::BigRealNumber(const string &numb) {
-    intPrt = new short[1000];
-    fillArrayWithZero(intPrt, 1000);
-    fractPrt = new short[1000];
-    fillArrayWithZero(fractPrt, 1000);
+    intPrt = new short[1000] {};
+    fractPrt = new short[1000] {};
     isNegative = numb[0] == '-';
 
     int point = (int) numb.find('.');
@@ -48,10 +44,8 @@ BigRealNumber::BigRealNumber(const string &numb) {
 }
 
 BigRealNumber::BigRealNumber(int n) {
-    intPrt = new short[1000];
-    fillArrayWithZero(intPrt, 1000);
-    fractPrt = new short[1000];
-    fillArrayWithZero(fractPrt, 1000);
+    intPrt = new short[1000] {};
+    fractPrt = new short[1000] {};
     fractPrtLen = 0;
     intPrtLen = 0;
     isNegative = n < 0;
@@ -63,10 +57,8 @@ BigRealNumber::BigRealNumber(int n) {
 }
 
 BigRealNumber::BigRealNumber() {
-    intPrt = new short[1000];
-    fillArrayWithZero(intPrt, 1000);
-    fractPrt = new short[1000];
-    fillArrayWithZero(fractPrt, 1000);
+    intPrt = new short[1000] {};
+    fractPrt = new short[1000] {};
     intPrtLen = 0;
     fractPrtLen = 0;
     isNegative = false;
@@ -104,10 +96,8 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
 
-    this->fractPrt = new short[1000];
-    fillArrayWithZero(this->fractPrt, 1000);
-    this->intPrt = new short[1000];
-    fillArrayWithZero(this->intPrt, 1000);
+    intPrt = new short[1000] {};
+    fractPrt = new short[1000] {};
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = other.fractPrt[i];
@@ -204,8 +194,7 @@ BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
     BigRealNumber resForInt{};
     // прибавлять к ответу множиемое пока целая часть множителя > 0
     oth.fractPrtLen = 0;
-    oth.fractPrt = new short[1000];
-    fillArrayWithZero(oth.fractPrt, 1000);
+    oth.fractPrt = new short[1000] {};
     short* a = oth.fractPrt;
     while (oth > 0) {
         resForInt = resForInt + ths;
@@ -484,10 +473,4 @@ int getFirstNotZero(short* arr, int start, int stop, bool backward) {
         }
     }
     return -1;
-}
-
-void fillArrayWithZero(short* arr, int len) {
-    for (int i = 0; i < len; i++) {
-        arr[i] = 0;
-    }
 }
