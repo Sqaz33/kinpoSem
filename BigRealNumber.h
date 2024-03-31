@@ -19,12 +19,10 @@ private:
     int fractPrtLen;
     bool isNegative;
 
-    void fillArrayWithZero(short *arr, int len);
     void appendToInt(short number);
     bool appendToFract(short number);
     void removeInsignDigits();
-    int getFirstNotZero(short* arr, int start, int stop, bool backward);
-
+    
     short attachArrays(
         const BigRealNumber& term1,
         const BigRealNumber& term2,
@@ -86,5 +84,9 @@ public:
     // Вычисления факториала
     BigRealNumber factorial(int fact);
 };
+
+
+int getFirstNotZero(short* arr, int start, int stop, bool backward);
+void fillArrayWithZero(short* arr, int len);
 
 #endif //UNTITLED1_BigRealNumber_H

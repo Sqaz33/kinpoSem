@@ -41,8 +41,9 @@ BigRealNumber::BigRealNumber(const string &numb) {
     j++;
     // копирование дробной части
     for (int i = 0; i < fractPrtLen; i++, j++) {
-        fractPrt[j] = (short)(numb.at(j) - '0');
+        fractPrt[i] = (short)(numb.at(j) - '0');
     }
+  
     removeInsignDigits();
 }
 
@@ -302,11 +303,6 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 }
 
 // -------- вспомогательные методы --------------
-void BigRealNumber::fillArrayWithZero(short* arr, int len) {
-    for (int i = 0; i < len; i++) {
-        arr[i] = 0;
-    }
-}
 
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 >= 1000) {
@@ -329,15 +325,6 @@ void BigRealNumber::removeInsignDigits() {
     intPrtLen = signDigit + 1;
     signDigit = getFirstNotZero(fractPrt, 999, 0, true);
     fractPrtLen = signDigit + 1;
-}
-
-int BigRealNumber::getFirstNotZero(short* arr, int start, int stop, bool backward) {
-    for (int i = start; i != stop; i += pow(-1, backward)) {
-        if (arr[i]) {
-            return i;
-        }
-    }
-    return -1;
 }
 
 short BigRealNumber::attachArrays(
@@ -397,4 +384,20 @@ short BigRealNumber::attachArrays(
     }
 
     return transfer;
+}
+
+//----------------------------------------------------------------
+int getFirstNotZero(short* arr, int start, int stop, bool backward) {
+    for (int i = start; i != stop; i += pow(-1, backward)) {
+        if (arr[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void fillArrayWithZero(short* arr, int len) {
+    for (int i = 0; i < len; i++) {
+        arr[i] = 0;
+    }
 }
