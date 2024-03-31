@@ -20,7 +20,7 @@ private:
     bool isNegative;
 
     void appendToInt(short number);
-    bool appendToFract(short number);
+    bool appendToFract(short number, int ind);
     void removeInsignDigits();
     
     short attachArrays(

@@ -391,11 +391,11 @@ void BigRealNumber::appendToInt(short number) {
     intPrt[intPrtLen++] = number;
 }
 
-bool BigRealNumber::appendToFract(short number) {
-    if (fractPrtLen + 1 >= 1000) {
+bool BigRealNumber::appendToFract(short number, int ind) {
+    if (fractPrtLen + 1 >= 1000  || ind >= 1000) {
         return false;
     }
-    fractPrt[fractPrtLen++] = number;
+    fractPrt[ind] = number;
     return true;
 }
 
@@ -447,7 +447,7 @@ short BigRealNumber::attachArrays(
         n %= 10;
 
         if (addToFract) {
-            if (!res.appendToFract(n)) {
+            if (!res.appendToFract(n, i)) {
                 break;
             }
         } else {
