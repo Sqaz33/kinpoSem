@@ -49,9 +49,11 @@ public:
 
     // Перегрузка оператора сложения (+)
     BigRealNumber operator+(const BigRealNumber &other) const;
+    BigRealNumber operator+(int other) const;
 
     // Перегрузка оператора вычитания (-)
     BigRealNumber operator-(const BigRealNumber &other) const;
+    BigRealNumber operator-(int n) const;
 
     // Перегрузка оператора умножения (*)
     BigRealNumber operator*(const BigRealNumber &other) const;
@@ -59,6 +61,7 @@ public:
 
     // Перегрузка оператора деления (/)
     BigRealNumber operator/(const BigRealNumber &other) const;
+    BigRealNumber operator/(int n) const;
 
     // Перегрузка оператора равенства (==)
     bool operator==(const BigRealNumber &other) const;
@@ -71,6 +74,7 @@ public:
 
     // Перегрузка оператора больше (>)
     bool operator>(const BigRealNumber &other) const;
+    bool operator>(int other) const;
 
     // Перегрузка оператора меньше или равно (<=)
     bool operator<=(const BigRealNumber &other) const;
@@ -82,7 +86,7 @@ public:
     BigRealNumber pw(int pow);
 
     // Вычисления факториала
-    BigRealNumber factorial(int fact);
+    BigRealNumber factorial();
 };
 
 

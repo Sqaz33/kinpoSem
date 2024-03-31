@@ -155,6 +155,10 @@ BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     return res;
 }
 
+BigRealNumber BigRealNumber::operator+(int n) const {
+    return *this + BigRealNumber(n);
+}
+
 BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - other
     // -this - other
@@ -191,37 +195,62 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
         return res;
     }
 }
-// доделать
-BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
-    // умножить на целую часть
-    // прибавлять к ответу множиемое пока целая часть множителя > 0
-    BigRealNumber cp = other;
-    BigRealNumber zero(0);
-    BigRealNumber one(1);
-    BigRealNumber res;
 
+BigRealNumber BigRealNumber::operator-(int n) const {
+    return *this - BigRealNumber(n);
+}
+
+BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
+    BigRealNumber cp = other;
+    BigRealNumber ths = *this;
+    cp.isNegative = false;
+    ths.isNegative = false;
+
+    // умножить на целую часть
+    BigRealNumber resForInt{};
+    // прибавлять к ответу множиемое пока целая часть множителя > 0
     cp.fractPrtLen = 0;
-    while (cp > zero) {
-        res = res + *this;
-        cp = cp - one;
+    cp.fractPrt = new short[1000];
+    short* a = cp.fractPrt;
+    fillArrayWithZero(cp.fractPrt, 1000);
+    while (cp > 0) {
+        resForInt = resForInt + ths;
+        cp = cp - 1;
     }
 
     // умножить на дробную часть
-    // умножать множитель на 10, пока он имеет 
-    // умножить множиемое на множитель
-    // поделить множиемое, на 10**кол. для умножение множителя
+    BigRealNumber resForFract{};
+    // умножать множитель на 10, пока он имеет дробную часть
+    cp = other;
+    cp.intPrt = a;
+    cp.intPrtLen = 0;
+    int p = 0;
+    while (cp.fractPrtLen != 0) {
+        cp = cp * 10;
+        p++;
+    }
+    // умножить на полученный множитель
+    resForFract = ths * cp;
+    // поделить на 10**p
+    resForFract = resForFract / pow(10, p);
 
     // сложить
+    BigRealNumber res = resForInt + resForFract;
+    res.isNegative = !(this->isNegative == other.isNegative);
     return res;
 }
 
 BigRealNumber BigRealNumber::operator*(int n) const {
-    return *this * BigRealNumber(10);
+    return *this * BigRealNumber(n);
 }
 
-//BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
-//
-//}
+BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
+
+}
+
+BigRealNumber BigRealNumber::operator/(int n) const {
+    return *this / BigRealNumber(n);
+}
 
 bool BigRealNumber::operator==(const BigRealNumber& other) const {
     if (fractPrtLen != other.fractPrtLen ||
@@ -288,6 +317,10 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
     return *this != other;
 }
 
+bool BigRealNumber::operator>(int other) const {
+    return *this > BigRealNumber(other);
+}
+
 bool BigRealNumber::operator<=(const BigRealNumber& other) const {
     if (*this == other) {
         return true;
@@ -300,6 +333,35 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
         return true;
     }
     return *this > other;
+}
+
+BigRealNumber BigRealNumber::pw(int pow) {
+    BigRealNumber res(1);
+    if (pow == 0) {
+        return res;
+    }
+
+    while (pow > 0) {
+        res = res * *this;
+        pow--;
+    }
+    return res;
+}
+
+BigRealNumber BigRealNumber::factorial() {
+    BigRealNumber res(1);
+    BigRealNumber fact(1);
+    BigRealNumber one(1);
+    BigRealNumber zero(0);
+    if (*this == zero) {
+        return res;
+    }
+
+    while (fact <= *this) {
+        res = res * fact;
+        fact = fact + 1;
+    }
+    return res;
 }
 
 // -------- вспомогательные методы --------------
