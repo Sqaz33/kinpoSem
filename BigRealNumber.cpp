@@ -1,6 +1,8 @@
 #include "BigRealNumber.h"
 
+// скопировать значения из объекта p в данный объект
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
+    // скопировать поля исходного объекта в новый объект
     isNegative = p.isNegative;
     fractPrtLen = p.fractPrtLen;
     intPrtLen = p.intPrtLen;
@@ -8,41 +10,51 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     this->fractPrt = new short[1000] {};
     this->intPrt = new short[1000] {};
 
+    // для каждого числа из дробной части исходного объекта
     for (int i = 0; i < fractPrtLen; i++) {
+        // внести в дробную часть нового объекта
         this->fractPrt[i] = p.fractPrt[i];
     }
+    // для каждого числа из целой части исходного объекта
     for (int i = 0; i < intPrtLen; i++) {
+        // внести в целую часть нового объекта
         this->intPrt[i] = p.intPrt[i];
     }
 }
 
+// получить из строки целую и дробную части, представленные массивами своих цифр
 BigRealNumber::BigRealNumber(const string &numb) {
     intPrt = new short[1000] {};
     fractPrt = new short[1000] {};
-    isNegative = numb[0] == '-';
+    // если строка имеет знак "-"
+    isNegative = numb.at(0) == '-'; // то число отрицательное
 
+    // получить из строки индекс знака, разделяющего части
     int point = (int) numb.find('.');
 
-    intPrtLen = point;
-    fractPrtLen = numb.length() - intPrtLen - 1;
-    if (isNegative) {
-        intPrt--;
-    }
+    // длинна целой части = индек разделяющего знака
+    // если число число отрицательно, длинна целой части -= 1
+    intPrtLen = point - isNegative;
+    
+    // длинна дробной части = длинна строки - длинна целой части - 1
+    // если число число отрицательно, длинна дробной части -= 1
+    fractPrtLen = numb.length() - intPrtLen - 1 - isNegative;
 
-    // копирование целой части
+    // записать в массив целой части цифры из целой части строки в обратном порядке
     int j = isNegative ? 1 : 0;
     for (int i = intPrtLen - 1; i >= 0; i--, j++) {
         intPrt[i] = (short)(numb.at(j) - '0');
     }
     j++;
-    // копирование дробной части
+    // записать в массив дробной части цифры из дробной части строки в прямом порядке
     for (int i = 0; i < fractPrtLen; i++, j++) {
         fractPrt[i] = (short)(numb.at(j) - '0');
     }
-  
+    // убрать из массивом целой и дробной частей незначащие разряды
     removeInsignDigits();
 }
 
+// получить из числа целую часть, представленную массивом своих цифр
 BigRealNumber::BigRealNumber(int n) {
     intPrt = new short[1000] {};
     fractPrt = new short[1000] {};
@@ -50,8 +62,11 @@ BigRealNumber::BigRealNumber(int n) {
     intPrtLen = 0;
     isNegative = n < 0;
     
+    // пока число > 0
     while (n > 0) {
+        // записать в массив целой части остаток от деления числа на 10
         intPrt[intPrtLen++] = (short)n % 10;
+        // поделить число на 10 нацело
         n /= 10;
     }
 }
@@ -69,22 +84,34 @@ BigRealNumber::~BigRealNumber() {
     delete intPrt;
 }
 
+// получить из дробного и целого массивов цифр число, в виде строки
 string BigRealNumber::toString() const {
     string numb;
+    // если число отрицательно
     if (isNegative) {
+         // добавить знак "-"
         numb.append(1, '-');
     }
+    // для каждого значения из целой части, начиная с последнего
     for (int i = intPrtLen - 1; i >= 0; i--) {
+        // добавить значение в строку
         numb.append(1, (char)('0' + (int)intPrt[i]));
     }
+    // если длинна целой части = 0
     if (!intPrtLen) {
+        // добавить в строку 0
         numb.append(1, '0');
     }
+    // добавить в строку знак, разделяющий целую и дробную части
     numb.append(1, '.');
+    // для каждого значение из дробной части 
     for (int i = 0; i < fractPrtLen; i++) {
+        // добавить значение в строку
         numb.append(1, (char)('0' + (int)fractPrt[i]));
     }
+    // если длинна дробной части = 0
     if (!fractPrtLen) {
+        // добавить в строку 0
         numb.append(1, '0');
     }
     return numb;
@@ -109,32 +136,38 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     return *this;
 }
 
+// сложить данное слагаемое с другми
 BigRealNumber BigRealNumber::operator+(const BigRealNumber &other) const {
     // this + other
     // -this + other
     // this + (-other)
     // -this + (-other)
 
+    // если данное слагаемое положительно, а другое отрицательно
     if (!(isNegative) && other.isNegative) { // this + (-other)
+        // результат = вычесть из данного слагаемого другое
         return *this - other;
-    } else if (isNegative && !other.isNegative) { // -this + other
+    } else if (isNegative && !other.isNegative) { // -this + other если данное слагаемое отрицательно, а другое положительно
+        // результат = вычесть из другого слагаемого данное
         return other - *this;
     }
 
     // this + other
     // -this + (-other)
+    // знак результата = знаку первого слагаемого
     BigRealNumber res{};
     res.isNegative = isNegative;
 
-    // сложение дробных частей
+    // дробная часть результата = сложить дробные части слагаемых с сохранением переноса
     short trans = attachArrays(*this, other,
                                  res, true,
                                  false, 0);
-    // сложение целых частей
+    // целая часть результата = сложить целые части слагаемых + перенос
     attachArrays(*this, other,
                    res, false,
                    false, trans);
 
+    // удалить незначащие разряды в результате
     res.removeInsignDigits();
     return res;
 }
@@ -143,6 +176,7 @@ BigRealNumber BigRealNumber::operator+(int n) const {
     return *this + BigRealNumber(n);
 }
 
+
 BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - other
     // -this - other
@@ -150,6 +184,7 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - (-other)
 
     BigRealNumber res{};
+    // если данн
     if ((isNegative && other.isNegative) || (!(isNegative) && other.isNegative)) {
         // -this - other; 
         // this - (-other) = this + other
