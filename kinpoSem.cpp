@@ -2,7 +2,9 @@
 #include "BigRealNumber.h"
 
 int main() {
-    BigRealNumber s("12.0");
-    s.shiftNumber(1, true);
-    cout << s.toString();
+    BigRealNumber s("34.434534534");
+    BigRealNumber t("119.0");
+    BigRealNumber v{};
+    s.mul(t, v);
+    cout << v.toString();
 }

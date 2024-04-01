@@ -39,14 +39,8 @@ BigRealNumber::BigRealNumber(const string& numb) {
 BigRealNumber::BigRealNumber(int n) {
     intPrt = new short[1000] {};
     fractPrt = new short[1000] {};
-    fractPrtLen = 0;
-    intPrtLen = 0;
     isNegative = n < 0;
-
-    while (n > 0) {
-        intPrt[intPrtLen++] = (short)n % 10;
-        n /= 10;
-    }
+    setVal(n);
 }
 
 BigRealNumber::BigRealNumber() {
@@ -99,24 +93,8 @@ BigRealNumber& BigRealNumber::operator=(const BigRealNumber& other) {
 }
 
 BigRealNumber BigRealNumber::operator+(const BigRealNumber& other) const {
-    if (!(isNegative) && other.isNegative) {
-        return *this - other;
-    }
-    else if (isNegative && !other.isNegative) {
-        return other - *this;
-    }
-
-    BigRealNumber res{};
-    res.isNegative = isNegative;
-
-    short trans = attachArrays(*this, other,
-        res, true,
-        false, 0);
-    attachArrays(*this, other,
-        res, false,
-        false, trans);
-
-    res.removeInsignDigits();
+    BigRealNumber res {};
+    add(other, res); 
     return res;
 }
 
@@ -126,34 +104,9 @@ BigRealNumber BigRealNumber::operator+(int n) const {
 
 
 BigRealNumber BigRealNumber::operator-(const BigRealNumber& other) const {
-
     BigRealNumber res{};
-    if ((isNegative && other.isNegative) || (!(isNegative) && other.isNegative)) {
-        res = *this + other;
-        res.isNegative = isNegative;
-        return  res;
-    }
-    else if (isNegative && other.isNegative) {
-        res = other;
-        res = res - *this;
-        return res;
-    }
-
-    if (*this >= other) {
-        short trans = attachArrays(*this, other,
-            res, true,
-            true, 0);
-        attachArrays(*this, other,
-            res, false,
-            true, trans);
-        res.removeInsignDigits();
-        return res;
-    }
-    else {
-        res = other - *this;
-        res.isNegative = true;
-        return res;
-    }
+    sub(other, res);
+    return res;
 }
 
 BigRealNumber BigRealNumber::operator-(int n) const {
@@ -352,44 +305,104 @@ BigRealNumber BigRealNumber::factorial() {
     return res;
 }
 
-void BigRealNumber::appendToInt(short number) {
-    if (intPrtLen + 1 >= 1000) {
-        throw runtime_error("Ошибка вычисления: целая часть "
-            "выходного числа содержит более 1000 цифр");
+
+// ---------------------вспомогательные методы---------------------------
+void BigRealNumber::add(
+        const BigRealNumber& term2,
+        BigRealNumber& res
+) const {
+    if (!(isNegative) && term2.isNegative) {
+        sub(term2, res);
+        return;
     }
-    intPrt[intPrtLen++] = number;
-}
-
-bool BigRealNumber::appendToFract(short number, int ind) {
-    if (fractPrtLen + 1 >= 1000 || ind >= 1000) {
-        return false;
+    else if (isNegative && !term2.isNegative) {
+        term2.sub(*this, res);
+        return;
     }
-    fractPrt[ind] = number;
-    return true;
+    res.isNegative = isNegative;
+
+    short trans = attachArrays(*this, term2,
+                                res, true,
+                                false, 0);
+    attachArrays(*this, term2,
+                res, false,
+                false, trans);
+
+    res.removeInsignDigits();
 }
 
-void BigRealNumber::removeInsignDigits() {
-    int signDigit = getFirstNotZero(intPrt, 999, -1, true);
-    intPrtLen = signDigit + 1;
-    signDigit = getFirstNotZero(fractPrt, 999, -1, true);
-    fractPrtLen = signDigit + 1;
+void BigRealNumber::sub(
+    const BigRealNumber& subtr,
+    BigRealNumber& res
+) const {
+    if ((isNegative && subtr.isNegative) || (!(isNegative) && subtr.isNegative)) {
+        add(subtr, res);
+        res.isNegative = isNegative;
+        return;
+    }
+    else if (isNegative && subtr.isNegative) {
+        subtr.sub(*this, res);
+        return;
+    }
+
+    if (*this >= subtr) {
+        short trans = attachArrays(*this, subtr,
+                                    res, true,
+                                    true, 0);
+        attachArrays(*this, subtr,
+                      res, false,
+                      true, trans);
+        res.removeInsignDigits();
+    } else {
+        subtr.sub(*this, res);
+    }
 }
 
-void BigRealNumber::shiftNumber(int shift, bool toRight) {
-    while (shift && intPrtLen && fractPrt) {
-        short buf = toRight ? intPrt[0] : fractPrt[0];
-        arrShift(intPrt, intPrtLen, 1, !toRight, 0);
-        arrShift(fractPrt, fractPrtLen, 1, toRight, 0);
-        if (toRight) {
-            fractPrt[0] = buf;
-            intPrt--;
-            fractPrt++;
-        } else {
-            intPrt[0] = buf;
-            intPrt++;
-            fractPrt++;
+void BigRealNumber::mul(
+    const BigRealNumber& fac,
+    BigRealNumber &res
+) const {
+    // умножаем на цифру
+    if (fac.intPrtLen == 1 && !fac.fractPrtLen) {
+        short ref = 0;
+        short f = fac.intPrt[0];
+        for (int i = fractPrtLen - 1; i >= 0; i--) {
+            short n = fractPrt[i] * f + ref;
+            ref = n / 10;
+            n %= 10;
+            res.appendToFract(n, i);
+        }  
+        for (int i = 0; i < intPrtLen; i++) {
+            short n = intPrt[i] * f + ref;
+            ref = n / 10;
+            n %= 10;
+            res.appendToInt(n);
         }
-        shift--;
+        if (ref) {
+            res.appendToInt(ref);
+        }
+        return;
+    }
+    
+    BigRealNumber buf1{};
+    BigRealNumber buf2{};
+    for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
+        buf2.setVal(0);
+        buf1.setVal(fac.fractPrt[i]);
+        mul(buf1, buf2);
+        buf2.shiftNumber(i + 1, true);
+        buf1.setVal(0);
+        res.add(buf2, buf1);
+        res = buf1;
+    }
+    for (int i = 0; i < fac.intPrtLen; i++) {
+        buf2.setVal(0);
+        buf1.setVal(fac.intPrt[i]);
+        mul(buf1, buf2);
+        buf2.shiftNumber(i, false);
+        buf1.setVal(0);
+        res.add(buf2, buf1);
+        res = buf1;
     }
 }
 
@@ -454,10 +467,86 @@ short BigRealNumber::attachArrays(
     return transfer;
 }
 
+void BigRealNumber::appendToInt(short number) {
+    if (intPrtLen + 1 >= 1000) {
+        throw runtime_error("Ошибка вычисления: целая часть "
+            "выходного числа содержит более 1000 цифр");
+    }
+    intPrt[intPrtLen++] = number;
+}
 
-// ------------------------------------------------------------------
+bool BigRealNumber::appendToFract(short number, int ind) {
+    if (fractPrtLen + 1 >= 1000 || ind >= 1000) {
+        return false;
+    }
+    fractPrt[ind] = number;
+    fractPrtLen++;
+    return true;
+}
+
+
+void BigRealNumber::removeInsignDigits() {
+    int signDigit = getFirstNotZero(intPrt, 999, -1, true);
+    intPrtLen = signDigit + 1;
+    signDigit = getFirstNotZero(fractPrt, 999, -1, true);
+    fractPrtLen = signDigit + 1;
+}
+
+void BigRealNumber::shiftNumber(int shift, bool toRight) {
+    while (shift) {
+        short buf = toRight ? intPrt[0] : fractPrt[0];
+        if (intPrtLen || !toRight) {
+            if (!toRight) {
+                intPrtLen++;
+            }
+            arrShift(intPrt, intPrtLen, 1, !toRight, 0);
+            if (toRight && intPrtLen) {
+                intPrtLen--;
+            }
+        }
+        if (fractPrt || toRight) {
+            if (toRight) {
+                if (intPrtLen + 1 >= 1000) {
+                    throw runtime_error("Ошибка вычисления: целая часть "
+                        "выходного числа содержит более 1000 цифр");
+                }
+                fractPrtLen++;
+            }
+            arrShift(fractPrt, fractPrtLen, 1, toRight, 0);
+            if (!toRight && fractPrtLen) {
+                fractPrtLen--;
+            }
+        }
+        if (toRight) {
+            fractPrt[0] = buf;
+        } else {
+            intPrt[0] = buf;
+        }
+        shift--;
+    }
+}
+
+void BigRealNumber::setVal(int n) {
+    for (int i = 0; i < max(intPrtLen, fractPrtLen); i++) {
+        intPrt[i] = 0;
+        fractPrt[i] = 0;
+    }
+    intPrtLen = 0;
+    fractPrtLen = 0;
+    while (n > 0) {
+        intPrt[intPrtLen++] = (short)n % 10;
+        n /= 10;
+    }
+}
+
+
+// -------------------------------------------внеклассовые функции
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
-    int rp, wp, dif, stop;
+    if (!len) {
+        return;
+    }
+    shift %= len;
+    int wp, rp, dif, stop;
     if (toRight) {
         wp = len - 1;
         rp = wp - shift;
@@ -465,7 +554,7 @@ void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
         stop = -1;
     } else {
         wp = 0;
-        rp = shift;
+        rp = wp + shift;
         dif = 1;
         stop = len;
     }
@@ -475,6 +564,7 @@ void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
         wp += dif;
         rp += dif;
     }
+    
 }
 
 int getFirstNotZero(short* arr, int start, int stop, bool backward) {

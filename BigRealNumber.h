@@ -19,33 +19,27 @@ private:
     int fractPrtLen;
     bool isNegative;
 
-    void appendToInt(short number);
-    bool appendToFract(short number, int ind);
-    void removeInsignDigits();
-public:  // тесты
-    void shiftNumber(int shift, bool toRight);
-
-    void plus(
+public:
+    void add(
         const BigRealNumber& term2,
         BigRealNumber& res
     ) const;
 
-    void minus(
-        const BigRealNumber& term2,
+    void sub(
+        const BigRealNumber& subtr,
         BigRealNumber& res
     ) const;
 
     void mul(
-        const BigRealNumber& term2,
+        const BigRealNumber& fac,
         BigRealNumber& res
     ) const;
 
     void div(
-        const BigRealNumber& term2,
+        const BigRealNumber& diver,
         BigRealNumber& res
     );
 
-    
     short attachArrays(
         const BigRealNumber& term1,
         const BigRealNumber& term2,
@@ -54,6 +48,16 @@ public:  // тесты
         bool minusTerm2,
         short transfer
     ) const;
+
+    void appendToInt(short number);
+
+    bool appendToFract(short number, int ind);
+
+    void removeInsignDigits();
+
+    void shiftNumber(int shift, bool toRight);
+
+    void setVal(int n);
 public:
     // Конструктор копирования
     BigRealNumber(const BigRealNumber& p);
