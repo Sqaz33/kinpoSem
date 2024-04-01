@@ -32,16 +32,20 @@ private:
         short transfer
     ) const;
 public:
+    // Конструктор копирования
     BigRealNumber(const BigRealNumber& p);
 
+    // Конструктор объекта по строковому представлению числа
     BigRealNumber(const string& n);
 
+    // Конструкто объекта по целому числу
     BigRealNumber(int n);
 
     BigRealNumber();
 
     ~BigRealNumber();
 
+    // Перевод в строковой представление числа дробную и целую части
     string toString() const;
 
     // Перегрузка оператора присваивания (=)
