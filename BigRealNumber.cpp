@@ -123,13 +123,7 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
 
-    //if (intPrt != nullptr) {
-    //    delete intPrt;
-    //}
     intPrt = new short[1000] {};
-    //if (fractPrt != nullptr) {
-    //    delete fractPrt;
-    //}
     fractPrt = new short[1000] {};
 
     for (int i = 0; i < fractPrtLen; i++) {
@@ -252,26 +246,24 @@ BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
     oth.isNegative = false;
     ths.isNegative = false;
 
-    // умножить на целую часть
-    BigRealNumber resForInt{};
-    // прибавлять к ответу множиемое пока целая часть множителя > 0
+    BigRealNumber res{};
     oth.fractPrtLen = 0;
     oth.fractPrt = new short[1000] {};
     short* a = oth.fractPrt;
     while (oth > 0) {
-        resForInt = resForInt + ths;
+        res = res + ths;
         oth = oth - 1;
     }
 
-    BigRealNumber res = resForInt;
     res.isNegative = !(isNegative == other.isNegative);
 
-    if (!other.fractPrtLen) {
+
+if (!other.fractPrtLen) {
         return res;
     }
-    // умножить на дробную часть
+
     BigRealNumber resForFract{};
-    // умножать множитель на 10, пока он имеет дробную часть
+
     oth = other;
     oth.intPrt = a;
     oth.intPrtLen = 0;
@@ -281,14 +273,12 @@ BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
         oth = oth * 10;
         p++;
     }
-    // умножить на полученный множитель
+
     resForFract = ths * oth;
-    // поделить на 10**p
     resForFract = resForFract / pow(10, p);
 
-    // сложить
     res = res + resForFract;
-    //delete &ths, & oth;
+    delete ths.fractPrt, ths.intPrt, oth.fractPrt, oth.intPrt;
     return res;
 }
 
@@ -326,8 +316,7 @@ BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
         }
     }
     quotient.isNegative = !(isNegative == other.isNegative);
-    
-    //delete& ths, & oth;
+
     return quotient;
 }
 
@@ -335,68 +324,104 @@ BigRealNumber BigRealNumber::operator/(int n) const {
     return *this / BigRealNumber(n);
 }
 
+// понят, равно ли данное числа другому
 bool BigRealNumber::operator==(const BigRealNumber& other) const {
+    // если линна донного числа и его знак не равны длинне и знаку другого числа
     if (fractPrtLen != other.fractPrtLen ||
         intPrtLen != other.intPrtLen ||
         isNegative != other.isNegative) 
     {
+        // то числа не равны
         return false;
     }
+    // для каждого значения из дробной части данного числа и другого числа
     for (int i = 0; i < fractPrtLen; i++) {
+        // если значение из данного числа не равно значению из другого
         if (fractPrt[i] != other.fractPrt[i]) {
+            // то числа не равны
             return false;
         }
     }
+    // для каждого значения из целой части данного числа и другого числа
     for (int i = 0; i < intPrtLen; i++) {
+        // если значение из данного числа не равно значению из другого
         if (intPrt[i] != other.intPrt[i]) {
+            // то числа не равны
             return false;
         }
     }
+    // числа равны
     return true;
 }
 
+// понять, не равно ли данное число другому
 bool BigRealNumber::operator!=(const BigRealNumber& other) const {
+    // понять, равно ли данное число другому
     return !(*this == other);
 }
 
+// понять, меньше ли данное число, чем другое
 bool BigRealNumber::operator<(const BigRealNumber& other) const {
+    // если данное число не равно другому
+    // и если данное число не больше, чем другое
+    // то данное число меньше, чем другое
     return *this != other && !(*this > other);
 }
 
+// понять больше ли данное число, чем другое
 bool BigRealNumber::operator>(const BigRealNumber& other) const {
+    // если длинна целой части данного числа больше, чем другого
     if (intPrtLen > other.intPrtLen) {
+        // то данное число больше, чем другое
         return true;
+    // если длинна целой части данного числа меньше, чем другого
     } else if (intPrtLen < other.intPrtLen) {
+        // то данное число не больше, чем другое
         return false;
     }
 
-    // сравниваем целые части, длинны равны
+    // сравнить целую часть данного, числа с другим
+    // для каждого значения целой части данного и другого чисел, начиная с конца
     for (int i = intPrtLen - 1; i >= 0; i--) {
+        // если значение из данного числа больше, чем значение другого
         if (intPrt[i] > other.intPrt[i]) {
+            // то данное число больше, чем другое
             return true;
+        // если значение из данного числа больше, чем значение другого
         } else if (intPrt[i] < other.intPrt[i]) {
+            // то данное число не больше, чем другое
             return false;
         }
     }
     
-    // сравниваем дробные части
+    // сравнить дробные части
     bool isEqual = true;
+    // для каждого значения дробной части данного и другого чисел
     for (int i = 0; i < fractPrtLen; i++) {
         if (isEqual) {
             isEqual = fractPrt[i] == other.fractPrt[i];
         }
+        // если значение из данного числа больше, чем значение другого
         if (fractPrt[i] > other.fractPrt[i]) {
+            // то данное число больше, чем другое
             return true;
         }
+        // если значение из данного числа больше, чем значение другого
         else if (fractPrt[i] < other.fractPrt[i]) {
+            // то данное число не больше, чем другое
             return false;
         }
     }
-
+    // если значения из дробной части данного числа
+    // равны соостветсующим значениям из дробной части другого
+    // и длинна дробной части другого числа больше длинны данного 
     if (isEqual && other.fractPrtLen > fractPrtLen) {
+        // то данное число больше, чем другое
         return false;
     }
     
+    // если данное число != другому
+    // то данное число больше, чем другое
     return *this != other;
 }
 
@@ -404,73 +429,105 @@ bool BigRealNumber::operator>(int other) const {
     return *this > BigRealNumber(other);
 }
 
+// понять, меньше или равно данное число, чем другое
 bool BigRealNumber::operator<=(const BigRealNumber& other) const {
+    // если данное число равно другому или данное число меньше, чем другое
+    // то данное число меньше или равно другому
     if (*this == other) {
         return true;
     }
     return *this < other;
 }
 
+// понять, больше или равно данное число, чем другое
 bool BigRealNumber::operator>=(const BigRealNumber& other) const {
+    // если данное число равно другому или данное число больше, чем другое
+    // то данное число больше или равно другому
     if (*this == other) {
         return true;
     }
     return *this > other;
 }
 
+// возвести данное число в степень pow
 BigRealNumber BigRealNumber::pw(int pow) {
+    // результат = 1
     BigRealNumber res(1);
+    // если степень равна 0
     if (pow == 0) {
+        // результат = 1
         return res;
     }
 
+   
+    // пока степень > 0
     while (pow > 0) {
+        // результат = результат * данное числа
         res = res * *this;
+        // вычесть из степени 1
         pow--;
     }
+    // результат найден
     return res;
 }
-
+// найти факториал данного числа
 BigRealNumber BigRealNumber::factorial() {
+    // результат = 1
+    // счетчик факториала = 1
     BigRealNumber res(1);
     BigRealNumber fact(1);
-    if (*this == 0) {
-        return res;
-    }
 
+    // пока счетчик факториала меньше или равен данному числу
     while (fact <= *this) {
+        // результат = результат * счетчик факториала
         res = res * fact;
+        // увеличить счетчик факториала
         fact = fact + 1;
-    }
+    } 
+    // результат найден
     return res;
 }
 
 // -------- вспомогательные методы --------------
-
+// добавить цифру в конец целой части
 void BigRealNumber::appendToInt(short number) {
+    // если длинна целой части + 1 >= 100
     if (intPrtLen + 1 >= 1000) {
+        // ошибква времени выполнения программы
         throw runtime_error("Ошибка вычисления: целая часть "
                             "выходного числа содержит более 1000 цифр");
     }
+    // добавить цифру в конец целой части
+    // увеличить длинну целой части на 1
     intPrt[intPrtLen++] = number;
 }
-
+// добавить цифру в дробную часть по индексу
 bool BigRealNumber::appendToFract(short number, int ind) {
+    // если длинна целой части + 1 >= 100 или индекс >= 1000
     if (fractPrtLen + 1 >= 1000  || ind >= 1000) {
+        // не добавлять число, вернуть ошибку вноса числа
         return false;
     }
+    // добавить цифру в дробную часть по индексу
+    // увеличить длинну дробной части на 1
     fractPrt[ind] = number;
     fractPrtLen++;
     return true;
 }
 
+// убрать незначие разряды из числа
 void BigRealNumber::removeInsignDigits() {
+    // найти индекс первого значащего разряда в целой части с конца
     int signDigit = getFirstNotZero(intPrt, 999, -1, true);
+    // длинна целой части = найденный индекс + 1
     intPrtLen = signDigit + 1;
+    // найти индекс первого значащего разряда в дробной части с конца
     signDigit = getFirstNotZero(fractPrt, 999, -1, true);
+    // длинна дробной части = найденный индекс + 1
     fractPrtLen = signDigit + 1;
 }
 
+// сложить или вычесть из массива1 массив2
 short BigRealNumber::attachArrays(
         const BigRealNumber &term1,
         const BigRealNumber &term2,
@@ -501,39 +558,62 @@ short BigRealNumber::attachArrays(
         t2 = term2.intPrt;
     }
 
+    // для каждого значения из массивов, если работаем с массивами из целой части двигаться с конца
     for (int i = start; ; i += diff) {
+        // цифра = перенос
         short n = transfer;
+        // цифра = цифра + значение1
+        // если вычитаем из массива1 массив2
+            // цифра = цифра - значение2
+        // инача
+            // цифра = цифра + значение2
         n += t1[i] + t2[i] * pow(-1, minusTerm2);
+        // если цифра > 9
+            // перенос = 1
         transfer = n > 9;
+        // иначе если цифра < 0
         if (n < 0) {
+            // цифра = цифра + 10
             n += 10;
+            // перенос = -1
             transfer = -1;
         }
+        // цифра = остаток от деление цифры на 10
         n %= 10;
 
+        // если работаем с дробными частями
         if (addToFract) {
+            // внести цифру в дробную часть по индексу значения1
+            // если есть ошибка внесения
             if (!res.appendToFract(n, i)) {
+                // прекратить цикл
                 break;
             }
+        // ианча
         } else {
+            // внести цифру в конец целой части
             res.appendToInt(n);
         }
         if (i == stop) {
             break;
         }
     }
-
+    // если перенос > 0 и работаем с целой частью
     if (transfer > 0 && !addToFract) {
+        // венсти перенос в конец целой части
         res.appendToInt(transfer);
     }
-
     return transfer;
 }
 
 //----------------------------------------------------------------
+// найти первое ненулевое значение в промежутке, двигаясь слева или справа
 int getFirstNotZero(short* arr, int start, int stop, bool backward) {
+    // для каждого значения из промежутка
     for (int i = start; i != stop; i += pow(-1, backward)) {
+        // если значение != 0
         if (arr[i]) {
+            // ненулевое значение найденно
             return i;
         }
     }
