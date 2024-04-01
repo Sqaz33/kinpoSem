@@ -22,7 +22,8 @@ private:
     void appendToInt(short number);
     bool appendToFract(short number, int ind);
     void removeInsignDigits();
-    void shiftNumber(int shift, int direction);
+public:  // тесты
+    void shiftNumber(int shift, bool toRight);
 
     void plus(
         const BigRealNumber& term2,
@@ -115,7 +116,7 @@ public:
     BigRealNumber factorial();
 };
 
-void arrShift(short* arr, int len,int shift, bool toRight);
+void arrShift(short* arr, int len, int shift, bool toRight, int fillVal);
 int getFirstNotZero(short* arr, int start, int stop, bool backward);
 
 #endif //UNTITLED1_BigRealNumber_H

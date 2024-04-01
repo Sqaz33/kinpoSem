@@ -375,10 +375,21 @@ void BigRealNumber::removeInsignDigits() {
     fractPrtLen = signDigit + 1;
 }
 
-void BigRealNumber::shiftNumber(int shift, int direction) {
-    while (shift && intPrtLen) {
-        int buf = intPrt[0];
-
+void BigRealNumber::shiftNumber(int shift, bool toRight) {
+    while (shift && intPrtLen && fractPrt) {
+        short buf = toRight ? intPrt[0] : fractPrt[0];
+        arrShift(intPrt, intPrtLen, 1, !toRight, 0);
+        arrShift(fractPrt, fractPrtLen, 1, toRight, 0);
+        if (toRight) {
+            fractPrt[0] = buf;
+            intPrt--;
+            fractPrt++;
+        } else {
+            intPrt[0] = buf;
+            intPrt++;
+            fractPrt++;
+        }
+        shift--;
     }
 }
 
@@ -445,10 +456,24 @@ short BigRealNumber::attachArrays(
 
 
 // ------------------------------------------------------------------
-void arrShift(short* arr, int len, int shift, bool toRight) {
+void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
+    int rp, wp, dif, stop;
     if (toRight) {
-        int wp = len - 1;
-        int rp = w
+        wp = len - 1;
+        rp = wp - shift;
+        dif = -1;
+        stop = -1;
+    } else {
+        wp = 0;
+        rp = shift;
+        dif = 1;
+        stop = len;
+    }
+    while (rp != stop) {
+        arr[wp] = arr[rp];
+        arr[rp] = fillVal;
+        wp += dif;
+        rp += dif;
     }
 }
 
