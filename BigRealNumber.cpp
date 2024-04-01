@@ -123,7 +123,13 @@ BigRealNumber &BigRealNumber::operator=(const BigRealNumber &other) {
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
 
+    //if (intPrt != nullptr) {
+    //    delete intPrt;
+    //}
     intPrt = new short[1000] {};
+    //if (fractPrt != nullptr) {
+    //    delete fractPrt;
+    //}
     fractPrt = new short[1000] {};
 
     for (int i = 0; i < fractPrtLen; i++) {
@@ -176,7 +182,7 @@ BigRealNumber BigRealNumber::operator+(int n) const {
     return *this + BigRealNumber(n);
 }
 
-
+// вычесть из данного числа другое
 BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - other
     // -this - other
@@ -184,32 +190,52 @@ BigRealNumber BigRealNumber::operator-(const BigRealNumber &other) const {
     // this - (-other)
 
     BigRealNumber res{};
-    // если данн
+    // если данное число отрицательно и другое число отрицательно
+    // или данной число не отрицательно и другое число отрицательно
     if ((isNegative && other.isNegative) || (!(isNegative) && other.isNegative)) {
         // -this - other; 
         // this - (-other) = this + other
-        res = *this + other;
+        // резлуьтат = сложить данное число с другим, без учетов знаков
+        BigRealNumber oth = other;
+        BigRealNumber ths = *this;
+        oth.isNegative = false;
+        ths.isNegative = false;
+        res = oth + ths;
+        // знак результата = знак данного числа
         res.isNegative = isNegative;
         return  res;
     } else if (isNegative && other.isNegative) {
+        // если данное число отрицательно и другое число отрицательно
         // -this - (-other) = other - this
         res = other;
+        res.isNegative = false;
+        // сменить знак другого число на +
+        // результат = вычесть из другого числа данное
         res = res - *this;
         return res;
     }
 
     // this - other
+    // если данное число больше другого
     if (*this >= other) {
+        // результат = вычесть из данного числа другое
+
+        // дробная часть результата = вычесть из дробной части данного числа дробную часть другого
+        // сохранить перенос
         short trans = attachArrays(*this, other,
                                     res, true,
                                     true, 0);
+        // целая часть результата = вычесть из целой части данного числа целую часть другого + перенос
         attachArrays(*this, other,
                      res, false,
                      true, trans);
+        // убрать незначащие разряды из результата
         res.removeInsignDigits();
         return res;
     } else {
+        // иначе, результат = вычесть из другого числа данное
         res = other - *this;
+        // знак результата = "-"
         res.isNegative = true;
         return res;
     }
@@ -219,6 +245,7 @@ BigRealNumber BigRealNumber::operator-(int n) const {
     return *this - BigRealNumber(n);
 }
 
+// перемножить числа
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
     BigRealNumber oth = other;
     BigRealNumber ths = *this;
@@ -261,6 +288,7 @@ BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
 
     // сложить
     res = res + resForFract;
+    //delete &ths, & oth;
     return res;
 }
 
@@ -299,6 +327,7 @@ BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
     }
     quotient.isNegative = !(isNegative == other.isNegative);
     
+    //delete& ths, & oth;
     return quotient;
 }
 
@@ -431,6 +460,7 @@ bool BigRealNumber::appendToFract(short number, int ind) {
         return false;
     }
     fractPrt[ind] = number;
+    fractPrtLen++;
     return true;
 }
 

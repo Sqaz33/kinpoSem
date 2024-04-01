@@ -11,3 +11,4 @@ gen
 .vs/
 x64/
 *.exe
+.vscode/
