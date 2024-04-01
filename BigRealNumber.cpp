@@ -1,18 +1,17 @@
 #include "BigRealNumber.h"
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
+    int len = max(this->fractPrtLen, p.fractPrtLen);
+    for (int i = 0; i < len; i++) {
+        this->fractPrt[i] = p.fractPrt[i];
+    }
+    len = max(this->intPrtLen, p.intPrtLen);
+    for (int i = 0; i < len; i++) {
+        this->intPrt[i] = p.intPrt[i];
+    }
     isNegative = p.isNegative;
     fractPrtLen = p.fractPrtLen;
     intPrtLen = p.intPrtLen;
-
-    this->fractPrt = new short[1000] {};
-    this->intPrt = new short[1000] {};
-    for (int i = 0; i < fractPrtLen; i++) {
-        this->fractPrt[i] = p.fractPrt[i];
-    }
-    for (int i = 0; i < intPrtLen; i++) {
-        this->intPrt[i] = p.intPrt[i];
-    }
 }
 
 BigRealNumber::BigRealNumber(const string& numb) {
@@ -85,20 +84,17 @@ string BigRealNumber::toString() const {
 }
 
 BigRealNumber& BigRealNumber::operator=(const BigRealNumber& other) {
+    int len = max(this->fractPrtLen, other.fractPrtLen);
+    for (int i = 0; i < len; i++) {
+        this->fractPrt[i] = other.fractPrt[i];
+    }
+    len = max(this->intPrtLen, other.intPrtLen);
+    for (int i = 0; i < len; i++) {
+        this->intPrt[i] = other.intPrt[i];
+    }
     isNegative = other.isNegative;
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
-
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
-
-    for (int i = 0; i < fractPrtLen; i++) {
-        this->fractPrt[i] = other.fractPrt[i];
-    }
-    for (int i = 0; i < intPrtLen; i++) {
-        this->intPrt[i] = other.intPrt[i];
-    }
-
     return *this;
 }
 
@@ -356,7 +352,6 @@ BigRealNumber BigRealNumber::factorial() {
     return res;
 }
 
-
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 >= 1000) {
         throw runtime_error("Ошибка вычисления: целая часть "
@@ -378,6 +373,13 @@ void BigRealNumber::removeInsignDigits() {
     intPrtLen = signDigit + 1;
     signDigit = getFirstNotZero(fractPrt, 999, -1, true);
     fractPrtLen = signDigit + 1;
+}
+
+void BigRealNumber::shiftNumber(int shift, int direction) {
+    while (shift && intPrtLen) {
+        int buf = intPrt[0];
+
+    }
 }
 
 short BigRealNumber::attachArrays(
@@ -439,6 +441,15 @@ short BigRealNumber::attachArrays(
     }
 
     return transfer;
+}
+
+
+// ------------------------------------------------------------------
+void arrShift(short* arr, int len, int shift, bool toRight) {
+    if (toRight) {
+        int wp = len - 1;
+        int rp = w
+    }
 }
 
 int getFirstNotZero(short* arr, int start, int stop, bool backward) {
