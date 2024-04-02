@@ -1,6 +1,15 @@
 #include "BigRealNumber.h"
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
+    if (!this->intPrt) {
+        delete this->intPrt;
+    }
+    this->intPrt = new short[1000] {};
+    if (!this->fractPrt) {
+        delete this->fractPrt;
+    }
+    this->fractPrt = new short[1000] {};
+
     int len = max(this->fractPrtLen, p.fractPrtLen);
     for (int i = 0; i < len; i++) {
         this->fractPrt[i] = p.fractPrt[i];
@@ -39,6 +48,8 @@ BigRealNumber::BigRealNumber(const string& numb) {
 BigRealNumber::BigRealNumber(int n) {
     intPrt = new short[1000] {};
     fractPrt = new short[1000] {};
+    intPrtLen = 0;
+    fractPrtLen = 0;
     isNegative = n < 0;
     setVal(n);
 }
@@ -328,18 +339,86 @@ void BigRealNumber::mul(
     }
     
     BigRealNumber buf1{};
+    BigRealNumber buf2{};
     for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
+        buf2.setVal(0);
         buf1.setVal(fac.fractPrt[i]);
-        mul(buf1, buf1);
-        buf1.shiftNumber(i + 1, true);
-        res.add(buf1, res);
+        mul(buf1, buf2);
+        buf2.shiftNumber(i + 1, true);
+        res.add(buf2, res);
     }
     for (int i = 0; i < fac.intPrtLen; i++) {
+        buf2.setVal(0);
         buf1.setVal(fac.intPrt[i]);
-        mul(buf1, buf1);
-        buf1.shiftNumber(i, false);
-        res.add(buf1, res);
+        mul(buf1, buf2);
+        buf2.shiftNumber(i, false);
+        res.add(buf2, res);
     }
+}
+
+// переделать
+void BigRealNumber::div(
+    const BigRealNumber& diver,
+    BigRealNumber& res
+) const {
+    // работаем с целой частью делимого
+    BigRealNumber divCp = diver;
+    delete divCp.fractPrt;
+    divCp.fractPrt = new short[1000] {};
+
+    BigRealNumber q{};
+    BigRealNumber r{};
+    BigRealNumber buf{};
+
+    int i = intPrtLen - 1;
+    int j = 0;
+    bool toFrct = false;
+    int fractInd = -1;
+
+    while ((j < fractPrtLen || i >= 0 || q > 0) && res.fractPrtLen < 1000) {
+        buf = q;
+        q.setVal(0);
+        r.setVal(0);
+        while (buf < divCp) {
+            if (i >= 0) {
+                buf.shiftNumber(1, false);
+                buf.intPrt[0] = intPrt[i--];
+                res.shiftNumber(1, false);
+            } else if (j < fractPrtLen) {
+                buf.shiftNumber(1, false);
+                buf.intPrt[0] = fractPrt[j++];
+                fractInd++;
+                toFrct = true;
+            } else {
+                buf.shiftNumber(1, false);
+                fractInd++;
+                toFrct = true;
+            }
+        }
+        buf.divRemaind(divCp, r, q);
+        if (toFrct) {
+            res.appendToFract(r.intPrt[0], fractInd);
+        } else {
+            res.intPrt[0] = r.intPrt[0];
+        }
+    }
+
+    res.removeInsignDigits();
+
+}
+
+void BigRealNumber::divRemaind(
+    const BigRealNumber& diver,
+    BigRealNumber& R,
+    BigRealNumber& Q
+) const {
+    BigRealNumber s = *this;
+    BigRealNumber one(1);
+    while (s >= diver) {
+        s.sub(diver, s);
+        R.add(one, R);
+    }
+    Q = s;
 }
 
 short BigRealNumber::attachArrays(

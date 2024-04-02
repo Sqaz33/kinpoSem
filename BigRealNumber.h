@@ -38,7 +38,13 @@ public:
     void div(
         const BigRealNumber& diver,
         BigRealNumber& res
-    );
+    ) const;
+
+    void divRemaind(
+        const BigRealNumber& diver,
+        BigRealNumber& R,
+        BigRealNumber& Q
+    ) const;
 
     short attachArrays(
         const BigRealNumber& term1,
