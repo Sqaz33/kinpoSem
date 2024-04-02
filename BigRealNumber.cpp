@@ -124,39 +124,7 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
-    BigRealNumber oth = other;
-    BigRealNumber ths = *this;
-    oth.isNegative = false;
-    ths.isNegative = false;
-
-    while (oth.fractPrtLen || ths.fractPrtLen) {
-        oth = oth * 10;
-        ths = ths * 10;
-    }
-
-    BigRealNumber quotient(0);
-    string p = "1.0";
-    int it = 0;
-    while (it < 1000 && ths > 0) {
-        if (ths < oth) {
-            ths = ths * 10;
-            if (p == "1.0") {
-                p = "0.1";
-            }
-            else {
-                string cp = p.substr(2);
-                p = "0.0" + cp;
-            }
-            it++;
-        }
-        else {
-            ths = ths - oth;
-            quotient = quotient + BigRealNumber(p);
-        }
-    }
-    quotient.isNegative = !(isNegative == other.isNegative);
-
-    return quotient;
+    return BigRealNumber();
 }
 
 BigRealNumber BigRealNumber::operator/(int n) const {
@@ -287,16 +255,20 @@ void BigRealNumber::add(
         term2.sub(*this, res);
         return;
     }
-    res.isNegative = isNegative;
+    BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
+    rs->isNegative = isNegative;
 
     short trans = attachArrays(*this, term2,
-                                res, true,
+                                *rs, true,
                                 false, 0);
     attachArrays(*this, term2,
-                res, false,
+                *rs, false,
                 false, trans);
 
-    res.removeInsignDigits();
+    rs->removeInsignDigits();
+    if (this == &res) {
+        res = *rs;
+    }
 }
 
 void BigRealNumber::sub(
@@ -312,15 +284,18 @@ void BigRealNumber::sub(
         subtr.sub(*this, res);
         return;
     }
-
     if (*this >= subtr) {
+        BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
         short trans = attachArrays(*this, subtr,
-                                    res, true,
+                                    *rs, true,
                                     true, 0);
         attachArrays(*this, subtr,
-                      res, false,
+                      *rs, false,
                       true, trans);
-        res.removeInsignDigits();
+        rs->removeInsignDigits();
+        if (this == &res) {
+            res = *rs;
+        }
     } else {
         subtr.sub(*this, res);
     }
@@ -353,24 +328,17 @@ void BigRealNumber::mul(
     }
     
     BigRealNumber buf1{};
-    BigRealNumber buf2{};
     for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
-        buf2.setVal(0);
         buf1.setVal(fac.fractPrt[i]);
-        mul(buf1, buf2);
-        buf2.shiftNumber(i + 1, true);
-        buf1.setVal(0);
-        res.add(buf2, buf1);
-        res = buf1;
+        mul(buf1, buf1);
+        buf1.shiftNumber(i + 1, true);
+        res.add(buf1, res);
     }
     for (int i = 0; i < fac.intPrtLen; i++) {
-        buf2.setVal(0);
         buf1.setVal(fac.intPrt[i]);
-        mul(buf1, buf2);
-        buf2.shiftNumber(i, false);
-        buf1.setVal(0);
-        res.add(buf2, buf1);
-        res = buf1;
+        mul(buf1, buf1);
+        buf1.shiftNumber(i, false);
+        res.add(buf1, res);
     }
 }
 
