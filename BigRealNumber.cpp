@@ -114,40 +114,8 @@ BigRealNumber BigRealNumber::operator-(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
-    BigRealNumber oth = other;
-    BigRealNumber ths = *this;
-    oth.isNegative = false;
-    ths.isNegative = false;
-
-    BigRealNumber resForInt{};
-    oth.fractPrtLen = 0;
-    oth.fractPrt = new short[1000] {};
-    short* a = oth.fractPrt;
-    while (oth > 0) {
-        resForInt = resForInt + ths;
-        oth = oth - 1;
-    }
-
-    BigRealNumber res = resForInt;
-    res.isNegative = !(isNegative == other.isNegative);
-
-    if (!other.fractPrtLen) {
-        return res;
-    }
-    BigRealNumber resForFract{};
-    oth = other;
-    oth.intPrt = a;
-    oth.intPrtLen = 0;
-    oth.isNegative = false;
-    int p = 0;
-    while (oth.fractPrtLen) {
-        oth = oth * 10;
-        p++;
-    }
-    resForFract = ths * oth;
-    resForFract = resForFract / pow(10, p);
-
-    res = res + resForFract;
+    BigRealNumber res{};
+    mul(other, res);
     return res;
 }
 
