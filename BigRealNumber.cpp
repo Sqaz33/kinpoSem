@@ -369,60 +369,66 @@ void BigRealNumber::div(
     const BigRealNumber& diver,
     BigRealNumber& res
 ) const {
-    // работаем с целой частью делимого
-    BigRealNumber divCp = diver;
-    delete divCp.fractPrt;
-    divCp.fractPrt = new short[1000] {};
-
+    // работаем с целой частью делителя
+    BigRealNumber dcp = diver;
+    delete dcp.fractPrt;
+    dcp.fractPrt = new short[1000] {};
+    dcp.fractPrtLen = 0;
+    
     BigRealNumber q{};
     BigRealNumber r{};
-    BigRealNumber buf{};
-
+    BigRealNumber divid{};
     int i = intPrtLen - 1;
     int j = 0;
-    bool toFrct = false;
-    int fractInd = -1;
+    int fp = 0;
+    bool toF = false;
 
-    while ((j < fractPrtLen || i >= 0 || q > 0) && res.fractPrtLen < 1000) {
-        buf = q;
+    while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < 1000 && diver.intPrtLen) {
+        divid = q;
         q.setVal(0);
         r.setVal(0);
-        if (i == 1) {
-            cout << buf.toString() << endl;
-        }
-        while (buf < divCp) {
+        while (divid < dcp) {
+            divid.shiftNumber(1, false);
             if (i >= 0) {
-                buf.shiftNumber(1, false);
-                buf.intPrt[0] = intPrt[i--];
                 res.shiftNumber(1, false);
+                divid.intPrt[0] = intPrt[i--];
             } else if (j < fractPrtLen) {
-                buf.shiftNumber(1, false);
-                buf.intPrt[0] = fractPrt[j++];
-                fractInd++;
-                toFrct = true;
+                divid.intPrt[0] = fractPrt[j++];
+                toF = true;
             } else {
-                buf.shiftNumber(1, false);
-                fractInd++;
-                toFrct = true;
-            }
-            buf.removeInsignDigits();
-            if (buf == 0) {
+                toF = true;
+            } 
+            divid.removeInsignDigits();
+            if (divid == 0) {
                 break;
             }
         }
-        if (i == 0) {
-            cout << buf.toString() << endl;
-        }
-        buf.divRemaind(divCp, r, q);
-        if (toFrct) {
-            res.appendToFract(r.intPrt[0], fractInd);
+
+        divid.divRemaind(dcp, r, q);
+        if (toF) {
+            res.appendToFract(r.intPrt[0], fp++);
         } else {
             res.intPrt[0] = r.intPrt[0];
         }
     }
-
     res.removeInsignDigits();
 
+    if (!diver.fractPrtLen) {
+        return;
+    }
+    // работем с дробной частью делителя
+    BigRealNumber ths = *this;
+    dcp = diver;
+    delete dcp.intPrt;
+    dcp.intPrtLen = 0;
+    dcp.intPrt = new short[1000] {};
+    ths.shiftNumber(dcp.fractPrtLen, false);
+    dcp.shiftNumber(dcp.fractPrtLen, false);
+    dcp.removeInsignDigits();
+    BigRealNumber rs{};
+    ths.div(dcp, rs);
+    
+    res.add(rs, res);
 }
 
 void BigRealNumber::divRemaind(
