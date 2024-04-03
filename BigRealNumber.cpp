@@ -162,8 +162,16 @@ bool BigRealNumber::operator==(const BigRealNumber& other) const {
     return true;
 }
 
+bool BigRealNumber::operator==(int other) const {
+    return *this == BigRealNumber(other);
+}
+
 bool BigRealNumber::operator!=(const BigRealNumber& other) const {
     return !(*this == other);
+}
+
+bool BigRealNumber::operator!=(int other) const {
+    return !(*this == BigRealNumber(other));
 }
 
 bool BigRealNumber::operator<(const BigRealNumber& other) const {
@@ -379,6 +387,9 @@ void BigRealNumber::div(
         buf = q;
         q.setVal(0);
         r.setVal(0);
+        if (i == 1) {
+            cout << buf.toString() << endl;
+        }
         while (buf < divCp) {
             if (i >= 0) {
                 buf.shiftNumber(1, false);
@@ -394,6 +405,13 @@ void BigRealNumber::div(
                 fractInd++;
                 toFrct = true;
             }
+            buf.removeInsignDigits();
+            if (buf == 0) {
+                break;
+            }
+        }
+        if (i == 0) {
+            cout << buf.toString() << endl;
         }
         buf.divRemaind(divCp, r, q);
         if (toFrct) {
@@ -483,7 +501,7 @@ short BigRealNumber::attachArrays(
 }
 
 void BigRealNumber::appendToInt(short number) {
-    if (intPrtLen + 1 >= 1000) {
+    if (intPrtLen + 1 > 1000) {
         throw runtime_error("Ошибка вычисления: целая часть "
             "выходного числа содержит более 1000 цифр");
     }
@@ -491,7 +509,7 @@ void BigRealNumber::appendToInt(short number) {
 }
 
 bool BigRealNumber::appendToFract(short number, int ind) {
-    if (fractPrtLen + 1 >= 1000 || ind >= 1000) {
+    if (fractPrtLen + 1 > 1000 || ind >= 1000) {
         return false;
     }
     fractPrt[ind] = number;

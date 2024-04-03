@@ -102,9 +102,11 @@ public:
 
     // Перегрузка оператора равенства (==)
     bool operator==(const BigRealNumber &other) const;
+    bool operator==(int other) const;
 
     // Перегрузка оператора неравенства (!=)
     bool operator!=(const BigRealNumber &other) const;
+    bool operator!=(int other) const;
 
     // Перегрузка оператора меньше (<)
     bool operator<(const BigRealNumber &other) const;
