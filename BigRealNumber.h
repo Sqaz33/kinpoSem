@@ -122,7 +122,7 @@ public:
     bool operator>=(const BigRealNumber &other) const;
 
     // Возведение в степень
-    BigRealNumber pw(int pow);
+    BigRealNumber pow(int pw);
 
     // Вычисления факториала
     BigRealNumber factorial();

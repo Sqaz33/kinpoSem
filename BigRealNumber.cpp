@@ -233,15 +233,15 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
     return *this > other;
 }
 
-BigRealNumber BigRealNumber::pw(int pow) {
+BigRealNumber BigRealNumber::pow(int pw) {
     BigRealNumber res(1);
-    if (pow == 0) {
+    if (pw == 0) {
         return res;
     }
 
-    while (pow > 0) {
+    while (pw > 0) {
         res = res * *this;
-        pow--;
+        pw--;
     }
     return res;
 }
@@ -478,7 +478,7 @@ short BigRealNumber::attachArrays(
 
     for (int i = start; ; i += diff) {
         short n = transfer;
-        n += t1[i] + t2[i] * pow(-1, minusTerm2);
+        n += t1[i] + t2[i] * std::pow(-1, minusTerm2);
         transfer = n > 9;
         if (n < 0) {
             n += 10;
@@ -607,7 +607,7 @@ void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
 }
 
 int getFirstNotZero(short* arr, int start, int stop, bool backward) {
-    for (int i = start; i != stop; i += pow(-1, backward)) {
+    for (int i = start; i != stop; i += std::pow(-1, backward)) {
         if (arr[i]) {
             return i;
         }
