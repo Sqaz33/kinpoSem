@@ -135,7 +135,9 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
-    return BigRealNumber();
+    BigRealNumber res{};
+    div(other, res);
+    return res;
 }
 
 BigRealNumber BigRealNumber::operator/(int n) const {
