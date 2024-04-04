@@ -19,7 +19,6 @@ private:
     int fractPrtLen;
     bool isNegative;
 
-public:
     void add(
         const BigRealNumber& term2,
         BigRealNumber& res
