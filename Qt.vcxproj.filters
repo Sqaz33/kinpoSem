@@ -29,7 +29,10 @@
     <ClCompile Include="BigRealNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImportActions.cpp">
+    <ClCompile Include="ActionsFromXML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,7 +40,10 @@
     <ClInclude Include="BigRealNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImportActions.h">
+    <ClInclude Include="ActionsFromXML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

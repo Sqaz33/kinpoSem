@@ -89,13 +89,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="BigRealNumber.cpp" />
-    <ClCompile Include="ImportActions.cpp" />
+    <ClCompile Include="ActionsFromXML.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="BigRealNumber.h" />
-    <ClInclude Include="ImportActions.h" />
+    <ClInclude Include="ActionsFromXML.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
