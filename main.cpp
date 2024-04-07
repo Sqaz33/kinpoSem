@@ -4,8 +4,13 @@
 #include "Action.h"
 #include "ActionsFromXML.h"
 #include "ResultActionsToTxt.h"
-#include "typeinfo"
 
-int main(int argc, char *argv[]) {
-
+int main() {
+	try {
+		QString path = "test.xml";
+		ActionsFromXML input(path.toStdString());
+		const QList<Action*>* l = input.getActions();
+	} catch (const runtime_error& e) {
+		cout << e.what();
+	}
 }

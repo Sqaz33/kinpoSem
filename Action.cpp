@@ -77,7 +77,7 @@ void Action::setTerm(const string &term, int number) {
 		return;
 	}
 
-	QRegExp rx("\-{0,1}\d+\.\d+");
+	QRegExp rx("-{0,1}\\d+\\.\\d+");
 	QString str = QString::fromStdString(term);
 
 	bool isNegative = term.at(0) == '-';

@@ -12,12 +12,12 @@ using namespace std;
 
 class ActionsFromXML {
 private:
-	QList<Action> actions;
+	QList<Action*> actions;
 
 	void loadActions(const string& XMLPath);
 public:
 	ActionsFromXML(const string& XMLPath);
 
-	const QList<Action>& getActions() const;
+	const QList<Action*>* getActions() const;
 };
 
