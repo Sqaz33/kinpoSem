@@ -1,14 +1,12 @@
-//
-// Created by mset6 on 19.02.2024.
-//
+#pragma once
 
-#ifndef UNTITLED1_BIGREALNUMBER_H
-#define UNTITLED1_BIGREALNUMBER_H
 #include "string"
 #include "stdexcept"
 #include "math.h"
 #include "iostream"
+
 using namespace std;
+
 
 class BigRealNumber {
 private:
@@ -132,5 +130,3 @@ public:
 
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal);
 int getFirstNotZero(short* arr, int start, int stop, bool backward);
-
-#endif //UNTITLED1_BigRealNumber_H

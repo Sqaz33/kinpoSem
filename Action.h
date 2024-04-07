@@ -1,9 +1,12 @@
 #pragma once
-#include "BigRealNumber.h"
+
+#include <unordered_map>
 #include "string"
+
 #include "QString"
 #include "qregexp"
-#include <unordered_map>
+
+#include "BigRealNumber.h"
 
 enum Operation {
 	ADD,

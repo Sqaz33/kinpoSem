@@ -5,16 +5,35 @@
 #include "ActionsFromXML.h"
 #include "ResultActionsToTxt.h"
 
-int main() {
+int main(int argc, char* argv[]) {
+	if (false /*argc != 3*/) {
+		throw runtime_error("Неверное количество входных аргументов программы");
+	}
+	//string xmlPath(argv[1]);
+	//string txtPath(argv[2]);
+
+	string xmlPath = "test.xml";
+	string txtPath = "test.txt";
+
 	try {
-		QString path = "test.xml";
-		ActionsFromXML input(path.toStdString());
-		const QList<Action*>* l = input.getActions();
-		for (int i = 0; i < l->length(); i++) {
-			Result r = l->at(i)->perform();
-			cout << r.result << endl;
+		ActionsFromXML input(xmlPath);
+		const QList<Action*>* actions = input.getActions();
+		QList<Result> results;
+		for (int i = 0; i < actions->length(); i++) {
+			results.append(actions->at(i)->perform());
+			if (results.last().isError) {
+				results.last().result = results.last().result + " для расчета №" + (char) ('0' + i + 1);
+				break;
+			}
 		}
+		ResultActionsToTxt output(txtPath);
+		output.writeResults(results);
+		if (results.last().isError) {
+			throw runtime_error(results.last().result);
+		}
+		return 0;
 	} catch (const runtime_error& e) {
 		cout << e.what();
+		return 1;
 	}
 }
