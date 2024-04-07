@@ -1,13 +1,8 @@
 #include "BigRealNumber.h"
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
-    if (!this->intPrt) {
-        delete this->intPrt;
-    }
+
     this->intPrt = new short[1000] {};
-    if (!this->fractPrt) {
-        delete this->fractPrt;
-    }
     this->fractPrt = new short[1000] {};
 
     int len = max(this->fractPrtLen, p.fractPrtLen);
