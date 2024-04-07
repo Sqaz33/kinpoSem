@@ -4,7 +4,7 @@
 
 #include "qlist"
 #include "qXmlStreamReader"
-#include "qFile";
+#include "qFile"
 #include "Action.h"
 using namespace std;
 
@@ -14,11 +14,12 @@ private:
 	string path;
 	QList<Action> actions;
 
-	void setPath(string& XMLPath);
+	void setPath(const string& XMLPath);
 	void loadActions();
-public:
-	ActionsFromXML(string& XMLPath);
 
-	QList<Action> getActions();
+public:
+	ActionsFromXML(const string& XMLPath);
+
+	const QList<Action>& getActions() const;
 };
 

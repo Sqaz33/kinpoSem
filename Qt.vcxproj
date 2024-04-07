@@ -93,11 +93,13 @@
     <ClCompile Include="BigRealNumber.cpp" />
     <ClCompile Include="ActionsFromXML.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResultActionsToTxt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="BigRealNumber.h" />
     <ClInclude Include="ActionsFromXML.h" />
+    <ClInclude Include="ResultActionsToTxt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

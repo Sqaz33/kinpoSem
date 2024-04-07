@@ -235,7 +235,7 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
     return *this > other;
 }
 
-BigRealNumber BigRealNumber::pow(int pw) {
+BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
     BigRealNumber res(1);
     if (pw == 0) {
         return res;

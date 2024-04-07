@@ -1,1 +1,6 @@
-#include "importActions.h"
+#include "ActionsFromXML.h"
+
+
+const QList<Action>& ActionsFromXML::getActions() const {
+	return actions;
+}
