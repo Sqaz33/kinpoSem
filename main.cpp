@@ -6,14 +6,14 @@
 #include "ResultActionsToTxt.h"
 
 int main(int argc, char* argv[]) {
-	if (false /*argc != 3*/) {
+	if (argc != 3) {
 		throw runtime_error("Неверное количество входных аргументов программы");
 	}
-	//string xmlPath(argv[1]);
-	//string txtPath(argv[2]);
+	string xmlPath(argv[1]);
+	string txtPath(argv[2]);
 
-	string xmlPath = "test.xml";
-	string txtPath = "test.txt";
+	//string xmlPath = "test.xml";
+	//string txtPath = "test.txt";
 
 	try {
 		ActionsFromXML input(xmlPath);
