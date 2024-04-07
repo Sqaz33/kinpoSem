@@ -77,6 +77,9 @@ public:
 
     ~BigRealNumber();
 
+    int getIntPrtLen() const;
+    int getFractPrtLen() const;
+
     // Перевод в строковой представление числа дробную и целую части
     string toString() const;
 

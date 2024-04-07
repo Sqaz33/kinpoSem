@@ -4,6 +4,7 @@
 
 #include "qlist"
 #include "qXmlStreamReader"
+#include "stdexcept"
 #include "qFile"
 #include "Action.h"
 using namespace std;
@@ -11,12 +12,9 @@ using namespace std;
 
 class ActionsFromXML {
 private:
-	string path;
 	QList<Action> actions;
 
-	void setPath(const string& XMLPath);
-	void loadActions();
-
+	void loadActions(const string& XMLPath);
 public:
 	ActionsFromXML(const string& XMLPath);
 

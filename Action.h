@@ -3,7 +3,7 @@
 #include "string"
 #include "QString"
 #include "qregexp"
-#include "qhash"
+#include <unordered_map>
 
 enum Operation {
 	ADD,
@@ -35,12 +35,12 @@ private:
 	BigRealNumber term2;
 	Operation oper;
 	Result res;
-	// далее будут проверки term1,2 и oper
+
 	void setTerm(const string &term, int number);
 	void setOperation(const string &oper);
 	void checkAction();
 
-	QHash<string, Operation> toOper{
+	unordered_map<string, Operation> stringToOper {
 		{"add", ADD},
 		{"subt", SUBT},
 		{"mul", MUL},
@@ -55,6 +55,21 @@ private:
 		{"no_less",  NO_LESS}
 	};
 
+
+	unordered_map<Operation, string> operToString{
+		{ADD, "add"},
+		{SUBT, "subt"},
+		{MUL, "mul"},
+		{DIV, "div"},
+		{POW, "pow"},
+		{FACT, "fact"},
+		{EQUALS, "equals"},
+		{NOT_EQUALS, "not_equals"},
+		{LESS, "less"},
+		{NO_MORE, "no_more"},
+		{MORE, "more"},
+		{NO_LESS, "no_less"}
+	};
 
 public:
 	Action(const string& term1, const string& term2, const string& oper);

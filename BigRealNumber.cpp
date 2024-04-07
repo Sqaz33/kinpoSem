@@ -67,6 +67,13 @@ BigRealNumber::~BigRealNumber() {
     delete intPrt;
 }
 
+int BigRealNumber::getIntPrtLen() const {
+    return intPrtLen;
+}
+int BigRealNumber::getFractPrtLen() const {
+    return fractPrtLen;
+}
+
 string BigRealNumber::toString() const {
     string numb;
     if (isNegative) {
@@ -243,7 +250,7 @@ BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
 
     while (pw > 0) {
         res = res * *this;
-        pw--;
+        pw = pw - 1;
     }
     return res;
 }
