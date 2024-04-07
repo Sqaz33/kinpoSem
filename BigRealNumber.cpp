@@ -1,21 +1,19 @@
 #include "BigRealNumber.h"
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
+    isNegative = p.isNegative;
+    fractPrtLen = p.fractPrtLen;
+    intPrtLen = p.intPrtLen;
 
     this->intPrt = new short[1000] {};
     this->fractPrt = new short[1000] {};
 
-    int len = max(this->fractPrtLen, p.fractPrtLen);
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = p.fractPrt[i];
     }
-    len = max(this->intPrtLen, p.intPrtLen);
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < intPrtLen; i++) {
         this->intPrt[i] = p.intPrt[i];
     }
-    isNegative = p.isNegative;
-    fractPrtLen = p.fractPrtLen;
-    intPrtLen = p.intPrtLen;
 }
 
 BigRealNumber::BigRealNumber(const string& numb) {
