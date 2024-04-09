@@ -32,6 +32,9 @@ struct Result {
 	bool isError;
 };
 
+// Установить ошибку в результате
+void setErrorToResult(const string& errorCode, Result& res);
+
 class Action {
 private:
 	BigRealNumber term1;
@@ -76,8 +79,6 @@ private:
 
 public:
 	Action(const string& term1, const string& term2, const string& oper);
-	// если в res уже isError вернуть res
 	Result perform();
 };
 
-void setErrorToResult(const string& errorCode, Result &res);

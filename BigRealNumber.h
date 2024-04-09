@@ -52,30 +52,31 @@ private:
         short transfer
     ) const;
 
+    // Добавить значение в конец целой части
     void appendToInt(short number);
-
+    // Добавить значение в дробную часть по индексу
     bool appendToFract(short number, int ind);
-
+    // Удалить незначащие разряды
     void removeInsignDigits();
-
     void shiftNumber(int shift, bool toRight);
-
     void setVal(int n);
 public:
     // Конструктор копирования
     BigRealNumber(const BigRealNumber& p);
 
-    // Конструктор объекта по строковому представлению числа
+    // Конструктор по строковому представлению числа
     BigRealNumber(const string& n);
 
-    // Конструкто объекта по целому числу
+    // Конструктор по целому числу
     BigRealNumber(int n);
 
     BigRealNumber();
 
     ~BigRealNumber();
 
+    // Получить длинну целой части
     int getIntPrtLen() const;
+    // Получить длинну дробной части
     int getFractPrtLen() const;
 
     // Перевод в строковой представление числа дробную и целую части

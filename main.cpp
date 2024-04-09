@@ -7,13 +7,10 @@
 
 int main(int argc, char* argv[]) {
 	if (argc != 3) {
-		throw runtime_error("Неверное количество входных аргументов программы");
+		throw runtime_error("Incorrect number of program input arguments.");
 	}
 	string xmlPath(argv[1]);
 	string txtPath(argv[2]);
-
-	//string xmlPath = "test.xml";
-	//string txtPath = "test.txt";
 
 	try {
 		ActionsFromXML input(xmlPath);

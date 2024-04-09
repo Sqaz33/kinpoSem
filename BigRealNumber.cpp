@@ -510,8 +510,10 @@ short BigRealNumber::attachArrays(
 
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 > 1000) {
-        throw runtime_error("Ошибка вычисления: целая часть "
-            "выходного числа содержит более 1000 цифр");
+        throw runtime_error(
+            "Calculation error : The integer part of the " 
+            "output number contains more than 1000 digits."
+        );
     }
     intPrt[intPrtLen++] = number;
 }
@@ -548,8 +550,10 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
         if (fractPrt || toRight) {
             if (toRight) {
                 if (intPrtLen + 1 >= 1000) {
-                    throw runtime_error("Ошибка вычисления: целая часть "
-                        "выходного числа содержит более 1000 цифр");
+                    throw runtime_error(
+                        "Calculation error : The integer part of the "
+                        "output number contains more than 1000 digits."
+                    );
                 }
                 fractPrtLen++;
             }

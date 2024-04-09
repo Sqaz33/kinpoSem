@@ -14,7 +14,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	QFile file(pt);
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		throw runtime_error("Ошибка чтения: неверно указан путь");
+		throw runtime_error("Read error: Path specified incorrectly.");
 	}
 
 	QXmlStreamReader reader(&file);
@@ -43,6 +43,6 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	}
 
 	if (reader.hasError()) {
-		throw runtime_error("Ошибка чтения: неверное содержание входного файла.");
+		throw runtime_error("Read error: Invalid content in input file.");
 	}
 }
