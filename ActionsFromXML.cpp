@@ -42,6 +42,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 		}
 	}
 
+	file.close();
 	if (reader.hasError()) {
 		throw runtime_error("Read error: Invalid content in input file.");
 	}

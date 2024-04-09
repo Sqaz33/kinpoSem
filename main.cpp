@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < actions->length(); i++) {
 			results.append(actions->at(i)->perform());
 			if (results.last().isError) {
-				results.last().result = results.last().result + " для расчета №" + (char) ('0' + i + 1);
+				results.last().result = results.last().result + " пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ" + to_string(i + 1);
 				break;
 			}
 		}
