@@ -60,7 +60,7 @@ Result Action::perform() {
 		r.term2 = term2.toString();
 		r.operation = operToString.at(oper);
 		if (boolRs >= 0) {
-			r.result = boolRs ? "правда" : "ложь";
+			r.result = boolRs ? "True" : "False";
 		} else {
 			r.result = rs.toString();
 		}
@@ -130,7 +130,6 @@ void Action::checkAction() {
 	if (res.isError) {
 		return;
 	}
-
 	if (oper == FACT && term2 != 0) {
 		setErrorToResult(
 			"Read error: incorrect number of operands specified.",

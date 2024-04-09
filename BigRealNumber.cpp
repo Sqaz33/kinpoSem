@@ -21,20 +21,26 @@ BigRealNumber::BigRealNumber(const string& numb) {
     fractPrt = new short[1000] {};
     isNegative = numb.at(0) == '-';
 
+    // Получить индек разделителя
     int point = (int)numb.find('.');
+    // Получить длину целой части
     intPrtLen = point - isNegative;
 
+    // Получить длину дробной части
     fractPrtLen = numb.length() - intPrtLen - 1 - isNegative;
 
+    // Записать целую часть в обратном порядке
     int j = isNegative ? 1 : 0;
     for (int i = intPrtLen - 1; i >= 0; i--, j++) {
         intPrt[i] = (short)(numb.at(j) - '0');
     }
     j++;
 
+    // Записать дробную часть
     for (int i = 0; i < fractPrtLen; i++, j++) {
         fractPrt[i] = (short)(numb.at(j) - '0');
     }
+    // Удалить незначащие разряды
     removeInsignDigits();
 }
 
@@ -135,6 +141,9 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
+    if (other == 0) {
+        throw runtime_error("Calculation error: Division by zero.");
+    }
     BigRealNumber res{};
     div(other, res);
     return res;
@@ -181,23 +190,23 @@ bool BigRealNumber::operator<(const BigRealNumber& other) const {
 }
 
 bool BigRealNumber::operator>(const BigRealNumber& other) const {
+    // Если целая часть больше
     if (intPrtLen > other.intPrtLen) {
         return true;
-    }
-    else if (intPrtLen < other.intPrtLen) {
+    } else if (intPrtLen < other.intPrtLen) {
         return false;
     }
-
+    // Сравнивать целые части начиная со старших разрядов
     for (int i = intPrtLen - 1; i >= 0; i--) {
         if (intPrt[i] > other.intPrt[i]) {
             return true;
-        }
-        else if (intPrt[i] < other.intPrt[i]) {
+        } else if (intPrt[i] < other.intPrt[i]) {
             return false;
         }
     }
 
     bool isEqual = true;
+    // Сравнить дробные части
     for (int i = 0; i < fractPrtLen; i++) {
         if (isEqual) {
             isEqual = fractPrt[i] == other.fractPrt[i];
@@ -209,8 +218,10 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
             return false;
         }
     }
-
+    // Если дробные части, сравненные по длинне короткой части,
+    // и длинна дробной части другого числа больше
     if (isEqual && other.fractPrtLen > fractPrtLen) {
+        // То данное числа меньше
         return false;
     }
 
@@ -263,19 +274,22 @@ BigRealNumber BigRealNumber::factorial() {
 }
 
 
-// ---------------------вспомогательные методы---------------------------
 void BigRealNumber::add(
         const BigRealNumber& term2,
         BigRealNumber& res
 ) const {
+    // Если term1 + (-term2)
     if (!(isNegative) && term2.isNegative) {
+        // res = term1 - term2
         sub(term2, res);
         return;
-    }
-    else if (isNegative && !term2.isNegative) {
+    // Если -term1 + term2
+    } else if (isNegative && !term2.isNegative) {
+        // res = term2 - term1
         term2.sub(*this, res);
         return;
     }
+    // На случай подобного: term1.add(term2, term1)
     BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
     rs->isNegative = isNegative;
 
@@ -296,15 +310,24 @@ void BigRealNumber::sub(
     const BigRealNumber& subtr,
     BigRealNumber& res
 ) const {
-    if ((isNegative && subtr.isNegative) || (!(isNegative) && subtr.isNegative)) {
+   // term1 - term2
+   // term1 - (-term2)
+   // -term1 - term2
+   // -term1 - (-term2) 
+
+    // Если -term1 - term2 или term1 - (-term2a) 
+    if ((isNegative && !subtr.isNegative) || !(isNegative) && subtr.isNegative) {
+        // res = term
         add(subtr, res);
         res.isNegative = isNegative;
         return;
-    }
-    else if (isNegative && subtr.isNegative) {
+    // Если -term1 - (-term2)
+    } else if (isNegative && subtr.isNegative) {
         subtr.sub(*this, res);
         return;
     }
+    // Иначе вычислить term1 - term2
+
     if (*this >= subtr) {
         BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
         short trans = attachArrays(*this, subtr,
@@ -318,7 +341,9 @@ void BigRealNumber::sub(
             res = *rs;
         }
     } else {
+        // res = -(term2 - term1)
         subtr.sub(*this, res);
+        res.isNegative = true;
     }
 }
 
@@ -326,74 +351,88 @@ void BigRealNumber::mul(
     const BigRealNumber& fac,
     BigRealNumber &res
 ) const {
-    // умножаем на цифру
+    // Умножаем на 1 цифру из числа
     if (fac.intPrtLen == 1 && !fac.fractPrtLen) {
-        short ref = 0;
-        short f = fac.intPrt[0];
+        short ref = 0; // перенос
+        short f = fac.intPrt[0]; // множитель
+        // Умножить начиная с младших разрядов столбиком
+        // Дробную часть
         for (int i = fractPrtLen - 1; i >= 0; i--) {
             short n = fractPrt[i] * f + ref;
             ref = n / 10;
             n %= 10;
             res.appendToFract(n, i);
         }  
+        // Целую часть
         for (int i = 0; i < intPrtLen; i++) {
             short n = intPrt[i] * f + ref;
             ref = n / 10;
             n %= 10;
             res.appendToInt(n);
         }
+        // Если остался перенос
         if (ref) {
             res.appendToInt(ref);
         }
         return;
     }
     
+    // Умножить начиная с младших разрядов столбиком
     BigRealNumber buf1{};
     BigRealNumber buf2{};
+    // Дробную часть
     for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
         buf2.setVal(0);
         buf1.setVal(fac.fractPrt[i]);
+        // Умножить множиемое на i-ый разряд множителя
         mul(buf1, buf2);
+        // Сдвинуть результат предыдущей операции вправо
         buf2.shiftNumber(i + 1, true);
+        // Прибавить к ответу
         res.add(buf2, res);
     }
+    // Целую часть
     for (int i = 0; i < fac.intPrtLen; i++) {
         buf2.setVal(0);
         buf1.setVal(fac.intPrt[i]);
         mul(buf1, buf2);
+        // Сдвинуть ... вправо
         buf2.shiftNumber(i, false);
         res.add(buf2, res);
     }
 }
 
-// переделать
 void BigRealNumber::div(
     const BigRealNumber& diver,
     BigRealNumber& res
 ) const {
-    // работаем с целой частью делителя
-    BigRealNumber dcp = diver;
-    delete dcp.fractPrt;
+    // Работать с целой частью делителя
+    BigRealNumber dcp = diver; // Копия делителя
+    delete dcp.fractPrt; 
     dcp.fractPrt = new short[1000] {};
     dcp.fractPrtLen = 0;
     
-    BigRealNumber q{};
-    BigRealNumber r{};
-    BigRealNumber divid{};
-    int i = intPrtLen - 1;
-    int j = 0;
-    int fp = 0;
-    bool toF = false;
+    BigRealNumber q{}; // Остаток
+    BigRealNumber r{}; // Целая часть
+    BigRealNumber divid{}; // Буфер для столбика
+    int i = intPrtLen - 1; 
+    int j = 0; // Начальный индекс для дробной части делимого
+    int fp = 0; // Индек для внесения в дробную часть результата
+    bool toF = false; // Флаг внесения в дробную часть результата
 
+    // Пока не выбрана целая или дробная часть делимого, или пока имеется остаток
     while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < 1000 && diver.intPrtLen) {
         divid = q;
         q.setVal(0);
         r.setVal(0);
         while (divid < dcp) {
+            // Сдвинуть буфер влево
             divid.shiftNumber(1, false);
+            // Взять разряд из целой части
             if (i >= 0) {
                 res.shiftNumber(1, false);
                 divid.intPrt[0] = intPrt[i--];
+            // Из дробной
             } else if (j < fractPrtLen) {
                 divid.intPrt[0] = fractPrt[j++];
                 toF = true;
@@ -418,12 +457,15 @@ void BigRealNumber::div(
     if (!diver.fractPrtLen) {
         return;
     }
-    // работем с дробной частью делителя
+    // Работать с дробной частью делителя
     BigRealNumber ths = *this;
+    // Убрать целую часть делителя
     dcp = diver;
     delete dcp.intPrt;
     dcp.intPrtLen = 0;
     dcp.intPrt = new short[1000] {};
+    // Сдвигать делитель и делимое, пока есть дробная часть делителя
+    // 0.1 / 0.001 -> 100 / 1
     ths.shiftNumber(dcp.fractPrtLen, false);
     dcp.shiftNumber(dcp.fractPrtLen, false);
     dcp.removeInsignDigits();
@@ -460,8 +502,8 @@ short BigRealNumber::attachArrays(
     int diff;
     short* t1;
     short* t2;
-
     if (addToFract) {
+        // Начинать с конца дробных частей
         start = max(term1.fractPrtLen, term2.fractPrtLen) - 1;
         start = max(0, start);
         stop = 0;
@@ -470,6 +512,7 @@ short BigRealNumber::attachArrays(
         t2 = term2.fractPrt;
     }
     else {
+        // Начинать с младших разрядов
         start = 0;
         stop = max(term1.intPrtLen, term2.intPrtLen) - 1;
         stop = max(0, stop);
@@ -529,19 +572,31 @@ bool BigRealNumber::appendToFract(short number, int ind) {
 
 
 void BigRealNumber::removeInsignDigits() {
-    int signDigit = getFirstNotZero(intPrt, 999, -1, true);
+    // Удалить незначащие разряды
+    // Пример для дробной части: fractPrtLen = 5, i = 4, 0.00100 <-(искать не нулевой символ),
+    // двигаясь справа на лево
+    //                           fractPrtLen = i + 1, i = 2, 0.001
+    int signDigit = getFirstNotZero(intPrt, intPrtLen, -1, true);
     intPrtLen = signDigit + 1;
-    signDigit = getFirstNotZero(fractPrt, 999, -1, true);
+    signDigit = getFirstNotZero(fractPrt, fractPrtLen, -1, true);
     fractPrtLen = signDigit + 1;
 }
 
 void BigRealNumber::shiftNumber(int shift, bool toRight) {
     while (shift) {
+        // Перенос младшего разряда из одного массива в другой 
         short buf = toRight ? intPrt[0] : fractPrt[0];
         if (intPrtLen || !toRight) {
             if (!toRight) {
+                if (intPrtLen + 1 > 1000) {
+                    throw runtime_error(
+                        "Calculation error : The integer part of the "
+                        "output number contains more than 1000 digits."
+                    );
+                }
                 intPrtLen++;
             }
+            // сдвинуть целую часть 
             arrShift(intPrt, intPrtLen, 1, !toRight, 0);
             if (toRight && intPrtLen) {
                 intPrtLen--;
@@ -549,19 +604,15 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
         }
         if (fractPrt || toRight) {
             if (toRight) {
-                if (intPrtLen + 1 >= 1000) {
-                    throw runtime_error(
-                        "Calculation error : The integer part of the "
-                        "output number contains more than 1000 digits."
-                    );
-                }
                 fractPrtLen++;
             }
+            // Сдвинуть дробную часть
             arrShift(fractPrt, fractPrtLen, 1, toRight, 0);
             if (!toRight && fractPrtLen) {
                 fractPrtLen--;
             }
         }
+        // Подставить значение из буфера на место пустого разряда
         if (toRight) {
             fractPrt[0] = buf;
         } else {
