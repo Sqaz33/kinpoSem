@@ -402,7 +402,7 @@ void BigRealNumber::mul(
         buf2.setVal(0);
         buf1.setVal(fac.intPrt[i]);
         mul(buf1, buf2);
-        // Сдвинуть ... вправо
+        // Сдвинуть ... влево
         buf2.shiftNumber(i, false);
         res.add(buf2, res);
     }
@@ -509,15 +509,14 @@ short BigRealNumber::attachArrays(
     short* t1;
     short* t2;
     if (addToFract) {
-        // Начинать с конца дробных частей
+        // Начинать с младших разрядов.
         start = max(term1.fractPrtLen, term2.fractPrtLen) - 1;
         start = max(0, start);
         stop = 0;
         diff = -1;
         t1 = term1.fractPrt;
         t2 = term2.fractPrt;
-    }
-    else {
+    } else {
         // Начинать с младших разрядов
         start = 0;
         stop = max(term1.intPrtLen, term2.intPrtLen) - 1;
@@ -541,8 +540,7 @@ short BigRealNumber::attachArrays(
             if (!res.appendToFract(n, i)) {
                 break;
             }
-        }
-        else {
+        } else {
             res.appendToInt(n);
         }
         if (i == stop) {
@@ -578,10 +576,6 @@ bool BigRealNumber::appendToFract(short number, int ind) {
 
 
 void BigRealNumber::removeInsignDigits() {
-    // Удалить незначащие разряды
-    // Пример для дробной части: fractPrtLen = 5, i = 4, 0.00100 <-(искать не нулевой символ),
-    // двигаясь справа на лево
-    //                           fractPrtLen = i + 1, i = 2, 0.001
     int signDigit = getFirstNotZero(intPrt, intPrtLen, -1, true);
     intPrtLen = signDigit + 1;
     signDigit = getFirstNotZero(fractPrt, fractPrtLen, -1, true);
