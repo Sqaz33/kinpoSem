@@ -53,7 +53,7 @@ private:
     ) const;
 
     // Добавить значение в конец целой части
-    void appendToInt(short number);
+    void appendToInt(short number); 
     // Добавить значение в дробную часть по индексу
     bool appendToFract(short number, int ind);
     // Удалить незначащие разряды

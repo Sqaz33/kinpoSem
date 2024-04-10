@@ -21,7 +21,7 @@ BigRealNumber::BigRealNumber(const string& numb) {
     fractPrt = new short[1000] {};
     isNegative = numb.at(0) == '-';
 
-    // Получить индек разделителя
+    // Получить индекс разделителя
     int point = (int)numb.find('.');
     // Получить длину целой части
     intPrtLen = point - isNegative;
@@ -190,6 +190,12 @@ bool BigRealNumber::operator<(const BigRealNumber& other) const {
 }
 
 bool BigRealNumber::operator>(const BigRealNumber& other) const {
+    if (isNegative && !other.isNegative)  {
+        return false;
+    } else if (!isNegative && other.isNegative) {
+        return true;
+    }
+
     // Если целая часть больше
     if (intPrtLen > other.intPrtLen) {
         return true;
@@ -316,7 +322,7 @@ void BigRealNumber::sub(
    // -term1 - (-term2) 
 
     // Если -term1 - term2 или term1 - (-term2a) 
-    if ((isNegative && !subtr.isNegative) || !(isNegative) && subtr.isNegative) {
+    if ((isNegative && !subtr.isNegative) || (!(isNegative) && subtr.isNegative)) {
         // res = term
         add(subtr, res);
         res.isNegative = isNegative;
