@@ -8,7 +8,7 @@ ResultActionsToTxt::ResultActionsToTxt(const string& txtPath) {
 void ResultActionsToTxt::writeResults(const QList<Result>& res) const {
 	QFile file(path);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-		throw runtime_error("Write error : Output file path specified incorrectly.");
+		throw runtime_error("Ошибка записи: неверно указан путь выходного файла");
 	}
 
 	QTextStream out(&file);

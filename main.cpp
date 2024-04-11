@@ -4,15 +4,16 @@
 #include "Action.h"
 #include "ActionsFromXML.h"
 #include "ResultActionsToTxt.h"
+#include "locale"
 
 int main(int argc, char* argv[]) {
-	if (argc != 3) {
-		throw runtime_error("Incorrect number of program input arguments.");
-	}
-	string xmlPath(argv[1]);
-	string txtPath(argv[2]);
-
+	setlocale(LC_ALL, "ru_RU.utf8");
 	try {
+		if (argc != 3) {
+			throw runtime_error("Неверное количество аргументов ввода программы.");
+		}
+		string xmlPath(argv[1]);
+		string txtPath(argv[2]);
 		ActionsFromXML input(xmlPath);
 		const QList<Action*>* actions = input.getActions();
 		QList<Result> results;

@@ -142,7 +142,7 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
     if (other == 0) {
-        throw runtime_error("Calculation error: Division by zero.");
+        throw runtime_error("Ошибка вычисления: деление на ноль");
     }
     BigRealNumber res{};
     div(other, res);
@@ -558,8 +558,7 @@ short BigRealNumber::attachArrays(
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 > 1000) {
         throw runtime_error(
-            "Calculation error : The integer part of the " 
-            "output number contains more than 1000 digits."
+            "Ошибка вычисления : целая часть выходного числа содержит более 1000 цифр"
         );
     }
     intPrt[intPrtLen++] = number;
@@ -590,8 +589,7 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
             if (!toRight) {
                 if (intPrtLen + 1 > 1000) {
                     throw runtime_error(
-                        "Calculation error : The integer part of the "
-                        "output number contains more than 1000 digits."
+                        "Ошибка вычисления : целая часть выходного числа содержит более 1000 цифр"
                     );
                 }
                 intPrtLen++;

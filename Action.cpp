@@ -98,11 +98,10 @@ void Action::setTerm(const string &term, int number) {
 				break;
 		}
 	} else if (!rx.exactMatch(str)) {
-		setErrorToResult("Read error: incorrect operand notation.", res);
+		setErrorToResult("Ошибка чтения: указан неверный операнд №" + to_string(number), res);
 	} else if (intPrtLen > 50 || fractPrtLen > 50) {
 		setErrorToResult(
-			"Read error: the operand's fractional"
-			" or integer part contains more than 50 digits.",
+			"Ошибка чтения : дробная или целая часть операнда содержит более 50",
 			res
 		);
 	}
@@ -114,7 +113,7 @@ void Action::setOperation(const string &op) {
 	}
 	oper = stringToOper.count(op) ? stringToOper[op] : NO_OPER;
 	if (oper == NO_OPER) {
-		setErrorToResult("Read error : inaccessible operation specified.", res);
+		setErrorToResult("Ошибка чтения: указана недоступная операция.", res);
 	}
 }
 
@@ -132,17 +131,17 @@ void Action::checkAction() {
 	}
 	if (oper == FACT && term2 != 0) {
 		setErrorToResult(
-			"Read error: incorrect number of operands specified.",
+			"Ошибка чтения: указано неверное количество операндов.",
 			res
 		);
 	} else if (oper == FACT && (term1.getFractPrtLen() || term1 < 0)) {
 		setErrorToResult(
-			"Read error : Operand #1 for the 'fact' operation is invalid.",
+			"Ошибка чтения : Операнд №1 для операции 'fact' недопустим.",
 			res
 		);
 	} else if (oper == POW && (term2.getFractPrtLen() || term2 < 0)) {
 		setErrorToResult(
-			"Read error: Operand #2 for the 'pow' operation is invalid.",
+			"Ошибка чтения : Операнд №2 для операции 'pow' недопустим.",
 			res
 		);
 	}
