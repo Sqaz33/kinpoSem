@@ -1,5 +1,8 @@
 #pragma once
 
+#include "qregexp"
+#include "QString"
+
 #include "string"
 #include "stdexcept"
 #include "math.h"
@@ -64,10 +67,9 @@ public:
     // Конструктор копирования
     BigRealNumber(const BigRealNumber& p);
 
-    BigRealNumber fromString(const string& numb); // реализовать
-
-    // Конструктор по строковому представлению числа
-    BigRealNumber(const string& n);
+    static BigRealNumber fromStdString(const string& numb);
+    static bool validateStdString(const string& numb);
+    static bool validateQString(const QString& numb);
 
     // Конструктор по целому числу
     BigRealNumber(int n);
@@ -76,16 +78,18 @@ public:
 
     ~BigRealNumber();
 
-    // Получить длинну целой части
+    // Получить длину целой части
     int getIntPrtLen() const;
-    // Получить длинну дробной части
+    // Получить длину дробной части
     int getFractPrtLen() const;
 
+
     // Перевод в строковой представление числа дробную и целую части
-    string toString() const;
+    string toStdString() const;
 
     // Перегрузка оператора присваивания (=)
     BigRealNumber& operator=(const BigRealNumber &other);
+    BigRealNumber& operator=(bool bl);
 
     // Перегрузка оператора сложения (+)
     BigRealNumber operator+(const BigRealNumber &other) const;

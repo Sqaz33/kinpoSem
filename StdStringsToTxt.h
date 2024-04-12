@@ -9,13 +9,13 @@
 #include "Action.h"
 
 
-class ResultActionsToTxt {
+class StdStringToTxt {
 private:
 	QString path;
 	
 public:
-	ResultActionsToTxt(const string &txtPath);
+	StdStringToTxt(const string &txtPath);
 	
-	void writeResults(const QList<Result>& res) const;
+	void write(const QList<string>& strs) const;
 };
 

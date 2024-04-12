@@ -1,6 +1,7 @@
 #include "ActionsFromXML.h"
 
-ActionsFromXML::ActionsFromXML(const string& XMLPath) {
+ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<string>* actionErrors) {
+	this->actionErrors = actionErrors;
 	actions = QList<Action*>();
 	loadActions(XMLPath);
 }
@@ -38,7 +39,12 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					oper = txt;
 				}
 			}
-			actions.append(new Action(term1, term2, oper));
+			try {
+				Action *act = &Action::fromStdStrings(term1, term2, oper);
+				actions.append(act);
+			} catch (const runtime_error& e) {
+				actionErrors->append(e.what());
+			}
 		}
 	}
 

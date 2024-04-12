@@ -37,7 +37,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>_msvc2017_64</QtInstall>
+    <QtInstall>5.12.12_msvc2017_64</QtInstall>
     <QtModules>core</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -98,13 +98,13 @@
     <ClCompile Include="BigRealNumber.cpp" />
     <ClCompile Include="ActionsFromXML.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ResultActionsToTxt.cpp" />
+    <ClCompile Include="StdStringsToTxt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="BigRealNumber.h" />
     <ClInclude Include="ActionsFromXML.h" />
-    <ClInclude Include="ResultActionsToTxt.h" />
+    <ClInclude Include="StdStringsToTxt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

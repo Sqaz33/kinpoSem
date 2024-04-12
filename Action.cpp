@@ -1,156 +1,148 @@
 #include "Action.h"
 
-// добавить toString()
-// перенсти всю валидацию, кроме кол опер. в bg.
-// perform возвращает bg
-
-// bg term, operation oper принемает 
-Action::Action(const string& term1, const string& term2, const string& oper) {
-	res = Result{};
-	setTerm(term1, 1);
-	setTerm(term2, 2);
-	setOperation(oper);
-	checkAction();
+Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2) {
+	this->oper = oper;
+	this->term1 = *term1;
+	this->term2 = *term2;
+	termCount = term2 == nullptr ? 1 : 0;
+	if (!checkArity()) {
+		throw runtime_error("Ошибка создания объекта: указано неверное количество операндов для операции " 
+							+ stdStringFromOper(this->oper) + ".");
+	}
 }
 
-Result Action::perform() {
-	Result r{};
-	if (res.isError) {
-		r = res;
-		return r;
-	}
-
-	try {
-		BigRealNumber rs;
-		int boolRs = -1;
-		switch (oper) {
-			case ADD:
-				rs = term1 + term2;
-				break;
-			case SUBT:
-				rs = term1 - term2;
-				break;
-			case MUL:
-				rs = term1 * term2;
-				break;
-			case DIV:
-				rs = term1 / term2;
-				break;
-			case POW:
-				rs = term1.pow(term2);
-				break;
-			case FACT:
-				rs = term1.factorial();
-				break;
-			case EQUALS:
-				boolRs = term1 == term2;
-				break;
-			case NOT_EQUALS:
-				boolRs = term1 != term2;
-				break;
-			case LESS:
-				boolRs = term1 < term2;
-				break;
-			case NO_MORE:
-				boolRs = term1 <= term2;
-				break;
-			case MORE:
-				boolRs = term1 > term2;
-				break;
-			case NO_LESS:
-				boolRs = term1 >= term2;
-				break;
-		}
-		r.term1 = term1.toString();
-		r.term2 = term2.toString();
-		r.operation = operToString.at(oper);
-		if (boolRs >= 0) {
-			r.result = boolRs ? "True" : "False";
-		} else {
-			r.result = rs.toString();
-		}
-		
-
+Action Action::fromStdStrings(const string& oper, const string& term1, const string& term2) {
+	bool isError = false;
+	stringstream error;
+	BigRealNumber t1{};
+	BigRealNumber t2{};
+	try { 
+		t1 = BigRealNumber::fromStdString(term1);
 	} catch (const runtime_error& e) {
-		setErrorToResult(e.what(), r);
+		isError = true;
+		error << e.what();
+		error << " для операнда 1.\n";
+		cout << error.str() << "\n";
 	}
-	return r;
-}
-
-// перенсти в ActionFromXML
-void Action::setTerm(const string &term, int number) {
-	if (res.isError) {
-		return;
+	try {
+		t2 = BigRealNumber::fromStdString(term2);
+	} catch (const runtime_error& e) {
+		isError = true;
+		error << e.what();
+		error << " для операнда 2.\n";
+		cout << error.str() << "\n";
 	}
 
-	// перенести в bg
-	QRegExp rx("-{0,1}\\d+\\.\\d+");
-	QString str = QString::fromStdString(term);
-	//-----------------
-	bool isNegative = term.at(0) == '-';
-	int point = (int)term.find('.');
-	int intPrtLen = point - isNegative;
-	int fractPrtLen = term.length() - intPrtLen - 1 - isNegative;
-
-	if (rx.exactMatch(str) && intPrtLen <= 50 && fractPrtLen <= 50) {
-		switch (number) {
-			case 1:
-				term1 = BigRealNumber(term);
-				res.term1 = term;
-				res.term2 = " ";
-				break;
-			case 2:
-				term2 = BigRealNumber(term);
-				res.term2 = term;
-				break;
+	Operation op = operFromStdString(oper);
+	if (op == NO_OPER) {
+		error << "Ошибка создания объекта: указана недоступная операция.\n";
+		throw runtime_error(error.str());
+	}
+	try {
+		Action act = Action(op, &t1, &t2);
+		if (isError) {
+			throw runtime_error(error.str());
 		}
-	} else if (!rx.exactMatch(str)) {
-		setErrorToResult("Ошибка чтения: указан неверный операнд №" + to_string(number), res);
-	} else if (intPrtLen > 50 || fractPrtLen > 50) {
-		setErrorToResult(
-			"Ошибка чтения : дробная или целая часть операнда содержит более 50",
-			res
-		);
+		return act;
+	} catch (const runtime_error& e) {
+		error << e.what();
+		throw runtime_error(error.str());
 	}
 }
 
-void Action::setOperation(const string &op) {
-	if (res.isError) {
-		return;
-	}
-	oper = stringToOper.count(op) ? stringToOper[op] : NO_OPER;
-	if (oper == NO_OPER) {
-		setErrorToResult("Ошибка чтения: указана недоступная операция.", res);
-	}
+string Action::toStdString() {
+	string str = term1.toStdString()
+				+ " "
+				+ term2.toStdString()
+				+ " "
+				+ stdStringFromOper(oper)
+				+ "\n";
+	return str;
 }
 
-void setErrorToResult(const string& errorCode, Result &res) {
-	res.isError = true;
-	res.term1 = "NaN";
-	res.term2 = "NaN";
-	res.operation = "NaN";
-	res.result = errorCode;
+BigRealNumber Action::perform() {
+	BigRealNumber rs{};
+	switch (oper) {
+		case ADD:
+			rs = term1 + term2;
+			break;
+		case SUBT:
+			rs = term1 - term2;
+			break;
+		case MUL:
+			rs = term1 * term2;
+			break;
+		case DIV:
+			rs = term1 / term2;
+			break;
+		case POW:
+			rs = term1.pow(term2);
+			break;
+		case FACT:
+			rs = term1.factorial();
+			break;
+		case EQUALS:
+			rs = term1 == term2;
+			break;
+		case NOT_EQUALS:
+			rs = term1 != term2;
+			break;
+		case LESS:
+			rs = term1 < term2;
+			break;
+		case NO_MORE:
+			rs = term1 <= term2;
+			break;
+		case MORE:
+			rs = term1 > term2;
+			break;
+		case NO_LESS:
+			rs = term1 >= term2;
+			break;
+	}
+	return rs;
 }
 
-// перенсти мат. в bg
-void Action::checkAction() {
-	if (res.isError) {
-		return;
+bool Action::checkArity() {
+	if (oper == FACT && termCount > 1) {
+		return false;
 	}
-	if (oper == FACT && term2 != 0) {
-		setErrorToResult(
-			"Ошибка чтения: указано неверное количество операндов.",
-			res
-		);
-	} else if (oper == FACT && (term1.getFractPrtLen() || term1 < 0)) {
-		setErrorToResult(
-			"Ошибка чтения : Операнд №1 для операции 'fact' недопустим.",
-			res
-		);
-	} else if (oper == POW && (term2.getFractPrtLen() || term2 < 0)) {
-		setErrorToResult(
-			"Ошибка чтения : Операнд №2 для операции 'pow' недопустим.",
-			res
-		);
-	}
+	return termCount == 2;
+}
+
+Operation operFromStdString(const string& oper) {
+	unordered_map<string, Operation> stringToOper{
+		{"add", ADD},
+		{"subt", SUBT},
+		{"mul", MUL},
+		{"div", DIV},
+		{"pow", POW},
+		{"fact", FACT},
+		{"equals", EQUALS},
+		{"not_equals", NOT_EQUALS},
+		{"less", LESS},
+		{"no_more", NO_MORE},
+		{"more", MORE},
+		{"no_less",  NO_LESS}
+	};
+	return stringToOper.count(oper) ? stringToOper[oper] : NO_OPER;
+}
+
+string stdStringFromOper(Operation oper) {
+	unordered_map<Operation, string> operToString{
+		{ADD, "add"},
+		{SUBT, "subt"},
+		{MUL, "mul"},
+		{DIV, "div"},
+		{POW, "pow"},
+		{FACT, "fact"},
+		{EQUALS, "equals"},
+		{NOT_EQUALS, "not_equals"},
+		{LESS, "less"},
+		{NO_MORE, "no_more"},
+		{MORE, "more"},
+		{NO_LESS, "no_less"},
+		{NO_OPER, "no_oper"}
+	};
+	return operToString[oper];
 }

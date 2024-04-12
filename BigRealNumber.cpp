@@ -16,32 +16,56 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     }
 }
 
-BigRealNumber::BigRealNumber(const string& numb) {
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
-    isNegative = numb.at(0) == '-';
+BigRealNumber BigRealNumber::fromStdString(const string& numb) {
+    if (!validateStdString(numb)) {
+        throw runtime_error("Ошибка создания объекта: указан неверный формат операнда");
+    }
+
+    BigRealNumber n{};
+    n.intPrt = new short[1000] {};
+    n.fractPrt = new short[1000] {};
+    n.isNegative = numb.at(0) == '-';
 
     // Получить индекс разделителя
     int point = (int)numb.find('.');
     // Получить длину целой части
-    intPrtLen = point - isNegative;
+    n.intPrtLen = point - n.isNegative;
 
     // Получить длину дробной части
-    fractPrtLen = numb.length() - intPrtLen - 1 - isNegative;
+    n.fractPrtLen = numb.length() - n.intPrtLen - 1 - n.isNegative;
+
+    if (n.fractPrtLen > 1000 || n.intPrtLen > 1000) {
+        throw runtime_error("Ошибка создания объекта: дробная или целая часть" 
+                            "строкового представления числа содержит более 1000 цифр");
+    }
 
     // Записать целую часть в обратном порядке
-    int j = isNegative ? 1 : 0;
-    for (int i = intPrtLen - 1; i >= 0; i--, j++) {
-        intPrt[i] = (short)(numb.at(j) - '0');
+    int j = n.isNegative ? 1 : 0;
+    for (int i = n.intPrtLen - 1; i >= 0; i--, j++) {
+        n.intPrt[i] = (short)(numb.at(j) - '0');
     }
     j++;
 
     // Записать дробную часть
-    for (int i = 0; i < fractPrtLen; i++, j++) {
-        fractPrt[i] = (short)(numb.at(j) - '0');
+    for (int i = 0; i < n.fractPrtLen; i++, j++) {
+        n.fractPrt[i] = (short)(numb.at(j) - '0');
     }
     // Удалить незначащие разряды
-    removeInsignDigits();
+    n.removeInsignDigits();
+    return n;
+}
+
+bool BigRealNumber::validateStdString(const string& numb) {
+    QString n = QString::fromStdString(numb);
+    return validateQString(n);
+}
+
+bool BigRealNumber::validateQString(const QString& numb) {
+    QRegExp rx("-{0,1}\\d+\\.\\d+");
+    if (!rx.exactMatch(numb)) {
+        return false;
+    }
+    return true;
 }
 
 BigRealNumber::BigRealNumber(int n) {
@@ -73,7 +97,7 @@ int BigRealNumber::getFractPrtLen() const {
     return fractPrtLen;
 }
 
-string BigRealNumber::toString() const {
+string BigRealNumber::toStdString() const {
     string numb;
     if (isNegative) {
         numb.append(1, '-');
@@ -106,6 +130,11 @@ BigRealNumber& BigRealNumber::operator=(const BigRealNumber& other) {
     isNegative = other.isNegative;
     fractPrtLen = other.fractPrtLen;
     intPrtLen = other.intPrtLen;
+    return *this;
+}
+
+BigRealNumber& BigRealNumber::operator=(bool bl) {
+    this->setVal(bl ? 1 : 0);
     return *this;
 }
 
@@ -224,7 +253,7 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
             return false;
         }
     }
-    // Если дробные части, сравненные по длинне короткой части,
+    // Если дробные части, сравненные по длине короткой части,
     // и длинна дробной части другого числа больше
     if (isEqual && other.fractPrtLen > fractPrtLen) {
         // То данное числа меньше
@@ -253,6 +282,20 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 }
 
 BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
+    bool isError = false;
+    string errorCode = "Ошибка вычисления: неверный операнд №2 для операции pow";
+    if (pw.fractPrtLen) {
+        isError = true;
+        errorCode += " (операнд имеет дробную часть)";
+    }
+    if (pw < 0) {
+        isError = true;
+        errorCode += " (операнд меньше нуля)";
+    }
+    if (isError) {
+        throw runtime_error(errorCode);
+    }
+
     BigRealNumber res(1);
     if (pw == 0) {
         return res;
@@ -266,6 +309,20 @@ BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
 }
 
 BigRealNumber BigRealNumber::factorial() {
+    bool isError = false;
+    string errorCode = "Ошибка вычисления: неверный операнд для операции factorial";
+    if (fractPrtLen) {
+        isError = true;
+        errorCode += " (операнд имеет дробную часть)";
+    }
+    if (*this < 0) {
+        isError = true;
+        errorCode += " (операнд меньше нуля)";
+    }
+    if (isError) {
+        throw runtime_error(errorCode);
+    }
+
     BigRealNumber res(1);
     BigRealNumber fact(1);
     if (*this == 0) {
