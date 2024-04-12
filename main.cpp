@@ -32,10 +32,12 @@ int main(int argc, char* argv[]) {
 				string res = to_string(n)
 							+ " "
 							+ act->toStdString()
-							+ act->perform().toStdString();
+							+ " "
+							+ act->perform().toStdString()
+							+ "\n";
 				results.append(res);
 			} catch (const runtime_error& e) {
-				string what = "for action #"
+				string what = "error action #"
 								+ to_string(n)
 								+ " ------------------------\n"
 								+ e.what()
@@ -47,11 +49,13 @@ int main(int argc, char* argv[]) {
 
 		// вывести действия в файл
 		StdStringToTxt output(txtPath);
-		output.write(results);
-		output.write(actionErrors);
+		output.write(results, false);
+		output.write(actionErrors, true);
 
-		if (!actionErrors.isEmpty()) {
-			cout << "Ошибочных действий: " + to_string(actionErrors.size()) << endl;
+		cout << "Ошибочных действий: " + to_string(actionErrors.size()) << endl;
+
+		if (actionErrors.size()) {
+			return 2;
 		}
 
 		return 0;

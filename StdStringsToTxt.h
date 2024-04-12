@@ -16,6 +16,6 @@ private:
 public:
 	StdStringToTxt(const string &txtPath);
 	
-	void write(const QList<string>& strs) const;
+	void write(const QList<string>& strs, bool appendTo) const;
 };
 

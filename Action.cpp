@@ -4,9 +4,9 @@ Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* 
 	this->oper = oper;
 	this->term1 = *term1;
 	this->term2 = term2 == nullptr ? BigRealNumber(0) : *term2;
-	termCount = term2 == nullptr ? 1 : 0;
+	termCount = term2 == nullptr ? 1 : 2;
 	if (!checkArity()) {
-		throw runtime_error("Ошибка создания объекта: указано неверное количество операндов для операции " 
+		throw runtime_error("Object creation error: Invalid number of operands for operation" 
 							+ stdStringFromOper(this->oper) + ".");
 	}
 }
@@ -39,7 +39,7 @@ Action* Action::fromStdStrings(const string& oper, const string& term1, const st
 		throw runtime_error(error.str());
 	}
 	try {
-		Action* act = new Action(op, &t1, term2 != "NaN" ? &t1 : nullptr);
+		Action* act = new Action(op, &t1, term2 != "NaN" ? &t2 : nullptr);
 		if (isError) {
 			throw runtime_error(error.str());
 		}
@@ -55,8 +55,7 @@ string Action::toStdString() const {
 				+ " "
 				+ term2.toStdString()
 				+ " "
-				+ stdStringFromOper(oper)
-				+ "\n";
+				+ stdStringFromOper(oper);
 	return str;
 }
 
@@ -106,8 +105,8 @@ BigRealNumber Action::perform() const {
 bool Action::checkArity() {
 	if (oper == FACT && termCount > 1) {
 		return false;
-	}
-	return termCount == 2;
+	} 
+	return termCount == 2 || (oper == FACT && termCount == 1);
 }
 
 Operation operFromStdString(const string& oper) {

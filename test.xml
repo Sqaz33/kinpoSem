@@ -5,7 +5,8 @@
     	<operator>mul</operator>
     </operation>
     <operation>
-        <operand1>5.0</operand1>
+        <operand1>-5.0</operand1>
+        <operand2>3.7</operand2>
     	<operator>fact</operator>
     </operation>
 </bigNumber>

@@ -15,7 +15,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	QFile file(pt);
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		throw runtime_error("Ошибка записи: неверно указан путь выходного файла");
+		throw runtime_error("Ошибка чтения: неверно указан путь входного файла");
 	}
 
 	QXmlStreamReader reader(&file);
@@ -40,20 +40,20 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					oper = txt;
 				}
 			}
-		}
-		try {
-			actions[count++] = Action::fromStdStrings(
-				oper, term1, term2
-			);
-		}
-		catch (const runtime_error& e) {
-			string what = "for action #"
-				+ to_string(count++)
-				+ " ------------------------\n"
-				+ e.what()
-				+ "\n"
-				+ "---------------------------------";
-			actionErrors->append(e.what());
+			try {
+				actions[count++] = Action::fromStdStrings(
+					oper, term1, term2
+				);
+			}
+			catch (const runtime_error& e) {
+				string what = "error action #"
+					+ to_string(count++)
+					+ " ------------------------\n"
+					+ e.what()
+					+ "\n"
+					+ "---------------------------------";
+				actionErrors->append(what);
+			}
 		}
 	}
 

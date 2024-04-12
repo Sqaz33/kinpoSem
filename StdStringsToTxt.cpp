@@ -5,9 +5,10 @@ StdStringToTxt::StdStringToTxt(const string& txtPath) {
 	path = QString::fromStdString(txtPath);
 }
 
-void StdStringToTxt::write(const QList<string>& strs) const {
+void StdStringToTxt::write(const QList<string>& strs, bool appendTo) const {
 	QFile file(path);
-	if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+	QIODevice::OpenModeFlag of = appendTo ? QIODevice::Append : QIODevice::WriteOnly;
+	if (!file.open(of | QIODevice::Text)) {
 		throw runtime_error("Ошибка записи: неверно указан путь выходного файла");
 	}
 
