@@ -4,24 +4,58 @@
 #include "Action.h"
 #include "ActionsFromXML.h"
 #include "StdStringsToTxt.h"
-#include "locale"
 
+#include "locale"
 
 
 int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "ru_RU.utf8");
-	QList<runtime_error> actionErrors;
+	QList<string> actionErrors;
 	try {
-		//if (argc != 3) {
-		//	throw runtime_error("Неверное количество аргументов ввода программы.");
-		//}
-		//string xmlPath(argv[1]);
-		//string txtPath(argv[2]);
+		if (argc != 3) {
+			throw runtime_error("Неверное количество аргументов ввода программы.");
+		}
+		string xmlPath(argv[1]);
+		string txtPath(argv[2]);
 
-		Action act = Action::fromStdStrings("0", "-0.", "sdf");
+		// получить действия
+		ActionsFromXML input(xmlPath, &actionErrors);
+		const QHash<int, Action*>* actions = input.getActions();
+
+		// прозвести действия
+		QList<string> results;
+		QList<int> keys = actions->keys();
+		qSort(keys.begin(), keys.end());
+		for (int n : keys) {
+			const Action* act = actions->value(n);
+			try {
+				string res = to_string(n)
+							+ " "
+							+ act->toStdString()
+							+ act->perform().toStdString();
+				results.append(res);
+			} catch (const runtime_error& e) {
+				string what = "for action #"
+								+ to_string(n)
+								+ " ------------------------\n"
+								+ e.what()
+								+ "\n"
+								+ "---------------------------------";
+				actionErrors.append(what);
+			}
+		}
+
+		// вывести действия в файл
+		StdStringToTxt output(txtPath);
+		output.write(results);
+		output.write(actionErrors);
+
+		if (!actionErrors.isEmpty()) {
+			cout << "Ошибочных действий: " + to_string(actionErrors.size()) << endl;
+		}
+
 		return 0;
 	} catch (const runtime_error& e) {
-		cout << e.what() << endl;
 		puts(e.what());
 		return 1;
 	}

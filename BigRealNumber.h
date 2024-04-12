@@ -129,10 +129,10 @@ public:
     bool operator>=(const BigRealNumber &other) const;
 
     // Возведение в степень
-    BigRealNumber pow(BigRealNumber pw);
+    BigRealNumber pow(BigRealNumber pw) const;
 
     // Вычисления факториала
-    BigRealNumber factorial();
+    BigRealNumber factorial() const;
 };
 
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal);

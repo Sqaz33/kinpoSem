@@ -11,7 +11,7 @@ Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* 
 	}
 }
 
-Action Action::fromStdStrings(const string& oper, const string& term1, const string& term2) {
+Action* Action::fromStdStrings(const string& oper, const string& term1, const string& term2) {
 	bool isError = false;
 	stringstream error;
 	BigRealNumber t1{};
@@ -21,25 +21,23 @@ Action Action::fromStdStrings(const string& oper, const string& term1, const str
 	} catch (const runtime_error& e) {
 		isError = true;
 		error << e.what();
-		error << " для операнда 1.\n";
-		cout << error.str() << "\n";
+		error << " for operand 1\n";
 	}
 	try {
 		t2 = BigRealNumber::fromStdString(term2);
 	} catch (const runtime_error& e) {
 		isError = true;
 		error << e.what();
-		error << " для операнда 2.\n";
-		cout << error.str() << "\n";
+		error << " for operand 2.\n";
 	}
 
 	Operation op = operFromStdString(oper);
 	if (op == NO_OPER) {
-		error << "Ошибка создания объекта: указана недоступная операция.\n";
+		error << "Object creation error: An unavailable operation was specified.\n";
 		throw runtime_error(error.str());
 	}
 	try {
-		Action act = Action(op, &t1, &t2);
+		Action* act = new Action(op, &t1, &t2);
 		if (isError) {
 			throw runtime_error(error.str());
 		}
@@ -50,7 +48,7 @@ Action Action::fromStdStrings(const string& oper, const string& term1, const str
 	}
 }
 
-string Action::toStdString() {
+string Action::toStdString() const {
 	string str = term1.toStdString()
 				+ " "
 				+ term2.toStdString()
@@ -60,7 +58,7 @@ string Action::toStdString() {
 	return str;
 }
 
-BigRealNumber Action::perform() {
+BigRealNumber Action::perform() const {
 	BigRealNumber rs{};
 	switch (oper) {
 		case ADD:

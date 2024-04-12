@@ -281,7 +281,7 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
     return *this > other;
 }
 
-BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
+BigRealNumber BigRealNumber::pow(BigRealNumber pw) const{
     bool isError = false;
     string errorCode = "Ошибка вычисления: неверный операнд №2 для операции pow";
     if (pw.fractPrtLen) {
@@ -308,7 +308,7 @@ BigRealNumber BigRealNumber::pow(BigRealNumber pw) {
     return res;
 }
 
-BigRealNumber BigRealNumber::factorial() {
+BigRealNumber BigRealNumber::factorial() const{
     bool isError = false;
     string errorCode = "Ошибка вычисления: неверный операнд для операции factorial";
     if (fractPrtLen) {

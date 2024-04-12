@@ -2,11 +2,11 @@
 
 ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<string>* actionErrors) {
 	this->actionErrors = actionErrors;
-	actions = QList<Action*>();
+	actions = QHash<int, Action*>();
 	loadActions(XMLPath);
 }
 
-const QList<Action*>* ActionsFromXML::getActions() const {
+const QHash<int, Action*>* ActionsFromXML::getActions() const {
 	return &actions;
 }
 
@@ -23,6 +23,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	string term2;
 	string oper;
 
+	int count = 1;
 	while (!reader.atEnd() && !reader.hasError()) {
 		reader.readNext();
 		if (reader.tokenType() == QXmlStreamReader::StartElement && reader.name() == "operation") {
@@ -40,9 +41,14 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 				}
 			}
 			try {
-				Action *act = &Action::fromStdStrings(term1, term2, oper);
-				actions.append(act);
+				actions[count++] = Action::fromStdStrings(term1, term2, oper);
 			} catch (const runtime_error& e) {
+				string what = "for action #" 
+							+ to_string(count++) 
+							+ " ------------------------\n" 
+							+ e.what() 
+							+ "\n" 
+							+ "---------------------------------";
 				actionErrors->append(e.what());
 			}
 		}
