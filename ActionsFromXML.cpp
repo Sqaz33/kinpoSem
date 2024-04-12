@@ -28,7 +28,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 		reader.readNext();
 		if (reader.tokenType() == QXmlStreamReader::StartElement && reader.name() == "operation") {
 			reader.readNext();
-			term2 = "0.0";
+			term2 = "NaN";
 			while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "operation")) {
 				reader.readNext();
 				string txt = reader.readElementText().toStdString();
@@ -40,17 +40,20 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					oper = txt;
 				}
 			}
-			try {
-				actions[count++] = Action::fromStdStrings(term1, term2, oper);
-			} catch (const runtime_error& e) {
-				string what = "for action #" 
-							+ to_string(count++) 
-							+ " ------------------------\n" 
-							+ e.what() 
-							+ "\n" 
-							+ "---------------------------------";
-				actionErrors->append(e.what());
-			}
+		}
+		try {
+			actions[count++] = Action::fromStdStrings(
+				oper, term1, term2
+			);
+		}
+		catch (const runtime_error& e) {
+			string what = "for action #"
+				+ to_string(count++)
+				+ " ------------------------\n"
+				+ e.what()
+				+ "\n"
+				+ "---------------------------------";
+			actionErrors->append(e.what());
 		}
 	}
 

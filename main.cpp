@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 		ActionsFromXML input(xmlPath, &actionErrors);
 		const QHash<int, Action*>* actions = input.getActions();
 
-		// прозвести действия
+		// произвести действия
 		QList<string> results;
 		QList<int> keys = actions->keys();
 		qSort(keys.begin(), keys.end());

@@ -14,7 +14,7 @@ void StdStringToTxt::write(const QList<string>& strs) const {
 	QTextStream out(&file);
 	int i = 1;
 	for (string s : strs) {
-		QString str = QString::fromStdString(to_string(i++) + " " + s);
+		QString str = QString::fromStdString(s);
 		out << str;
 	}
 

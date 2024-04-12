@@ -62,10 +62,7 @@ bool BigRealNumber::validateStdString(const string& numb) {
 
 bool BigRealNumber::validateQString(const QString& numb) {
     QRegExp rx("-{0,1}\\d+\\.\\d+");
-    if (!rx.exactMatch(numb)) {
-        return false;
-    }
-    return true;
+    return rx.exactMatch(numb);
 }
 
 BigRealNumber::BigRealNumber(int n) {
