@@ -64,6 +64,8 @@ public:
     // Конструктор копирования
     BigRealNumber(const BigRealNumber& p);
 
+    BigRealNumber fromString(const string& numb); // реализовать
+
     // Конструктор по строковому представлению числа
     BigRealNumber(const string& n);
 

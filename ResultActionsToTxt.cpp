@@ -1,6 +1,6 @@
 #include "ResultActionsToTxt.h"
 
-
+// реализовать в main, просто запись в main
 ResultActionsToTxt::ResultActionsToTxt(const string& txtPath) {
 	path = QString::fromStdString(txtPath);
 }

@@ -1,5 +1,10 @@
 #include "Action.h"
 
+// добавить toString()
+// перенсти всю валидацию, кроме кол опер. в bg.
+// perform возвращает bg
+
+// bg term, operation oper принемает 
 Action::Action(const string& term1, const string& term2, const string& oper) {
 	res = Result{};
 	setTerm(term1, 1);
@@ -72,14 +77,16 @@ Result Action::perform() {
 	return r;
 }
 
+// перенсти в ActionFromXML
 void Action::setTerm(const string &term, int number) {
 	if (res.isError) {
 		return;
 	}
 
+	// перенести в bg
 	QRegExp rx("-{0,1}\\d+\\.\\d+");
 	QString str = QString::fromStdString(term);
-
+	//-----------------
 	bool isNegative = term.at(0) == '-';
 	int point = (int)term.find('.');
 	int intPrtLen = point - isNegative;
@@ -125,6 +132,7 @@ void setErrorToResult(const string& errorCode, Result &res) {
 	res.result = errorCode;
 }
 
+// перенсти мат. в bg
 void Action::checkAction() {
 	if (res.isError) {
 		return;
