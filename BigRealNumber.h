@@ -10,15 +10,27 @@
 
 using namespace std;
 
+#define MAX_ARR_LENGTH 1000
 
 class BigRealNumber {
 private:
-    short* intPrt;
     short* fractPrt;
+    short* intPrt;
+    int fractArrLen;
+    int intArrLen;
 
     int intPrtLen;
     int fractPrtLen;
     bool isNegative;
+
+    //---методы для работы с частями (массивами)----
+    short atFract(int ind);
+    short atInt(int ind);
+    bool appendToFract(short n);
+    void appendToInt(short n);
+    void doubleFractArr();
+    void doubleIntArr();
+    //-----------------------------------------------
 
     void add(
         const BigRealNumber& term2,
@@ -135,5 +147,6 @@ public:
     BigRealNumber factorial() const;
 };
 
+short* toNewArr(short* oldArr, int oldArrLength, int newArrLength);
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal);
 int getFirstNotZero(short* arr, int start, int stop, bool backward);

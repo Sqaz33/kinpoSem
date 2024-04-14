@@ -1,12 +1,32 @@
 #include "BigRealNumber.h"
 
+BigRealNumber::BigRealNumber(int n) {
+    intPrt = new short[16] {};
+    fractPrt = new short[16] {};
+    intPrtLen = 0;
+    fractPrtLen = 0;
+    isNegative = n < 0;
+
+    setVal(n);
+}
+
+BigRealNumber::BigRealNumber() {
+    intPrt = new short[1000] {};
+    fractPrt = new short[1000] {};
+    intPrtLen = 0;
+    fractPrtLen = 0;
+    isNegative = false;
+}
+
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     isNegative = p.isNegative;
     fractPrtLen = p.fractPrtLen;
     intPrtLen = p.intPrtLen;
+    fractArrLen = p.fractArrLen;
+    intArrLen = p.intArrLen;
 
-    this->intPrt = new short[1000] {};
-    this->fractPrt = new short[1000] {};
+    this->intPrt = new short[fractArrLen] {};
+    this->fractPrt = new short[intArrLen] {};
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = p.fractPrt[i];
@@ -16,39 +36,44 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     }
 }
 
+BigRealNumber::~BigRealNumber() {
+    delete fractPrt;
+    delete intPrt;
+}
+
+//-------------------------методы создания числа из std строки----------------
 BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     if (!validateStdString(numb)) {
         throw runtime_error("Ошибка создания объекта: указан неверный формат операнда");
     }
 
     BigRealNumber n{};
-    n.intPrt = new short[1000] {};
-    n.fractPrt = new short[1000] {};
-    n.isNegative = numb.at(0) == '-';
-
     // Получить индекс разделителя
     int point = (int)numb.find('.');
     // Получить длину целой части
     n.intPrtLen = point - n.isNegative;
-
     // Получить длину дробной части
     n.fractPrtLen = numb.length() - n.intPrtLen - 1 - n.isNegative;
 
-    if (n.fractPrtLen > 1000 || n.intPrtLen > 1000) {
+    if (n.fractPrtLen > MAX_ARR_LENGTH || n.intPrtLen > MAX_ARR_LENGTH) {
         throw runtime_error("Ошибка создания объекта: дробная или целая часть" 
                             "строкового представления числа содержит более 1000 цифр");
     }
 
+    n.fractArrLen = 16;
+    n.intArrLen = 16;
+    n.intPrt = new short[n.fractArrLen] {};
+    n.fractPrt = new short[n.intArrLen] {};
+    n.isNegative = numb.at(0) == '-';
+
     // Записать целую часть в обратном порядке
     int j = n.isNegative ? 1 : 0;
-    for (int i = n.intPrtLen - 1; i >= 0; i--, j++) {
-        n.intPrt[i] = (short)(numb.at(j) - '0');
+    for (int i = 0; i < n.intPrtLen; i--, j++) {
+        n.appendToFract((short)(numb.at(j) - '0'));
     }
     j++;
-
-    // Записать дробную часть
-    for (int i = 0; i < n.fractPrtLen; i++, j++) {
-        n.fractPrt[i] = (short)(numb.at(j) - '0');
+    for (int i = 0; i < n.fractPrtLen; i--, j++) {
+        n.appendToFract((short)(numb.at(j) - '0'));
     }
     // Удалить незначащие разряды
     n.removeInsignDigits();
@@ -64,28 +89,57 @@ bool BigRealNumber::validateQString(const QString& numb) {
     QRegExp rx("-{0,1}\\d+\\.\\d+");
     return rx.exactMatch(numb);
 }
+//-------------------------------------------------------------
 
-BigRealNumber::BigRealNumber(int n) {
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
-    intPrtLen = 0;
-    fractPrtLen = 0;
-    isNegative = n < 0;
-    setVal(n);
+//----------------методы для работы с частями (массивами)--------
+short BigRealNumber::atFract(int ind) {
+    return ind >= fractPrtLen ? 0 : fractPrt[ind];
+}
+short BigRealNumber::atInt(int ind) {
+    return ind >= intPrtLen ? 0 : intPrt[ind];
 }
 
-BigRealNumber::BigRealNumber() {
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
-    intPrtLen = 0;
-    fractPrtLen = 0;
-    isNegative = false;
+bool BigRealNumber::appendToFract(short n) {
+    if (fractPrtLen + 1 >= MAX_ARR_LENGTH) {
+        return false;
+    }
+    if (fractPrtLen + 1 > fractArrLen) {
+        doubleFractArr();
+    }
+    fractPrt[fractPrtLen++] = n;
+    return true;
 }
 
-BigRealNumber::~BigRealNumber() {
-    delete fractPrt;
-    delete intPrt;
+void BigRealNumber::appendToInt(short n) {
+    if (intPrtLen + 1 >= MAX_ARR_LENGTH) {
+        throw runtime_error("Ошибка вычисления: целая часть числа содержит более " 
+                               + to_string(MAX_ARR_LENGTH) + " цифр");
+    }
+    if (intPrtLen + 1 > intArrLen) {
+        doubleIntArr();
+    }
+    intPrt[intPrtLen++] = n;
 }
+
+void BigRealNumber::doubleFractArr() {
+    if (fractArrLen == MAX_ARR_LENGTH) {
+        return;
+    }
+    int newLen = min(MAX_ARR_LENGTH, fractArrLen * 2);
+    fractPrt = toNewArr(fractPrt, fractArrLen, newLen);
+    fractArrLen = newLen;
+}
+void BigRealNumber::doubleIntArr() {
+    if (intArrLen == MAX_ARR_LENGTH) {
+        return;
+    }
+    int newLen = min(MAX_ARR_LENGTH, intArrLen * 2);
+    intPrt = toNewArr(intPrt, intArrLen, newLen);
+    intArrLen = newLen;
+}
+
+//------------------------------------------------------------
+
 
 int BigRealNumber::getIntPrtLen() const {
     return intPrtLen;
@@ -609,25 +663,6 @@ short BigRealNumber::attachArrays(
     return transfer;
 }
 
-void BigRealNumber::appendToInt(short number) {
-    if (intPrtLen + 1 > 1000) {
-        throw runtime_error(
-            "Ошибка вычисления : целая часть выходного числа содержит более 1000 цифр"
-        );
-    }
-    intPrt[intPrtLen++] = number;
-}
-
-bool BigRealNumber::appendToFract(short number, int ind) {
-    if (fractPrtLen + 1 > 1000 || ind >= 1000) {
-        return false;
-    }
-    fractPrt[ind] = number;
-    fractPrtLen++;
-    return true;
-}
-
-
 void BigRealNumber::removeInsignDigits() {
     int signDigit = getFirstNotZero(intPrt, intPrtLen, -1, true);
     intPrtLen = signDigit + 1;
@@ -689,6 +724,15 @@ void BigRealNumber::setVal(int n) {
 
 
 // -------------------------------------------внеклассовые функции
+short* toNewArr(short* oldArr, int oldArrLength, int newArrLength) {
+    short* newArr = new short[newArrLength];
+    for (int i = 0; i < oldArrLength; i++) {
+        newArr[i] = oldArr[i];
+    }
+    delete oldArr;
+    return newArr;
+}
+
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
     if (!len) {
         return;
@@ -723,3 +767,4 @@ int getFirstNotZero(short* arr, int start, int stop, bool backward) {
     }
     return -1;
 }
+
