@@ -79,7 +79,8 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 
 			if (!isError) {
 				try {
-					actions[count++] = &(t1 == 1 ? Action(oper, &t1, nullptr) : Action(oper, &t1, &t2));
+					Action* a = tCount == 1 ? new Action(oper, &t1, nullptr) : new Action(oper, &t1, &t2);
+					actions[count++] = a;
 				} catch (ActionBuildError &e) {
 					e.setXmlLineNumber(reader.lineNumber());
 					actionErrors->append(e);
