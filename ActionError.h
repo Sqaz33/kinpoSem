@@ -22,7 +22,7 @@ public:
 	virtual std::string toStdString() const;
 };
 
-class ActionBuildError : ActionError {
+class ActionBuildError : public ActionError {
 private:
 	int xmlLineNumber;
 public:
@@ -31,7 +31,7 @@ public:
 	std::string toStdString() const override;
 };
 
-class ActionPerformError : ActionError {
+class ActionPerformError : public ActionError {
 private:
 	int actionNumber;
 public:

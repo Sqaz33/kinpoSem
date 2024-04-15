@@ -21,7 +21,7 @@ std::string ActionPerformError::toStdString() const {
 			+ "xml-פאיכא: "
 			+ ActionError::toStdString();
 }
-void ActionPerformError::setActonNumber(int a) {
+void ActionPerformError::setActionNumber(int a) {
 	actionNumber = a;
 }
 
