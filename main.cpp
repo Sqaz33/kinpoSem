@@ -24,7 +24,6 @@ int main(int argc, char* argv[]) {
 
 		// произвести действия
 		QList<string> results;
-		QList<string> errors;
 		QList<int> keys = actions->keys();
 		qSort(keys.begin(), keys.end());
 		for (int n : keys) {
@@ -39,14 +38,18 @@ int main(int argc, char* argv[]) {
 				results.append(res);
 			} catch (ActionPerformError& e) {
 				e.setActionNumber(n);
-				errors.append(e.toStdString());
+				actionErrors.append(e);
 			}
 		}
 
+		QList<string> strErrors;
+		for (ActionError e : actionErrors) {
+			strErrors.append(e.toStdString());
+		}
 		// вывести действия в файл
 		StdStringToTxt output(txtPath);
 		output.write(results, false);
-		output.write(errors, true);
+		output.write(strErrors, true);
 
 		cout << "Ошибочных действий: " + to_string(actionErrors.size()) << endl;
 
