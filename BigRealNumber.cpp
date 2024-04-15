@@ -18,7 +18,7 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
 
 BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     if (!validateStdString(numb)) {
-        throw runtime_error("Ошибка создания объекта: указан неверный формат операнда");
+        throw ActionBuildError(INVALID_OPERAND_FORMAT);
     }
 
     BigRealNumber n{};
@@ -35,8 +35,7 @@ BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     n.fractPrtLen = numb.length() - n.intPrtLen - 1 - n.isNegative;
 
     if (n.fractPrtLen > 1000 || n.intPrtLen > 1000) {
-        throw runtime_error("Ошибка создания объекта: дробная или целая часть" 
-                            "строкового представления числа содержит более 1000 цифр");
+        throw ActionBuildError(INVALID_LENGTH);
     }
 
     // Записать целую часть в обратном порядке
@@ -168,7 +167,7 @@ BigRealNumber BigRealNumber::operator*(int n) const {
 
 BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
     if (other == 0) {
-        throw runtime_error("Ошибка вычисления: деление на ноль");
+        throw ActionPerformError(DIVISION_BY_ZERO);
     }
     BigRealNumber res{};
     div(other, res);
@@ -279,20 +278,16 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 }
 
 BigRealNumber BigRealNumber::pow(BigRealNumber pw) const{
-    bool isError = false;
-    string errorCode = "Ошибка вычисления: неверный операнд №2 для операции pow";
     if (pw.fractPrtLen) {
-        isError = true;
-        errorCode += " (операнд имеет дробную часть)";
+        throw ActionPerformError(
+            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
+        );
     }
     if (pw < 0) {
-        isError = true;
-        errorCode += " (операнд меньше нуля)";
+        throw ActionPerformError(
+            OPERAND_LESS_ZERO_POW_FACT
+        );
     }
-    if (isError) {
-        throw runtime_error(errorCode);
-    }
-
     BigRealNumber res(1);
     if (pw == 0) {
         return res;
@@ -307,17 +302,15 @@ BigRealNumber BigRealNumber::pow(BigRealNumber pw) const{
 
 BigRealNumber BigRealNumber::factorial() const{
     bool isError = false;
-    string errorCode = "Ошибка вычисления: неверный операнд для операции factorial";
     if (fractPrtLen) {
-        isError = true;
-        errorCode += " (операнд имеет дробную часть)";
+        throw ActionPerformError(
+            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
+        );
     }
     if (*this < 0) {
-        isError = true;
-        errorCode += " (операнд меньше нуля)";
-    }
-    if (isError) {
-        throw runtime_error(errorCode);
+        throw ActionPerformError(
+            OPERAND_LESS_ZERO_POW_FACT
+        );
     }
 
     BigRealNumber res(1);
@@ -611,9 +604,7 @@ short BigRealNumber::attachArrays(
 
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 > 1000) {
-        throw runtime_error(
-            "Ошибка вычисления : целая часть выходного числа содержит более 1000 цифр"
-        );
+        throw ActionPerformError(INVALID_LENGTH);
     }
     intPrt[intPrtLen++] = number;
 }
@@ -642,9 +633,7 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
         if (intPrtLen || !toRight) {
             if (!toRight) {
                 if (intPrtLen + 1 > 1000) {
-                    throw runtime_error(
-                        "Ошибка вычисления : целая часть выходного числа содержит более 1000 цифр"
-                    );
+                    throw ActionPerformError(INVALID_LENGTH);
                 }
                 intPrtLen++;
             }

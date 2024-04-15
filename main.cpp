@@ -10,7 +10,8 @@
 
 int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "ru_RU.utf8");
-	QList<string> actionErrors;
+	QList<ActionBuildError> actionBuildErrors;
+	QList<ActionPerformError> actionPerformErrors;
 	try {
 		if (argc != 3) {
 			throw runtime_error("Неверное количество аргументов ввода программы.");
@@ -19,7 +20,7 @@ int main(int argc, char* argv[]) {
 		string txtPath(argv[2]);
 
 		// получить действия
-		ActionsFromXML input(xmlPath, &actionErrors);
+		ActionsFromXML input(xmlPath, &actionBuildErrors);
 		const QHash<int, Action*>* actions = input.getActions();
 
 		// произвести действия

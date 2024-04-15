@@ -1,11 +1,12 @@
 #pragma once
 
-#include <unordered_map>
+#include "unordered_map"
 #include "string"
 #include "sstream"
 #include "QString"
 
 #include "BigRealNumber.h"
+#include "ActionError.h"
 
 enum Operation {
 	ADD,
@@ -27,7 +28,6 @@ string stdStringFromOper(Operation oper);
 
 class Action {
 private:
-	~Action();
 	BigRealNumber term1;
 	BigRealNumber term2;
 	Operation oper;
@@ -36,8 +36,7 @@ private:
 	bool checkArity();
 
 public:
-	static Action* fromStdStrings(const string& oper, const string& term1, const string& term2);
-	Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2 = nullptr);
+	Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2);
 	BigRealNumber perform() const;
 	string toStdString() const;
 };

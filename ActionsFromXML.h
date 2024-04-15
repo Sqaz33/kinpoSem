@@ -14,11 +14,11 @@ using namespace std;
 class ActionsFromXML {
 private:
 	QHash<int, Action*> actions;
-	QList<string>* actionErrors;
+	QList<ActionBuildError>* actionErrors;
 
 	void loadActions(const string& XMLPath);
 public:
-	ActionsFromXML(const string& XMLPath, QList<string>* actionErrors);
+	ActionsFromXML(const string& XMLPath, QList<ActionBuildError>* actionErrors);
 
 	const QHash<int, Action*>* getActions() const;
 };

@@ -6,49 +6,10 @@ Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* 
 	this->term2 = term2 == nullptr ? BigRealNumber(0) : *term2;
 	termCount = term2 == nullptr ? 1 : 2;
 	if (!checkArity()) {
-		throw runtime_error("Object creation error: Invalid number of operands for operation" 
-							+ stdStringFromOper(this->oper) + ".");
+		throw ActionBuildError(NO_OPER_E);
 	}
 }
 
-Action* Action::fromStdStrings(const string& oper, const string& term1, const string& term2) {
-	bool isError = false;
-	stringstream error;
-	BigRealNumber t1{};
-	BigRealNumber t2{};
-	try { 
-		t1 = BigRealNumber::fromStdString(term1);
-	} catch (const runtime_error& e) {
-		isError = true;
-		error << e.what();
-		error << " for operand 1\n";
-	}
-	try {
-		if (term2 != "NaN") {
-			t2 = BigRealNumber::fromStdString(term2);
-		} 
-	} catch (const runtime_error& e) {
-		isError = true;
-		error << e.what();
-		error << " for operand 2.\n";
-	}
-
-	Operation op = operFromStdString(oper);
-	if (op == NO_OPER) {
-		error << "Object creation error: An unavailable operation was specified.\n";
-		throw runtime_error(error.str());
-	}
-	try {
-		Action* act = new Action(op, &t1, term2 != "NaN" ? &t2 : nullptr);
-		if (isError) {
-			throw runtime_error(error.str());
-		}
-		return act;
-	} catch (const runtime_error& e) {
-		error << e.what();
-		throw runtime_error(error.str());
-	}
-}
 
 string Action::toStdString() const {
 	string str = term1.toStdString()

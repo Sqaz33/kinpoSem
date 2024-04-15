@@ -1,6 +1,6 @@
 #include "ActionsFromXML.h"
 
-ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<string>* actionErrors) {
+ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionBuildError>* actionErrors) {
 	this->actionErrors = actionErrors;
 	actions = QHash<int, Action*>();
 	loadActions(XMLPath);
@@ -19,40 +19,71 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	}
 
 	QXmlStreamReader reader(&file);
-	string term1;
-	string term2;
-	string oper;
 
 	int count = 1;
 	while (!reader.atEnd() && !reader.hasError()) {
+
+		BigRealNumber t1;
+		BigRealNumber t2;
+		int tCount = 0;
+		Operation oper;
+
 		reader.readNext();
 		if (reader.tokenType() == QXmlStreamReader::StartElement && reader.name() == "operation") {
 			reader.readNext();
-			term2 = "NaN";
+			bool isError = false;
 			while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "operation")) {
 				reader.readNext();
 				string txt = reader.readElementText().toStdString();
 				if (reader.name() == "operand1") {
-					term1 = txt;
+					try {
+						t1 = BigRealNumber::fromStdString(txt);
+						tCount++;
+					} catch (ActionBuildError& e) {
+						isError = true;
+						e.setXmlLineNumber(reader.lineNumber());
+						actionErrors->append(e);
+
+					}
 				} else if (reader.name() == "operand2") {
-					term2 = txt;
+					try {
+						t2 = BigRealNumber::fromStdString(txt);
+						tCount++;
+					} catch (ActionBuildError& e) {
+						isError = true;
+						e.setXmlLineNumber(reader.lineNumber());
+						actionErrors->append(e);
+					}
 				} else if (reader.name() == "operator") {
-					oper = txt;
+					oper = operFromStdString(txt);
+					if (oper == NO_OPER) {
+						isError = true;
+						ActionBuildError e(NO_OPER_E);
+						e.setXmlLineNumber(reader.lineNumber());
+						actionErrors->append(e);
+					}
 				}
 			}
-			try {
-				actions[count++] = Action::fromStdStrings(
-					oper, term1, term2
-				);
+			if (!oper) {
+				isError = true;
+				ActionBuildError e(NO_OPER_E);
+				e.setXmlLineNumber(reader.lineNumber());
+				actionErrors->append(e);
 			}
-			catch (const runtime_error& e) {
-				string what = "error action #"
-					+ to_string(count++)
-					+ " ------------------------\n"
-					+ e.what()
-					+ "\n"
-					+ "---------------------------------";
-				actionErrors->append(what);
+			else if (tCount != 1 && tCount != 2) {
+				isError = true;
+				ActionBuildError e(INVALID_ARITY);
+				e.setXmlLineNumber(reader.lineNumber());
+				actionErrors->append(e);
+			}
+
+			if (!isError) {
+				try {
+					actions[count++] = &(t1 == 1 ? Action(oper, &t1, nullptr) : Action(oper, &t1, &t2));
+				} catch (ActionBuildError &e) {
+					e.setXmlLineNumber(reader.lineNumber());
+					actionErrors->append(e);
+				}
 			}
 		}
 	}
