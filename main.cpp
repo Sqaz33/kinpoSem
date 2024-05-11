@@ -8,6 +8,17 @@
 #include "locale"
 
 
+/**
+ * @brief Программа BigRealNumber предназначена для операций над 
+ * рациональными числами, представленными в виде массива своих цифр.
+ * @author Матвеев С.А. ПрИн-286 ФЭВТ
+ * @param argc количество аргументов
+ * @param argv[0] имя программы
+ * @param argv[1] относительный или полный 
+ *                путь до xml-файла с операциями 
+ * @param argv[2] путь до txt-файла для вывода ответа
+ * @return код завершения программы 
+*/
 int main(int argc, char* argv[]) {
 	/*setlocale(LC_ALL, "ru_RU.utf8");*/
 	QList<ActionError> actionErrors;
