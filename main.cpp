@@ -9,7 +9,7 @@
 
 
 int main(int argc, char* argv[]) {
-	setlocale(LC_ALL, "ru_RU.utf8");
+	/*setlocale(LC_ALL, "ru_RU.utf8");*/
 	QList<ActionError> actionErrors;
 	try {
 		if (argc != 3) {

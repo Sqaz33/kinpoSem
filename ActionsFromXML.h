@@ -6,6 +6,7 @@
 #include "qlist"
 #include "qXmlStreamReader"
 #include "qFile"
+#include "qhash"
 
 #include "Action.h"
 using namespace std;
