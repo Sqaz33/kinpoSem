@@ -1,5 +1,42 @@
 #include "Action.h"
 
+Operation operFromStdString(const string& oper) {
+	unordered_map<string, Operation> stringToOper{
+		{"add", ADD},
+		{"subt", SUBT},
+		{"mul", MUL},
+		{"div", DIV},
+		{"pow", POW},
+		{"fact", FACT},
+		{"equals", EQUALS},
+		{"not_equals", NOT_EQUALS},
+		{"less", LESS},
+		{"no_more", NO_MORE},
+		{"more", MORE},
+		{"no_less",  NO_LESS}
+	};
+	return stringToOper.count(oper) ? stringToOper[oper] : NO_OPER;
+}
+
+string stdStringFromOper(Operation oper) {
+	unordered_map<Operation, string> operToString{
+		{ADD, "add"},
+		{SUBT, "subt"},
+		{MUL, "mul"},
+		{DIV, "div"},
+		{POW, "pow"},
+		{FACT, "fact"},
+		{EQUALS, "equals"},
+		{NOT_EQUALS, "not_equals"},
+		{LESS, "less"},
+		{NO_MORE, "no_more"},
+		{MORE, "more"},
+		{NO_LESS, "no_less"},
+		{NO_OPER, "no_oper"}
+	};
+	return operToString[oper];
+}
+
 Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2) {
 	this->oper = oper;
 	this->term1 = *term1;
@@ -68,41 +105,4 @@ bool Action::checkArity() {
 		return false;
 	} 
 	return termCount == 2 || (oper == FACT && termCount == 1);
-}
-
-Operation operFromStdString(const string& oper) {
-	unordered_map<string, Operation> stringToOper{
-		{"add", ADD},
-		{"subt", SUBT},
-		{"mul", MUL},
-		{"div", DIV},
-		{"pow", POW},
-		{"fact", FACT},
-		{"equals", EQUALS},
-		{"not_equals", NOT_EQUALS},
-		{"less", LESS},
-		{"no_more", NO_MORE},
-		{"more", MORE},
-		{"no_less",  NO_LESS}
-	};
-	return stringToOper.count(oper) ? stringToOper[oper] : NO_OPER;
-}
-
-string stdStringFromOper(Operation oper) {
-	unordered_map<Operation, string> operToString{
-		{ADD, "add"},
-		{SUBT, "subt"},
-		{MUL, "mul"},
-		{DIV, "div"},
-		{POW, "pow"},
-		{FACT, "fact"},
-		{EQUALS, "equals"},
-		{NOT_EQUALS, "not_equals"},
-		{LESS, "less"},
-		{NO_MORE, "no_more"},
-		{MORE, "more"},
-		{NO_LESS, "no_less"},
-		{NO_OPER, "no_oper"}
-	};
-	return operToString[oper];
 }

@@ -4,7 +4,6 @@ std::string ActionError::toStdString() const{
 	return eNameToStdSting(e);
 }
 
-
 std::string ActionBuildError::toStdString() const {
 	return "Ошибка создания объекта в строке "
 			+ std::to_string(xmlLineNumber)

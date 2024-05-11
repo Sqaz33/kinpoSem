@@ -2,12 +2,16 @@
 
 ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors) {
 	this->actionErrors = actionErrors;
-	actions = QHash<int, Action*>();
+	actions = new QHash<int, Action*>();
 	loadActions(XMLPath);
 }
 
+ActionsFromXML::~ActionsFromXML() {
+	delete actions;
+}
+
 const QHash<int, Action*>* ActionsFromXML::getActions() const {
-	return &actions;
+	return actions;
 }
 
 void ActionsFromXML::loadActions(const string& XMLPath) {
@@ -43,7 +47,6 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 						isError = true;
 						e.setXmlLineNumber(reader.lineNumber());
 						actionErrors->append(e);
-
 					}
 				} else if (reader.name() == "operand2") {
 					try {
@@ -80,7 +83,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 			if (!isError) {
 				try {
 					Action* a = tCount == 1 ? new Action(oper, &t1, nullptr) : new Action(oper, &t1, &t2);
-					actions[count++] = a;
+					actions->insert(count++, a);
 				} catch (ActionBuildError &e) {
 					e.setXmlLineNumber(reader.lineNumber());
 					actionErrors->append(e);
