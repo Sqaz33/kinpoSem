@@ -1,7 +1,7 @@
 #include "ActionError.h"
 
 std::string ActionError::toStdString() const{
-	return eNameToStdSting(e);
+	return errorTypeToStdSting(e);
 }
 
 std::string ActionBuildError::toStdString() const {
@@ -24,8 +24,8 @@ void ActionPerformError::setActionNumber(int a) {
 	actionNumber = a;
 }
 
-std::string eNameToStdSting(ActionErrorName e) {
-	std::unordered_map<ActionErrorName, std::string> eNameToString{
+std::string errorTypeToStdSting(ActionErrorType e) {
+	std::unordered_map<ActionErrorType, std::string> errorTypeToString {
 	{NO_OPER_E, "указана недоступная операция"},
 	{INVALID_ARITY, "недопустимое количество операндов"},
 	{INVALID_OPERAND_FORMAT, "указан неверный формат операнда"},
@@ -34,5 +34,5 @@ std::string eNameToStdSting(ActionErrorName e) {
 	{OPERAND_WITH_FRACTIONAL_PART_POW_FACT, "операнд имеет дробную часть для операции pow или fact"},
 	{OPERAND_LESS_ZERO_POW_FACT, "операнд меньше нуля для операции pow или fact"}
 	};
-	return eNameToString[e];
+	return errorTypeToString[e];
 }
