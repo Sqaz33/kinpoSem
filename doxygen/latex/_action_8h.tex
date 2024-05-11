@@ -1,0 +1,102 @@
+\doxysection{D\+:/kinpo\+Sem/\+Action.h File Reference}
+\hypertarget{_action_8h}{}\label{_action_8h}\index{D:/kinpoSem/Action.h@{D:/kinpoSem/Action.h}}
+{\ttfamily \#include "{}unordered\+\_\+map"{}}\newline
+{\ttfamily \#include "{}string"{}}\newline
+{\ttfamily \#include "{}sstream"{}}\newline
+{\ttfamily \#include "{}QString"{}}\newline
+{\ttfamily \#include "{}Big\+Real\+Number.\+h"{}}\newline
+{\ttfamily \#include "{}Action\+Error.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_action}{Action}}
+\begin{DoxyCompactList}\small\item\em Класс для представления действия. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb}{Operation}} \{ \newline
+\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacfcf145f2788bf340ff3f3098bc54909}{ADD}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbae88c4f5a9faff5792bda1028ddc1ff02}{SUBT}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba086ab1f2f4dac104b6826ebe0eaba8fd}{MUL}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba8565f0d60c3ba6d468661c49d86e9744}{DIV}}
+, \newline
+\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba2f4ddc85dd27c0d03482e36ec69479a7}{POW}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba1b6692b56d378abb85bd49063721d034}{FACT}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba949310f9cb536c15919e133f7e7316f3}{EQUALS}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba238616c701ea4986457efd6a6aa19f05}{NOT\+\_\+\+EQUALS}}
+, \newline
+\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba95c736070f99b99eb80d1eac1f4ca60f}{LESS}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbac2a3bff278ae61a35e609c7c1a3d7022}{NO\+\_\+\+MORE}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaf165e191d0fd1c7cc04270fb883dbc02}{MORE}}
+, \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaca233fe9079230b728acb06d55863288}{NO\+\_\+\+LESS}}
+, \newline
+\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacb859a842de121cd9290de73202d11d9}{NO\+\_\+\+OPER}}
+ \}
+\begin{DoxyCompactList}\small\item\em Список операций \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb} 
+\index{Action.h@{Action.h}!Operation@{Operation}}
+\index{Operation@{Operation}!Action.h@{Action.h}}
+\doxysubsubsection{\texorpdfstring{Operation}{Operation}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb}{Operation}}}
+
+
+
+Список операций 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ADD@{ADD}!Action.h@{Action.h}}\index{Action.h@{Action.h}!ADD@{ADD}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacfcf145f2788bf340ff3f3098bc54909}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacfcf145f2788bf340ff3f3098bc54909} 
+ADD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUBT@{SUBT}!Action.h@{Action.h}}\index{Action.h@{Action.h}!SUBT@{SUBT}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbae88c4f5a9faff5792bda1028ddc1ff02}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbae88c4f5a9faff5792bda1028ddc1ff02} 
+SUBT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MUL@{MUL}!Action.h@{Action.h}}\index{Action.h@{Action.h}!MUL@{MUL}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba086ab1f2f4dac104b6826ebe0eaba8fd}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba086ab1f2f4dac104b6826ebe0eaba8fd} 
+MUL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIV@{DIV}!Action.h@{Action.h}}\index{Action.h@{Action.h}!DIV@{DIV}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba8565f0d60c3ba6d468661c49d86e9744}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba8565f0d60c3ba6d468661c49d86e9744} 
+DIV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POW@{POW}!Action.h@{Action.h}}\index{Action.h@{Action.h}!POW@{POW}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba2f4ddc85dd27c0d03482e36ec69479a7}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba2f4ddc85dd27c0d03482e36ec69479a7} 
+POW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FACT@{FACT}!Action.h@{Action.h}}\index{Action.h@{Action.h}!FACT@{FACT}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba1b6692b56d378abb85bd49063721d034}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba1b6692b56d378abb85bd49063721d034} 
+FACT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EQUALS@{EQUALS}!Action.h@{Action.h}}\index{Action.h@{Action.h}!EQUALS@{EQUALS}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba949310f9cb536c15919e133f7e7316f3}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba949310f9cb536c15919e133f7e7316f3} 
+EQUALS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_EQUALS@{NOT\_EQUALS}!Action.h@{Action.h}}\index{Action.h@{Action.h}!NOT\_EQUALS@{NOT\_EQUALS}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba238616c701ea4986457efd6a6aa19f05}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba238616c701ea4986457efd6a6aa19f05} 
+NOT\+\_\+\+EQUALS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LESS@{LESS}!Action.h@{Action.h}}\index{Action.h@{Action.h}!LESS@{LESS}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba95c736070f99b99eb80d1eac1f4ca60f}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bba95c736070f99b99eb80d1eac1f4ca60f} 
+LESS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_MORE@{NO\_MORE}!Action.h@{Action.h}}\index{Action.h@{Action.h}!NO\_MORE@{NO\_MORE}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbac2a3bff278ae61a35e609c7c1a3d7022}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbac2a3bff278ae61a35e609c7c1a3d7022} 
+NO\+\_\+\+MORE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MORE@{MORE}!Action.h@{Action.h}}\index{Action.h@{Action.h}!MORE@{MORE}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaf165e191d0fd1c7cc04270fb883dbc02}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaf165e191d0fd1c7cc04270fb883dbc02} 
+MORE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_LESS@{NO\_LESS}!Action.h@{Action.h}}\index{Action.h@{Action.h}!NO\_LESS@{NO\_LESS}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaca233fe9079230b728acb06d55863288}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbaca233fe9079230b728acb06d55863288} 
+NO\+\_\+\+LESS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_OPER@{NO\_OPER}!Action.h@{Action.h}}\index{Action.h@{Action.h}!NO\_OPER@{NO\_OPER}}}\Hypertarget{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacb859a842de121cd9290de73202d11d9}\label{_action_8h_aa8f137f19095e0bdcf4f521e901f88bbacb859a842de121cd9290de73202d11d9} 
+NO\+\_\+\+OPER&\\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,98 @@
+\doxysection{Action\+Perform\+Error Class Reference}
+\hypertarget{class_action_perform_error}{}\label{class_action_perform_error}\index{ActionPerformError@{ActionPerformError}}
+
+
+Дочерний класс \doxylink{class_action_error}{Action\+Error}. Класс ошибки выполнения \doxylink{class_action}{Action}.  
+
+
+
+
+{\ttfamily \#include $<$Action\+Error.\+h$>$}
+
+Inheritance diagram for Action\+Perform\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_action_perform_error}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}{Action\+Perform\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} e)
+\begin{DoxyCompactList}\small\item\em Номер объекта \doxylink{class_action}{Action}, который вызывал ошибку. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}{to\+Std\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Метод получения std\+::string строкового представления ошибки. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}{set\+Action\+Number}} (int a)
+\begin{DoxyCompactList}\small\item\em Сеттер номера объекта \doxylink{class_action}{Action}, который вызвал ошибку. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_action_error}{Action\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_error_a5ed35f9c60e2b62a3e4b4d1bcadd4381}{Action\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} e)
+\begin{DoxyCompactList}\small\item\em Тип ошибки. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Дочерний класс \doxylink{class_action_error}{Action\+Error}. Класс ошибки выполнения \doxylink{class_action}{Action}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_big_real_number}{Big\+Real\+Number} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}\label{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830} 
+\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{ActionPerformError()}{ActionPerformError()}}
+{\footnotesize\ttfamily Action\+Perform\+Error\+::\+Action\+Perform\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Номер объекта \doxylink{class_action}{Action}, который вызывал ошибку. 
+
+Конструктор \doxylink{class_action_perform_error}{Action\+Perform\+Error}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e} & тип ошибки. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}\label{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a} 
+\index{ActionPerformError@{ActionPerformError}!setActionNumber@{setActionNumber}}
+\index{setActionNumber@{setActionNumber}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{setActionNumber()}{setActionNumber()}}
+{\footnotesize\ttfamily void Action\+Perform\+Error\+::set\+Action\+Number (\begin{DoxyParamCaption}\item[{int}]{a }\end{DoxyParamCaption})}
+
+
+
+Сеттер номера объекта \doxylink{class_action}{Action}, который вызвал ошибку. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em a} & номер \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}\label{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1} 
+\index{ActionPerformError@{ActionPerformError}!toStdString@{toStdString}}
+\index{toStdString@{toStdString}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{toStdString()}{toStdString()}}
+{\footnotesize\ttfamily std\+::string Action\+Perform\+Error\+::to\+Std\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Метод получения std\+::string строкового представления ошибки. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string строковое представления ошибки. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_action_error_a328ad9bc6f9c0508f3234564e1fc6832}{Action\+Error}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/kinpo\+Sem/\mbox{\hyperlink{_action_error_8h}{Action\+Error.\+h}}\item 
+D\+:/kinpo\+Sem/\mbox{\hyperlink{_action_error_8cpp}{Action\+Error.\+cpp}}\end{DoxyCompactItemize}

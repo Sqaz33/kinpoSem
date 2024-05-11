@@ -1,0 +1,84 @@
+\doxysection{D\+:/kinpo\+Sem/\+Action\+Error.h File Reference}
+\hypertarget{_action_error_8h}{}\label{_action_error_8h}\index{D:/kinpoSem/ActionError.h@{D:/kinpoSem/ActionError.h}}
+{\ttfamily \#include "{}unordered\+\_\+map"{}}\newline
+{\ttfamily \#include "{}string"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_action_error}{Action\+Error}}
+\begin{DoxyCompactList}\small\item\em Класс ошибки \doxylink{class_action}{Action}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}}
+\begin{DoxyCompactList}\small\item\em Дочерний класс \doxylink{class_action_error}{Action\+Error}. Класс ошибки создания \doxylink{class_action}{Action}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_action_perform_error}{Action\+Perform\+Error}}
+\begin{DoxyCompactList}\small\item\em Дочерний класс \doxylink{class_action_error}{Action\+Error}. Класс ошибки выполнения \doxylink{class_action}{Action}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \{ \newline
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}{NO\+\_\+\+OPER\+\_\+E}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}{INVALID\+\_\+\+ARITY}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}{INVALID\+\_\+\+OPERAND\+\_\+\+FORMAT}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}{INVALID\+\_\+\+LENGTH}}
+, \newline
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}{DIVISION\+\_\+\+BY\+\_\+\+ZERO}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}{OPERAND\+\_\+\+WITH\+\_\+\+FRACTIONAL\+\_\+\+PART\+\_\+\+POW\+\_\+\+FACT}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}{OPERAND\+\_\+\+LESS\+\_\+\+ZERO\+\_\+\+POW\+\_\+\+FACT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Типы ошибок. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{_action_error_8h_ade445ccec2412f840ae1570fcc141849}{error\+Type\+To\+Std\+Sting}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} e)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+\index{ActionError.h@{ActionError.h}!ActionErrorType@{ActionErrorType}}
+\index{ActionErrorType@{ActionErrorType}!ActionError.h@{ActionError.h}}
+\doxysubsubsection{\texorpdfstring{ActionErrorType}{ActionErrorType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}
+
+
+
+Типы ошибок. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_OPER\_E@{NO\_OPER\_E}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!NO\_OPER\_E@{NO\_OPER\_E}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b} 
+NO\+\_\+\+OPER\+\_\+E&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_ARITY@{INVALID\_ARITY}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_ARITY@{INVALID\_ARITY}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d} 
+INVALID\+\_\+\+ARITY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_OPERAND\_FORMAT@{INVALID\_OPERAND\_FORMAT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_OPERAND\_FORMAT@{INVALID\_OPERAND\_FORMAT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717} 
+INVALID\+\_\+\+OPERAND\+\_\+\+FORMAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_LENGTH@{INVALID\_LENGTH}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_LENGTH@{INVALID\_LENGTH}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9} 
+INVALID\+\_\+\+LENGTH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIVISION\_BY\_ZERO@{DIVISION\_BY\_ZERO}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!DIVISION\_BY\_ZERO@{DIVISION\_BY\_ZERO}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae} 
+DIVISION\+\_\+\+BY\+\_\+\+ZERO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT@{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT@{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3} 
+OPERAND\+\_\+\+WITH\+\_\+\+FRACTIONAL\+\_\+\+PART\+\_\+\+POW\+\_\+\+FACT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPERAND\_LESS\_ZERO\_POW\_FACT@{OPERAND\_LESS\_ZERO\_POW\_FACT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!OPERAND\_LESS\_ZERO\_POW\_FACT@{OPERAND\_LESS\_ZERO\_POW\_FACT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28} 
+OPERAND\+\_\+\+LESS\+\_\+\+ZERO\+\_\+\+POW\+\_\+\+FACT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_action_error_8h_ade445ccec2412f840ae1570fcc141849}\label{_action_error_8h_ade445ccec2412f840ae1570fcc141849} 
+\index{ActionError.h@{ActionError.h}!errorTypeToStdSting@{errorTypeToStdSting}}
+\index{errorTypeToStdSting@{errorTypeToStdSting}!ActionError.h@{ActionError.h}}
+\doxysubsubsection{\texorpdfstring{errorTypeToStdSting()}{errorTypeToStdSting()}}
+{\footnotesize\ttfamily std\+::string error\+Type\+To\+Std\+Sting (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}]{e }\end{DoxyParamCaption})}
+

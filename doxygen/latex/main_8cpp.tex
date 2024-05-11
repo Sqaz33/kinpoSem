@@ -1,0 +1,50 @@
+\doxysection{D\+:/kinpo\+Sem/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{D:/kinpoSem/main.cpp@{D:/kinpoSem/main.cpp}}
+{\ttfamily \#include "{}iostream"{}}\newline
+{\ttfamily \#include "{}Big\+Real\+Number.\+h"{}}\newline
+{\ttfamily \#include "{}Action.\+h"{}}\newline
+{\ttfamily \#include "{}Actions\+From\+XML.\+h"{}}\newline
+{\ttfamily \#include "{}Std\+Strings\+To\+Txt.\+h"{}}\newline
+{\ttfamily \#include "{}locale"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Программа \doxylink{class_big_real_number}{Big\+Real\+Number} предназначена для операций над рациональными числами, представленными в виде массива своих цифр. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Программа \doxylink{class_big_real_number}{Big\+Real\+Number} предназначена для операций над рациональными числами, представленными в виде массива своих цифр. 
+
+\begin{DoxyAuthor}{Author}
+Матвеев С.\+А., ПрИн-\/286, ФЭВТ, 2024. 
+\end{DoxyAuthor}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & если неверное количество аргументов командной строки \\
+\hline
+{\em ошибки} & \doxylink{class_big_real_number}{Big\+Real\+Number}, \doxylink{class_action}{Action}, \doxylink{class_actions_from_x_m_l}{Actions\+From\+XML}, Std\+Strings\+To\+Txt\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em argc} & количество аргументов \\
+\hline
+\mbox{\texttt{ in}}  & {\em argv\mbox{[}0\mbox{]}} & имя программы \\
+\hline
+\mbox{\texttt{ in}}  & {\em argv\mbox{[}1\mbox{]}} & относительный или полный путь до xml-\/файла с операциями \\
+\hline
+\mbox{\texttt{ in}}  & {\em argv\mbox{[}2\mbox{]}} & путь до txt-\/файла для вывода ответа\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Код завершения программы 
+\end{DoxyReturn}

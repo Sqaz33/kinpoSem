@@ -1,0 +1,706 @@
+\doxysection{Big\+Real\+Number Class Reference}
+\hypertarget{class_big_real_number}{}\label{class_big_real_number}\index{BigRealNumber@{BigRealNumber}}
+
+
+Класс для представления вещественных чисел массивом своих цифр. Далее \doxylink{class_big_real_number}{Big\+Real\+Number} -\/ BRN.  
+
+
+
+
+{\ttfamily \#include $<$Big\+Real\+Number.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_big_real_number_a5976909bf2c038d04af5993d747626d4}{Big\+Real\+Number}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&p)
+\begin{DoxyCompactList}\small\item\em Конструктор копирования. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number_a8938fcd781f51cdd817e8e1eea182a25}{Big\+Real\+Number}} (int n)
+\begin{DoxyCompactList}\small\item\em Конструктор по целому числу. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number_ac84414ad33d221473a676059c264e3b7}{Big\+Real\+Number}} ()
+\begin{DoxyCompactList}\small\item\em Конструктор "{}пустого"{} объекта. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number_af436b532ac2c3054a6fdd138f83c70bf}{\texorpdfstring{$\sim$}{\string~}\+Big\+Real\+Number}} ()
+\begin{DoxyCompactList}\small\item\em Деструктор BRN. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_big_real_number_a2425d79bc1a68daa7345a8210263934b}{get\+Int\+Prt\+Len}} () const
+\begin{DoxyCompactList}\small\item\em Метод для получения длины целой части числа. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_big_real_number_ad3dac71e8c33f5df46e53f979a356af6}{get\+Fract\+Prt\+Len}} () const
+\begin{DoxyCompactList}\small\item\em Метод для получения длины части числа. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_big_real_number_a0d5ee3dd7162cfbf37f5a2388dd5a868}{to\+Std\+String}} () const
+\begin{DoxyCompactList}\small\item\em Метод для перевода в std\+::string строковое представление числа. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \& \mbox{\hyperlink{class_big_real_number_abc332206272317f12ad69f2fa48014ae}{operator=}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other)
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора присваивания (=). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \& \mbox{\hyperlink{class_big_real_number_a2345ac84c1e3cb7409340317845dcc73}{operator=}} (bool bl)
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора присваивания (=) по булевому значению. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_a1c5e77364ea69908f715bdd646bfc15a}{operator+}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора сложения (+). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_ac539b22cd83c68448349b65035aac151}{operator+}} (int other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора сложения (+). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_ab8bde8fe6be16910645c527b9707a034}{operator-\/}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора вычитания (-\/). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_ae7a5ef1a905644746836e9b0ba80b40a}{operator-\/}} (int n) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора вычитания (-\/). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_a9ef53045b052e1220c83c1fa832f02ba}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора умножения (\texorpdfstring{$\ast$}{*}). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_af770202295c8f83e3d1ad41a60582c9e}{operator\texorpdfstring{$\ast$}{*}}} (int n) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора умножения (\texorpdfstring{$\ast$}{*}). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_ac1864e48b44abbe306f0953f08f8fb33}{operator/}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора деления (/). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_af36846fae62c1741bf2cdf01a8293603}{operator/}} (int n) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора деления (/). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a74287d4a99d2e1fd28cfac52e43c7495}{operator==}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора равенства (==). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a4ec5ae7c50ad7ad7f032c8cf7c749921}{operator==}} (int other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора равенства (==). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a760f254590648830a444940697eefc75}{operator!=}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора неравенства (!=). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a14861cc6fce042d9e50e5bbbb39ff0c1}{operator!=}} (int other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора неравенства (!=). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_aae278cdac93a567562be18a2a24c10be}{operator$<$}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора меньше (\texorpdfstring{$<$}{<}). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_ae1ed3bd2bc2b0ee8ab8a0f014b11fa6d}{operator$>$}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора больше (\texorpdfstring{$>$}{>}). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a649f995f6e5ca3719661a5ddf39bfa84}{operator$>$}} (int other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора больше (\texorpdfstring{$>$}{>}). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a9076762b1ceb4873425d5b4243116407}{operator$<$=}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора меньше или равно (\texorpdfstring{$<$}{<}=). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_big_real_number_a94d75e64df36ce1f629ab400b91ae3e1}{operator$>$=}} (const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&other) const
+\begin{DoxyCompactList}\small\item\em Метод перегрузки оператора больше или равно (\texorpdfstring{$>$}{>}=). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_ad1d878024996f42101b0bda1f3a2786e}{pow}} (\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} pw) const
+\begin{DoxyCompactList}\small\item\em Метод возведения в степень. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_a18f55fc5b19df4213f1cf4cd08da7f25}{factorial}} () const
+\begin{DoxyCompactList}\small\item\em Метод вычисления факториала. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_big_real_number_a3f17b27082a052f3cb3d84b200949154}{from\+Std\+String}} (const string \&numb)
+\begin{DoxyCompactList}\small\item\em Метод порождающий BRN по строковому представлению числа. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_big_real_number_a3195ef2e0e7bcd2c525c0e770e047053}{validate\+Std\+String}} (const string \&numb)
+\begin{DoxyCompactList}\small\item\em Метод валидирующий std\+::string строковое представление числа, показывает, возможно ли создать по этой строки объект BRN. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_big_real_number_a80aa166b2b9a19e3c5651685353b67d2}{validate\+QString}} (const QString \&numb)
+\begin{DoxyCompactList}\small\item\em Метод валидирующий QString строковое представление числа, показывает, возможно ли создать по этой строки объект BRN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Symbols}
+(Note that these are not member symbols.) \begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_big_real_number_a64dd5a1fe861a35c832e9f7bd6554550}{arr\+Shift}} (short \texorpdfstring{$\ast$}{*}arr, int len, int shift, bool to\+Right, int fill\+Val)
+\begin{DoxyCompactList}\small\item\em Метод для сдвига массива. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_big_real_number_ae0e209b5510ddcf88b331f48c3722391}{get\+First\+Not\+Zero}} (short \texorpdfstring{$\ast$}{*}arr, int start, int stop, bool backward)
+\begin{DoxyCompactList}\small\item\em Метод для получения индекса первого ненулевого значения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для представления вещественных чисел массивом своих цифр. Далее \doxylink{class_big_real_number}{Big\+Real\+Number} -\/ BRN. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_big_real_number_a5976909bf2c038d04af5993d747626d4}\label{class_big_real_number_a5976909bf2c038d04af5993d747626d4} 
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{BigRealNumber()}{BigRealNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Big\+Real\+Number\+::\+Big\+Real\+Number (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Конструктор копирования. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p} & копируемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_big_real_number_a8938fcd781f51cdd817e8e1eea182a25}\label{class_big_real_number_a8938fcd781f51cdd817e8e1eea182a25} 
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{BigRealNumber()}{BigRealNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Big\+Real\+Number\+::\+Big\+Real\+Number (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Конструктор по целому числу. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em n} & целое число. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_big_real_number_ac84414ad33d221473a676059c264e3b7}\label{class_big_real_number_ac84414ad33d221473a676059c264e3b7} 
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\index{BigRealNumber@{BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{BigRealNumber()}{BigRealNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Big\+Real\+Number\+::\+Big\+Real\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Конструктор "{}пустого"{} объекта. 
+
+\Hypertarget{class_big_real_number_af436b532ac2c3054a6fdd138f83c70bf}\label{class_big_real_number_af436b532ac2c3054a6fdd138f83c70bf} 
+\index{BigRealNumber@{BigRealNumber}!````~BigRealNumber@{\texorpdfstring{$\sim$}{\string~}BigRealNumber}}
+\index{````~BigRealNumber@{\texorpdfstring{$\sim$}{\string~}BigRealNumber}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BigRealNumber()}{\string~BigRealNumber()}}
+{\footnotesize\ttfamily Big\+Real\+Number\+::\texorpdfstring{$\sim$}{\string~}\+Big\+Real\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Деструктор BRN. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_big_real_number_a18f55fc5b19df4213f1cf4cd08da7f25}\label{class_big_real_number_a18f55fc5b19df4213f1cf4cd08da7f25} 
+\index{BigRealNumber@{BigRealNumber}!factorial@{factorial}}
+\index{factorial@{factorial}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{factorial()}{factorial()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::factorial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Метод вычисления факториала. 
+
+\begin{DoxyReturn}{Returns}
+Результат вычисления факториала.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+Метод вычисляет факториал только для неотрицательного целочисленного числа. 
+
+this \texorpdfstring{$>$}{>} 0 \&\& !this.fract\+Prt.
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_action_perform_error}{Action\+Perform\+Error}} & если число отрицательно. \\
+\hline
+{\em \doxylink{class_action_perform_error}{Action\+Perform\+Error}} & если число не целое. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_big_real_number_a3f17b27082a052f3cb3d84b200949154}\label{class_big_real_number_a3f17b27082a052f3cb3d84b200949154} 
+\index{BigRealNumber@{BigRealNumber}!fromStdString@{fromStdString}}
+\index{fromStdString@{fromStdString}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{fromStdString()}{fromStdString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::from\+Std\+String (\begin{DoxyParamCaption}\item[{const string \&}]{numb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Метод порождающий BRN по строковому представлению числа. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em numb} & строковое представление числа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Объект BRN.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_action_build_error}{Action\+Build\+Error}} & если невозможно создать объект под данной строке \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_big_real_number_ad3dac71e8c33f5df46e53f979a356af6}\label{class_big_real_number_ad3dac71e8c33f5df46e53f979a356af6} 
+\index{BigRealNumber@{BigRealNumber}!getFractPrtLen@{getFractPrtLen}}
+\index{getFractPrtLen@{getFractPrtLen}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{getFractPrtLen()}{getFractPrtLen()}}
+{\footnotesize\ttfamily int Big\+Real\+Number\+::get\+Fract\+Prt\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Метод для получения длины части числа. 
+
+\begin{DoxyReturn}{Returns}
+Длинна целой части числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a2425d79bc1a68daa7345a8210263934b}\label{class_big_real_number_a2425d79bc1a68daa7345a8210263934b} 
+\index{BigRealNumber@{BigRealNumber}!getIntPrtLen@{getIntPrtLen}}
+\index{getIntPrtLen@{getIntPrtLen}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{getIntPrtLen()}{getIntPrtLen()}}
+{\footnotesize\ttfamily int Big\+Real\+Number\+::get\+Int\+Prt\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Метод для получения длины целой части числа. 
+
+\begin{DoxyReturn}{Returns}
+Длинна целой части числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a760f254590648830a444940697eefc75}\label{class_big_real_number_a760f254590648830a444940697eefc75} 
+\index{BigRealNumber@{BigRealNumber}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора неравенства (!=). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Не равны ли числа 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a14861cc6fce042d9e50e5bbbb39ff0c1}\label{class_big_real_number_a14861cc6fce042d9e50e5bbbb39ff0c1} 
+\index{BigRealNumber@{BigRealNumber}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator!= (\begin{DoxyParamCaption}\item[{int}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора неравенства (!=). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемое число. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Не равны ли числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a9ef53045b052e1220c83c1fa832f02ba}\label{class_big_real_number_a9ef53045b052e1220c83c1fa832f02ba} 
+\index{BigRealNumber@{BigRealNumber}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора умножения (\texorpdfstring{$\ast$}{*}). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & множитель. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат умножения. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_af770202295c8f83e3d1ad41a60582c9e}\label{class_big_real_number_af770202295c8f83e3d1ad41a60582c9e} 
+\index{BigRealNumber@{BigRealNumber}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора умножения (\texorpdfstring{$\ast$}{*}). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & множитель. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат умножения. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a1c5e77364ea69908f715bdd646bfc15a}\label{class_big_real_number_a1c5e77364ea69908f715bdd646bfc15a} 
+\index{BigRealNumber@{BigRealNumber}!operator+@{operator+}}
+\index{operator+@{operator+}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора сложения (+). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & второе слагаемое. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат сложения. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ac539b22cd83c68448349b65035aac151}\label{class_big_real_number_ac539b22cd83c68448349b65035aac151} 
+\index{BigRealNumber@{BigRealNumber}!operator+@{operator+}}
+\index{operator+@{operator+}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator+ (\begin{DoxyParamCaption}\item[{int}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора сложения (+). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & второе слагаемое. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат сложения. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ab8bde8fe6be16910645c527b9707a034}\label{class_big_real_number_ab8bde8fe6be16910645c527b9707a034} 
+\index{BigRealNumber@{BigRealNumber}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора вычитания (-\/). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & вычитаемое. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат вычитания. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ae7a5ef1a905644746836e9b0ba80b40a}\label{class_big_real_number_ae7a5ef1a905644746836e9b0ba80b40a} 
+\index{BigRealNumber@{BigRealNumber}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator-\/ (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора вычитания (-\/). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & вычитаемое. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат вычитания. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ac1864e48b44abbe306f0953f08f8fb33}\label{class_big_real_number_ac1864e48b44abbe306f0953f08f8fb33} 
+\index{BigRealNumber@{BigRealNumber}!operator/@{operator/}}
+\index{operator/@{operator/}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора деления (/). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & делитель. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат деления. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_af36846fae62c1741bf2cdf01a8293603}\label{class_big_real_number_af36846fae62c1741bf2cdf01a8293603} 
+\index{BigRealNumber@{BigRealNumber}!operator/@{operator/}}
+\index{operator/@{operator/}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::operator/ (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора деления (/). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & делитель. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат деления. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_aae278cdac93a567562be18a2a24c10be}\label{class_big_real_number_aae278cdac93a567562be18a2a24c10be} 
+\index{BigRealNumber@{BigRealNumber}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора меньше (\texorpdfstring{$<$}{<}). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Меньше ли данное число чем другое. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a9076762b1ceb4873425d5b4243116407}\label{class_big_real_number_a9076762b1ceb4873425d5b4243116407} 
+\index{BigRealNumber@{BigRealNumber}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator$<$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора меньше или равно (\texorpdfstring{$<$}{<}=). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Меньше или равно ли данное число чем другое. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a2345ac84c1e3cb7409340317845dcc73}\label{class_big_real_number_a2345ac84c1e3cb7409340317845dcc73} 
+\index{BigRealNumber@{BigRealNumber}!operator=@{operator=}}
+\index{operator=@{operator=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \& Big\+Real\+Number\+::operator= (\begin{DoxyParamCaption}\item[{bool}]{bl }\end{DoxyParamCaption})}
+
+
+
+Метод перегрузки оператора присваивания (=) по булевому значению. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em bl} & булевое значение. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Новый объект BRN. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_abc332206272317f12ad69f2fa48014ae}\label{class_big_real_number_abc332206272317f12ad69f2fa48014ae} 
+\index{BigRealNumber@{BigRealNumber}!operator=@{operator=}}
+\index{operator=@{operator=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \& Big\+Real\+Number\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Метод перегрузки оператора присваивания (=). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Новый объект BRN. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a74287d4a99d2e1fd28cfac52e43c7495}\label{class_big_real_number_a74287d4a99d2e1fd28cfac52e43c7495} 
+\index{BigRealNumber@{BigRealNumber}!operator==@{operator==}}
+\index{operator==@{operator==}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора равенства (==). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Равны ли числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a4ec5ae7c50ad7ad7f032c8cf7c749921}\label{class_big_real_number_a4ec5ae7c50ad7ad7f032c8cf7c749921} 
+\index{BigRealNumber@{BigRealNumber}!operator==@{operator==}}
+\index{operator==@{operator==}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator== (\begin{DoxyParamCaption}\item[{int}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора равенства (==). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемое число. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Равны ли числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ae1ed3bd2bc2b0ee8ab8a0f014b11fa6d}\label{class_big_real_number_ae1ed3bd2bc2b0ee8ab8a0f014b11fa6d} 
+\index{BigRealNumber@{BigRealNumber}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора больше (\texorpdfstring{$>$}{>}). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Больше ли данное число чем другое. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a649f995f6e5ca3719661a5ddf39bfa84}\label{class_big_real_number_a649f995f6e5ca3719661a5ddf39bfa84} 
+\index{BigRealNumber@{BigRealNumber}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator$>$ (\begin{DoxyParamCaption}\item[{int}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора больше (\texorpdfstring{$>$}{>}). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемое число. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Больше ли данное число чем другое. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a94d75e64df36ce1f629ab400b91ae3e1}\label{class_big_real_number_a94d75e64df36ce1f629ab400b91ae3e1} 
+\index{BigRealNumber@{BigRealNumber}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::operator$>$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Метод перегрузки оператора больше или равно (\texorpdfstring{$>$}{>}=). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & сравниваемый объект BRN. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Больше или равно ли данное число чем другое. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_ad1d878024996f42101b0bda1f3a2786e}\label{class_big_real_number_ad1d878024996f42101b0bda1f3a2786e} 
+\index{BigRealNumber@{BigRealNumber}!pow@{pow}}
+\index{pow@{pow}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{pow()}{pow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Big\+Real\+Number\+::pow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}}}]{pw }\end{DoxyParamCaption}) const}
+
+
+
+Метод возведения в степень. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pw} & степень. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат возведения в степень.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+Метод возводит только в неотрицательную целую степень. 
+
+pw \texorpdfstring{$>$}{>} 0 \&\& !pw.fract\+Prt.
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_action_perform_error}{Action\+Perform\+Error}} & если степень отрицательна. \\
+\hline
+{\em \doxylink{class_action_perform_error}{Action\+Perform\+Error}} & если степень не целая. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_big_real_number_a0d5ee3dd7162cfbf37f5a2388dd5a868}\label{class_big_real_number_a0d5ee3dd7162cfbf37f5a2388dd5a868} 
+\index{BigRealNumber@{BigRealNumber}!toStdString@{toStdString}}
+\index{toStdString@{toStdString}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{toStdString()}{toStdString()}}
+{\footnotesize\ttfamily string Big\+Real\+Number\+::to\+Std\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Метод для перевода в std\+::string строковое представление числа. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string строковое представление числа. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a80aa166b2b9a19e3c5651685353b67d2}\label{class_big_real_number_a80aa166b2b9a19e3c5651685353b67d2} 
+\index{BigRealNumber@{BigRealNumber}!validateQString@{validateQString}}
+\index{validateQString@{validateQString}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{validateQString()}{validateQString()}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::validate\+QString (\begin{DoxyParamCaption}\item[{const QString \&}]{numb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Метод валидирующий QString строковое представление числа, показывает, возможно ли создать по этой строки объект BRN. 
+
+Например\+: "{}-\/5.\+0"{}, "{}0.\+3"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em numb} & строковое представление числа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Возможно ли создать объект BRN по данной QString строке. 
+\end{DoxyReturn}
+\Hypertarget{class_big_real_number_a3195ef2e0e7bcd2c525c0e770e047053}\label{class_big_real_number_a3195ef2e0e7bcd2c525c0e770e047053} 
+\index{BigRealNumber@{BigRealNumber}!validateStdString@{validateStdString}}
+\index{validateStdString@{validateStdString}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{validateStdString()}{validateStdString()}}
+{\footnotesize\ttfamily bool Big\+Real\+Number\+::validate\+Std\+String (\begin{DoxyParamCaption}\item[{const string \&}]{numb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Метод валидирующий std\+::string строковое представление числа, показывает, возможно ли создать по этой строки объект BRN. 
+
+Например\+: "{}-\/5.\+0"{}, "{}0.\+3"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em numb} & строковое представление числа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Возможно ли создать объект BRN по данной std\+::string строке. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_big_real_number_a64dd5a1fe861a35c832e9f7bd6554550}\label{class_big_real_number_a64dd5a1fe861a35c832e9f7bd6554550} 
+\index{BigRealNumber@{BigRealNumber}!arrShift@{arrShift}}
+\index{arrShift@{arrShift}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{arrShift()}{arrShift()}}
+{\footnotesize\ttfamily void arr\+Shift (\begin{DoxyParamCaption}\item[{short \texorpdfstring{$\ast$}{*}}]{arr,  }\item[{int}]{len,  }\item[{int}]{shift,  }\item[{bool}]{to\+Right,  }\item[{int}]{fill\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Метод для сдвига массива. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_big_real_number}{Big\+Real\+Number}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em arr} & массив. \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & длинна массива. \\
+\hline
+\mbox{\texttt{ in}}  & {\em shift} & сдвиг. \\
+\hline
+\mbox{\texttt{ in}}  & {\em to\+Right} & флаг направления сдвига. \\
+\hline
+\mbox{\texttt{ in}}  & {\em fill\+Val} & значение для заполнения. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_big_real_number_ae0e209b5510ddcf88b331f48c3722391}\label{class_big_real_number_ae0e209b5510ddcf88b331f48c3722391} 
+\index{BigRealNumber@{BigRealNumber}!getFirstNotZero@{getFirstNotZero}}
+\index{getFirstNotZero@{getFirstNotZero}!BigRealNumber@{BigRealNumber}}
+\doxysubsubsection{\texorpdfstring{getFirstNotZero()}{getFirstNotZero()}}
+{\footnotesize\ttfamily int get\+First\+Not\+Zero (\begin{DoxyParamCaption}\item[{short \texorpdfstring{$\ast$}{*}}]{arr,  }\item[{int}]{start,  }\item[{int}]{stop,  }\item[{bool}]{backward }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Метод для получения индекса первого ненулевого значения. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_big_real_number}{Big\+Real\+Number}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em arr} & массив. \\
+\hline
+\mbox{\texttt{ in}}  & {\em start} & начало движения указателя. \\
+\hline
+\mbox{\texttt{ in}}  & {\em stop} & конец движения указателя. \\
+\hline
+\mbox{\texttt{ in}}  & {\em backward} & флаг направления движения указателя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+индекс первого ненулевого значения. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/kinpo\+Sem/\mbox{\hyperlink{_big_real_number_8h}{Big\+Real\+Number.\+h}}\item 
+D\+:/kinpo\+Sem/\mbox{\hyperlink{_big_real_number_8cpp}{Big\+Real\+Number.\+cpp}}\end{DoxyCompactItemize}

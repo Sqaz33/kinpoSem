@@ -1,6 +1,3 @@
-### Example user template template
-### Example user template
-
 .idea/
 *.iml
 cmake-build-debug/
@@ -13,6 +10,3 @@ x64/
 *.exe
 .txt
 *.bkp
-  
- 
-/ActionError.h
