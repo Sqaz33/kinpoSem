@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
 
 		QList<string> strErrors;
 		for (ActionError e : actionErrors) {
-			strErrors.append(e.toStdString());
+			strErrors.append(e.toStdString());	
 		}
 		// вывести действия в файл
 		StdStringToTxt output(txtPath);
