@@ -16,6 +16,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Action.h" />
+    <ClInclude Include="include\ActionError.h" />
+    <ClInclude Include="include\ActionsFromXML.h" />
+    <ClInclude Include="include\BigRealNumber.h" />
+    <ClInclude Include="include\StdStringsToTxt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ActionError.cpp" />
+    <ClCompile Include="src\ActionsFromXML.cpp" />
+    <ClCompile Include="src\BigRealNumber.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\StdStringsToTxt.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB3F0D12-0987-41CC-9CC1-9E47AF38952B}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
@@ -93,21 +107,6 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Action.cpp" />
-    <ClCompile Include="BigRealNumber.cpp" />
-    <ClCompile Include="ActionsFromXML.cpp" />
-    <ClCompile Include="ActionError.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="StdStringsToTxt.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="BigRealNumber.h" />
-    <ClInclude Include="ActionsFromXML.h" />
-    <ClInclude Include="ActionError.h" />
-    <ClInclude Include="StdStringsToTxt.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

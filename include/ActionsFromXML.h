@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_FROM_XML_H
+#define ACTION_FROM_XML_H
 
 #include <string>
 #include <stdexcept>
@@ -48,3 +49,5 @@ private:
     */
     void loadActions(const string& XMLPath);
 };
+
+#endif //ACTION_FROM_XML_H

@@ -1,9 +1,9 @@
 #include "iostream"
 
-#include "BigRealNumber.h"
-#include "Action.h"
-#include "ActionsFromXML.h"
-#include "StdStringsToTxt.h"
+#include "../include/BigRealNumber.h"
+#include "../include/Action.h"
+#include "../include/ActionsFromXML.h"
+#include "../include/StdStringsToTxt.h"
 
 #include "locale"
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STD_STRING_TO_TXT_H
+#define STD_STRING_TO_TXT_H
 
 #include <string>
 #include <QList>
@@ -29,3 +30,5 @@ public:
 private:
     QString path; /** @brief Path to the txt file for answers */
 };
+
+#endif

@@ -45,11 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Qt.vcxproj">
-      <Project>{db3f0d12-0987-41cc-9cc1-9e47af38952b}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemDefinitionGroup />

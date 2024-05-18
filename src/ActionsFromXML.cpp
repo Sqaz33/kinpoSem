@@ -1,4 +1,4 @@
-#include "ActionsFromXML.h"
+#include "../include/ActionsFromXML.h"
 
 ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors) {
 	this->actionErrors = actionErrors;
@@ -19,7 +19,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	QFile file(pt);
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		throw runtime_error("Ошибка чтения: неверно указан путь входного файла");
+		throw runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 	}
 
 	QXmlStreamReader reader(&file);
@@ -94,6 +94,6 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 
 	file.close();
 	if (reader.hasError()) {
-		throw runtime_error("Ошибка чтения: неверное содержание входного файла.");
+		throw runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.");
 	}
 }

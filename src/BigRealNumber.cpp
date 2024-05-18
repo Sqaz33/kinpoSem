@@ -1,4 +1,4 @@
-#include "BigRealNumber.h"
+#include "../include/BigRealNumber.h"
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     isNegative = p.isNegative;

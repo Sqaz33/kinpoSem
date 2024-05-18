@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ACTION_ERROR_H
+#define ACTION_ERROR_H
+
 #include <unordered_map>
 #include <string>
 
@@ -99,3 +101,5 @@ public:
      */
     void setActionNumber(int a);
 };
+
+#endif // ACTION_ERROR_H

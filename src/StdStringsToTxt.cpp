@@ -1,6 +1,6 @@
-#include "StdStringsToTxt.h"
+#include "../include/StdStringsToTxt.h"
 
-// реализовать в main, просто запись в main
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ main, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ main
 StdStringToTxt::StdStringToTxt(const string& txtPath) {
 	path = QString::fromStdString(txtPath);
 }
@@ -9,7 +9,7 @@ void StdStringToTxt::write(const QList<string>& strs, bool appendTo) const {
 	QFile file(path);
 	QIODevice::OpenModeFlag of = appendTo ? QIODevice::Append : QIODevice::WriteOnly;
 	if (!file.open(of | QIODevice::Text)) {
-		throw runtime_error("Ошибка записи: неверно указан путь выходного файла");
+		throw runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 	}
 
 	QTextStream out(&file);

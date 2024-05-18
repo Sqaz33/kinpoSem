@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_H
+#define ACTION_H
 
 #include <unordered_map>
 #include <string>
@@ -103,3 +104,5 @@ private:
     */
     bool checkArity();
 };
+
+#endif // ACTION_H
