@@ -17,18 +17,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Action.h" />
-    <ClInclude Include="include\ActionError.h" />
-    <ClInclude Include="include\ActionsFromXML.h" />
-    <ClInclude Include="include\BigRealNumber.h" />
-    <ClInclude Include="include\StdStringsToTxt.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="src\Action.cpp" />
     <ClCompile Include="src\ActionError.cpp" />
     <ClCompile Include="src\ActionsFromXML.cpp" />
     <ClCompile Include="src\BigRealNumber.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\StdStringsToTxt.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Action.h" />
+    <ClInclude Include="include\ActionError.h" />
+    <ClInclude Include="include\ActionsFromXML.h" />
+    <ClInclude Include="include\BigRealNumber.h" />
+    <ClInclude Include="include\StdStringsToTxt.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB3F0D12-0987-41CC-9CC1-9E47AF38952B}</ProjectGuid>
