@@ -1,24 +1,37 @@
 cmake_minimum_required(VERSION 3.10)
 
-# Проект
+if (WIN32)
+
 project(BRN VERSION 0.1 LANGUAGES CXX)
 
-# Минимальный стандтарт языка
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Создание исполняемого файла
 add_executable(BRN)
 
-# Включение заголовочных файлов
-target_include_directories(BRN PUBLIC "${PROJECT_SOURCE_DIR}/include")
+#
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTOUIC ON)
+set(CMAKE_PREFIX_PATH $ENV{QTDIR})
+find_package(Qt5Core REQUIRED)
 
-# Связываем библиотеки Qt
-target_link_libraries(BRN PUBLIC "Qt5Core.dll")
+# ==========Включение файлов проекта=========
+target_include_directories(
+    BRN PUBLIC "${PROJECT_SOURCE_DIR}/include"
+)
+file(
+    GLOB_RECURSE 
+    SOURCES 
+    "${PROJECT_SOURCE_DIR}/src/*.cpp"
+)
+target_sources(BRN PUBLIC ${SOURCES})
+# ===========================================
 
-# Используем file(GLOB ...) для добавления всех исходных файлов из директории src
-file(GLOB_RECURSE ALL_SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
+# Линк qt
+target_link_libraries(BRN Qt5::Core)
 
-# Указываем исходные файлы для цели BRN
-target_sources(BRN PUBLIC ${ALL_SOURCES})
-
+else()
+    message("Приложение только для платформы WIN32")
+endif()

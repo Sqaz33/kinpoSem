@@ -4,11 +4,13 @@
 *.txt
 *.bkp
 
+!CMakeLists.txt
+
 .idea/
 cmake-build-debug/
-!CMakeLists.txt
 out/
 gen/
 x64/
 build/
 .vs/
+CMakeFiles/
