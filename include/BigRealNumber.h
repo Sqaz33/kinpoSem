@@ -1,7 +1,7 @@
 #pragma once
 
-#include "qregexp"
-#include "QString"
+#include <qregexp>
+#include <QString>
 
 #include "string"
 #include "stdexcept"

@@ -1,11 +1,10 @@
 #include "iostream"
+#include "locale"
 
 #include "../include/BigRealNumber.h"
 #include "../include/Action.h"
 #include "../include/ActionsFromXML.h"
 #include "../include/StdStringsToTxt.h"
-
-#include "locale"
 
 
 /**
