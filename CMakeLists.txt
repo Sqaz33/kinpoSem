@@ -12,45 +12,28 @@ set(CMAKE_PREFIX_PATH $ENV{QTDIR})
 
 find_package(Qt5 COMPONENTS REQUIRED Core Test)
 
-# ========Настройка для Qt==========
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-# ==================================
 
+add_executable(BRN)
 
-include_directories(
+target_include_directories(
+        BRN PRIVATE
         ${PROJECT_SOURCE_DIR}/src
-        ${PROJECT_SOURCE_DIR}/include
 )
-
-file(GLOB all
-        "${PROJECT_SOURCE_DIR}/include/*.h"
+file(GLOB srcs 
         "${PROJECT_SOURCE_DIR}/src/*.cpp"
 )
+target_sources(BRN PRIVATE ${srcs})
 
+target_link_libraries(BRN PRIVATE Qt5::Core)
 
-# Создание исполняемого файла
-add_executable(BRN ${all})
-
-# ==========Добавление тестов=========================
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-        # option(BUILD_TEST "build tests (or no)" ON)
-        set(BUILD_TESTS ON)
-        if (BUILD_TESTS)
         add_subdirectory(tests)
-
-        # Линк qt для BRN
-        target_link_libraries(BRN PUBLIC Qt5::Core Qt5::Test)
-        
         enable_testing()
-        
-        endif()
-
 endif()
-# ====================================================
-
 
 
 
