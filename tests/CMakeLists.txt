@@ -1,9 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
+# В директории tests/CMakeLists.txt
 
-project(BRN VERSION 0.1 LANGUAGES CXX)
+# Найти библиотеки Qt5
+find_package(Qt5 REQUIRED COMPONENTS Core Test)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Создание исполняемого файла с тестами
+add_executable(tst BigRealNumberTests.cpp)
 
+# Линковка тестового исполняемого файла с библиотеками Qt5
+target_link_libraries(tst Qt5::Core Qt5::Test)
 
-add_executable(test)
+# Регистрация теста в CTest
+add_test(NAME MyTestClass COMMAND tst)
