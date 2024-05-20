@@ -17,7 +17,21 @@ using namespace std;
  * Далее BigRealNumber - BRN.
 */
 class BigRealNumber {
+private:
+    short* intPrt; /**@brief Массив целой части.*/
+    short* fractPrt; /**@brief Массив дробной части.*/
+
+    int intPrtLen; /**@brief Длина целой части.*/
+    int fractPrtLen; /**@brief Длина дробной части.*/
+    bool isNegative; /**@brief Флаг, указывающий, является ли данное число отрицательным.*/
+
 public:
+    // Доступ к внутренним полям для целей тестирования
+    //=====================================================
+    const short* getIntPrt() const { return intPrt; }
+    const short* getFractPrt() const { return fractPrt; }
+    //=====================================================
+    
     /**
      * @brief Конструктор копирования.
      * @param[in] p копируемый объект BRN.
@@ -96,6 +110,12 @@ public:
      * @return Длинна целой части числа.
     */
     int getFractPrtLen() const;
+
+    /**
+     * @brief Метод для получения занака числа.
+     * @return Знак числа.
+    */
+    bool negative() const;
 
 
     /**
@@ -255,12 +275,12 @@ public:
     BigRealNumber factorial() const;
 
 private:
-    short* intPrt; /**@brief Массив целой части.*/
-    short* fractPrt; /**@brief Массив дробной части.*/
+    // short* intPrt; /**@brief Массив целой части.*/
+    // short* fractPrt; /**@brief Массив дробной части.*/
 
-    int intPrtLen; /**@brief Длина целой части.*/
-    int fractPrtLen; /**@brief Длина дробной части.*/
-    bool isNegative; /**@brief Флаг, указывающий, является ли данное число отрицательным.*/
+    // int intPrtLen; /**@brief Длина целой части.*/
+    // int fractPrtLen; /**@brief Длина дробной части.*/
+    // bool isNegative; /**@brief Флаг, указывающий, является ли данное число отрицательным.*/
 
     /**
      * @brief Внутренний метод сложения, 

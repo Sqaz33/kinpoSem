@@ -60,7 +60,7 @@ bool BigRealNumber::validateStdString(const string& numb) {
 }
 
 bool BigRealNumber::validateQString(const QString& numb) {
-    QRegExp rx("-{0,1}\\d+\\.\\d+");
+    QRegExp rx("-{0,1}\\d{1,1000}\\.\\d{1,1000}");
     return rx.exactMatch(numb);
 }
 
@@ -91,6 +91,10 @@ int BigRealNumber::getIntPrtLen() const {
 }
 int BigRealNumber::getFractPrtLen() const {
     return fractPrtLen;
+}
+
+bool BigRealNumber::negative() const {
+    return isNegative;
 }
 
 string BigRealNumber::toStdString() const {
@@ -620,9 +624,9 @@ bool BigRealNumber::appendToFract(short number, int ind) {
 
 
 void BigRealNumber::removeInsignDigits() {
-    int signDigit = getFirstNotZero(intPrt, intPrtLen, -1, true);
+    int signDigit = getFirstNotZero(intPrt, max(intPrtLen - 1, 0), -1, true);
     intPrtLen = signDigit + 1;
-    signDigit = getFirstNotZero(fractPrt, fractPrtLen, -1, true);
+    signDigit = getFirstNotZero(fractPrt, max(fractPrtLen - 1, 0), -1, true);
     fractPrtLen = signDigit + 1;
 }
 

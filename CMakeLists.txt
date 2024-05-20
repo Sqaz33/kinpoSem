@@ -30,10 +30,9 @@ target_sources(BRN PRIVATE ${srcs})
 
 target_link_libraries(BRN PRIVATE Qt5::Core)
 
-if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-        add_subdirectory(tests)
-        enable_testing()
-endif()
+add_subdirectory(tests)
+enable_testing()
+
 
 
 
