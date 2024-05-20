@@ -64,6 +64,10 @@ bool BigRealNumber::validateQString(const QString& numb) {
     return rx.exactMatch(numb);
 }
 
+bool BigRealNumber::negative() const {
+    return isNegative;
+}
+
 BigRealNumber::BigRealNumber(int n) {
     intPrt = new short[1000] {};
     fractPrt = new short[1000] {};
@@ -91,10 +95,6 @@ int BigRealNumber::getIntPrtLen() const {
 }
 int BigRealNumber::getFractPrtLen() const {
     return fractPrtLen;
-}
-
-bool BigRealNumber::negative() const {
-    return isNegative;
 }
 
 string BigRealNumber::toStdString() const {
@@ -139,7 +139,7 @@ BigRealNumber& BigRealNumber::operator=(bool bl) {
 }
 
 BigRealNumber BigRealNumber::operator+(const BigRealNumber& other) const {
-    BigRealNumber res {};
+    BigRealNumber res;
     add(other, res); 
     return res;
 }
@@ -150,7 +150,7 @@ BigRealNumber BigRealNumber::operator+(int n) const {
 
 
 BigRealNumber BigRealNumber::operator-(const BigRealNumber& other) const {
-    BigRealNumber res{};
+    BigRealNumber res;
     sub(other, res);
     return res;
 }
@@ -160,7 +160,7 @@ BigRealNumber BigRealNumber::operator-(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
-    BigRealNumber res{};
+    BigRealNumber res;
     mul(other, res);
     return res;
 }
@@ -173,7 +173,7 @@ BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
     if (other == 0) {
         throw ActionPerformError(DIVISION_BY_ZERO);
     }
-    BigRealNumber res{};
+    BigRealNumber res;
     div(other, res);
     return res;
 }
@@ -338,12 +338,16 @@ void BigRealNumber::add(
     // Если term1 + (-term2)
     if (!(isNegative) && term2.isNegative) {
         // res = term1 - term2
-        sub(term2, res);
+        BigRealNumber buf = term2;
+        buf.isNegative = false;
+        this->sub(buf, res);
         return;
     // Если -term1 + term2
     } else if (isNegative && !term2.isNegative) {
         // res = term2 - term1
-        term2.sub(*this, res);
+        BigRealNumber buf = *this;
+        buf.isNegative = false;
+        term2.sub(buf, res);
         return;
     }
     // На случай подобного: term1.add(term2, term1)
@@ -364,7 +368,7 @@ void BigRealNumber::add(
 }
 
 void BigRealNumber::sub(
-    const BigRealNumber& subtr,
+    const BigRealNumber& subtractor,
     BigRealNumber& res
 ) const {
    // term1 - term2
@@ -373,24 +377,29 @@ void BigRealNumber::sub(
    // -term1 - (-term2) 
 
     // Если -term1 - term2 или term1 - (-term2a) 
-    if ((isNegative && !subtr.isNegative) || (!(isNegative) && subtr.isNegative)) {
-        // res = term
-        add(subtr, res);
+    if ((isNegative && !subtractor.isNegative) || (!(isNegative) && subtractor.isNegative)) {
+        BigRealNumber buf = subtractor;
+        buf.isNegative = isNegative;
+        this->add(buf, res);
         res.isNegative = isNegative;
         return;
     // Если -term1 - (-term2)
-    } else if (isNegative && subtr.isNegative) {
-        subtr.sub(*this, res);
+    } else if (isNegative && subtractor.isNegative) {
+        BigRealNumber ths = *this;
+        BigRealNumber sb = subtractor;
+        ths.isNegative = false;
+        sb.isNegative = false;
+        ths.sub(sb, res);
         return;
     }
     // Иначе вычислить term1 - term2
 
-    if (*this >= subtr) {
+    if (*this >= subtractor) {
         BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
-        short trans = attachArrays(*this, subtr,
+        short trans = attachArrays(*this, subtractor,
                                     *rs, true,
                                     true, 0);
-        attachArrays(*this, subtr,
+        attachArrays(*this, subtractor,
                       *rs, false,
                       true, trans);
         rs->removeInsignDigits();
@@ -399,7 +408,7 @@ void BigRealNumber::sub(
         }
     } else {
         // res = -(term2 - term1)
-        subtr.sub(*this, res);
+        subtractor.sub(*this, res);
         res.isNegative = true;
     }
 }
@@ -624,9 +633,9 @@ bool BigRealNumber::appendToFract(short number, int ind) {
 
 
 void BigRealNumber::removeInsignDigits() {
-    int signDigit = getFirstNotZero(intPrt, max(intPrtLen - 1, 0), -1, true);
+    int signDigit = getFirstNotZero(intPrt, max(0, intPrtLen-1), -1, true);
     intPrtLen = signDigit + 1;
-    signDigit = getFirstNotZero(fractPrt, max(fractPrtLen - 1, 0), -1, true);
+    signDigit = getFirstNotZero(fractPrt, max(0, fractPrtLen-1), -1, true);
     fractPrtLen = signDigit + 1;
 }
 
