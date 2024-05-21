@@ -349,7 +349,7 @@ void BigRealNumber::add(
         buf.isNegative = false;
         term2.sub(buf, res);
         return;
-    }
+    } 
     // На случай подобного: term1.add(term2, term1)
     BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
     rs->isNegative = isNegative;
@@ -385,11 +385,12 @@ void BigRealNumber::sub(
         return;
     // Если -term1 - (-term2)
     } else if (isNegative && subtractor.isNegative) {
+        // res = term2 - term1
         BigRealNumber ths = *this;
         BigRealNumber sb = subtractor;
         ths.isNegative = false;
         sb.isNegative = false;
-        ths.sub(sb, res);
+        sb.sub(ths, res);
         return;
     }
     // Иначе вычислить term1 - term2
