@@ -2,13 +2,15 @@
 #include "testInstruments.h"
 
 #include <string>
-
+#include <QStringBuilder>
 #include <QString>
 #include <QtTest/QtTest>
 
 using std::string;
+using namespace test_instruments;
 
 Q_DECLARE_METATYPE(string);
+
 class BigRealNumberTest : public QObject
 {
     Q_OBJECT
@@ -34,9 +36,13 @@ private slots:
     void operatorSub_tests_data();
     void operatorSub_tests();
 
-    // test BigRealNumber::operator*()
+    // test BigRealNumber::operator*()  
     void operatorMul_tests_data();
     void operatorMul_tests();
+
+    // test BigRealNumber::operator/()  
+    void operatorDiv_tests_data();
+    void operatorDiv_tests();
 };
 
 void BigRealNumberTest::fromStdString_tests_data() {
@@ -47,12 +53,12 @@ void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<int>("expectedFractPrtLen");
     QTest::addColumn<bool>("expectedIsNegative");
 
-    QTest::addRow("max_size") << test_instruments::genQStrNumb_m1xp0x1(1000, 1000)
-                              << test_instruments::genIntPrt(1000)
-                              << test_instruments::genFractPrt(1000)
+    QTest::addRow("max_length") << genQStrNumb_m1xp0x1(1000, 1000)
+                              << genIntPrt(1000)
+                              << genFractPrt(1000)
                               << 1000 << 1000 << true;
 
-    QTest::addRow("min_size") << "0.0" << QList<int>{0} << QList<int>{0} << 0 << 0 << false;
+    QTest::addRow("min_length") << "0.0" << QList<int>{0} << QList<int>{0} << 0 << 0 << false;
 
     QTest::addRow("negative_number") << "-123.456"
                                      << QList<int>{3, 2, 1}
@@ -118,14 +124,15 @@ void BigRealNumberTest::validateQString_tests() {
     QFETCH(bool, isValid);
 
     bool result = BigRealNumber::validateQString(inputString);
+    qDebug() << inputString.left(5) << QString::number(isValid) << " --> "<< QString::number(result);
     QCOMPARE(result, isValid);
 }
 
 void BigRealNumberTest::toStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
 
-    QTest::addRow("max_size") << test_instruments::genQStrNumb_m1xp0x1(1000, 1000);
-    QTest::addRow("min_size") << "0.0";
+    QTest::addRow("max_length") << genQStrNumb_m1xp0x1(1000, 1000);
+    QTest::addRow("min_length") << "0.0";
     QTest::addRow("negative_number") << "-123.456";
     QTest::addRow("positive_number") << "123.456";
 }
@@ -135,7 +142,7 @@ void BigRealNumberTest::toStdString_tests() {
 
     BigRealNumber brn = BigRealNumber::fromStdString(inputString.toStdString());
     QString resultString = QString::fromStdString(brn.toStdString());
-
+    qDebug() << inputString.left(5) << " --> "<< resultString.left(5);
     QCOMPARE(resultString, inputString);
 }
 
@@ -144,10 +151,11 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
 
-    QTest::addRow("max_operands") << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
-                                  << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
-                                  << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 2, 2, false);
+    QTest::addRow("max_operands") << genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
+                                  << genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
+                                  << genQStrNumb_m1xp0x1(1000, 1000, 2, 2, false);
     QTest::addRow("min_operands") << "1.0" << "1.0" << "2.0";
+
     QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "1.0";
     QTest::addRow("neg_pos_operands_pos_res") << "-1.0" << "2.0" << "1.0";
     QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-1.0";
@@ -162,7 +170,7 @@ void BigRealNumberTest::operatorAdd_tests() {
 
     BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
                       + BigRealNumber::fromStdString(b.toStdString());
-
+    qDebug() << a.left(5) << " + " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
     QCOMPARE(r.toStdString(), res.toStdString());
 }
 
@@ -171,10 +179,13 @@ void BigRealNumberTest::operatorSub_tests_data() {
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
 
-    QTest::addRow("max_operands") << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
-                                  << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
+    // test length operands
+    QTest::addRow("max_operands") << genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
+                                  << genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
                                   << "0.0";
     QTest::addRow("min_operands") << "1.0" << "1.0" << "0.0";
+
+    // test 
     QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "3.0";
     QTest::addRow("neg_pos_operands_neg_res") << "-1.0" << "2.0" << "-3.0";
     QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-3.0";
@@ -189,24 +200,28 @@ void BigRealNumberTest::operatorSub_tests() {
 
     BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
                       - BigRealNumber::fromStdString(b.toStdString());
-    qDebug() << a << " - " << b << " = " << QString::fromStdString(r.toStdString()) ;
+    qDebug() << a.left(5) << " - " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
     QCOMPARE(r.toStdString(), res.toStdString());
-}
+}   
 
 void BigRealNumberTest::operatorMul_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
 
-    QTest::addRow("max_operands") << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
-                                  << test_instruments::genQStrNumb_m1xp0x1(1000, 1000, 1, 1, false)
-                                  << "0.0";
-    QTest::addRow("min_operands") << "1.0" << "1.0" << "0.0";
-    QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "3.0";
-    QTest::addRow("neg_pos_operands_neg_res") << "-1.0" << "2.0" << "-3.0";
-    QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-3.0";
-    QTest::addRow("neg_neg_operands_pow_res") << "-1.0" << "-2.0" << "1.0";
-    QTest::addRow("pos_pos_operand_null_res") << "1.0" << "1.0" << "0.0";
+    QTest::addRow("max_length_int_res") << genQStrNumb_m1xp0x1(990+1, 0, 1, 0, false)
+                                        << genQStrNumb_m1xp0x1(9+1, 0, 1, 0, false)
+                                        << genQStrNumb_m1xp0x1(1000, 0, 1, 0, false);
+    QTest::addRow("max_length_fract_operand") << genQStrNumb_m1xp0x1(0, 1000, 0, 1, false) 
+                                              << "1.0" 
+                                              << genQStrNumb_m1xp0x1(0, 1000, 0, 1, false);
+
+    QTest::addRow("null_pos_operands_null_res") << "0.0" << "1.0" << "0.0";
+    QTest::addRow("pos_null_operands_null_res") << "1.0" << "0.0" << "0.0";
+
+    QTest::addRow("pos_neg_operands_neg_res") << "1.0" << "-1.0" << "-1.0";
+    QTest::addRow("neg_pos_operands_neg_res") << "-1.0" << "1.0" << "-1.0";
+    QTest::addRow("neg_neg_operands_pos_res") << "-1.0" << "-1.0" << "1.0";
 }
 
 void BigRealNumberTest::operatorMul_tests() {
@@ -216,9 +231,45 @@ void BigRealNumberTest::operatorMul_tests() {
 
     BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
                       * BigRealNumber::fromStdString(b.toStdString());
-    qDebug() << a << " * " << b << " = " << QString::fromStdString(r.toStdString()) ;
+    qDebug() << a.left(5) << " * " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
     QCOMPARE(r.toStdString(), res.toStdString());
 }
+
+void BigRealNumberTest::operatorDiv_tests_data() {
+    QTest::addColumn<QString>("a");
+    QTest::addColumn<QString>("b");
+    QTest::addColumn<QString>("res");
+
+
+    QTest::addRow("max_length_fract_res") << "1.0" 
+                                          << genQStrNumb_m1xp0x1(1000, 0, 1, 0, false)  
+                                          << genQStrNumb_m1xp0x1(0, 999, 0, 1, false);
+
+    QTest::addRow("max_length_int_res") << genQStrNumb_m1xp0x1(999, 0, 5, 0, false)
+                                        << "0.5"
+                                        << genQStrNumb_m1xp0x1(1000, 0, 1, 0, false);
+
+    QTest::addRow("cyclic_fraction_res") << "1.0" << "3.0" 
+                                         << QString('0') + QString('.') + QString("3").repeated(1000);
+
+    QTest::addRow("null_pos_operands_null_res") << "0.0" << "1.0" << "0.0";
+
+    QTest::addRow("pos_neg_operands_neg_res") << "1.0" << "-1.0" << "-1.0";
+    QTest::addRow("neg_pos_operands_neg_res") << "-1.0" << "1.0" << "-1.0";
+    QTest::addRow("neg_neg_operands_pos_res") << "-1.0" << "-1.0" << "1.0";
+}
+
+void BigRealNumberTest::operatorDiv_tests() {
+    QFETCH(QString, a);
+    QFETCH(QString, b);
+    QFETCH(QString, res);
+
+    BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
+                      / BigRealNumber::fromStdString(b.toStdString());
+    qDebug() << a.left(5) << " / " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
+    QCOMPARE(r.toStdString(), res.toStdString());
+}
+
 
 QTEST_MAIN(BigRealNumberTest)
 

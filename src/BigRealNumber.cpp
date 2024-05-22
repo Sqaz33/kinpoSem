@@ -173,8 +173,14 @@ BigRealNumber BigRealNumber::operator/(const BigRealNumber& other) const {
     if (other == 0) {
         throw ActionPerformError(DIVISION_BY_ZERO);
     }
+    BigRealNumber ths = *this;
+    BigRealNumber oth = other;
+    ths.isNegative = false;
+    oth.isNegative = false;
+
     BigRealNumber res;
-    div(other, res);
+    ths.div(oth, res);
+    res.isNegative = isNegative != other.isNegative;
     return res;
 }
 
@@ -418,6 +424,8 @@ void BigRealNumber::mul(
     const BigRealNumber& fac,
     BigRealNumber &res
 ) const {
+    res.isNegative = isNegative != fac.isNegative;
+
     // Умножаем на 1 цифру из числа
     if (fac.intPrtLen == 1 && !fac.fractPrtLen) {
         short ref = 0; // перенос
@@ -473,73 +481,60 @@ void BigRealNumber::div(
     const BigRealNumber& diver,
     BigRealNumber& res
 ) const {
-    // Работать с целой частью делителя
-    BigRealNumber dcp = diver; // Копия делителя
-    delete dcp.fractPrt; 
-    dcp.fractPrt = new short[1000] {};
-    dcp.fractPrtLen = 0;
-    
-    BigRealNumber q{}; // Остаток
-    BigRealNumber r{}; // Целая часть
-    BigRealNumber divid{}; // Буфер для столбика
-    int i = intPrtLen - 1; 
-    int j = 0; // Начальный индекс для дробной части делимого
-    int fp = 0; // Индек для внесения в дробную часть результата
-    bool toF = false; // Флаг внесения в дробную часть результата
+    BigRealNumber dcp = diver; 
+    BigRealNumber ths = *this;
+    ths.shiftNumber(dcp.fractPrtLen, false);
+    dcp.shiftNumber(dcp.fractPrtLen, false);
 
+    BigRealNumber q; // Остаток
+    BigRealNumber r; // Целая часть
+    BigRealNumber divid; // Буфер для столбика
+    int i = ths.intPrtLen - 1; // Начальный индекс для целой части делимого
+    int j = 0; // Начальный индекс для дробной части делимого
+    int fp = -1; // Индек для внесения в дробную часть результата
+    bool toF = false; // Флаг внесения в дробную часть результа     
     // Пока не выбрана целая или дробная часть делимого, или пока имеется остаток
-    while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < 1000 && diver.intPrtLen) {
+    while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < 1000) {
+        // буфер = остаток //
         divid = q;
         q.setVal(0);
         r.setVal(0);
+        // пока буфер меньше делителя //
         while (divid < dcp) {
-            // Сдвинуть буфер влево
+            // Сдвинуть буфер влево //
             divid.shiftNumber(1, false);
-            // Взять разряд из целой части
+    
+            // Взять разряд из целой части 
             if (i >= 0) {
-                res.shiftNumber(1, false);
-                divid.intPrt[0] = intPrt[i--];
-            // Из дробной
+                divid.intPrt[0] = ths.intPrt[i--];
+            // из дробной //
             } else if (j < fractPrtLen) {
-                divid.intPrt[0] = fractPrt[j++];
+                divid.intPrt[0] = ths.fractPrt[j++];
                 toF = true;
             } else {
                 toF = true;
             } 
             divid.removeInsignDigits();
+
+            if (toF) {
+                fp++;
+            } else {
+                res.shiftNumber(1, false);
+            }
+
             if (divid == 0) {
                 break;
             }
         }
-
+        // поделить с остатком
         divid.divRemaind(dcp, r, q);
         if (toF) {
-            res.appendToFract(r.intPrt[0], fp++);
+            res.appendToFract(r.intPrt[0], fp);
         } else {
             res.intPrt[0] = r.intPrt[0];
         }
     }
     res.removeInsignDigits();
-
-    if (!diver.fractPrtLen) {
-        return;
-    }
-    // Работать с дробной частью делителя
-    BigRealNumber ths = *this;
-    // Убрать целую часть делителя
-    dcp = diver;
-    delete dcp.intPrt;
-    dcp.intPrtLen = 0;
-    dcp.intPrt = new short[1000] {};
-    // Сдвигать делитель и делимое, пока есть дробная часть делителя
-    // 0.1 / 0.001 -> 100 / 1
-    ths.shiftNumber(dcp.fractPrtLen, false);
-    dcp.shiftNumber(dcp.fractPrtLen, false);
-    dcp.removeInsignDigits();
-    BigRealNumber rs{};
-    ths.div(dcp, rs);
-    
-    res.add(rs, res);
 }
 
 void BigRealNumber::divRemaind(
@@ -549,6 +544,7 @@ void BigRealNumber::divRemaind(
 ) const {
     BigRealNumber s = *this;
     BigRealNumber one(1);
+    BigRealNumber d = diver;
     while (s >= diver) {
         s.sub(diver, s);
         R.add(one, R);
@@ -628,7 +624,7 @@ bool BigRealNumber::appendToFract(short number, int ind) {
         return false;
     }
     fractPrt[ind] = number;
-    fractPrtLen++;
+    fractPrtLen = ind + 1;
     return true;
 }
 

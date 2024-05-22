@@ -1,8 +1,8 @@
 #include "testInstruments.h"
 
 namespace test_instruments {
-    QString genQStrNumb_m1xp0x1(int intLen, int fractLen, int first_int, int last_fract, bool neg) {
-        QString res = QString::number(first_int) 
+    QString genQStrNumb_m1xp0x1(int intLen, int fractLen, int firstInt, int last_fract, bool neg) {
+        QString res = QString::number(firstInt) 
                       % QString('0').repeated(intLen-1) 
                       % QString('.')
                       % QString('0').repeated(fractLen-1)
