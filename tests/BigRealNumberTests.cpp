@@ -1,67 +1,4 @@
-#include "../include/BigRealNumber.h"
-#include "testInstruments.h"
-#include <math.h>
-
-#include <string>
-#include <QStringBuilder>
-#include <QString>
-#include <QtTest/QtTest>
-
-#define MAX_LENGTH 1000
-
-using std::string;
-using namespace test_instruments;
-
-class BigRealNumberTest : public QObject
-{
-    Q_OBJECT
-
-private slots:
-    // test BigRealNumber BigRealNumber::fromStdString(const string& numb)
-    void fromStdString_tests_data();
-    void fromStdString_tests();
-
-    // test bool BigRealNumber::validateQString(const QString& numb)
-    void validateQString_tests_data();
-    void validateQString_tests();
-
-    // test std::string BigRealNumber::toStdString(const BigRealNumber& other)
-    void toStdString_tests_data();
-    void toStdString_tests();
-
-    // test BigRealNumber BigRealNumber::operator+(const BigRealNumber& other)
-    void operatorAdd_tests_data();
-    void operatorAdd_tests();
-
-    // test BigRealNumber BigRealNumber::operator-(const BigRealNumber& other)
-    void operatorSub_tests_data();
-    void operatorSub_tests();
-
-    // test BigRealNumber BigRealNumber::operator*(const BigRealNumber& other)  
-    void operatorMul_tests_data();
-    void operatorMul_tests();
-
-    // test BigRealNumber BigRealNumber::operator/(const BigRealNumber& other)  
-    void operatorDiv_tests_data();
-    void operatorDiv_tests();
-
-    // test BigRealNumber BigRealNumber::pow(const BigRealNumber& other)  
-    void pow_tests_data();
-    void pow_tests();
-
-    // test BigRealNumber BigRealNumber::factorial() 
-    void factorial_tests_data();
-    void factorial_tests();
-
-    // test bool BigRealNumber::operator==(const BigRealNumber& other)  
-    void operator_eq_data();
-    void operator_eq();
-
-    
-    // test bool BigRealNumber::operator>(const BigRealNumber& other) 
-    void operator_more_data();
-    void operator_more();
-};
+#include "BigRealNumberTests.h"
 
 void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
@@ -346,7 +283,7 @@ void BigRealNumberTest::factorial_tests() {
 
 
 
-void BigRealNumberTest::operator_eq_data() {
+void BigRealNumberTest::operatorEq_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<bool>("res");
@@ -363,7 +300,7 @@ void BigRealNumberTest::operator_eq_data() {
     QTest::addRow("neg_pos_operands") << "-1.0" << "1.0" << false;
 }
 
-void BigRealNumberTest::operator_eq() {
+void BigRealNumberTest::operatorEq() {
     QFETCH(QString, a);
     QFETCH(QString, b);
     QFETCH(bool, res);
@@ -374,7 +311,7 @@ void BigRealNumberTest::operator_eq() {
 }
 
 
-void BigRealNumberTest::operator_more_data() {
+void BigRealNumberTest::operatorMore_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<bool>("res");
@@ -405,7 +342,7 @@ void BigRealNumberTest::operator_more_data() {
     QTest::addRow("neg_pos_operand_first_abs_more") << "-3.0" << "-2.0" << false;
 }
 
-void BigRealNumberTest::operator_more() {
+void BigRealNumberTest::operatorMore() {
     QFETCH(QString, a);
     QFETCH(QString, b);
     QFETCH(bool, res);
@@ -414,7 +351,3 @@ void BigRealNumberTest::operator_more() {
     qDebug() << "(" << a.left(5) << " > " << b.left(5) << ") = " << QString::number(r);
     QCOMPARE(r, res);
 }
-
-QTEST_MAIN(BigRealNumberTest)
-
-#include "BigRealNumberTests.moc"

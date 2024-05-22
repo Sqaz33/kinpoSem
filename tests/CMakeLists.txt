@@ -8,8 +8,9 @@ target_sources(
     tst PRIVATE
     BigRealNumberTests.cpp
     testInstruments.cpp
+    tests_main.cpp
 )
-target_include_directories(tst PRIVATE testInstruments.h)
+target_include_directories(tst PRIVATE testInstruments.h BigRealNumberTests.h)
 
 target_sources(
     tst PRIVATE

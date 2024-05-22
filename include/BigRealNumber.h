@@ -17,14 +17,16 @@ using namespace std;
  * Subsequently referred to as BigRealNumber - BRN.
 */
 class BigRealNumber {
+     
 private:
+  // Access to internal fields for testing purposes
     short* intPrt; /**@brief Array representing the integer part.*/
     short* fractPrt; /**@brief Array representing the fractional part.*/
 
     int intPrtLen; /**@brief Length of the integer part.*/
     int fractPrtLen; /**@brief Length of the fractional part.*/
     bool isNegative; /**@brief Flag indicating whether the number is negative.*/
-
+    // 
 public:
     // Access to internal fields for testing purposes
     //=====================================================

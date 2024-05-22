@@ -679,7 +679,6 @@ void BigRealNumber::setVal(int n) {
 }
 
 
-// -------------------------------------------внеклассовые функции
 void arrShift(short* arr, int len, int shift, bool toRight, int fillVal) {
     if (!len) {
         return;
