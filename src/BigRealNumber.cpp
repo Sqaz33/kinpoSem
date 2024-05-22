@@ -1,12 +1,14 @@
 #include "../include/BigRealNumber.h"
 
+#define MAX_LENGTH 1000
+
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     isNegative = p.isNegative;
     fractPrtLen = p.fractPrtLen;
     intPrtLen = p.intPrtLen;
 
-    this->intPrt = new short[1000] {};
-    this->fractPrt = new short[1000] {};
+    this->intPrt = new short[MAX_LENGTH] {};
+    this->fractPrt = new short[MAX_LENGTH] {};
 
     for (int i = 0; i < fractPrtLen; i++) {
         this->fractPrt[i] = p.fractPrt[i];
@@ -22,8 +24,8 @@ BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     }
 
     BigRealNumber n{};
-    n.intPrt = new short[1000] {};
-    n.fractPrt = new short[1000] {};
+    n.intPrt = new short[MAX_LENGTH] {};
+    n.fractPrt = new short[MAX_LENGTH] {};
     n.isNegative = numb.at(0) == '-';
 
     // Получить индекс разделителя
@@ -34,7 +36,7 @@ BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     // Получить длину дробной части
     n.fractPrtLen = numb.length() - n.intPrtLen - 1 - n.isNegative;
 
-    if (n.fractPrtLen > 1000 || n.intPrtLen > 1000) {
+    if (n.fractPrtLen > MAX_LENGTH || n.intPrtLen > MAX_LENGTH) {
         throw ActionBuildError(INVALID_LENGTH);
     }
 
@@ -69,8 +71,8 @@ bool BigRealNumber::negative() const {
 }
 
 BigRealNumber::BigRealNumber(int n) {
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
+    intPrt = new short[MAX_LENGTH] {};
+    fractPrt = new short[MAX_LENGTH] {};
     intPrtLen = 0;
     fractPrtLen = 0;
     isNegative = n < 0;
@@ -78,8 +80,8 @@ BigRealNumber::BigRealNumber(int n) {
 }
 
 BigRealNumber::BigRealNumber() {
-    intPrt = new short[1000] {};
-    fractPrt = new short[1000] {};
+    intPrt = new short[MAX_LENGTH] {};
+    fractPrt = new short[MAX_LENGTH] {};
     intPrtLen = 0;
     fractPrtLen = 0;
     isNegative = false;
@@ -160,8 +162,15 @@ BigRealNumber BigRealNumber::operator-(int n) const {
 }
 
 BigRealNumber BigRealNumber::operator*(const BigRealNumber& other) const {
+    BigRealNumber mult = *this;
+    BigRealNumber fac = other;
+    fac.isNegative = false;
+    mult.isNegative = false;
+
     BigRealNumber res;
-    mul(other, res);
+    mult.mul(fac, res);
+    res.isNegative = isNegative != other.isNegative;
+
     return res;
 }
 
@@ -233,40 +242,27 @@ bool BigRealNumber::operator>(const BigRealNumber& other) const {
 
     // Если целая часть больше
     if (intPrtLen > other.intPrtLen) {
-        return true;
+        return true && !isNegative;
     } else if (intPrtLen < other.intPrtLen) {
-        return false;
+        return false && !isNegative;
     }
     // Сравнивать целые части начиная со старших разрядов
-    for (int i = intPrtLen - 1; i >= 0; i--) {
+    for (int i =  intPrtLen - 1; i >= 0; i--) {
         if (intPrt[i] > other.intPrt[i]) {
-            return true;
+            return true && !isNegative;
         } else if (intPrt[i] < other.intPrt[i]) {
-            return false;
+            return false || isNegative;
         }
     }
-
-    bool isEqual = true;
     // Сравнить дробные части
-    for (int i = 0; i < fractPrtLen; i++) {
-        if (isEqual) {
-            isEqual = fractPrt[i] == other.fractPrt[i];
-        }
+    for (int i = 0; i < max(fractPrtLen, other.fractPrtLen); i++) {
         if (fractPrt[i] > other.fractPrt[i]) {
-            return true;
+            return true && !isNegative;
         }
         else if (fractPrt[i] < other.fractPrt[i]) {
-            return false;
+            return false || isNegative;
         }
     }
-    // Если дробные части, сравненные по длине короткой части,
-    // и длинна дробной части другого числа больше
-    if (isEqual && other.fractPrtLen > fractPrtLen) {
-        // То данное числа меньше
-        return false;
-    }
-
-    return *this != other;
 }
 
 bool BigRealNumber::operator>(int other) const {
@@ -424,7 +420,6 @@ void BigRealNumber::mul(
     const BigRealNumber& fac,
     BigRealNumber &res
 ) const {
-    res.isNegative = isNegative != fac.isNegative;
 
     // Умножаем на 1 цифру из числа
     if (fac.intPrtLen == 1 && !fac.fractPrtLen) {
@@ -453,8 +448,8 @@ void BigRealNumber::mul(
     }
     
     // Умножить начиная с младших разрядов столбиком
-    BigRealNumber buf1{};
-    BigRealNumber buf2{};
+    BigRealNumber buf1;
+    BigRealNumber buf2;
     // Дробную часть
     for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
         buf2.setVal(0);
@@ -494,20 +489,17 @@ void BigRealNumber::div(
     int fp = -1; // Индек для внесения в дробную часть результата
     bool toF = false; // Флаг внесения в дробную часть результа     
     // Пока не выбрана целая или дробная часть делимого, или пока имеется остаток
-    while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < 1000) {
+    while ((i >= 0 || j < fractPrtLen || q != 0) && res.fractPrtLen < MAX_LENGTH) {
         // буфер = остаток //
         divid = q;
         q.setVal(0);
         r.setVal(0);
-        // пока буфер меньше делителя //
         while (divid < dcp) {
-            // Сдвинуть буфер влево //
             divid.shiftNumber(1, false);
     
             // Взять разряд из целой части 
             if (i >= 0) {
                 divid.intPrt[0] = ths.intPrt[i--];
-            // из дробной //
             } else if (j < fractPrtLen) {
                 divid.intPrt[0] = ths.fractPrt[j++];
                 toF = true;
@@ -613,18 +605,18 @@ short BigRealNumber::attachArrays(
 }
 
 void BigRealNumber::appendToInt(short number) {
-    if (intPrtLen + 1 > 1000) {
+    if (intPrtLen + 1 > MAX_LENGTH) {
         throw ActionPerformError(INVALID_LENGTH);
     }
     intPrt[intPrtLen++] = number;
 }
 
 bool BigRealNumber::appendToFract(short number, int ind) {
-    if (fractPrtLen + 1 > 1000 || ind >= 1000) {
+    if (fractPrtLen + 1 > MAX_LENGTH || ind >= MAX_LENGTH) {
         return false;
     }
     fractPrt[ind] = number;
-    fractPrtLen = ind + 1;
+    fractPrtLen = max(ind+1, fractPrtLen);
     return true;
 }
 
@@ -642,7 +634,7 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
         short buf = toRight ? intPrt[0] : fractPrt[0];
         if (intPrtLen || !toRight) {
             if (!toRight) {
-                if (intPrtLen + 1 > 1000) {
+                if (intPrtLen + 1 > MAX_LENGTH) {
                     throw ActionPerformError(INVALID_LENGTH);
                 }
                 intPrtLen++;
