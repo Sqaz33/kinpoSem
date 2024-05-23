@@ -8,6 +8,8 @@ void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<int>("expectedFractPrtLen");
     QTest::addColumn<bool>("expectedIsNegative");
 
+    QTest::addRow("simple_case") << "1.1" << QList<int>{1} << QList<int>{1} << 1 << 1 << false;
+
     QTest::addRow("max_length") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH)
                               << genIntPrt(MAX_LENGTH)
                               << genFractPrt(MAX_LENGTH)
@@ -53,6 +55,8 @@ void BigRealNumberTest::validateQString_tests_data() {
     QTest::addColumn<QString>("inputString");
     QTest::addColumn<bool>("isValid");
 
+    QTest::addRow("simple_case") << "1.1" << true;
+
     // Корректные строки
     QTest::addRow("positive_number") << "123.456" << true;
     QTest::addRow("negative_number") << "-123.456" << true;
@@ -86,6 +90,9 @@ void BigRealNumberTest::validateQString_tests() {
 void BigRealNumberTest::toStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
 
+    QTest::addRow("simple_case") << "1.1";
+
+
     QTest::addRow("max_length") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH);
     QTest::addRow("min_length") << "0.0";
     QTest::addRow("negative_number") << "-123.456";
@@ -105,6 +112,9 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
+
+    QTest::addRow("simple_case") << "1.1" << "2.2" << "3.3";
+
 
     QTest::addRow("max_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
                                   << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
@@ -137,6 +147,8 @@ void BigRealNumberTest::operatorSub_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
+
+    QTest::addRow("simple_case") << "3.3" << "1.1" << "2.2";
 
     // test length operands
     QTest::addRow("max_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
@@ -207,6 +219,8 @@ void BigRealNumberTest::operatorDiv_tests_data() {
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
 
+    QTest::addRow("simple_case") << "2.0" << "2.0" << "2.0";
+    
 
     QTest::addRow("max_length_fract_res") << "1.0" 
                                           << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false)  
@@ -243,7 +257,9 @@ void BigRealNumberTest::pow_tests_data() {
     QTest::addColumn<QString>("p");
     QTest::addColumn<QString>("res");
 
-    QTest::addRow("simple_case") << "10.0" << "10.0" << "10000000000.0";
+    QTest::addRow("simple_case") << "2.0" << "3.0" << "8.0";
+
+    QTest::addRow("ten_pow") << "10.0" << "10.0" << "10000000000.0";
 
     QTest::addRow("10_pow_max_length_int_res") << "10.0" << "999.0" 
                                                <<  QString("1") + QString("0").repeated(MAX_LENGTH-1) + QString(".0"); // 1...000.0

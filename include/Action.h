@@ -78,7 +78,7 @@ public:
      * 
      * @exception ActionBuildError if the number of operands is incorrect.
     */
-    Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2);
+    Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* term2 = nullptr);
 
     /**
      * @brief Method to perform the action.
@@ -91,6 +91,9 @@ public:
      * @return String representation of the action.
     */
     std::string toStdString() const;
+
+    // for test!!! //
+    bool operator==(const Action& other) const;
 
 private:
     BigRealNumber term1; /**@brief First operand.*/

@@ -28,8 +28,7 @@ using namespace test_instruments;
 //  BigRealNumber BigRealNumber::factorial() 
 //  bool BigRealNumber::operator==(const BigRealNumber& other)  
 //  bool BigRealNumber::operator>(const BigRealNumber& other) 
-class BigRealNumberTest : public QObject
-{
+class BigRealNumberTest : public QObject {
     Q_OBJECT
 private slots:
     // test BigRealNumber BigRealNumber::fromStdString(const string& numb)
