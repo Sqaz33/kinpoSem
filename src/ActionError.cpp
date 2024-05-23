@@ -5,9 +5,9 @@ std::string ActionError::toStdString() const{
 }
 
 std::string ActionBuildError::toStdString() const {
-	return "������ �������� ������� � ������ "
+	return "Error building action on line "
 			+ std::to_string(xmlLineNumber)
-			+ "xml-�����: "
+			+ "xml-file: "
 			+ ActionError::toStdString();
 }
 void ActionBuildError::setXmlLineNumber(int ln) {
@@ -15,9 +15,9 @@ void ActionBuildError::setXmlLineNumber(int ln) {
 }
 
 std::string ActionPerformError::toStdString() const {
-	return "���������� ��� �������� �"
+	return "Error performing an action on a line "
 			+ std::to_string(actionNumber)
-			+ "xml-�����: "
+			+ "xml-file: "
 			+ ActionError::toStdString();
 }
 void ActionPerformError::setActionNumber(int a) {
@@ -26,13 +26,13 @@ void ActionPerformError::setActionNumber(int a) {
 
 std::string errorTypeToStdString(ActionErrorType e) {
 	std::unordered_map<ActionErrorType, std::string> errorTypeToString {
-	{NO_OPER_E, "������� ����������� ��������"},
-	{INVALID_ARITY, "������������ ���������� ���������"},
-	{INVALID_OPERAND_FORMAT, "������ �������� ������ ��������"},
-	{INVALID_LENGTH, "������� ��� ����� ����� ����� ������� ����� 1000 ����"},
-	{DIVISION_BY_ZERO, "������� �� ����"},
-	{OPERAND_WITH_FRACTIONAL_PART_POW_FACT, "������� ����� ������� ����� ��� �������� pow ��� fact"},
-	{OPERAND_LESS_ZERO_POW_FACT, "������� ������ ���� ��� �������� pow ��� fact"}
+		{NO_OPER_E, "No operands in expression"},
+		{INVALID_ARITY, "Invalid number of arguments"},
+		{INVALID_OPERAND_FORMAT, "Format error for one of the operands"},
+		{INVALID_LENGTH, "The length or size of one of the lines exceeds 1000 characters"},
+		{DIVISION_BY_ZERO, "Division by zero"},
+		{OPERAND_WITH_FRACTIONAL_PART_POW_FACT, "The operand cannot be fractional for pow or fact operations"},
+		{OPERAND_LESS_ZERO_POW_FACT, "Operand cannot be less than zero for pow or fact operations"}
 	};
 	return errorTypeToString[e];
 }

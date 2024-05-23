@@ -1,6 +1,5 @@
 #include "../include/StdStringsToTxt.h"
 
-// ����������� � main, ������ ������ � main
 StdStringToTxt::StdStringToTxt(const string& txtPath) {
 	path = QString::fromStdString(txtPath);
 }
@@ -9,7 +8,9 @@ void StdStringToTxt::write(const QList<string>& strs, bool appendTo) const {
 	QFile file(path);
 	QIODevice::OpenModeFlag of = appendTo ? QIODevice::Append : QIODevice::WriteOnly;
 	if (!file.open(of | QIODevice::Text)) {
-		throw runtime_error("������ ������: ������� ������ ���� ��������� �����");
+		throw runtime_error(
+			"Execution error: it is not possible to open the txt file for writing."
+			);
 	}
 
 	QTextStream out(&file);

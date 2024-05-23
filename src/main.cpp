@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	QList<ActionError> actionErrors;
 	try {
 		if (argc != 3) {
-			throw runtime_error("Неверное количество аргументов ввода программы.");
+			throw runtime_error("The number of program input arguments is incorrect.");
 		}
 		string xmlPath(argv[1]);
 		string txtPath(argv[2]);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 		output.write(results, false);
 		output.write(strErrors, true);
 
-		cout << "Ошибочных действий: " + to_string(actionErrors.size()) << endl;
+		cout << "Erroneous actions: " + to_string(actionErrors.size()) << endl;
 
 		if (actionErrors.size()) {
 			return 2;

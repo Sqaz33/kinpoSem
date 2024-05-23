@@ -351,3 +351,5 @@ void BigRealNumberTest::operatorMore() {
     qDebug() << "(" << a.left(5) << " > " << b.left(5) << ") = " << QString::number(r);
     QCOMPARE(r, res);
 }
+
+#include "BigRealNumberTests.moc"

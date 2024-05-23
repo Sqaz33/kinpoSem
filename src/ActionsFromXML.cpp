@@ -19,7 +19,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 	QFile file(pt);
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		throw runtime_error("������ ������: ������� ������ ���� �������� �����");
+		throw runtime_error("execution error: unable to open the xml file for reading");
 	}
 
 	QXmlStreamReader reader(&file);
@@ -94,6 +94,6 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 
 	file.close();
 	if (reader.hasError()) {
-		throw runtime_error("������ ������: �������� ���������� �������� �����.");
+		throw runtime_error("execution error: unable to read data from xml file");
 	}
 }

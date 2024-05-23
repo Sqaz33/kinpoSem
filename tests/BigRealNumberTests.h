@@ -78,6 +78,5 @@ private slots:
     void operatorMore();
 };
 
-#include "BigRealNumberTests.moc"
 
 #endif
