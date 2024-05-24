@@ -1,6 +1,6 @@
 #include <QtTest/QtTest>
 #include "BigRealNumberTests.h"
-#include "ActionFromXMLTests.h"
+#include "ActionsFromXMLTests.h"
 
 int main(int argc, char *argv[]) {
     int status = 0;

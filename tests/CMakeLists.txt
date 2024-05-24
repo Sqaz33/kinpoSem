@@ -7,10 +7,15 @@ add_executable(tst)
 target_sources(
     tst PRIVATE
     BigRealNumberTests.cpp
+    ActionsFromXMLTests.cpp
     testInstruments.cpp
     tests_main.cpp
 )
-target_include_directories(tst PRIVATE testInstruments.h BigRealNumberTests.h)
+target_include_directories(tst PRIVATE 
+    testInstruments.h 
+    BigRealNumberTests.h
+    ActionsFromXMLTests.h
+)
 
 target_sources(
     tst PRIVATE

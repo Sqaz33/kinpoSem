@@ -1,6 +1,5 @@
 #include "../include/BigRealNumber.h"
 
-#define MAX_LENGTH 1000
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     isNegative = p.isNegative;

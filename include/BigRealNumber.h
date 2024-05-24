@@ -1,14 +1,17 @@
-#pragma once
+#ifndef BIG_REAL_NUMBER_H
+#define BIG_REAL_NUMBER_H
 
 #include <qregexp>
 #include <QString>
 
-#include "string"
-#include "stdexcept"
+#include <string>
+#include <stdexcept>
+#include <iostream>
 #include "math.h"
-#include "iostream"
 
 #include "ActionError.h"
+
+#define MAX_LENGTH 1000
 
 using namespace std;
 
@@ -19,7 +22,7 @@ using namespace std;
 class BigRealNumber {
      
 private:
-  // Access to internal fields for testing purposes
+   //   TODO:  Access to internal fields for testing purposes
     short* intPrt; /**@brief Array representing the integer part.*/
     short* fractPrt; /**@brief Array representing the fractional part.*/
 
@@ -28,7 +31,7 @@ private:
     bool isNegative; /**@brief Flag indicating whether the number is negative.*/
     // 
 public:
-    // Access to internal fields for testing purposes
+    // TODO:  Access to internal fields for testing purposes
     //=====================================================
     const short* getIntPrt() const { return intPrt; }
     const short* getFractPrt() const { return fractPrt; }
@@ -278,7 +281,7 @@ public:
     BigRealNumber factorial() const;
 
 private:
-    // short* intPrt; /**@brief Array representing the integer part.*/
+   // TODO:  short* intPrt; /**@brief Array representing the integer part.*/
     // short* fractPrt; /**@brief Array representing the fractional part.*/
 
     // int intPrtLen; /**@brief Length of the integer part.*/
@@ -431,3 +434,5 @@ void arrShift(short* arr, int len, int shift, bool toRight, int fillVal);
  * @return Index of the first non-zero value. 
 */
 int getFirstNotZero(short* arr, int start, int stop, bool backward);
+
+#endif // BIG_REAL_NUMBER_H

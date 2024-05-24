@@ -1,6 +1,11 @@
 #include "BigRealNumberTests.h"
 
+// TODO: добавить больше сложных тестов
+
+
 void BigRealNumberTest::fromStdString_tests_data() {
+    // TODO добавить исключительные случаи
+    // TODO добавить незнач. разряды
     QTest::addColumn<QString>("inputString");
     QTest::addColumn<QList<int>>("expectedIntPrt");
     QTest::addColumn<QList<int>>("expectedFractPrt");
@@ -26,6 +31,7 @@ void BigRealNumberTest::fromStdString_tests_data() {
                                      << QList<int>{3, 2, 1}
                                      << QList<int>{4, 5, 6}
                                      << 3 << 3 << false;
+  
 }
 
 void BigRealNumberTest::fromStdString_tests() {
@@ -88,8 +94,9 @@ void BigRealNumberTest::validateQString_tests() {
 }
 
 void BigRealNumberTest::toStdString_tests_data() {
-    QTest::addColumn<QString>("inputString");
+    // TODO: строка должна выводится из brn
 
+    QTest::addColumn<QString>("inputString");
     QTest::addRow("simple_case") << "1.1";
 
 
@@ -123,7 +130,6 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     
     QTest::addRow("second_operand_len_more") << "0.0" << "0.01" << "0.01";
     QTest::addRow("first_operand_len_more") << "0.01" << "0.0" << "0.01";
-
 
     QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "1.0";
     QTest::addRow("neg_pos_operands_pos_res") << "-1.0" << "2.0" << "1.0";

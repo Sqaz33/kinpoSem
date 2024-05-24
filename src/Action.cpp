@@ -107,7 +107,12 @@ bool Action::checkArity() {
 	return termCount == 2 || (oper == FACT && termCount == 1);
 }
 
-// for test!!!//
-bool Action::operator==(const Action& other) const {
-	return term1 == other.term1 && term1 == other.term1 && oper == other.oper && termCount == other.termCount;
+// TODO: for test!!!//
+bool Action::operator==(const Action* other) const {
+	return  termCount == other->termCount && oper == other->oper && term1 == other->term1 && (termCount == 1 ||  term2 == other->term2);
+}
+
+// TODO: for tests only//
+Action::Action() {
+
 }

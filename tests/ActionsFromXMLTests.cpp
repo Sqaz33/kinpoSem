@@ -7,20 +7,20 @@ void ActionFromXMLTests::tests_data() {
     
     QTest::addColumn<bool>("isError");
 
-    QTest::addRow("simple_case") << "simple_case_test.xml" 
-                                 <<  QList<Action>{ 
-                                        Action(
-                                            MUL, 
-                                            &BigRealNumber::fromStdString("2.5"),
-                                            &BigRealNumber::fromStdString("3.7")
-                                        ),
-                                        Action(
-                                            FACT, 
-                                            &BigRealNumber::fromStdString("5.0"),
-                                        )
-                                    }
-                                 << QList<int>{1, 2}
-                                 << false;
+    QTest::addRow("simple_case") << "C:/kinpoSem/tests/xml/simple_case_test.xml"
+                                << QList<Action>{
+                                    Action(
+                                        MUL,
+                                        &BigRealNumber::fromStdString("2.5"),
+                                        &BigRealNumber::fromStdString("3.7")
+                                    ),
+                                    Action(
+                                        FACT,
+                                        &BigRealNumber::fromStdString("5.0")
+                                    )
+                                }
+                                << QList<int>{1, 2}
+                                << false;
     }
 
 
@@ -38,12 +38,12 @@ void ActionFromXMLTests::tests() {
 
     const QHash<int, Action*>* XMLActions = reader.getActions();
     QList<int> keys = XMLActions->keys();
+    qSort(keys.begin(), keys.end());
 
     QCOMPARE(actionsNumb.length(), keys.length());
     for (int i = 0; i < actionsNumb.length(); i++) {
         QCOMPARE(actionsNumb.at(i), keys.at(i));
         QCOMPARE(actions.at(i), XMLActions->value(keys.at(i)));
-
     }
 
 }

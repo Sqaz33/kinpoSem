@@ -92,9 +92,11 @@ public:
     */
     std::string toStdString() const;
 
-    // for test!!! //
-    bool operator==(const Action& other) const;
-
+    // TODO: for test!!! //
+    bool operator==(const Action* other) const;
+    
+    // TODO: for tests only //
+    Action();
 private:
     BigRealNumber term1; /**@brief First operand.*/
     BigRealNumber term2; /**@brief Second operand.*/

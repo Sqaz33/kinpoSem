@@ -1,5 +1,5 @@
-#ifndef ACTION_FROM_XML_TESTS
-#define ACTION_FROM_XML_TESTS
+#ifndef ACTIONS_FROM_XML_TESTS
+#define ACTIONS_FROM_XML_TESTS
 
 #include <QtTest/QtTest>
 
@@ -11,8 +11,10 @@
 #include <QString>
 #include <QList>
 #include <QHash>
+#include <QtAlgorithms>
 
 Q_DECLARE_METATYPE(Action)
+Q_DECLARE_METATYPE(QList<Action>)
 Q_DECLARE_METATYPE(Action*)
 
 // tests for ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors)
