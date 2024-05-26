@@ -4,34 +4,55 @@
 
 
 void BigRealNumberTest::fromStdString_tests_data() {
-    // TODO добавить исключительные случаи
-    // TODO добавить незнач. разряды
     QTest::addColumn<QString>("inputString");
     QTest::addColumn<QList<int>>("expectedIntPrt");
     QTest::addColumn<QList<int>>("expectedFractPrt");
     QTest::addColumn<int>("expectedIntPrtLen");
     QTest::addColumn<int>("expectedFractPrtLen");
     QTest::addColumn<bool>("expectedIsNegative");
+    QTest::addColumn<std::optional<ActionBuildError>>("error");
 
-    QTest::addRow("simple_case") << "1.1" << QList<int>{1} << QList<int>{1} << 1 << 1 << false;
+
+    QTest::addRow("simple_case") << "1.1" << QList<int>{1} << QList<int>{1} << 1 << 1 << false << std::optional<ActionBuildError>{};
 
     QTest::addRow("max_length") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH)
                               << genIntPrt(MAX_LENGTH)
                               << genFractPrt(MAX_LENGTH)
-                              << MAX_LENGTH << MAX_LENGTH << true;
+                              << MAX_LENGTH << MAX_LENGTH << true << false;
 
-    QTest::addRow("min_length") << "0.0" << QList<int>{0} << QList<int>{0} << 0 << 0 << false;
+    QTest::addRow("min_length") << "0.0" << QList<int>{0} << QList<int>{0} << 0 << 0 << false << std::optional<ActionBuildError>{};
 
     QTest::addRow("negative_number") << "-123.456"
                                      << QList<int>{3, 2, 1}
                                      << QList<int>{4, 5, 6}
-                                     << 3 << 3 << true;
+                                     << 3 << 3 << true << std::optional<ActionBuildError>{};
 
     QTest::addRow("positive_number") << "123.456"
                                      << QList<int>{3, 2, 1}
                                      << QList<int>{4, 5, 6}
-                                     << 3 << 3 << false;
-  
+                                     << 3 << 3 << false << std::optional<ActionBuildError>{};
+
+    QTest::addRow("maximum_insignificant_digits_int_prt") << QString("0").repeated(999) + "1.1"
+                                                          << QList<int>{1} << QList<int>{1}
+                                                          << 1 << 1 << false << std::optional<ActionBuildError>{};
+
+    QTest::addRow("maximum_insignificant_digits_fract_prt") << "1.1" + QString("0").repeated(999)
+                                                            << QList<int>{1} << QList<int>{1}
+                                                            << 1 << 1 << false << std::optional<ActionBuildError>{};        
+
+    QTest::addRow("maximum_insignificant_digits_all_prt") << QString("0").repeated(999) 
+                                                              + "1.1" 
+                                                              + QString("0").repeated(999)
+                                                            << QList<int>{1} << QList<int>{1}
+                                                            << 1 << 1 << false << std::optional<ActionBuildError>{};                 
+    // исключительные случаи
+    QTest::addRow("no_int_prt") << "1." << QList<int>{1} << QList<int>{0} << 1 << 0 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT));
+    QTest::addRow("no_fract_prt") << ".1" << QList<int>{0} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT)); 
+    QTest::addRow("no_point") << "1 1" << QList<int>{1} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT));
+    QTest::addRow("wrong_int_length") << "1" + QString("0").repeated(1000) + ".1" 
+                                      << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>(ActionBuildError(INVALID_LENGTH));
+    QTest::addRow("wrong_fract_length") << "1." + QString("0").repeated(1000) + "1" 
+                                        << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>(ActionBuildError(INVALID_LENGTH));
 }
 
 void BigRealNumberTest::fromStdString_tests() {
@@ -41,9 +62,18 @@ void BigRealNumberTest::fromStdString_tests() {
     QFETCH(int, expectedIntPrtLen);
     QFETCH(int, expectedFractPrtLen);
     QFETCH(bool, expectedIsNegative);
+    QFETCH(std::optional<ActionBuildError>, error);
 
-    BigRealNumber result = BigRealNumber::fromStdString(inputString.toStdString());
+    bool hasError;
+    try {
+        BigRealNumber result = BigRealNumber::fromStdString(inputString.toStdString());
+    } catch (const ActionBuildError &e) {
+        hasError = true;
+        QVERIFY(error.has_value);
+        QCOMPARE(error.value(), e);
+    }
 
+    QCOMPARE(hasError, error.has_value());
     QCOMPARE(result.getIntPrtLen(), expectedIntPrtLen);
     QCOMPARE(result.getFractPrtLen(), expectedFractPrtLen);
     QCOMPARE(result.negative(), expectedIsNegative);
@@ -55,6 +85,7 @@ void BigRealNumberTest::fromStdString_tests() {
     for (int i = 0; i < expectedFractPrtLen; ++i) {
         QCOMPARE(result.getFractPrt()[i], expectedFractPrt[i]);
     }
+
 }
 
 void BigRealNumberTest::validateQString_tests_data() {

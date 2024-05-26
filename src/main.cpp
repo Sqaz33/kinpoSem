@@ -1,5 +1,5 @@
-#include "iostream"
-#include "locale"
+#include <iostream>
+#include <locale>
 
 #include "../include/BigRealNumber.h"
 #include "../include/Action.h"

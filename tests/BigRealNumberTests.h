@@ -2,9 +2,11 @@
 #define BRN_TESTS
 
 #include "../include/BigRealNumber.h"
+#include "../include/ActionError.h"
 #include "testInstruments.h"
 
 #include <string>
+#include <optional>
 
 #include <QStringBuilder>
 #include <QString>
@@ -15,6 +17,7 @@
 using std::string;
 using namespace test_instruments;
 
+Q_DECLARE_METATYPE(std::optional<ActionBuildError>);
 
 // tests for
 //  BigRealNumber BigRealNumber::fromStdString(const string& numb)

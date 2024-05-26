@@ -4,6 +4,10 @@ std::string ActionError::toStdString() const{
 	return errorTypeToStdString(e);
 }
 
+bool ActionError::operator==(const ActionError &other) const {
+	return e == other.e;
+}
+
 std::string ActionBuildError::toStdString() const {
 	return "Error building action on line "
 			+ std::to_string(xmlLineNumber)
@@ -14,6 +18,13 @@ void ActionBuildError::setXmlLineNumber(int ln) {
 	xmlLineNumber = ln;
 }
 
+bool ActionBuildError::operator==(const ActionError &other) const {
+	const ActionBuildError* otherBuildError = dynamic_cast<const ActionBuildError*>(&other);
+	if (otherBuildError) {
+		return ActionError::operator==(other) && xmlLineNumber == otherBuildError->xmlLineNumber;
+	}
+}
+
 std::string ActionPerformError::toStdString() const {
 	return "Error performing an action on a line "
 			+ std::to_string(actionNumber)
@@ -22,6 +33,13 @@ std::string ActionPerformError::toStdString() const {
 }
 void ActionPerformError::setActionNumber(int a) {
 	actionNumber = a;
+}
+
+bool ActionPerformError::operator==(const ActionError &other) const {
+	const ActionPerformError* otherPerformError = dynamic_cast<const ActionPerformError*>(&other);
+	if (otherPerformError) {
+		return ActionError::operator==(other) && actionNumber == otherPerformError->actionNumber;
+	}
 }
 
 std::string errorTypeToStdString(ActionErrorType e) {

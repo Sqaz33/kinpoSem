@@ -13,5 +13,6 @@ gen/
 x64/
 build/
 .vs/
+.vscode/
 CMakeFiles/
 Testing/

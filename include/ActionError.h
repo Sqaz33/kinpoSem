@@ -42,6 +42,8 @@ public:
      * @return std::string representation of the error.
      */
     virtual std::string toStdString() const;
+
+    virtual bool operator==(const ActionError &other) const;
 };
 
 /**
@@ -71,6 +73,8 @@ public:
      * @return std::string representation of the error.
      */
     std::string toStdString() const override;
+
+    bool operator==(const ActionError &other) const override;
 };
 
 /**
@@ -100,6 +104,8 @@ public:
      * @param[in] a Number of the Action object.
      */
     void setActionNumber(int a);
+
+    bool operator==(const ActionError &other) const override;
 };
 
 #endif // ACTION_ERROR_H
