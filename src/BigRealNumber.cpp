@@ -1,5 +1,18 @@
 #include "../include/BigRealNumber.h"
-
+//TODO: for tests
+BigRealNumber::BigRealNumber(std::vector<short> &intP, std::vector<short> &fractP, bool isNeg) {
+    intPrt = new short[MAX_LENGTH];
+    fractPrt = new short[MAX_LENGTH];
+    intPrtLen = intP.size();
+    fractPrtLen = fractP.size();
+    isNegative = isNeg;
+    for (int i = 0; i < intPrtLen; i++) {
+        intPrt[i] = intP.at(i);
+    }
+    for (int i = 0; i < fractPrtLen; i++) {
+        fractPrt[i] = fractP.at(i);
+    }
+}
 
 BigRealNumber::BigRealNumber(const BigRealNumber& p) {
     isNegative = p.isNegative;
@@ -19,12 +32,13 @@ BigRealNumber::BigRealNumber(const BigRealNumber& p) {
 
 BigRealNumber BigRealNumber::fromStdString(const string& numb) {
     if (!validateStdString(numb)) {
-        throw ActionBuildError(INVALID_OPERAND_FORMAT);
+        QRegExp rx ("-{0,1}\\d+\\.\\d+");
+        if (!rx.exactMatch(QString::fromStdString(numb))) {
+            throw ActionBuildError(INVALID_OPERAND_FORMAT);
+        }
     }
 
-    BigRealNumber n{};
-    n.intPrt = new short[MAX_LENGTH] {};
-    n.fractPrt = new short[MAX_LENGTH] {};
+    BigRealNumber n;
     n.isNegative = numb.at(0) == '-';
 
     // Получить индекс разделителя
@@ -39,6 +53,8 @@ BigRealNumber BigRealNumber::fromStdString(const string& numb) {
         throw ActionBuildError(INVALID_LENGTH);
     }
 
+    n.intPrt = new short[MAX_LENGTH] {};
+    n.fractPrt = new short[MAX_LENGTH] {};
     // Записать целую часть в обратном порядке
     int j = n.isNegative ? 1 : 0;
     for (int i = n.intPrtLen - 1; i >= 0; i--, j++) {

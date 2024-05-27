@@ -5,6 +5,10 @@
 #include <QStringBuilder>
 #include <QList>
 
+#include <vector>
+#include <algorithm>
+#include <iterator>
+
 namespace test_instruments {
     QString genQStrNumb_m1xp0x1(
         int intLen, int fractLen, int firstInt = 1, 
@@ -12,6 +16,7 @@ namespace test_instruments {
     );
     QList<int> genIntPrt(int length);
     QList<int> genFractPrt(int length);
+    std::vector<short> getVector(int length, short fillVal, bool isFract, short minDigit);
 }
 
 #endif

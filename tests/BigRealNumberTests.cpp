@@ -1,8 +1,8 @@
 #include "BigRealNumberTests.h"
 
-// TODO: добавить больше сложных тестов
-
-
+// TODO: добавить коммплексные тесты
+// TODO: добавить тесты на перенос разряда
+// TODO: добавить тесты для всех bool-ф-ций
 void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
     QTest::addColumn<QList<int>>("expectedIntPrt");
@@ -18,7 +18,7 @@ void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addRow("max_length") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH)
                               << genIntPrt(MAX_LENGTH)
                               << genFractPrt(MAX_LENGTH)
-                              << MAX_LENGTH << MAX_LENGTH << true << false;
+                              << MAX_LENGTH << MAX_LENGTH << true << std::optional<ActionBuildError>{};
 
     QTest::addRow("min_length") << "0.0" << QList<int>{0} << QList<int>{0} << 0 << 0 << false << std::optional<ActionBuildError>{};
 
@@ -32,27 +32,27 @@ void BigRealNumberTest::fromStdString_tests_data() {
                                      << QList<int>{4, 5, 6}
                                      << 3 << 3 << false << std::optional<ActionBuildError>{};
 
-    QTest::addRow("maximum_insignificant_digits_int_prt") << QString("0").repeated(999) + "1.1"
+    QTest::addRow("maximum_insignificant_digits_int_prt") << QString("0").repeated(MAX_LENGTH - 1) + "1.1"
                                                           << QList<int>{1} << QList<int>{1}
                                                           << 1 << 1 << false << std::optional<ActionBuildError>{};
 
-    QTest::addRow("maximum_insignificant_digits_fract_prt") << "1.1" + QString("0").repeated(999)
+    QTest::addRow("maximum_insignificant_digits_fract_prt") << "1.1" + QString("0").repeated(MAX_LENGTH - 1)
                                                             << QList<int>{1} << QList<int>{1}
                                                             << 1 << 1 << false << std::optional<ActionBuildError>{};        
 
-    QTest::addRow("maximum_insignificant_digits_all_prt") << QString("0").repeated(999) 
+    QTest::addRow("maximum_insignificant_digits_all_prt") << QString("0").repeated(MAX_LENGTH - 1) 
                                                               + "1.1" 
-                                                              + QString("0").repeated(999)
+                                                              + QString("0").repeated(MAX_LENGTH - 1)
                                                             << QList<int>{1} << QList<int>{1}
                                                             << 1 << 1 << false << std::optional<ActionBuildError>{};                 
     // исключительные случаи
-    QTest::addRow("no_int_prt") << "1." << QList<int>{1} << QList<int>{0} << 1 << 0 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT));
-    QTest::addRow("no_fract_prt") << ".1" << QList<int>{0} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT)); 
-    QTest::addRow("no_point") << "1 1" << QList<int>{1} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>(ActionBuildError(INVALID_OPERAND_FORMAT));
-    QTest::addRow("wrong_int_length") << "1" + QString("0").repeated(1000) + ".1" 
-                                      << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>(ActionBuildError(INVALID_LENGTH));
-    QTest::addRow("wrong_fract_length") << "1." + QString("0").repeated(1000) + "1" 
-                                        << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>(ActionBuildError(INVALID_LENGTH));
+    QTest::addRow("no_int_prt") << "1." << QList<int>{1} << QList<int>{0} << 1 << 0 << false << std::optional<ActionBuildError>{ActionBuildError(INVALID_OPERAND_FORMAT)};
+    QTest::addRow("no_fract_prt") << ".1" << QList<int>{0} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>{ActionBuildError(INVALID_OPERAND_FORMAT)}; 
+    QTest::addRow("no_point") << "1 1" << QList<int>{1} << QList<int>{1} << 0 << 1 << false << std::optional<ActionBuildError>{ActionBuildError(INVALID_OPERAND_FORMAT)};
+    QTest::addRow("wrong_int_length") << "1" + QString("0").repeated(MAX_LENGTH) + ".1" 
+                                      << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>{ActionBuildError(INVALID_LENGTH)};
+    QTest::addRow("wrong_fract_length") << "1." + QString("0").repeated(MAX_LENGTH) + "1" 
+                                        << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>{ActionBuildError(INVALID_LENGTH)};
 }
 
 void BigRealNumberTest::fromStdString_tests() {
@@ -64,12 +64,13 @@ void BigRealNumberTest::fromStdString_tests() {
     QFETCH(bool, expectedIsNegative);
     QFETCH(std::optional<ActionBuildError>, error);
 
-    bool hasError;
+    BigRealNumber result; 
+    bool hasError = false;
     try {
-        BigRealNumber result = BigRealNumber::fromStdString(inputString.toStdString());
+       result = BigRealNumber::fromStdString(inputString.toStdString());
     } catch (const ActionBuildError &e) {
         hasError = true;
-        QVERIFY(error.has_value);
+        QVERIFY(error.has_value());
         QCOMPARE(error.value(), e);
     }
 
@@ -85,7 +86,6 @@ void BigRealNumberTest::fromStdString_tests() {
     for (int i = 0; i < expectedFractPrtLen; ++i) {
         QCOMPARE(result.getFractPrt()[i], expectedFractPrt[i]);
     }
-
 }
 
 void BigRealNumberTest::validateQString_tests_data() {
@@ -98,16 +98,16 @@ void BigRealNumberTest::validateQString_tests_data() {
     QTest::addRow("positive_number") << "123.456" << true;
     QTest::addRow("negative_number") << "-123.456" << true;
     QTest::addRow("zero") << "0.0" << true;
-    QTest::addRow("max_int_part") << QString("1").repeated(1000) + ".0" << true;
-    QTest::addRow("max_fract_part") << "0." + QString("0").repeated(1000) << true;
+    QTest::addRow("max_int_part") << QString("1").repeated(MAX_LENGTH) + ".0" << true;
+    QTest::addRow("max_fract_part") << "0." + QString("0").repeated(MAX_LENGTH) << true;
 
     // Некорректные строки
     QTest::addRow("no_decimal_point") << "123456" << false;
     QTest::addRow("multiple_decimal_points") << "123.45.6" << false;
     QTest::addRow("invalid_character_in_integer_part") << "12a.456" << false;
     QTest::addRow("invalid_character_in_fractional_part") << "123.45b" << false;
-    QTest::addRow("too_long_integer_part") << QString("1").repeated(1001) + ".0" << false;
-    QTest::addRow("too_long_fractional_part") << "1." + QString("0").repeated(1001) << false;
+    QTest::addRow("too_long_integer_part") << QString("1").repeated(MAX_LENGTH + 1) + ".0" << false;
+    QTest::addRow("too_long_fractional_part") << "1." + QString("0").repeated(MAX_LENGTH + 1) << false;
     QTest::addRow("negative_with_invalid_character") << "-12a.456" << false;
     QTest::addRow("empty_string") << "" << false;
     QTest::addRow("only_decimal_point") << "." << false;
@@ -125,25 +125,56 @@ void BigRealNumberTest::validateQString_tests() {
 }
 
 void BigRealNumberTest::toStdString_tests_data() {
-    // TODO: строка должна выводится из brn
+    QTest::addColumn<std::vector<short>>("intPrt");
+    QTest::addColumn<std::vector<short>>("fractPrt");
+    QTest::addColumn<bool>("isNegative");
+    QTest::addColumn<QString>("expectedString");
 
-    QTest::addColumn<QString>("inputString");
-    QTest::addRow("simple_case") << "1.1";
+    QTest::addRow("simple_case") << std::vector<short>{1}
+                                 << std::vector<short>{1}
+                                 << true
+                                 << "-1.1";
 
+    QTest::addRow("max_int_length") << getVector(MAX_LENGTH, 0, false, 1)
+                                    << std::vector<short>{1}
+                                    << false
+                                    << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 1, false);
+                                 
+    QTest::addRow("max_fract_length") << std::vector<short>{1}
+                                      << getVector(MAX_LENGTH, 0, true, 1)
+                                      << false
+                                      << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 1, false);
+    QTest::addRow("max_length") << getVector(MAX_LENGTH, 0, false, 1)
+                                << getVector(MAX_LENGTH, 0, true, 1)
+                                << true
+                                << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, true);
 
-    QTest::addRow("max_length") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH);
-    QTest::addRow("min_length") << "0.0";
-    QTest::addRow("negative_number") << "-123.456";
-    QTest::addRow("positive_number") << "123.456";
+    QTest::addRow("min_length") << std::vector<short>{0} 
+                                << std::vector<short>{0} 
+                                << false 
+                                << "0.0";
+
+    QTest::addRow("negative_number") << std::vector<short>{3, 2, 1} 
+                                     << std::vector<short>{4, 5, 6} 
+                                     << true
+                                     << "-123.456";
+    
+    QTest::addRow("positive_number") << std::vector<short>{3, 2, 1} 
+                                     << std::vector<short>{4, 5, 6} 
+                                     << false
+                                     << "123.456";
 }
 
 void BigRealNumberTest::toStdString_tests() {
-    QFETCH(QString, inputString);
+    QFETCH(std::vector<short>, intPrt);
+    QFETCH(std::vector<short>, fractPrt);
+    QFETCH(bool, isNegative);
+    QFETCH(QString, expectedString);
 
-    BigRealNumber brn = BigRealNumber::fromStdString(inputString.toStdString());
+    BigRealNumber brn(intPrt, fractPrt, isNegative);
     QString resultString = QString::fromStdString(brn.toStdString());
-    qDebug() << inputString.left(5) << " --> "<< resultString.left(5);
-    QCOMPARE(resultString, inputString);
+    qDebug() << expectedString.left(5) << " --> "<< resultString.left(5);
+    QCOMPARE(resultString, expectedString);
 }
 
 void BigRealNumberTest::operatorAdd_tests_data() {
@@ -154,10 +185,24 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     QTest::addRow("simple_case") << "1.1" << "2.2" << "3.3";
 
 
-    QTest::addRow("max_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
-                                  << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
-                                  << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 2, 2, false);
-    QTest::addRow("min_operands") << "1.0" << "1.0" << "2.0";
+    QTest::addRow("max_length_int_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 1, false) 
+                                             << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 1, false) 
+                                             << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 2, false);
+                
+    QTest::addRow("max_length_fract_operands") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 1, false) 
+                                               << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 1, false) 
+                                               << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 2, false);
+                                                        
+
+    QTest::addRow("max_length_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
+                                         << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
+                                         << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 2, 2, false);
+    QTest::addRow("min_length_operands") << "1.0" << "1.0" << "2.0";
+
+    QTest::addRow("max_length_int_res") << genQStrNumb_m1xp0x1(MAX_LENGTH-1, 0, 9, 1, false) 
+                                        << genQStrNumb_m1xp0x1(MAX_LENGTH-1, 0, 1, 1, false) 
+                                        << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 2, false);
+    
     
     QTest::addRow("second_operand_len_more") << "0.0" << "0.01" << "0.01";
     QTest::addRow("first_operand_len_more") << "0.01" << "0.0" << "0.01";
@@ -167,6 +212,8 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-1.0";
     QTest::addRow("neg_neg_operands_neg_res") << "-1.0" << "-1.0" << "-2.0";
     QTest::addRow("null_res") << "1.0" << "-1.0" << "0.0";
+
+
 }
 
 void BigRealNumberTest::operatorAdd_tests() {
@@ -256,7 +303,7 @@ void BigRealNumberTest::operatorDiv_tests_data() {
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
 
-    QTest::addRow("simple_case") << "2.0" << "2.0" << "2.0";
+    QTest::addRow("simple_case") << "2.0" << "2.0" << "1.0";
     
 
     QTest::addRow("max_length_fract_res") << "1.0" 

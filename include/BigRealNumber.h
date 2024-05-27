@@ -7,6 +7,7 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
+#include <vector>
 #include "math.h"
 
 #include "ActionError.h"
@@ -36,7 +37,10 @@ public:
     const short* getIntPrt() const { return intPrt; }
     const short* getFractPrt() const { return fractPrt; }
     //=====================================================
-    
+    // TODO: constructor for tests
+    BigRealNumber(std::vector<short> &intP, std::vector<short> &fractP, bool isNeg);
+
+
     /**
      * @brief Copy constructor.
      * @param[in] p BRN object being copied.

@@ -27,4 +27,18 @@ namespace test_instruments {
         fractPrt.append(1);
         return fractPrt;
     }
+
+    std::vector<short> getVector(int length, short fillVal, bool isFract, short minDigit) {
+        std::vector<short> vec;
+        for (int i = 0; i < length; i++) {
+            vec.push_back(fillVal);
+        }
+        if (isFract) {
+            vec[length - 1] = minDigit;
+        } else {
+            vec[0] = minDigit;
+            std::reverse(vec.begin(), vec.end());
+        }
+        return vec;
+    }
 }

@@ -25,6 +25,12 @@ bool ActionBuildError::operator==(const ActionError &other) const {
 	}
 }
 
+ActionBuildError& ActionBuildError::operator=(const ActionBuildError &other) {
+	this->e = other.e;
+	this->xmlLineNumber = other.xmlLineNumber;
+	return *this;
+}
+
 std::string ActionPerformError::toStdString() const {
 	return "Error performing an action on a line "
 			+ std::to_string(actionNumber)

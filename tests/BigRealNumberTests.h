@@ -18,6 +18,8 @@ using std::string;
 using namespace test_instruments;
 
 Q_DECLARE_METATYPE(std::optional<ActionBuildError>);
+Q_DECLARE_METATYPE(std::vector<short>);
+
 
 // tests for
 //  BigRealNumber BigRealNumber::fromStdString(const string& numb)
@@ -34,7 +36,7 @@ Q_DECLARE_METATYPE(std::optional<ActionBuildError>);
 class BigRealNumberTest : public QObject {
     Q_OBJECT
 private slots:
-    // test BigRealNumber BigRealNumber::fromStdString(const string& numb)
+    // // test BigRealNumber BigRealNumber::fromStdString(const string& numb)
     void fromStdString_tests_data();
     void fromStdString_tests();
 

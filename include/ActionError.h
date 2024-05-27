@@ -28,7 +28,7 @@ std::string errorTypeToStdString(ActionErrorType e);
  * @brief Class representing an Action error.
  */
 class ActionError {
-private:
+protected:
     ActionErrorType e; /** @brief Error type. */
 public:
     /**
@@ -75,6 +75,8 @@ public:
     std::string toStdString() const override;
 
     bool operator==(const ActionError &other) const override;
+
+    ActionBuildError& operator=(const ActionBuildError &other);
 };
 
 /**
