@@ -495,6 +495,8 @@ void BigRealNumber::div(
     BigRealNumber ths = *this;
     ths.shiftNumber(dcp.fractPrtLen, false);
     dcp.shiftNumber(dcp.fractPrtLen, false);
+    ths.removeInsignDigits();
+    dcp.removeInsignDigits();
 
     BigRealNumber q; // Остаток
     BigRealNumber r; // Целая часть
@@ -627,7 +629,7 @@ void BigRealNumber::appendToInt(short number) {
 }
 
 bool BigRealNumber::appendToFract(short number, int ind) {
-    if (fractPrtLen + 1 > MAX_LENGTH || ind >= MAX_LENGTH) {
+    if (ind >= MAX_LENGTH) {
         return false;
     }
     fractPrt[ind] = number;

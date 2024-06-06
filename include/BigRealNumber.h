@@ -310,7 +310,7 @@ private:
      *        equivalent to the operator- 
      *        method in the public interface.
      * @see operator-
-     * @param[in] term2
+     * @param[in] subtr
      * @param[out] res
     */
     void sub(
@@ -323,7 +323,7 @@ private:
      *        equivalent to the operator*
      *        method in the public interface.
      * @see operator*
-     * @param[in] term2
+     * @param[in] tfac,
      * @param[out] res
     */
     void mul(
@@ -336,22 +336,22 @@ private:
      *        equivalent to the operator/
      *        method in the public interface
      * @see operator/
-     * @param[in] term2
+     * @param[in] divider
      * @param[out] res
     */
     void div(
-        const BigRealNumber& diver,
+        const BigRealNumber& divider,
         BigRealNumber& res
     ) const;
 
  /**
      * @brief Method for division with remainder.
-     * @param[in] diver Divisor.
+     * @param[in] divider Divisor.
      * @param[out] R Division result. 
      * @param[out] Q Remainder.
     */
     void divRemaind(
-        const BigRealNumber& diver,
+        const BigRealNumber& divider,
         BigRealNumber& R,
         BigRealNumber& Q
     ) const;
@@ -397,6 +397,7 @@ private:
     */
     void removeInsignDigits();
 
+    public:
     /**
      * @brief Method for shifting the entire number.
      * 

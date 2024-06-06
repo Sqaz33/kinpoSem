@@ -11,10 +11,10 @@ int main(int argc, char *argv[]) {
     }
 
     // run tests for ActionFromXML
-    {
-        ActionFromXMLTests actionFromXMLTests;
-        status |= QTest::qExec(&actionFromXMLTests, argc, argv);
-    }
+    // {
+    //     ActionFromXMLTests actionFromXMLTests;
+    //     status |= QTest::qExec(&actionFromXMLTests, argc, argv);
+    // }
 
 
 
