@@ -83,6 +83,8 @@ public:
      * 
      * numb - should only contain the following characters: digits {'-', ('0'-'9'), '.',}
      * 
+     * @note the function gets rid of insignificant digits in a number
+     * 
      * @return BRN object.
      * 
      * @exception ActionBuildError if the string representation numb of the number does not meet the requirements.

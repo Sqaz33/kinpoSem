@@ -24,67 +24,57 @@
  * @return Код завершения программы 
 */
 int main(int argc, char* argv[]) {
-	// setlocale(LC_ALL, "ru_RU.utf8");
-	// QList<ActionError> actionErrors;
-	// try {
-	// 	if (argc != 3) {
-	// 		throw runtime_error("The number of program input arguments is incorrect.");
-	// 	}
-	// 	string xmlPath(argv[1]);
-	// 	string txtPath(argv[2]);
+	setlocale(LC_ALL, "ru_RU.utf8");
+	QList<ActionError> actionErrors;
+	try {
+		if (argc != 3) {
+			throw runtime_error("The number of program input arguments is incorrect.");
+		}
+		string xmlPath(argv[1]);
+		string txtPath(argv[2]);
 
-	// 	// получить действия
-	// 	ActionsFromXML input(xmlPath, &actionErrors);
-	// 	const QHash<int, Action*>* actions = input.getActions();
+		// получить действия
+		ActionsFromXML input(xmlPath, &actionErrors);
+		const QHash<int, Action*>* actions = input.getActions();
 
-	// 	// произвести действия
-	// 	QList<string> results;
-	// 	QList<int> keys = actions->keys();
-	// 	qSort(keys.begin(), keys.end());
-	// 	for (int n : keys) {
-	// 		const Action* act = actions->value(n);
-	// 		try {
-	// 			string res = to_string(n)
-	// 						+ " "
-	// 						+ act->toStdString() 
-	// 						+ " "
-	// 						+ act->perform().toStdString()
-	// 						+ "\n";
-	// 			results.append(res);
-	// 		} catch (ActionPerformError& e) {
-	// 			e.setActionNumber(n);
-	// 			actionErrors.append(e);
-	// 		}
-	// 	}
+		// произвести действия
+		QList<string> results;
+		QList<int> keys = actions->keys();
+		qSort(keys.begin(), keys.end());
+		for (int n : keys) {
+			const Action* act = actions->value(n);
+			try {
+				string res = to_string(n)
+							+ " "
+							+ act->toStdString() 
+							+ " "
+							+ act->perform().toStdString()
+							+ "\n";
+				results.append(res);
+			} catch (ActionPerformError& e) {
+				e.setActionNumber(n);
+				actionErrors.append(e);
+			}
+		}
 
-	// 	QList<string> strErrors;
-	// 	for (ActionError e : actionErrors) {
-	// 		strErrors.append(e.toStdString());	
-	// 	}
-	// 	// вывести действия в файл
-	// 	StdStringToTxt output(txtPath);
-	// 	output.write(results, false);
-	// 	output.write(strErrors, true);
+		QList<string> strErrors;
+		for (ActionError e : actionErrors) {
+			strErrors.append(e.toStdString());	
+		}
+		// вывести действия в файл
+		StdStringToTxt output(txtPath);
+		output.write(results, false);
+		output.write(strErrors, true);
 
-	// 	cout << "Erroneous actions: " + to_string(actionErrors.size()) << endl;
+		cout << "Erroneous actions: " + to_string(actionErrors.size()) << endl;
 
-	// 	if (actionErrors.size()) {
-	// 		return 2;
-	// 	}
+		if (actionErrors.size()) {
+			return 2;
+		}
 
-	// 	return 0;
-	// } catch (const runtime_error& e) {
-	// 	puts(e.what());
-	// 	return 1;
-
-
-	// TODO:
-	QString str = "0.1" + QString("0").repeated(998) + "1";
-	BigRealNumber a = BigRealNumber::fromStdString(str.toStdString());
-	BigRealNumber b = BigRealNumber::fromStdString("0.1");
-	str = "1." + QString("0").repeated(998) + "1";
-	BigRealNumber res = BigRealNumber::fromStdString(str.toStdString());
-	BigRealNumber rs;
-	rs = a / b;
-	std::cout << (res == rs);                                            
+		return 0;
+	} catch (const runtime_error& e) {
+		puts(e.what());
+		return 1;
+	}
 }

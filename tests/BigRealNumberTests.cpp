@@ -2,8 +2,6 @@
 
 // TODO: добавить коммплексные тесты
 
-// TODO: добавить тесты на перенос разряда
-
 // TODO: добавить тесты для всех bool-ф-ций
 void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
@@ -55,6 +53,16 @@ void BigRealNumberTest::fromStdString_tests_data() {
                                       << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>{ActionBuildError(INVALID_LENGTH)};
     QTest::addRow("wrong_fract_len") << "1." + QString("0").repeated(MAX_LENGTH) + "1" 
                                         << QList<int>{1} << QList<int>{1} << 1 << 1 << false <<  std::optional<ActionBuildError>{ActionBuildError(INVALID_LENGTH)};
+
+    QTest::addRow("complex_number_1") << "12345.67890" 
+                                      << QList<int>{5, 4, 3, 2, 1} 
+                                      << QList<int>{6, 7, 8, 9} 
+                                      << 5 << 4 << false << std::optional<ActionBuildError>{};
+    QTest::addRow("complex_number_2") << "-9876.54321" 
+                                      << QList<int>{6, 7, 8, 9} 
+                                      << QList<int>{5, 4, 3, 2, 1} 
+                                      << 4 << 5 << true << std::optional<ActionBuildError>{};
+
 }
 
 void BigRealNumberTest::fromStdString_tests() {
@@ -117,6 +125,11 @@ void BigRealNumberTest::validateQString_tests_data() {
     QTest::addRow("only_decimal_point") << "." << false;
     QTest::addRow("only_minus") << "-" << false;
     QTest::addRow("minus_with_decimal_point") << "-." << false;
+
+    QTest::addRow("complex_valid_1") << "12345.67890" << true;
+    QTest::addRow("complex_valid_2") << "-9876.54321" << true;
+    QTest::addRow("complex_invalid_1") << "12.34.56" << false;
+    QTest::addRow("complex_invalid_2") << "12a34.56" << false;
 }
 
 void BigRealNumberTest::validateQString_tests() {
@@ -167,6 +180,15 @@ void BigRealNumberTest::toStdString_tests_data() {
                                      << std::vector<short>{4, 5, 6} 
                                      << false
                                      << "123.456";
+
+    QTest::addRow("complex_number_1") << std::vector<short>{5, 4, 3, 2, 1}
+                                      << std::vector<short>{6, 7, 8, 9, 0}
+                                      << false
+                                      << "12345.67890";
+    QTest::addRow("complex_number_2") << std::vector<short>{6, 7, 8, 9}
+                                      << std::vector<short>{5, 4, 3, 2, 1}
+                                      << true
+                                      << "-9876.54321";
 }
 
 void BigRealNumberTest::toStdString_tests() {
@@ -233,6 +255,8 @@ void BigRealNumberTest::operatorAdd_tests_data() {
                                                         + QString("9").repeated(MAX_LENGTH)
                                                     << "0." + QString("0").repeated(MAX_LENGTH-1) + "1" 
                                                     << "1" + QString("0").repeated(MAX_LENGTH-1) + ".0";
+    QTest::addRow("complex_add_1") << "123.456" << "789.012" << "912.468";
+    QTest::addRow("complex_add_2") << "-123.456" << "789.012" << "665.556";
 }
 
 void BigRealNumberTest::operatorAdd_tests() {
@@ -285,6 +309,9 @@ void BigRealNumberTest::operatorSub_tests_data() {
                                                  << QString("9").repeated(MAX_LENGTH-1) 
                                                     + "."
                                                     + QString("9").repeated(MAX_LENGTH);
+
+    QTest::addRow("complex_sub_1") << "789.012" << "123.456" << "665.556";
+    QTest::addRow("complex_sub_2") << "-123.456" << "-789.012" << "665.556";
 }
 
 void BigRealNumberTest::operatorSub_tests() {
@@ -339,6 +366,9 @@ void BigRealNumberTest::operatorMul_tests_data() {
                                             << QString("1").repeated(MAX_LENGTH)  
                                                 + "."  
                                                 + QString("1").repeated(MAX_LENGTH-1);
+
+    QTest::addRow("complex_mul_1") << "12.34" << "56.78" << "700.6652";
+    QTest::addRow("complex_mul_2") << "-12.34" << "56.78" << "-700.6652";
  }
  
 void BigRealNumberTest::operatorMul_tests() {
@@ -395,6 +425,8 @@ void BigRealNumberTest::operatorDiv_tests_data() {
                                      + "."
                                      + QString("0").repeated(MAX_LENGTH-2)
                                      + "1";
+    QTest::addRow("complex_div_1") << "100.0" << "4.0" << "25.0";
+    QTest::addRow("complex_div_2") << "-100.0" << "4.0" << "-25.0";
 }
 
 void BigRealNumberTest::operatorDiv_tests() {

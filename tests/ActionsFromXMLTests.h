@@ -8,14 +8,19 @@
 #include "../include/ActionError.h"
 #include "../include/BigRealNumber.h"
 
+#include <string>
+
 #include <QString>
 #include <QList>
 #include <QHash>
 #include <QtAlgorithms>
 
-Q_DECLARE_METATYPE(Action)
-Q_DECLARE_METATYPE(QList<Action>)
-Q_DECLARE_METATYPE(Action*)
+
+typedef QHash<int, Action> qh;
+
+Q_DECLARE_METATYPE(QList<ActionError>)
+Q_DECLARE_METATYPE(qh)
+
 
 // tests for ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors)
 class ActionFromXMLTests : public QObject {

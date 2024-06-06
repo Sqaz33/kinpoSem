@@ -93,7 +93,7 @@ public:
     std::string toStdString() const;
 
     // TODO: for test!!! //
-    bool operator==(const Action* other) const;
+    bool operator==(const Action& other) const;
     
     // TODO: for tests only //
     Action();

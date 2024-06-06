@@ -1,11 +1,11 @@
-<bigNumber>
+<operations>
     <operation>
+        <operator>mul</operator>
         <operand1>2.5</operand1>
-    	<operand2>3.7</operand2>
-    	<operator>mul</operator>
+        <operand2>3.7</operand2>
     </operation>
     <operation>
+        <operator>fact</operator>
         <operand1>5.0</operand1>
-    	<operator>fact</operator>
     </operation>
-</bigNumber>
+</operations>

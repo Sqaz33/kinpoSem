@@ -37,6 +37,9 @@ public:
      */
     ActionError(ActionErrorType e) : e(e) {};
 
+    //TODO: for tests
+    ActionError() : e(NO_OPER_E) {};
+
     /**
      * @brief Method to get the std::string representation of the error.
      * @return std::string representation of the error.
@@ -61,6 +64,12 @@ public:
      * @param[in] e Error type.
      */
     ActionBuildError(ActionErrorType e) : ActionError(e), xmlLineNumber(-1) {};
+    //TODO: for tests;
+    ActionBuildError() 
+    : 
+    xmlLineNumber(-1),
+    ActionError()
+    {};
 
     /**
      * @brief Setter for the line number in the XML file containing the erroneous action.
@@ -94,6 +103,12 @@ public:
      * @param[in] e Error type.
      */
     ActionPerformError(ActionErrorType e) : ActionError(e), actionNumber(-1) {};
+
+    ActionPerformError()
+    :
+    actionNumber(-1),
+    ActionError()
+    {};
 
     /**
      * @brief Method to get the std::string representation of the error.
