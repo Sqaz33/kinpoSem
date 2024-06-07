@@ -823,14 +823,15 @@ void BigRealNumberTest::operatorMoreEq_tests_data() {
     QTest::addRow("max_int_operands_second_more_eq") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
                                                      << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
                                                      << false;
-
     QTest::addRow("max_fract_operands_first_more_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
                                                       << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
                                                       << true;
+    //TODO: поправить похожие тесты
     QTest::addRow("max_fract_operands_second_more_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
                                                        << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
                                                        << false;
 
+    //TODO: добавить тест на максимальную длинну
     QTest::addRow("neg_neg_operand_first_abs_more_eq") << "-2.0" << "-1.0" << false;
     QTest::addRow("neg_neg_operand_second_abs_more_eq") << "-1.0" << "-2.0" << true;
     QTest::addRow("pos_neg_operand_first_abs_more_eq") << "1.0" << "-3.0" << true;
