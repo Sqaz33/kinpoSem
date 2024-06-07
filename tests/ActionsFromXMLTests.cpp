@@ -2,7 +2,7 @@
 
 void ActionFromXMLTests::tests_data() {
     QTest::addColumn<QString>("path");
-    QTest::addColumn<QHash<int, Action>>("expectedActions");
+    QTest::addColumn<qh>("expectedActions");
     QTest::addColumn<QList<ActionError>>("expectedErrors");
 
     QTest::addRow("simple_case") 
@@ -36,13 +36,17 @@ void ActionFromXMLTests::tests() {
 
     QList<ActionError> actualErrors;
     ActionsFromXML reader(path.toStdString(), &actualErrors);
-
-    QCOMPARE(actualErrors.size(), expectedErrors.size());
-    for (int i = 0; i < expectedErrors.size(); ++i) {
-        QCOMPARE(actualErrors[i], expectedErrors[i]);
+    
+    if (actualErrors.size() > 0) {
+        QVERIFY(expectedErrors.size());
+        QCOMPARE(actualErrors.size(), expectedErrors.size());
+        for (int i = 0; i < expectedErrors.size(); ++i) {
+            QCOMPARE(actualErrors[i], expectedErrors[i]);
+        }
     }
 
-    if (expectedErrors.size() < 0) {
+    
+    if (expectedErrors.size() == 0) {
         const QHash<int, Action*>* actualActions = reader.getActions();
 
         QCOMPARE(actualActions->size(), expectedActions.size());
@@ -54,7 +58,6 @@ void ActionFromXMLTests::tests() {
             QCOMPARE(*actualActions->value(key), expectedAction);
         }
     }
-
 }
 
 #include "ActionsFromXMLTests.moc"

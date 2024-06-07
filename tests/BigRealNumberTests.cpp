@@ -505,12 +505,12 @@ void BigRealNumberTest::operatorDiv_tests_data() {
     QTest::addRow("complex_div_1") << "100.0" << "4.0" << "25.0" << std::optional<ActionPerformError>{};
     QTest::addRow("complex_div_2") << "-100.0" << "4.0" << "-25.0" << std::optional<ActionPerformError>{};
 
-    QTest::addRow("int_overwlow_test") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 5, 0, false) 
+    QTest::addRow("int_overwlow") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 5, 0, false) 
                                        << "0.5"
                                        << "0.0" 
                                        << std::optional<ActionPerformError>{ActionPerformError(INTEGER_PART_OVERFLOW)};
 
-    QTest::addRow("int_overwlow_test") << "1.0"
+    QTest::addRow("div_by_zero") << "1.0"
                                         << "0.0"
                                         << "0.0" 
                                         << std::optional<ActionPerformError>{ActionPerformError(DIVISION_BY_ZERO)};
@@ -677,12 +677,12 @@ void BigRealNumberTest::operatorMore_tests_data() {
                                                   << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
                                                   << false;
 
-    QTest::addRow("max_fract_operands_first_more") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
-                                                   << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+    QTest::addRow("max_fract_operands_first_more") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false) 
+                                                   << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false)
                                                    << true;
 
-    QTest::addRow("max_fract_operands_second_more") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
-                                                    << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+    QTest::addRow("max_fract_operands_second_more") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false) 
+                                                    << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false)
                                                     << false;
 
     QTest::addRow("neg_neg_operand_first_abs_more") << "-2.0" << "-1.0" << false;
@@ -742,11 +742,11 @@ void BigRealNumberTest::operatorLess_tests_data() {
                                                   << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
                                                   << false;
 
-    QTest::addRow("max_fract_operands_first_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
-                                                   << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+    QTest::addRow("max_fract_operands_first_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false) 
+                                                   << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false)
                                                    << true;
-    QTest::addRow("max_fract_operands_second_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
-                                                    << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+    QTest::addRow("max_fract_operands_second_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false) 
+                                                    << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false)
                                                     << false;
 
     QTest::addRow("neg_neg_operand_first_abs_less") << "-1.0" << "-2.0" << false;
@@ -781,12 +781,16 @@ void BigRealNumberTest::operatorLessEq_tests_data() {
                                                      << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
                                                      << false;
 
-    QTest::addRow("max_fract_operands_first_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
-                                                      << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+    QTest::addRow("max_fract_operands_first_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false) 
+                                                      << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false)
                                                       << true;
-    QTest::addRow("max_fract_operands_second_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
-                                                       << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+    QTest::addRow("max_fract_operands_second_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 2, false) 
+                                                       << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false)
                                                        << false;
+    QTest::addRow("max_fract_operands_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false) 
+                                            << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1, false)
+                                            << true;
+
 
     QTest::addRow("neg_neg_operand_first_abs_less_eq") << "-1.0" << "-2.0" << false;
     QTest::addRow("neg_neg_operand_second_abs_less_eq") << "-2.0" << "-1.0" << true;
@@ -842,7 +846,5 @@ void BigRealNumberTest::operatorMoreEq_tests() {
     qDebug() << "(" << a.left(5) << " >= " << b.left(5) << ") = " << QString::number(r);
     QCOMPARE(r, res);
 }
-
-
 
 #include "BigRealNumberTests.moc"

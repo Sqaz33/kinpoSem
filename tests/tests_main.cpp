@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
         status |= QTest::qExec(&brnTests, argc, argv);
     }
 
-    // // run tests for ActionFromXML
+    // run tests for ActionFromXML
     // {
     //     ActionFromXMLTests actionFromXMLTests;
     //     status |= QTest::qExec(&actionFromXMLTests, argc, argv);
