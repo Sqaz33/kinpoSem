@@ -35,6 +35,10 @@ Q_DECLARE_METATYPE(std::optional<ActionPerformError>);
 //  BigRealNumber BigRealNumber::factorial() 
 //  bool BigRealNumber::operator==(const BigRealNumber& other)  
 //  bool BigRealNumber::operator>(const BigRealNumber& other)
+//  bool BigRealNumber::operator!=(const BigRealNumber& other)
+//  bool BigRealNumber::operator<(const BigRealNumber& other)
+//  bool BigRealNumber::operator<=(const BigRealNumber& other)
+//  bool BigRealNumber::operator>=(const BigRealNumber& other)
 class BigRealNumberTest : public QObject {
     Q_OBJECT
 private slots:
@@ -75,13 +79,28 @@ private slots:
     void factorial_tests();
 
     // test bool BigRealNumber::operator==(const BigRealNumber& other)  
-    void operatorEq_data();
-    void operatorEq();
+    void operatorEq_tests_data();
+    void operatorEq_tests();
 
-    
     // test bool BigRealNumber::operator>(const BigRealNumber& other) 
-    void operatorMore_data();
-    void operatorMore();
+    void operatorMore_tests_data();
+    void operatorMore_tests();
+
+    // test bool operator!=(const BigRealNumber &other)
+    void operatorNotEq_tests_data();
+    void operatorNotEq_tests();
+
+    // test bool operator<(const BigRealNumber &other)
+    void operatorLess_tests_data();
+    void operatorLess_tests();
+    
+    // test bool operator<=(const BigRealNumber &other)
+    void operatorLessEq_tests_data();
+    void operatorLessEq_tests();
+
+    // test bool operator>=(const BigRealNumber &other)
+    void operatorMoreEq_tests_data();
+    void operatorMoreEq_tests();
 };
 
 #endif

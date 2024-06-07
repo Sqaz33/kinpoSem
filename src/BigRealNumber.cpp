@@ -301,12 +301,12 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 BigRealNumber BigRealNumber::pow(BigRealNumber pw) const{
     if (pw.fractPrtLen) {
         throw ActionPerformError(
-            POW_WITH_FRACTIONAL_PART
+            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
         );
     }
     if (pw < 0) {
         throw ActionPerformError(
-           NEGATIVE_POS
+           OPERAND_LESS_ZERO_POW_FACT
         );
     }
     BigRealNumber res(1);
@@ -325,7 +325,7 @@ BigRealNumber BigRealNumber::factorial() const{
     bool isError = false;
     if (fractPrtLen) {
         throw ActionPerformError(
-            POW_WITH_FRACTIONAL_PART
+            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
         );
     }
     if (*this < 0) {

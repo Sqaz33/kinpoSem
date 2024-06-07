@@ -1,8 +1,5 @@
 #include "BigRealNumberTests.h"
 
-// TODO: добавить коммплексные тесты
-
-// TODO: добавить тесты для всех bool-ф-ций
 void BigRealNumberTest::fromStdString_tests_data() {
     QTest::addColumn<QString>("inputString");
     QTest::addColumn<QList<int>>("expectedIntPrt");
@@ -570,10 +567,8 @@ void BigRealNumberTest::pow_tests_data() {
                                                << std::optional<ActionPerformError>{};
     
 
-    QTest::addRow()
-
-
-
+    QTest::addRow("negative_pow") << "1.0" << "-1.0" << "0.0" << std::optional<ActionPerformError>{ActionPerformError(OPERAND_LESS_ZERO_POW_FACT)};
+    QTest::addRow("pow_with_fract") << "1.0" << "1.1" << "0.0" << std::optional<ActionPerformError>{ActionPerformError(OPERAND_WITH_FRACTIONAL_PART_POW_FACT)};
 }
 
 
@@ -581,34 +576,61 @@ void BigRealNumberTest::pow_tests() {
     QFETCH(QString, b);
     QFETCH(QString, p);
     QFETCH(QString, res);
+    QFETCH(std::optional<ActionPerformError>, expectedError);
 
+    bool hasError = false;
+    BigRealNumber r;
+    try {
+        BigRealNumber r = BigRealNumber::fromStdString(b.toStdString())
+                        .pow(BigRealNumber::fromStdString(p.toStdString()));
+        qDebug() << b.left(5) << " ** " << p.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
+    } catch (ActionPerformError &actualError) {
+        QVERIFY(expectedError.has_value());
+        QCOMPARE(actualError, expectedError.value());
+        hasError = true;
+    }
 
-    BigRealNumber r = BigRealNumber::fromStdString(b.toStdString())
-                      .pow(BigRealNumber::fromStdString(p.toStdString()));
-    qDebug() << b.left(5) << " ** " << p.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
-    QCOMPARE(QString::fromStdString(r.toStdString()), res);
+    if (hasError) {
+        QCOMPARE(r.toStdString(), res.toStdString());
+    }
 }
 
 void BigRealNumberTest::factorial_tests_data() {
     QTest::addColumn<QString>("f");
     QTest::addColumn<QString>("res");
+    QTest::addColumn<std::optional<ActionPerformError>>("expectedError");
 
-    QTest::addRow("simple_case") << "5.0" << "120.0";
+    QTest::addRow("simple_case") << "5.0" << "120.0" << std::optional<ActionPerformError>{};
+    
+    QTest::addRow("negative_fact") << "-1.0" << "0.0" << std::optional<ActionPerformError>{ActionPerformError(OPERAND_LESS_ZERO_POW_FACT)};
+    QTest::addRow("pow_with_fract") << "1.1" << "0.0" << std::optional<ActionPerformError>{ActionPerformError(OPERAND_WITH_FRACTIONAL_PART_POW_FACT)};
 }
 
 
 void BigRealNumberTest::factorial_tests() {
     QFETCH(QString, f);
     QFETCH(QString, res);
+    QFETCH(std::optional<ActionPerformError>, expectedError);
 
-    BigRealNumber r = BigRealNumber::fromStdString(f.toStdString()).factorial();
-    qDebug() << "fact(" << f.left(5) << ")" << " = " << QString::fromStdString(r.toStdString()).left(5);
-    QCOMPARE(QString::fromStdString(r.toStdString()), res);
+    bool hasError = false;
+    BigRealNumber r;
+    try {
+        BigRealNumber r = BigRealNumber::fromStdString(f.toStdString()).factorial();
+        qDebug() << "fact(" << f.left(5) << ")" << " = " << QString::fromStdString(r.toStdString()).left(5);
+    } catch (ActionPerformError &actualError) {
+        QVERIFY(expectedError.has_value());
+        QCOMPARE(actualError, expectedError.value());
+        hasError = true;
+    }
+
+    if (hasError) {
+        QCOMPARE(r.toStdString(), res.toStdString());
+    }
 }
 
 
 
-void BigRealNumberTest::operatorEq_data() {
+void BigRealNumberTest::operatorEq_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<bool>("res");
@@ -627,7 +649,7 @@ void BigRealNumberTest::operatorEq_data() {
 
 }
 
-void BigRealNumberTest::operatorEq() {
+void BigRealNumberTest::operatorEq_tests() {
     QFETCH(QString, a);
     QFETCH(QString, b);
     QFETCH(bool, res);
@@ -638,7 +660,7 @@ void BigRealNumberTest::operatorEq() {
 }
 
 
-void BigRealNumberTest::operatorMore_data() {
+void BigRealNumberTest::operatorMore_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<bool>("res");
@@ -669,7 +691,7 @@ void BigRealNumberTest::operatorMore_data() {
     QTest::addRow("neg_pos_operand_first_abs_more") << "-3.0" << "-2.0" << false;
 }
 
-void BigRealNumberTest::operatorMore() {
+void BigRealNumberTest::operatorMore_tests() {
     QFETCH(QString, a);
     QFETCH(QString, b);
     QFETCH(bool, res);
@@ -678,5 +700,149 @@ void BigRealNumberTest::operatorMore() {
     qDebug() << "(" << a.left(5) << " > " << b.left(5) << ") = " << QString::number(r);
     QCOMPARE(r, res);
 }
+
+void BigRealNumberTest::operatorNotEq_tests_data() {
+    QTest::addColumn<QString>("a");
+    QTest::addColumn<QString>("b");
+    QTest::addColumn<bool>("res");
+
+    QTest::addRow("simple_case_1") << "1.0" << "1.0" << false;
+    QTest::addRow("simple_case_2") << "2.0" << "1.0" << true;
+
+    QString buf = genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0);
+    QTest::addRow("max_len_int_operands") << buf << buf << false;
+    buf = genQStrNumb_m1xp0x1(0, MAX_LENGTH, 0, 1);
+    QTest::addRow("max_len_fract_operands") << buf << buf << false; 
+
+    QTest::addRow("neg_pos_operands") << "-1.0" << "1.0" << true;
+}
+
+void BigRealNumberTest::operatorNotEq_tests() {
+    QFETCH(QString, a);
+    QFETCH(QString, b);
+    QFETCH(bool, res);
+    bool r = BigRealNumber::fromStdString(a.toStdString()) 
+             != BigRealNumber::fromStdString(b.toStdString());
+    qDebug() << "(" << a.left(5) << " != " << b.left(5) << ") = " << QString::number(r);
+    QCOMPARE(r, res);
+}
+
+void BigRealNumberTest::operatorLess_tests_data() {
+    QTest::addColumn<QString>("a");
+    QTest::addColumn<QString>("b");
+    QTest::addColumn<bool>("res");
+
+    QTest::addRow("simple_case_1") << "1.0" << "2.0" << true;
+    QTest::addRow("simple_case_2") << "1.0" << "0.0" << false;
+
+    QTest::addRow("max_int_operands_first_less") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                 << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                 << true;
+    QTest::addRow("max_int_operands_second_less") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                  << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                  << false;
+
+    QTest::addRow("max_fract_operands_first_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
+                                                   << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+                                                   << true;
+    QTest::addRow("max_fract_operands_second_less") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
+                                                    << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+                                                    << false;
+
+    QTest::addRow("neg_neg_operand_first_abs_less") << "-1.0" << "-2.0" << false;
+    QTest::addRow("neg_neg_operand_second_abs_less") << "-2.0" << "-1.0" << true;
+    QTest::addRow("pos_neg_operand_first_abs_less") << "-3.0" << "1.0" << true;
+    QTest::addRow("neg_pos_operand_first_abs_less") << "-2.0" << "-3.0" << false;
+}
+
+void BigRealNumberTest::operatorLess_tests() {
+    QFETCH(QString, a);
+    QFETCH(QString, b);
+    QFETCH(bool, res);
+    bool r = BigRealNumber::fromStdString(a.toStdString()) 
+             < BigRealNumber::fromStdString(b.toStdString());
+    qDebug() << "(" << a.left(5) << " < " << b.left(5) << ") = " << QString::number(r);
+    QCOMPARE(r, res);
+}
+
+void BigRealNumberTest::operatorLessEq_tests_data() {
+    QTest::addColumn<QString>("a");
+    QTest::addColumn<QString>("b");
+    QTest::addColumn<bool>("res");
+
+    QTest::addRow("simple_case_1") << "1.0" << "2.0" << true;
+    QTest::addRow("simple_case_2") << "1.0" << "1.0" << true;
+    QTest::addRow("simple_case_3") << "2.0" << "1.0" << false;
+
+    QTest::addRow("max_int_operands_first_less_eq") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                    << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                    << true;
+    QTest::addRow("max_int_operands_second_less_eq") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                     << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                     << false;
+
+    QTest::addRow("max_fract_operands_first_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
+                                                      << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+                                                      << true;
+    QTest::addRow("max_fract_operands_second_less_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
+                                                       << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+                                                       << false;
+
+    QTest::addRow("neg_neg_operand_first_abs_less_eq") << "-1.0" << "-2.0" << false;
+    QTest::addRow("neg_neg_operand_second_abs_less_eq") << "-2.0" << "-1.0" << true;
+    QTest::addRow("pos_neg_operand_first_abs_less_eq") << "-3.0" << "1.0" << true;
+    QTest::addRow("neg_pos_operand_first_abs_less_eq") << "-2.0" << "-3.0" << false;
+}
+
+void BigRealNumberTest::operatorLessEq_tests() {
+    QFETCH(QString, a);
+    QFETCH(QString, b);
+    QFETCH(bool, res);
+    bool r = BigRealNumber::fromStdString(a.toStdString()) 
+             <= BigRealNumber::fromStdString(b.toStdString());
+    qDebug() << "(" << a.left(5) << " <= " << b.left(5) << ") = " << QString::number(r);
+    QCOMPARE(r, res);
+}
+
+void BigRealNumberTest::operatorMoreEq_tests_data() {
+    QTest::addColumn<QString>("a");
+    QTest::addColumn<QString>("b");
+    QTest::addColumn<bool>("res");
+
+    QTest::addRow("simple_case_1") << "2.0" << "1.0" << true;
+    QTest::addRow("simple_case_2") << "1.0" << "1.0" << true;
+    QTest::addRow("simple_case_3") << "0.0" << "1.0" << false;
+
+    QTest::addRow("max_int_operands_first_more_eq") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                    << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                    << true;
+    QTest::addRow("max_int_operands_second_more_eq") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                                     << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 0, false) 
+                                                     << false;
+
+    QTest::addRow("max_fract_operands_first_more_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false) 
+                                                      << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false)
+                                                      << true;
+    QTest::addRow("max_fract_operands_second_more_eq") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 0, false) 
+                                                       << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 0, false)
+                                                       << false;
+
+    QTest::addRow("neg_neg_operand_first_abs_more_eq") << "-2.0" << "-1.0" << false;
+    QTest::addRow("neg_neg_operand_second_abs_more_eq") << "-1.0" << "-2.0" << true;
+    QTest::addRow("pos_neg_operand_first_abs_more_eq") << "1.0" << "-3.0" << true;
+    QTest::addRow("neg_pos_operand_first_abs_more_eq") << "-3.0" << "-2.0" << false;
+}
+
+void BigRealNumberTest::operatorMoreEq_tests() {
+    QFETCH(QString, a);
+    QFETCH(QString, b);
+    QFETCH(bool, res);
+    bool r = BigRealNumber::fromStdString(a.toStdString()) 
+             >= BigRealNumber::fromStdString(b.toStdString());
+    qDebug() << "(" << a.left(5) << " >= " << b.left(5) << ") = " << QString::number(r);
+    QCOMPARE(r, res);
+}
+
+
 
 #include "BigRealNumberTests.moc"
