@@ -19,6 +19,8 @@ using namespace test_instruments;
 
 Q_DECLARE_METATYPE(std::optional<ActionBuildError>);
 Q_DECLARE_METATYPE(std::vector<short>);
+Q_DECLARE_METATYPE(std::optional<ActionPerformError>);
+
 
 
 // tests for
@@ -81,6 +83,5 @@ private slots:
     void operatorMore_data();
     void operatorMore();
 };
-
 
 #endif

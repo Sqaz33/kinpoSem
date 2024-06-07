@@ -207,66 +207,87 @@ void BigRealNumberTest::operatorAdd_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
     QTest::addColumn<QString>("res");
+    QTest::addColumn<std::optional<ActionBuildError>>("error");
 
     QTest::addRow("simple_case") << "1.1" << "2.2" << "3.3";
 
 
     QTest::addRow("max_len_int_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 1, false) 
                                              << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 1, false) 
-                                             << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 2, false);
+                                             << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 2, 2, false)
+                                             << std::optional<ActionPerformError>{};
                 
     QTest::addRow("max_len_fract_operands") << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 1, false) 
                                                << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 1, 1, false) 
-                                               << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 2, false);
+                                               << genQStrNumb_m1xp0x1(0, MAX_LENGTH, 2, 2, false)
+                                               <<std::optional<ActionPerformError>{};
                                                         
 
     QTest::addRow("max_len_operands") << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
                                          << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 1, 1, false)
-                                         << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 2, 2, false);
-    QTest::addRow("min_len_operands") << "1.0" << "1.0" << "2.0";
+                                         << genQStrNumb_m1xp0x1(MAX_LENGTH, MAX_LENGTH, 2, 2, false)
+                                         << std::optional<ActionPerformError>{};
+    QTest::addRow("min_len_operands") << "1.0" << "1.0" << "2.0" << std::optional<ActionPerformError>{};
 
     QTest::addRow("max_len_int_res") << genQStrNumb_m1xp0x1(MAX_LENGTH-1, 0, 9, 1, false) 
                                         << genQStrNumb_m1xp0x1(MAX_LENGTH-1, 0, 1, 1, false) 
-                                        << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 2, false);
+                                        << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 2, false) 
+                                        << std::optional<ActionPerformError>{};
     
     
-    QTest::addRow("second_operand_len_more") << "0.0" << "0.01" << "0.01";
-    QTest::addRow("first_operand_len_more") << "0.01" << "0.0" << "0.01";
+    QTest::addRow("second_operand_len_more") << "0.0" << "0.01" << "0.01" << std::optional<ActionPerformError>{};
+    QTest::addRow("first_operand_len_more") << "0.01" << "0.0" << "0.01" << std::optional<ActionPerformError>{};
 
-    QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "1.0";
-    QTest::addRow("neg_pos_operands_pos_res") << "-1.0" << "2.0" << "1.0";
-    QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-1.0";
-    QTest::addRow("neg_neg_operands_neg_res") << "-1.0" << "-1.0" << "-2.0";
-    QTest::addRow("null_res") << "1.0" << "-1.0" << "0.0";
+    QTest::addRow("pos_neg_operands_pos_res") << "2.0" << "-1.0" << "1.0" << std::optional<ActionPerformError>{};
+    QTest::addRow("neg_pos_operands_pos_res") << "-1.0" << "2.0" << "1.0" << std::optional<ActionPerformError>{};
+    QTest::addRow("neg_pos_operands_neg_res") << "-2.0" << "1.0" << "-1.0" << std::optional<ActionPerformError>{};
+    QTest::addRow("neg_neg_operands_neg_res") << "-1.0" << "-1.0" << "-2.0" << std::optional<ActionPerformError>{};
+    QTest::addRow("null_res") << "1.0" << "-1.0" << "0.0" << std::optional<ActionPerformError>{};
 
 
     QTest::addRow("max_int_with_carry") << QString("9").repeated(MAX_LENGTH-1) + ".9"
                                         << "0.1"
-                                        << QString("1") + QString("0").repeated(MAX_LENGTH-1) + ".0";
+                                        << QString("1") + QString("0").repeated(MAX_LENGTH-1) + ".0"
+                                        << std::optional<ActionPerformError>{};
 
-    QTest::addRow("small_fractional_carry") << "0.999" << "0.001" << "1.0";
+    QTest::addRow("small_fractional_carry") << "0.999" << "0.001" << "1.0" << std::optional<ActionPerformError>{};
     QTest::addRow("max_fract_carry") << "0." + QString("9").repeated(MAX_LENGTH) 
                                      << "0." + QString("0").repeated(MAX_LENGTH-1) + "1" 
-                                     << "1.0";
+                                     << "1.0"
+                                     << std::optional<ActionPerformError>{};
 
-    QTest::addRow("int_and_fraction_carry") << "999.999" << "0.002" << "1000.001";
+    QTest::addRow("int_and_fraction_carry") << "999.999" << "0.002" << "1000.001" << std::optional<ActionPerformError>{};
     QTest::addRow("max_int_and_fraction_len_carry") << QString("9").repeated(MAX_LENGTH-1) 
                                                         + "."  
                                                         + QString("9").repeated(MAX_LENGTH)
                                                     << "0." + QString("0").repeated(MAX_LENGTH-1) + "1" 
-                                                    << "1" + QString("0").repeated(MAX_LENGTH-1) + ".0";
-    QTest::addRow("complex_add_1") << "123.456" << "789.012" << "912.468";
-    QTest::addRow("complex_add_2") << "-123.456" << "789.012" << "665.556";
+                                                    << "1" + QString("0").repeated(MAX_LENGTH-1) + ".0"
+                                                    << std::optional<ActionPerformError>{};
+    QTest::addRow("complex_add_1") << "123.456" << "789.012" << "912.468" << std::optional<ActionPerformError>{};
+    QTest::addRow("complex_add_2") << "-123.456" << "789.012" << "665.556" << std::optional<ActionPerformError>{};
+
+    QTest::addRow("complex_add_2") << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 1, 0, false) 
+                                   << genQStrNumb_m1xp0x1(MAX_LENGTH, 0, 9, 0, false) 
+                                   << "0.0" 
+                                   << std::optional<ActionPerformError>{ActionPerformError(INTEGER_PART_OVERFLOW)};
+
 }
 
 void BigRealNumberTest::operatorAdd_tests() {
     QFETCH(QString, a);
     QFETCH(QString, b);
     QFETCH(QString, res);
+    QFETCH(std::optional<ActionBuildError>, error);
 
-    BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
-                      + BigRealNumber::fromStdString(b.toStdString());
-    qDebug() << a.left(5) << " + " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
+    try {
+        BigRealNumber r = BigRealNumber::fromStdString(a.toStdString())
+                    + BigRealNumber::fromStdString(b.toStdString());
+        qDebug() << a.left(5) << " + " << b.left(5) << " = " << QString::fromStdString(r.toStdString()).left(5);
+    } catch (ActionPerformError &e) {
+
+    }
+
+    if (error.)
     QCOMPARE(r.toStdString(), res.toStdString());
 }
 
