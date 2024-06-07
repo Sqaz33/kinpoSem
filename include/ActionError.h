@@ -13,7 +13,8 @@ enum ActionErrorType {
     INVALID_OPERAND_FORMAT, // Error creating object
     INVALID_LENGTH, // Error creating or performing
     DIVISION_BY_ZERO, // Error performing
-    OPERAND_WITH_FRACTIONAL_PART_POW_FACT, // Error performing
+    POW_WITH_FRACTIONAL_PART, // Error performing
+    NEGATIVE_POS, // Error performing
     OPERAND_LESS_ZERO_POW_FACT, // Error performing
     INTEGER_PART_OVERFLOW // Error performing 
 };

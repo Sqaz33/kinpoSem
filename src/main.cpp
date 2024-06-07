@@ -24,6 +24,13 @@
  * @return Код завершения программы 
 */
 int main(int argc, char* argv[]) {
+	QString str = "5" + QString("0").repeated(999) + ".1";
+	BigRealNumber a = BigRealNumber::fromStdString(str.toStdString());
+	BigRealNumber b = BigRealNumber::fromStdString("0.5");
+	BigRealNumber res;
+	res = a / b;
+
+	return 0;
 	setlocale(LC_ALL, "ru_RU.utf8");
 	QList<ActionError> actionErrors;
 	try {

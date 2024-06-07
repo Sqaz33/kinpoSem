@@ -4,17 +4,17 @@
 
 int main(int argc, char *argv[]) {
     int status = 0;
-    // // run tests for BigRealNumber
-    // {
-    //     BigRealNumberTest brnTests;
-    //     status |= QTest::qExec(&brnTests, argc, argv);
-    // }
-
-    // run tests for ActionFromXML
+    // run tests for BigRealNumber
     {
-        ActionFromXMLTests actionFromXMLTests;
-        status |= QTest::qExec(&actionFromXMLTests, argc, argv);
+        BigRealNumberTest brnTests;
+        status |= QTest::qExec(&brnTests, argc, argv);
     }
+
+    // // run tests for ActionFromXML
+    // {
+    //     ActionFromXMLTests actionFromXMLTests;
+    //     status |= QTest::qExec(&actionFromXMLTests, argc, argv);
+    // }
 
 
 

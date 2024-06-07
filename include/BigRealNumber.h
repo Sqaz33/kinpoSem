@@ -73,15 +73,15 @@ public:
      * 
      * Sign: number is negative -> numb[0] == '-', number is positive -> numb[0] - digit of the integer part.
      * 
-     * Integer_part: max(length) = 1000, min(length) - 1. 
+     * Integer_part: max(length) = 1000, min(length) = 1. 
      * 
      * Separator: '.' character.
      * 
-     * Fractional_part: max(length) = 1000, min(length) - 1. 
+     * Fractional_part: max(length) = 1000, min(length) = 1. 
      * 
-     * Fractional and integer parts should only contain digit characters (0-9).
+     * Fractional and integer parts should only contain digit characters ('0'...'9').
      * 
-     * numb - should only contain the following characters: digits {'-', ('0'-'9'), '.',}
+     * numb - should only contain the following characters: {'-', '0'...'9', '.',}
      * 
      * @note the function gets rid of insignificant digits in a number
      * 

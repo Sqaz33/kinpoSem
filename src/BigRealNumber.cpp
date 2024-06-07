@@ -301,12 +301,12 @@ bool BigRealNumber::operator>=(const BigRealNumber& other) const {
 BigRealNumber BigRealNumber::pow(BigRealNumber pw) const{
     if (pw.fractPrtLen) {
         throw ActionPerformError(
-            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
+            POW_WITH_FRACTIONAL_PART
         );
     }
     if (pw < 0) {
         throw ActionPerformError(
-            OPERAND_LESS_ZERO_POW_FACT
+           NEGATIVE_POS
         );
     }
     BigRealNumber res(1);
@@ -325,7 +325,7 @@ BigRealNumber BigRealNumber::factorial() const{
     bool isError = false;
     if (fractPrtLen) {
         throw ActionPerformError(
-            OPERAND_WITH_FRACTIONAL_PART_POW_FACT
+            POW_WITH_FRACTIONAL_PART
         );
     }
     if (*this < 0) {
@@ -623,7 +623,7 @@ short BigRealNumber::attachArrays(
 
 void BigRealNumber::appendToInt(short number) {
     if (intPrtLen + 1 > MAX_LENGTH) {
-        throw ActionPerformError(INVALID_LENGTH);
+        throw ActionPerformError(INTEGER_PART_OVERFLOW);
     }
     intPrt[intPrtLen++] = number;
 }
@@ -652,7 +652,7 @@ void BigRealNumber::shiftNumber(int shift, bool toRight) {
         if (intPrtLen || !toRight) {
             if (!toRight) {
                 if (intPrtLen + 1 > MAX_LENGTH) {
-                    throw ActionPerformError(INVALID_LENGTH);
+                    throw ActionPerformError(INTEGER_PART_OVERFLOW);
                 }
                 intPrtLen++;
             }
