@@ -15,6 +15,11 @@ using namespace std;
 
 /**
  * @brief Class for loading operations from an XML file.
+ *
+ * The ActionsFromXML class is responsible for reading and parsing an XML file
+ * that contains a list of operations. It extracts the relevant data to create
+ * Action objects and stores them in a hash table. This class is designed to
+ * ignore any XML tags other than those specifically defined for operations.
 */
 class ActionsFromXML {
 public:

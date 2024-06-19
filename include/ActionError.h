@@ -38,7 +38,7 @@ public:
      */
     ActionError(ActionErrorType e) : e(e) {};
 
-    //TODO: for tests
+    //TODO: for tests only
     ActionError() : e(NO_OPER_E) {};
 
     /**
@@ -65,7 +65,7 @@ public:
      * @param[in] e Error type.
      */
     ActionBuildError(ActionErrorType e) : ActionError(e), xmlLineNumber(-1) {};
-    //TODO: for tests;
+    //TODO: for tests only
     ActionBuildError() 
     : 
     xmlLineNumber(-1),
@@ -105,6 +105,7 @@ public:
      */
     ActionPerformError(ActionErrorType e) : ActionError(e), actionNumber(-1) {};
 
+    //TODO: for tests only
     ActionPerformError()
     :
     actionNumber(-1),

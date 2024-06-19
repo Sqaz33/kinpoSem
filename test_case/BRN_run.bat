@@ -1,1 +1,0 @@
-BRN.exe test.xml test.txt

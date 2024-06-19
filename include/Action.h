@@ -68,7 +68,7 @@ std::string stdStringFromOper(Operation oper);
  * --------------------
  *
 */
-class Action {
+class Action { 
 public:
     /**
      * @brief Action constructor.
@@ -92,10 +92,10 @@ public:
     */
     std::string toStdString() const;
 
-    // TODO: for test!!! //
+    // TODO: for tests only 
     bool operator==(const Action& other) const;
     
-    // TODO: for tests only //
+    // TODO: for tests only 
     Action();
 private:
     BigRealNumber term1; /**@brief First operand.*/

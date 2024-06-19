@@ -4,6 +4,7 @@
 *.txt
 *.bkp
 
+Makefile
 !CMakeLists.txt
 
 .idea/
@@ -16,3 +17,5 @@ build/
 .vscode/
 CMakeFiles/
 Testing/
+debug/
+release/
