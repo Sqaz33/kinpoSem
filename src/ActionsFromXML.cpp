@@ -67,7 +67,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					}
 				}
 			}
-			if (oper == NO_OPER) {
+			if (oper == NO_OPER && !actionErrors->contains(ActionBuildError(NO_OPER_E))) {
 				isError = true;
 				ActionBuildError e(NO_OPER_E);
 				e.setXmlLineNumber(reader.lineNumber());

@@ -43,7 +43,7 @@ Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* 
 	this->term2 = term2 == nullptr ? BigRealNumber(0) : *term2;
 	termCount = term2 == nullptr ? 1 : 2;
 	if (!checkArity()) {
-		throw ActionBuildError(NO_OPER_E);
+		throw ActionBuildError(INVALID_ARITY);
 	}
 }
 

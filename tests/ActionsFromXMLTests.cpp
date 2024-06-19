@@ -38,13 +38,11 @@ void ActionFromXMLTests::tests() {
     ActionsFromXML reader(path.toStdString(), &actualErrors);
     
     if (actualErrors.size() > 0) {
-        QVERIFY(expectedErrors.size());
         QCOMPARE(actualErrors.size(), expectedErrors.size());
         for (int i = 0; i < expectedErrors.size(); ++i) {
             QCOMPARE(actualErrors[i], expectedErrors[i]);
         }
     }
-
     
     if (expectedErrors.size() == 0) {
         const QHash<int, Action*>* actualActions = reader.getActions();
@@ -55,7 +53,9 @@ void ActionFromXMLTests::tests() {
             int key = it.key();
             Action expectedAction = it.value();
             QVERIFY(actualActions->contains(key));
-            QCOMPARE(*actualActions->value(key), expectedAction);
+            if (actualActions->contains(key)) {
+                QCOMPARE(*actualActions->value(key), expectedAction);
+            }
         }
     }
 }

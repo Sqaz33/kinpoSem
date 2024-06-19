@@ -12,7 +12,7 @@ cmake-build-debug/
 out/
 gen/
 x64/
-build/
+build*/
 .vs/
 .vscode/
 CMakeFiles/
