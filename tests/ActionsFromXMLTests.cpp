@@ -6,7 +6,7 @@ void ActionFromXMLTests::tests_data() {
     QTest::addColumn<QList<ActionError>>("expectedErrors");
 
     QTest::addRow("simple_case") 
-        << "../../../tests/xml/simple_case_test.xml"
+        << "../../../../../tests/xml/simple_case_test.xml"
         << QHash<int, Action>{
             {1, Action(MUL, &BigRealNumber::fromStdString("2.5"), &BigRealNumber::fromStdString("3.7"))},
             {2, Action(FACT, &BigRealNumber::fromStdString("5.0"))}
@@ -14,17 +14,17 @@ void ActionFromXMLTests::tests_data() {
         << QList<ActionError>{};
 
     QTest::addRow("invalid_arity")
-        << "../../../tests/xml/invalid_arity_test.xml"
+        << "../../../../../tests/xml/invalid_arity_test.xml"
         << QHash<int, Action>{}
         << QList<ActionError>{ActionBuildError(INVALID_ARITY)};
 
     QTest::addRow("unknown_operator")
-        << "../../../tests/xml/unknown_operator_test.xml"
+        << "../../../../../tests/xml/unknown_operator_test.xml"
         << QHash<int, Action>{}
         << QList<ActionError>{ActionBuildError(NO_OPER_E)};
 
     QTest::addRow("missing_operand")
-        << "../../../tests/xml/missing_operand_test.xml"
+        << "../../../../../tests/xml/missing_operand_test.xml"
         << QHash<int, Action>{}
         << QList<ActionError>{ActionBuildError(INVALID_ARITY)};
 }

@@ -46,6 +46,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					} catch (ActionBuildError& e) {
 						isError = true;
 						e.setXmlLineNumber(reader.lineNumber());
+						count++;
 						actionErrors->append(e);
 					}
 				} else if (reader.name() == "operand2") {
@@ -55,6 +56,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					} catch (ActionBuildError& e) {
 						isError = true;
 						e.setXmlLineNumber(reader.lineNumber());
+						count++;
 						actionErrors->append(e);
 					}
 				} else if (reader.name() == "operator") {
@@ -63,6 +65,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 						isError = true;
 						ActionBuildError e(NO_OPER_E);
 						e.setXmlLineNumber(reader.lineNumber());
+						count++;
 						actionErrors->append(e);
 					}
 				}
@@ -71,12 +74,14 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 				isError = true;
 				ActionBuildError e(NO_OPER_E);
 				e.setXmlLineNumber(reader.lineNumber());
+				count++;
 				actionErrors->append(e);
 			}
 			else if (tCount != 1 && tCount != 2) {
 				isError = true;
 				ActionBuildError e(INVALID_ARITY);
 				e.setXmlLineNumber(reader.lineNumber());
+				count++;
 				actionErrors->append(e);
 			}
 

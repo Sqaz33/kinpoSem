@@ -1,7 +1,25 @@
 <operations>
     <operation>
+        <operator>unknown</operator>
+        <operand1>5.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+    <operation>
         <operator>fact</operator>
         <operand1>5.0</operand1>
         <operand2>2.0</operand2>
+    </operation>
+    <operation>
+        <operator>add</operator>
+        <operand1>5.0</operand1>
+    </operation>
+   <operation>
+        <operator>mul</operator>
+        <operand1>2.5</operand1>
+        <operand2>3.7</operand2>
+    </operation>
+    <operation>
+        <operator>fact</operator>
+        <operand1>5.0</operand1>
     </operation>
 </operations>

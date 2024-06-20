@@ -58,8 +58,12 @@ int main(int argc, char* argv[]) {
 		}
 
 		QList<string> strErrors;
+		int eNumb = 1;
 		for (ActionError e : actionErrors) {
-			strErrors.append(e.toStdString());	
+			while (keys.contains(eNumb)) {
+				eNumb++;
+			}
+			strErrors.append(QString::number(eNumb++).toStdString() + " " + e.toStdString() + "\n");	
 		}
 		// вывести действия в файл
 		StdStringToTxt output(txtPath);
