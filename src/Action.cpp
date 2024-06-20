@@ -3,7 +3,7 @@
 Operation operFromStdString(const string& oper) {
 	unordered_map<string, Operation> stringToOper{
 		{"add", ADD},
-		{"subt", SUBT},
+		{"sub", SUB},
 		{"mul", MUL},
 		{"div", DIV},
 		{"pow", POW},
@@ -21,7 +21,7 @@ Operation operFromStdString(const string& oper) {
 string stdStringFromOper(Operation oper) {
 	unordered_map<Operation, string> operToString{
 		{ADD, "add"},
-		{SUBT, "subt"},
+		{SUB, "sub"},
 		{MUL, "mul"},
 		{DIV, "div"},
 		{POW, "pow"},
@@ -63,7 +63,7 @@ BigRealNumber Action::perform() const {
 		case ADD:
 			rs = term1 + term2;
 			break;
-		case SUBT:
+		case SUB:
 			rs = term1 - term2;
 			break;
 		case MUL:

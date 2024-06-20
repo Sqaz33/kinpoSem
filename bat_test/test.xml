@@ -94,91 +94,91 @@
     <!-- sub -->
     <!-- simple_case -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>3.3</operand1>
         <operand2>1.1</operand2>
     </operation>
 
     <!-- min_operands -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- second_operand_len_more -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>0.0</operand1>
         <operand2>0.01</operand2>
     </operation>
 
     <!-- first_operand_len_more -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>0.01</operand1>
         <operand2>0.0</operand2>
     </operation>
 
     <!-- pos_neg_operands_pos_res -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>2.0</operand1>
         <operand2>-1.0</operand2>
     </operation>
 
     <!-- neg_pos_operands_neg_res -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>-1.0</operand1>
         <operand2>2.0</operand2>
     </operation>
 
     <!-- neg_pos_operands_neg_res (duplicate test) -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>-2.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- neg_neg_operands_pow_res -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>-1.0</operand1>
         <operand2>-2.0</operand2>
     </operation>
 
     <!-- pos_pos_operand_null_res -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- small_fractional_carry -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>1.0</operand1>
         <operand2>0.001</operand2>
     </operation>
 
     <!-- int_and_fract_carry -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>1000.001</operand1>
         <operand2>0.002</operand2>
     </operation>
 
     <!-- complex_sub_1 -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>789.012</operand1>
         <operand2>123.456</operand2>
     </operation>
 
     <!-- complex_sub_2 -->
     <operation>
-        <operator>subt</operator>
+        <operator>sub</operator>
         <operand1>-123.456</operand1>
         <operand2>-789.012</operand2>
     </operation>

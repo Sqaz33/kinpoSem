@@ -16,7 +16,7 @@
 */
 enum Operation {
     ADD,
-    SUBT,
+    SUB,
     MUL,
     DIV,
     POW,
