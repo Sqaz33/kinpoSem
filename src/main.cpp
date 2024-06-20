@@ -35,14 +35,14 @@ int main(int argc, char* argv[]) {
 
 		// получить действия
 		ActionsFromXML input(xmlPath, &actionErrors);
-		const QHash<int, Action*>* actions = input.getActions();
+		QHash<int, Action*> actions(*input.getActions());
 
 		// произвести действия
 		QList<string> results;
-		QList<int> keys = actions->keys();
+		QList<int> keys = actions.keys();
 		qSort(keys.begin(), keys.end());
 		for (int n : keys) {
-			const Action* act = actions->value(n);
+			const Action* act = actions.value(n);
 			try {
 				string res = to_string(n)
 							+ " "
@@ -54,6 +54,7 @@ int main(int argc, char* argv[]) {
 			} catch (ActionPerformError& e) {
 				e.setActionNumber(n);
 				actionErrors.append(e);
+				actions.remove(n);
 			}
 		}
 
