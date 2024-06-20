@@ -628,8 +628,6 @@ void BigRealNumberTest::factorial_tests() {
     }
 }
 
-
-
 void BigRealNumberTest::operatorEq_tests_data() {
     QTest::addColumn<QString>("a");
     QTest::addColumn<QString>("b");
@@ -645,8 +643,6 @@ void BigRealNumberTest::operatorEq_tests_data() {
     QTest::addRow("max_len_fract_operands") << buf << buf << true; 
 
     QTest::addRow("neg_pos_operands") << "-1.0" << "1.0" << false;
-
-
 }
 
 void BigRealNumberTest::operatorEq_tests() {

@@ -1,0 +1,625 @@
+<operations>
+    <!-- add -->
+    <!-- simple_case -->
+    <operation>
+        <operator>add</operator>
+        <operand1>1.1</operand1>
+        <operand2>2.2</operand2>
+    </operation>
+
+    <!-- min_len_operands -->
+    <operation>
+        <operator>add</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- second_operand_len_more -->
+    <operation>
+        <operator>add</operator>
+        <operand1>0.0</operand1>
+        <operand2>0.01</operand2>
+    </operation>
+
+    <!-- first_operand_len_more -->
+    <operation>
+        <operator>add</operator>
+        <operand1>0.01</operand1>
+        <operand2>0.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operands_pos_res -->
+    <operation>
+        <operator>add</operator>
+        <operand1>2.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_pos_res -->
+    <operation>
+        <operator>add</operator>
+        <operand1>-1.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_neg_res -->
+    <operation>
+        <operator>add</operator>
+        <operand1>-2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operands_neg_res -->
+    <operation>
+        <operator>add</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- null_res -->
+    <operation>
+        <operator>add</operator>
+        <operand1>1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- small_fractional_carry -->
+    <operation>
+        <operator>add</operator>
+        <operand1>0.999</operand1>
+        <operand2>0.001</operand2>
+    </operation>
+
+    <!-- int_and_fraction_carry -->
+    <operation>
+        <operator>add</operator>
+        <operand1>999.999</operand1>
+        <operand2>0.002</operand2>
+    </operation>
+
+    <!-- complex_add_1 -->
+    <operation>
+        <operator>add</operator>
+        <operand1>123.456</operand1>
+        <operand2>789.012</operand2>
+    </operation>
+
+    <!-- complex_add_2 -->
+    <operation>
+        <operator>add</operator>
+        <operand1>-123.456</operand1>
+        <operand2>789.012</operand2>
+    </operation>
+
+    <!-- sub -->
+    <!-- simple_case -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>3.3</operand1>
+        <operand2>1.1</operand2>
+    </operation>
+
+    <!-- min_operands -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- second_operand_len_more -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>0.0</operand1>
+        <operand2>0.01</operand2>
+    </operation>
+
+    <!-- first_operand_len_more -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>0.01</operand1>
+        <operand2>0.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operands_pos_res -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>2.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_neg_res -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>-1.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_neg_res (duplicate test) -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>-2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operands_pow_res -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+
+    <!-- pos_pos_operand_null_res -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- small_fractional_carry -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>1.0</operand1>
+        <operand2>0.001</operand2>
+    </operation>
+
+    <!-- int_and_fract_carry -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>1000.001</operand1>
+        <operand2>0.002</operand2>
+    </operation>
+
+    <!-- complex_sub_1 -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>789.012</operand1>
+        <operand2>123.456</operand2>
+    </operation>
+
+    <!-- complex_sub_2 -->
+    <operation>
+        <operator>subt</operator>
+        <operand1>-123.456</operand1>
+        <operand2>-789.012</operand2>
+    </operation>
+
+    <!-- mul -->
+        <!-- simple_case_1 -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>2.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>0.1</operand1>
+        <operand2>0.1</operand2>
+    </operation>
+
+    <!-- null_pos_operands_null_res -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>0.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- pos_null_operands_null_res -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>1.0</operand1>
+        <operand2>0.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operands_neg_res -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_neg_res -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>-1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operands_pos_res -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- small_fractional_carry -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>0.9</operand1>
+        <operand2>0.9</operand2>
+    </operation>
+
+    <!-- int_and_fraction_carry -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>99.9</operand1>
+        <operand2>0.1</operand2>
+    </operation>
+
+    <!-- complex_mul_1 -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>12.34</operand1>
+        <operand2>56.78</operand2>
+    </operation>
+
+    <!-- complex_mul_2 -->
+    <operation>
+        <operator>mul</operator>
+        <operand1>-12.34</operand1>
+        <operand2>56.78</operand2>
+    </operation>
+
+    <!-- div -->
+        <!-- simple_case -->
+    <operation>
+        <operator>div</operator>
+        <operand1>2.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- cyclic_fraction_res -->
+    <operation>
+        <operator>div</operator>
+        <operand1>1.0</operand1>
+        <operand2>3.0</operand2>
+    </operation>
+
+    <!-- null_pos_operands_null_res -->
+    <operation>
+        <operator>div</operator>
+        <operand1>0.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operands_neg_res -->
+    <operation>
+        <operator>div</operator>
+        <operand1>1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands_neg_res -->
+    <operation>
+        <operator>div</operator>
+        <operand1>-1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operands_pos_res -->
+    <operation>
+        <operator>div</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- complex_div_1 -->
+    <operation>
+        <operator>div</operator>
+        <operand1>100.0</operand1>
+        <operand2>4.0</operand2>
+    </operation>
+
+    <!-- complex_div_2 -->
+    <operation>
+        <operator>div</operator>
+        <operand1>-100.0</operand1>
+        <operand2>4.0</operand2>
+    </operation>
+
+    <!-- div_by_zero -->
+    <operation>
+        <operator>div</operator>
+        <operand1>1.0</operand1>
+        <operand2>0.0</operand2>
+    </operation>
+
+    <!-- pow -->
+        <!-- simple_case -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>2.0</operand1>
+        <operand2>3.0</operand2>
+    </operation>
+
+    <!-- ten_pow -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>10.0</operand1>
+        <operand2>10.0</operand2>
+    </operation>
+
+    <!-- neg_base_even_pow -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>-2.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- neg_base_odd_pow -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>-2.0</operand1>
+        <operand2>3.0</operand2>
+    </operation>
+
+    <!-- negative_pow -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>1.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- pow_with_fract -->
+    <operation>
+        <operator>pow</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.1</operand2>
+    </operation>
+
+    <!-- fact -->
+        <!-- simple_case -->
+    <operation>
+        <operator>fact</operator>
+        <operand1>5.0</operand1>
+    </operation>
+
+    <!-- negative_fact -->
+    <operation>
+        <operator>fact</operator>
+        <operand1>-1.0</operand1>
+    </operation>
+
+    <!-- pow_with_fract -->
+    <operation>
+        <operator>fact</operator>
+        <operand1>1.1</operand1>
+    </operation>
+
+    <!-- equals -->
+    <!-- simple_case_1 -->
+    <operation>
+        <operator>equals</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_3 -->
+    <operation>
+        <operator>equals</operator>
+        <operand1>2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands -->
+    <operation>
+        <operator>equals</operator>
+        <operand1>-1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- more -->
+        <!-- simple_case_1 -->
+    <operation>
+        <operator>more</operator>
+        <operand1>2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>more</operator>
+        <operand1>0.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_first_abs_more -->
+    <operation>
+        <operator>more</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_second_abs_more -->
+    <operation>
+        <operator>more</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operand_second_abs_more -->
+    <operation>
+        <operator>more</operator>
+        <operand1>1.0</operand1>
+        <operand2>-3.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operand_first_abs_more -->
+    <operation>
+        <operator>more</operator>
+        <operand1>-3.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+    
+    <!-- notEq -->
+    <!-- simple_case_1 -->
+    <operation>
+        <operator>notEq</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>notEq</operator>
+        <operand1>2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operands -->
+    <operation>
+        <operator>notEq</operator>
+        <operand1>-1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- less -->
+    <!-- simple_case_1 -->
+    <operation>
+        <operator>less</operator>
+        <operand1>1.0</operand1>
+        <operand2>2.0</operand2>
+        <result>true</result>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>less</operator>
+        <operand1>1.0</operand1>
+        <operand2>0.0</operand2>
+        <result>false</result>
+    </operation>
+
+    <!-- neg_neg_operand_first_abs_less -->
+    <operation>
+        <operator>less</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-2.0</operand2>
+        <result>false</result>
+    </operation>
+
+    <!-- neg_neg_operand_second_abs_less -->
+    <operation>
+        <operator>less</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-1.0</operand2>
+        <result>true</result>
+    </operation>
+
+    <!-- pos_neg_operand_first_abs_less -->
+    <operation>
+        <operator>less</operator>
+        <operand1>-3.0</operand1>
+        <operand2>1.0</operand2>
+        <result>true</result>
+    </operation>
+
+    <!-- neg_pos_operand_first_abs_less -->
+    <operation>
+        <operator>less</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-3.0</operand2>
+        <result>false</result>
+    </operation>
+
+    <!-- lessEq -->
+        <!-- simple_case_1 -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>1.0</operand1>
+        <operand2>2.0</operand2>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_3 -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_first_abs_less_eq -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_second_abs_less_eq -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operand_first_abs_less_eq -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>-3.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operand_first_abs_less_eq -->
+    <operation>
+        <operator>less_eq</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-3.0</operand2>
+    </operation>
+
+    <!-- more_eq -->
+        <!-- simple_case_1 -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>2.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_2 -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>1.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- simple_case_3 -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>0.0</operand1>
+        <operand2>1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_first_abs_more_eq -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>-2.0</operand1>
+        <operand2>-1.0</operand2>
+    </operation>
+
+    <!-- neg_neg_operand_second_abs_more_eq -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>-1.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+
+    <!-- pos_neg_operand_first_abs_more_eq -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>1.0</operand1>
+        <operand2>-3.0</operand2>
+    </operation>
+
+    <!-- neg_pos_operand_first_abs_more_eq -->
+    <operation>
+        <operator>more_eq</operator>
+        <operand1>-3.0</operand1>
+        <operand2>-2.0</operand2>
+    </operation>
+</operations>

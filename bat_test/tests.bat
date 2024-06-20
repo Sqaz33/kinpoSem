@@ -1,0 +1,1 @@
+.\BRN.exe test.xml test_out.txt
