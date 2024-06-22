@@ -19,6 +19,7 @@
 typedef QHash<int, Action> qh;
 
 Q_DECLARE_METATYPE(QList<ActionError>)
+Q_DECLARE_METATYPE(QList<ActionBuildError>)
 Q_DECLARE_METATYPE(qh)
 
 

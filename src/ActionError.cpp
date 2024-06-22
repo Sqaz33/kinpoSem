@@ -8,6 +8,10 @@ bool ActionError::operator==(const ActionError &other) const {
 	return e == other.e;
 }
 
+ActionErrorType ActionBuildError::type() {
+	return e;
+}
+
 std::string ActionBuildError::toStdString() const {
 	return "Error building action on line "
 			+ std::to_string(xmlLineNumber)
@@ -23,6 +27,10 @@ bool ActionBuildError::operator==(const ActionError &other) const {
 	if (otherBuildError) {
 		return ActionError::operator==(other) && xmlLineNumber == otherBuildError->xmlLineNumber;
 	}
+}
+
+ActionErrorType ActionPerformError::type() {
+	return e;
 }
 
 ActionBuildError& ActionBuildError::operator=(const ActionBuildError &other) {

@@ -25,20 +25,17 @@
 */
 int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "ru_RU.utf8");
-	QList<ActionError> actionErrors;
+	QList<ActionError*> actionErrors;
 	try {
 		// if (argc != 3) {
 		// 	throw runtime_error("The number of program input arguments is incorrect.");
 		// }
-		// string xmlPath(argv[1]);
-		// string txtPath(argv[2]);
-		
-		string xmlPath(argv[1]);
-		string txtPath(argv[2]);
+		string xmlPath("test.xml");
+		string txtPath("test.txt");
 		
 
 		// получить действия
-		ActionsFromXML input(xmlPath, &actionErrors);
+		ActionsFromXML input(xmlPath, actionErrors);
 		const QHash<int, const Action*> *actions = input.getActions();
 
 		// произвести действия
@@ -56,21 +53,21 @@ int main(int argc, char* argv[]) {
 				results.append(res);
 			} catch (ActionPerformError& e) {
 				e.setActionNumber(n);
-				actionErrors.append(e);
+				actionErrors.append(new ActionPerformError(&e));
 			}
 		}
 
 		QList<string> strErrors;
 		int eNumb = 1;
-		for (ActionError e : actionErrors) {
-			ActionBuildError* buildE =  dynamic_cast<ActionBuildError*>(&e);
+		for (auto &e : actionErrors) {
+			ActionBuildError* buildE =  dynamic_cast<ActionBuildError*>(e);
 			if (buildE != nullptr){
 				while (keys.contains(eNumb)) {
 					eNumb++;
 				}
 				strErrors.append(QString::number(eNumb++).toStdString() + " " + buildE->toStdString());	
 			} else {
-				ActionPerformError* performE = dynamic_cast<ActionPerformError*>(&e);
+				ActionPerformError* performE = dynamic_cast<ActionPerformError*>(e);
 				strErrors.append(performE->toStdString());	
 			}
 		}

@@ -1,7 +1,7 @@
 #include "../include/ActionsFromXML.h"
 
-ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors) {
-	this->actionErrors = actionErrors;
+ActionsFromXML::ActionsFromXML(const string& XMLPath, QList<ActionError*> &actionErrors) {
+	this->actionErrors = &actionErrors;
 	actions = new QHash<int, const Action*>();
 	loadActions(XMLPath);
 }
@@ -47,7 +47,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 						isError = true;
 						e.setXmlLineNumber(reader.lineNumber());
 						count++;
-						actionErrors->append(e);
+						actionErrors->append(new ActionBuildError(&e));
 					}
 				} else if (reader.name() == "operand2") {
 					try {
@@ -57,7 +57,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 						isError = true;
 						e.setXmlLineNumber(reader.lineNumber());
 						count++;
-						actionErrors->append(e);
+						actionErrors->append(new ActionBuildError(&e));
 					}
 				} else if (reader.name() == "operator") {
 					oper = operFromStdString(txt);
@@ -66,23 +66,23 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 						ActionBuildError e(NO_OPER_E);
 						e.setXmlLineNumber(reader.lineNumber());
 						count++;
-						actionErrors->append(e);
+						actionErrors->append(new ActionBuildError(&e));
 					}
 				}
 			}
-			if (oper == NO_OPER && !actionErrors->contains(ActionBuildError(NO_OPER_E))) {
+			if (oper == NO_OPER && !isError) {
 				isError = true;
 				ActionBuildError e(NO_OPER_E);
 				e.setXmlLineNumber(reader.lineNumber());
 				count++;
-				actionErrors->append(e);
+				actionErrors->append(new ActionBuildError(&e));
 			}
 			else if (tCount != 1 && tCount != 2) {
 				isError = true;
 				ActionBuildError e(INVALID_ARITY);
 				e.setXmlLineNumber(reader.lineNumber());
 				count++;
-				actionErrors->append(e);
+				actionErrors->append(new ActionBuildError(&e));
 			}
 
 			if (!isError) {
@@ -91,7 +91,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					actions->insert(count++, a);
 				} catch (ActionBuildError &e) {
 					e.setXmlLineNumber(reader.lineNumber());
-					actionErrors->append(e);
+					actionErrors->append(new ActionBuildError(&e));
 				}
 			}
 		}

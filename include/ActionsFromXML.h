@@ -28,7 +28,7 @@ public:
      * @param[in] XMLPath path to the XML file.
      * @param[out] actionErrors list of Action creation errors.
     */
-    ActionsFromXML(const string& XMLPath, QList<ActionError>* actionErrors);
+    ActionsFromXML(const string& XMLPath, QList<ActionError*>& actionErrors);
 
     /**
      * @brief ActionsFromXML destructor.
@@ -43,7 +43,7 @@ public:
 
 private:
     QHash<int, const Action*>* actions; /**@brief List of actions*/
-    QList<ActionError>* actionErrors; /**@brief List of Action creation errors*/
+    QList<ActionError*>* actionErrors; /**@brief List of Action creation errors*/
 
     /**
      * @brief Method to load Actions from an XML file.

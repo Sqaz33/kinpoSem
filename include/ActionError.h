@@ -71,6 +71,10 @@ public:
     xmlLineNumber(-1),
     ActionError()
     {};
+    // TODO: добавить doxygen
+    ActionBuildError(ActionBuildError *e) : ActionError(e->e), xmlLineNumber(e->xmlLineNumber) {};
+    // TODO: добавить doxygen
+    ActionErrorType type();
 
     /**
      * @brief Setter for the line number in the XML file containing the erroneous action.
@@ -104,13 +108,18 @@ public:
      * @param[in] e Error type.
      */
     ActionPerformError(ActionErrorType e) : ActionError(e), actionNumber(-1) {};
-
+    
     //TODO: for tests only
     ActionPerformError()
     :
     actionNumber(-1),
     ActionError()
     {};
+    
+    // TODO: добавить doxygen
+    ActionPerformError(ActionPerformError *e) : ActionError(e->e), actionNumber(e->actionNumber) {};
+    // TODO: добавить doxygen
+     ActionErrorType type();
 
     /**
      * @brief Method to get the std::string representation of the error.
