@@ -36,6 +36,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 		if (reader.tokenType() == QXmlStreamReader::StartElement && reader.name() == "operation") {
 			reader.readNext();
 			bool isError = false;
+			bool isOperError = false;
 			while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "operation")) {
 				reader.readNext();
 				string txt = reader.readElementText().toStdString();
@@ -63,6 +64,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					oper = operFromStdString(txt);
 					if (oper == NO_OPER) {
 						isError = true;
+						isOperError = true;
 						ActionBuildError e(NO_OPER_E);
 						e.setXmlLineNumber(reader.lineNumber());
 						count++;
@@ -70,7 +72,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 					}
 				}
 			}
-			if (oper == NO_OPER && !isError) {
+			if (oper == NO_OPER && !isOperError) {
 				isError = true;
 				ActionBuildError e(NO_OPER_E);
 				e.setXmlLineNumber(reader.lineNumber());
@@ -87,7 +89,7 @@ void ActionsFromXML::loadActions(const string& XMLPath) {
 
 			if (!isError) {
 				try {
-					const Action* a = tCount == 1 ? new Action(oper, &t1, nullptr) : new Action(oper, &t1, &t2);
+					const Action* a = tCount == 1 ? new Action(oper, &t1) : new Action(oper, &t1, &t2);
 					actions->insert(count++, a);
 				} catch (ActionBuildError &e) {
 					e.setXmlLineNumber(reader.lineNumber());

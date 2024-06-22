@@ -64,7 +64,7 @@ public:
      * @brief Constructor for ActionBuildError.
      * @param[in] e Error type.
      */
-    ActionBuildError(ActionErrorType e) : ActionError(e), xmlLineNumber(-1) {};
+    ActionBuildError(ActionErrorType e, int xmlLineNumber = -1) : ActionError(e), xmlLineNumber(xmlLineNumber) {};
     //TODO: for tests only
     ActionBuildError() 
     : 

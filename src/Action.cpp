@@ -47,7 +47,6 @@ Action::Action(Operation oper, const BigRealNumber* term1, const BigRealNumber* 
 	}
 }
 
-
 string Action::toStdString() const {
 	string str = term1.toStdString()
 				+ " "

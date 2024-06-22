@@ -27,12 +27,11 @@ int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "ru_RU.utf8");
 	QList<ActionError*> actionErrors;
 	try {
-		// if (argc != 3) {
-		// 	throw runtime_error("The number of program input arguments is incorrect.");
-		// }
-		string xmlPath("test.xml");
-		string txtPath("test.txt");
-		
+		if (argc != 3) {
+			throw runtime_error("The number of program input arguments is incorrect.");
+		}
+		string xmlPath(argv[1]);
+		string txtPath(argv[2]);
 
 		// получить действия
 		ActionsFromXML input(xmlPath, actionErrors);

@@ -15,7 +15,7 @@ ActionErrorType ActionBuildError::type() {
 std::string ActionBuildError::toStdString() const {
 	return "Error building action on line "
 			+ std::to_string(xmlLineNumber)
-			+ "xml-file: "
+			+ ". Error: "
 			+ ActionError::toStdString();
 }
 void ActionBuildError::setXmlLineNumber(int ln) {
@@ -40,9 +40,9 @@ ActionBuildError& ActionBuildError::operator=(const ActionBuildError &other) {
 }
 
 std::string ActionPerformError::toStdString() const {
-	return "Error performing an action on a line "
+	return "Error performing action number "
 			+ std::to_string(actionNumber)
-			+ "xml-file: "
+			+ ". Error: "
 			+ ActionError::toStdString();
 }
 void ActionPerformError::setActionNumber(int a) {
