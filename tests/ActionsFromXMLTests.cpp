@@ -45,7 +45,7 @@ void ActionFromXMLTests::tests() {
     }
     
     if (expectedErrors.size() == 0) {
-        const QHash<int, Action*>* actualActions = reader.getActions();
+        const QHash<int, const Action*>* actualActions = reader.getActions();
 
         QCOMPARE(actualActions->size(), expectedActions.size());
 

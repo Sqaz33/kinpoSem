@@ -39,10 +39,10 @@ public:
      * @brief Method to get the list of Actions.
      * @return List of Actions.
     */
-    const QHash<int, Action*>* getActions() const;
+    const QHash<int, const Action*>* getActions() const;
 
 private:
-    QHash<int, Action*>* actions; /**@brief List of actions*/
+    QHash<int, const Action*>* actions; /**@brief List of actions*/
     QList<ActionError>* actionErrors; /**@brief List of Action creation errors*/
 
     /**

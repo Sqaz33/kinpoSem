@@ -452,24 +452,24 @@
         <operand2>-2.0</operand2>
     </operation>
     
-    <!-- notEq -->
+    <!-- not_equals -->
     <!-- simple_case_1 -->
     <operation>
-        <operator>notEq</operator>
+        <operator>not_equals</operator>
         <operand1>1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- simple_case_2 -->
     <operation>
-        <operator>notEq</operator>
+        <operator>not_equals</operator>
         <operand1>2.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- neg_pos_operands -->
     <operation>
-        <operator>notEq</operator>
+        <operator>not_equals</operator>
         <operand1>-1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
@@ -526,99 +526,99 @@
     <!-- lessEq -->
         <!-- simple_case_1 -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>1.0</operand1>
         <operand2>2.0</operand2>
     </operation>
 
     <!-- simple_case_2 -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- simple_case_3 -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>2.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
-    <!-- neg_neg_operand_first_abs_less_eq -->
+    <!-- neg_neg_operand_first_abs_no_more -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>-1.0</operand1>
         <operand2>-2.0</operand2>
     </operation>
 
-    <!-- neg_neg_operand_second_abs_less_eq -->
+    <!-- neg_neg_operand_second_abs_no_more -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>-2.0</operand1>
         <operand2>-1.0</operand2>
     </operation>
 
-    <!-- pos_neg_operand_first_abs_less_eq -->
+    <!-- pos_neg_operand_first_abs_no_more -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>-3.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
-    <!-- neg_pos_operand_first_abs_less_eq -->
+    <!-- neg_pos_operand_first_abs_no_more -->
     <operation>
-        <operator>less_eq</operator>
+        <operator>no_more</operator>
         <operand1>-2.0</operand1>
         <operand2>-3.0</operand2>
     </operation>
 
-    <!-- more_eq -->
+    <!-- no_less -->
         <!-- simple_case_1 -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>2.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- simple_case_2 -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>1.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
     <!-- simple_case_3 -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>0.0</operand1>
         <operand2>1.0</operand2>
     </operation>
 
-    <!-- neg_neg_operand_first_abs_more_eq -->
+    <!-- neg_neg_operand_first_abs_no_less -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>-2.0</operand1>
         <operand2>-1.0</operand2>
     </operation>
 
-    <!-- neg_neg_operand_second_abs_more_eq -->
+    <!-- neg_neg_operand_second_abs_no_less -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>-1.0</operand1>
         <operand2>-2.0</operand2>
     </operation>
 
-    <!-- pos_neg_operand_first_abs_more_eq -->
+    <!-- pos_neg_operand_first_abs_no_less -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>1.0</operand1>
         <operand2>-3.0</operand2>
     </operation>
 
-    <!-- neg_pos_operand_first_abs_more_eq -->
+    <!-- neg_pos_operand_first_abs_no_less -->
     <operation>
-        <operator>more_eq</operator>
+        <operator>no_less</operator>
         <operand1>-3.0</operand1>
         <operand2>-2.0</operand2>
     </operation>
