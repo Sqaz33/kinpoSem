@@ -1,0 +1,140 @@
+\doxysection{Big\+Real\+Number.\+h}
+\hypertarget{_big_real_number_8h_source}{}\label{_big_real_number_8h_source}\index{include/BigRealNumber.h@{include/BigRealNumber.h}}
+\mbox{\hyperlink{_big_real_number_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ BIG\_REAL\_NUMBER\_H}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ BIG\_REAL\_NUMBER\_H}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <qregexp>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}math.h"{}}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_action_error_8h}{ActionError.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00015}\mbox{\hyperlink{_big_real_number_8h_a7a9a231e30b47bc0345749c8bd1e5077}{00015}}\ \textcolor{preprocessor}{\#define\ MAX\_LENGTH\ 1000}}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00017}00017\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00023}\mbox{\hyperlink{class_big_real_number}{00023}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \{}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00024}00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00029}\mbox{\hyperlink{class_big_real_number_a5976909bf2c038d04af5993d747626d4}{00029}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number_a5976909bf2c038d04af5993d747626d4}{BigRealNumber}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ p);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00035}\mbox{\hyperlink{class_big_real_number_a8938fcd781f51cdd817e8e1eea182a25}{00035}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number_a8938fcd781f51cdd817e8e1eea182a25}{BigRealNumber}}(\textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00040}\mbox{\hyperlink{class_big_real_number_ac84414ad33d221473a676059c264e3b7}{00040}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number_ac84414ad33d221473a676059c264e3b7}{BigRealNumber}}();}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00045}\mbox{\hyperlink{class_big_real_number_af436b532ac2c3054a6fdd138f83c70bf}{00045}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number_af436b532ac2c3054a6fdd138f83c70bf}{\string~BigRealNumber}}();}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00073}\mbox{\hyperlink{class_big_real_number_aafea22d2ede5b1e546519106e35939d6}{00073}}\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_aafea22d2ede5b1e546519106e35939d6}{fromStdString}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ numb);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00082}\mbox{\hyperlink{class_big_real_number_a5ae64d3ac8cb48a215529566ca1f6d85}{00082}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a5ae64d3ac8cb48a215529566ca1f6d85}{validateStdString}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ numb);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00092}\mbox{\hyperlink{class_big_real_number_aa76307bb5df7edfa17548babad127f75}{00092}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_aa76307bb5df7edfa17548babad127f75}{validateQString}}(\textcolor{keyword}{const}\ QString\&\ numb);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00099}\mbox{\hyperlink{class_big_real_number_a2425d79bc1a68daa7345a8210263934b}{00099}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_big_real_number_a2425d79bc1a68daa7345a8210263934b}{getIntPrtLen}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00104}\mbox{\hyperlink{class_big_real_number_ad3dac71e8c33f5df46e53f979a356af6}{00104}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_big_real_number_ad3dac71e8c33f5df46e53f979a356af6}{getFractPrtLen}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00110}\mbox{\hyperlink{class_big_real_number_a1c78c689dec02c2fa98a4d6c7a95dbcf}{00110}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a1c78c689dec02c2fa98a4d6c7a95dbcf}{negative}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00117}\mbox{\hyperlink{class_big_real_number_a0d5ee3dd7162cfbf37f5a2388dd5a868}{00117}}\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_big_real_number_a0d5ee3dd7162cfbf37f5a2388dd5a868}{toStdString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00124}\mbox{\hyperlink{class_big_real_number_abc332206272317f12ad69f2fa48014ae}{00124}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ \mbox{\hyperlink{class_big_real_number_abc332206272317f12ad69f2fa48014ae}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00130}\mbox{\hyperlink{class_big_real_number_a2345ac84c1e3cb7409340317845dcc73}{00130}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ \mbox{\hyperlink{class_big_real_number_a2345ac84c1e3cb7409340317845dcc73}{operator=}}(\textcolor{keywordtype}{bool}\ bl);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00137}\mbox{\hyperlink{class_big_real_number_a1c5e77364ea69908f715bdd646bfc15a}{00137}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_a1c5e77364ea69908f715bdd646bfc15a}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00143}\mbox{\hyperlink{class_big_real_number_ac539b22cd83c68448349b65035aac151}{00143}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_ac539b22cd83c68448349b65035aac151}{operator+}}(\textcolor{keywordtype}{int}\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00150}\mbox{\hyperlink{class_big_real_number_ab8bde8fe6be16910645c527b9707a034}{00150}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_ab8bde8fe6be16910645c527b9707a034}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00156}\mbox{\hyperlink{class_big_real_number_ae7a5ef1a905644746836e9b0ba80b40a}{00156}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_ae7a5ef1a905644746836e9b0ba80b40a}{operator-\/}}(\textcolor{keywordtype}{int}\ n)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00163}\mbox{\hyperlink{class_big_real_number_a9ef53045b052e1220c83c1fa832f02ba}{00163}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_a9ef53045b052e1220c83c1fa832f02ba}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00169}\mbox{\hyperlink{class_big_real_number_af770202295c8f83e3d1ad41a60582c9e}{00169}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_af770202295c8f83e3d1ad41a60582c9e}{operator*}}(\textcolor{keywordtype}{int}\ n)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00176}\mbox{\hyperlink{class_big_real_number_ac1864e48b44abbe306f0953f08f8fb33}{00176}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_ac1864e48b44abbe306f0953f08f8fb33}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00182}\mbox{\hyperlink{class_big_real_number_af36846fae62c1741bf2cdf01a8293603}{00182}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_af36846fae62c1741bf2cdf01a8293603}{operator/}}(\textcolor{keywordtype}{int}\ n)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00189}\mbox{\hyperlink{class_big_real_number_a74287d4a99d2e1fd28cfac52e43c7495}{00189}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a74287d4a99d2e1fd28cfac52e43c7495}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00195}\mbox{\hyperlink{class_big_real_number_a4ec5ae7c50ad7ad7f032c8cf7c749921}{00195}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a4ec5ae7c50ad7ad7f032c8cf7c749921}{operator==}}(\textcolor{keywordtype}{int}\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00202}\mbox{\hyperlink{class_big_real_number_a760f254590648830a444940697eefc75}{00202}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a760f254590648830a444940697eefc75}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00208}\mbox{\hyperlink{class_big_real_number_a14861cc6fce042d9e50e5bbbb39ff0c1}{00208}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a14861cc6fce042d9e50e5bbbb39ff0c1}{operator!=}}(\textcolor{keywordtype}{int}\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00216}\mbox{\hyperlink{class_big_real_number_aae278cdac93a567562be18a2a24c10be}{00216}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_aae278cdac93a567562be18a2a24c10be}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00223}\mbox{\hyperlink{class_big_real_number_ae1ed3bd2bc2b0ee8ab8a0f014b11fa6d}{00223}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_ae1ed3bd2bc2b0ee8ab8a0f014b11fa6d}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00229}\mbox{\hyperlink{class_big_real_number_a649f995f6e5ca3719661a5ddf39bfa84}{00229}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a649f995f6e5ca3719661a5ddf39bfa84}{operator>}}(\textcolor{keywordtype}{int}\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00236}\mbox{\hyperlink{class_big_real_number_a9076762b1ceb4873425d5b4243116407}{00236}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a9076762b1ceb4873425d5b4243116407}{operator<=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00243}\mbox{\hyperlink{class_big_real_number_a94d75e64df36ce1f629ab400b91ae3e1}{00243}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_big_real_number_a94d75e64df36ce1f629ab400b91ae3e1}{operator>=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00256}\mbox{\hyperlink{class_big_real_number_ad1d878024996f42101b0bda1f3a2786e}{00256}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_ad1d878024996f42101b0bda1f3a2786e}{pow}}(\mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ pw)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00268}\mbox{\hyperlink{class_big_real_number_a18f55fc5b19df4213f1cf4cd08da7f25}{00268}}\ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\ \mbox{\hyperlink{class_big_real_number_a18f55fc5b19df4213f1cf4cd08da7f25}{factorial}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00270}00270\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00271}00271\ \ \ \ \ \textcolor{keywordtype}{short}*\ intPrt;\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00272}00272\ \ \ \ \ \textcolor{keywordtype}{short}*\ fractPrt;\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00274}00274\ \ \ \ \ \textcolor{keywordtype}{int}\ intPrtLen;\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00275}00275\ \ \ \ \ \textcolor{keywordtype}{int}\ fractPrtLen;\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00276}00276\ \ \ \ \ \textcolor{keywordtype}{bool}\ isNegative;\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00286}00286\ \ \ \ \ \textcolor{keywordtype}{void}\ add(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ term2,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00288}00288\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ res}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00289}00289\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00299}00299\ \ \ \ \ \textcolor{keywordtype}{void}\ sub(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ subtr,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00301}00301\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ res}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00302}00302\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00312}00312\ \ \ \ \ \textcolor{keywordtype}{void}\ mul(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ fac,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00314}00314\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ res}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00315}00315\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00316}00316\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00325}00325\ \ \ \ \ \textcolor{keywordtype}{void}\ div(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ divider,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00327}00327\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ res}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00328}00328\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00336}00336\ \ \ \ \ \textcolor{keywordtype}{void}\ divRemaind(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ divider,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00338}00338\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ R,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00339}00339\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ Q}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00340}00340\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00353}00353\ \ \ \ \ \textcolor{keywordtype}{short}\ attachArrays(}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00354}00354\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ term1,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00355}00355\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ term2,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00356}00356\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_big_real_number}{BigRealNumber}}\&\ res,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ addToFract,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ minusTerm2,}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00359}00359\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{short}\ transfer}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00360}00360\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00368}00368\ \ \ \ \ \textcolor{keywordtype}{void}\ appendToInt(\textcolor{keywordtype}{short}\ number);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00369}00369\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00376}00376\ \ \ \ \ \textcolor{keywordtype}{bool}\ appendToFract(\textcolor{keywordtype}{short}\ number,\ \textcolor{keywordtype}{int}\ ind);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00381}00381\ \ \ \ \ \textcolor{keywordtype}{void}\ removeInsignDigits();}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00383}00383\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00393}\mbox{\hyperlink{class_big_real_number_a6a61e475143818c1ee87d110a62bbab6}{00393}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_big_real_number_a6a61e475143818c1ee87d110a62bbab6}{shiftNumber}}(\textcolor{keywordtype}{int}\ shift,\ \textcolor{keywordtype}{bool}\ toRight);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00399}\mbox{\hyperlink{class_big_real_number_aba4760231239b72a77897bed083aee64}{00399}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_big_real_number_aba4760231239b72a77897bed083aee64}{setVal}}(\textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00400}00400\ \};}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00412}\mbox{\hyperlink{class_big_real_number_a64dd5a1fe861a35c832e9f7bd6554550}{00412}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_big_real_number_a64dd5a1fe861a35c832e9f7bd6554550}{arrShift}}(\textcolor{keywordtype}{short}*\ arr,\ \textcolor{keywordtype}{int}\ len,\ \textcolor{keywordtype}{int}\ shift,\ \textcolor{keywordtype}{bool}\ toRight,\ \textcolor{keywordtype}{int}\ fillVal);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00424}\mbox{\hyperlink{class_big_real_number_ae0e209b5510ddcf88b331f48c3722391}{00424}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_big_real_number_ae0e209b5510ddcf88b331f48c3722391}{getFirstNotZero}}(\textcolor{keywordtype}{short}*\ arr,\ \textcolor{keywordtype}{int}\ start,\ \textcolor{keywordtype}{int}\ stop,\ \textcolor{keywordtype}{bool}\ backward);}
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{_big_real_number_8h_source_l00426}00426\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BIG\_REAL\_NUMBER\_H}}
+
+\end{DoxyCode}

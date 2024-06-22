@@ -1,0 +1,159 @@
+\doxysection{Action\+Perform\+Error Class Reference}
+\hypertarget{class_action_perform_error}{}\label{class_action_perform_error}\index{ActionPerformError@{ActionPerformError}}
+
+
+Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} performance error.  
+
+
+
+
+{\ttfamily \#include $<$Action\+Error.\+h$>$}
+
+Inheritance diagram for Action\+Perform\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_action_perform_error}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}{Action\+Perform\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})
+\begin{DoxyCompactList}\small\item\em Number of the \doxylink{class_action}{Action} object that caused the error. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_action_perform_error_a1f4a9d95339a0384f60d5b97430d53d8}{Action\+Perform\+Error}} (\mbox{\hyperlink{class_action_perform_error}{Action\+Perform\+Error}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_action_perform_error}{Action\+Perform\+Error} object from another \doxylink{class_action_perform_error}{Action\+Perform\+Error} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_perform_error_a8615c59840d0918c3e173c939de1c9bc}{type}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the type of the action error. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}{to\+Std\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Method to get the std\+::string representation of the error. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}{set\+Action\+Number}} (int a)
+\begin{DoxyCompactList}\small\item\em Setter for the number of the \doxylink{class_action}{Action} object that caused the error. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_action_perform_error_aa7534c78046237de4c8dcc79b0983677}{operator==}} (const \mbox{\hyperlink{class_action_error}{Action\+Error}} \&other) const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_action_error}{Action\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_error_a5ed35f9c60e2b62a3e4b4d1bcadd4381}{Action\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})
+\begin{DoxyCompactList}\small\item\em Error type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_action_error}{Action\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} performance error. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_big_real_number}{Big\+Real\+Number} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00097}{97}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{ActionPerformError()}{ActionPerformError()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830} 
+Action\+Perform\+Error\+::\+Action\+Perform\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of the \doxylink{class_action}{Action} object that caused the error. 
+
+Constructor for \doxylink{class_action_perform_error}{Action\+Perform\+Error}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e} & Error type. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00105}{105}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+\Hypertarget{class_action_perform_error_a1f4a9d95339a0384f60d5b97430d53d8}\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\index{ActionPerformError@{ActionPerformError}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{ActionPerformError()}{ActionPerformError()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_action_perform_error_a1f4a9d95339a0384f60d5b97430d53d8} 
+Action\+Perform\+Error\+::\+Action\+Perform\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_action_perform_error}{Action\+Perform\+Error}} \texorpdfstring{$\ast$}{*}}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an \doxylink{class_action_perform_error}{Action\+Perform\+Error} object from another \doxylink{class_action_perform_error}{Action\+Perform\+Error} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & A pointer to an \doxylink{class_action_perform_error}{Action\+Perform\+Error} object to copy from. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00116}{116}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_action_perform_error_aa7534c78046237de4c8dcc79b0983677}\index{ActionPerformError@{ActionPerformError}!operator==@{operator==}}
+\index{operator==@{operator==}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_action_perform_error_aa7534c78046237de4c8dcc79b0983677} 
+bool Action\+Perform\+Error\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_action_error}{Action\+Error}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_action_error_a6552f5500bb6545435cf2677b9293e98}{Action\+Error}}.
+
+\Hypertarget{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}\index{ActionPerformError@{ActionPerformError}!setActionNumber@{setActionNumber}}
+\index{setActionNumber@{setActionNumber}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{setActionNumber()}{setActionNumber()}}
+{\footnotesize\ttfamily \label{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a} 
+void Action\+Perform\+Error\+::set\+Action\+Number (\begin{DoxyParamCaption}\item[{int}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Setter for the number of the \doxylink{class_action}{Action} object that caused the error. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em a} & Number of the \doxylink{class_action}{Action} object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}\index{ActionPerformError@{ActionPerformError}!toStdString@{toStdString}}
+\index{toStdString@{toStdString}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{toStdString()}{toStdString()}}
+{\footnotesize\ttfamily \label{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1} 
+std\+::string Action\+Perform\+Error\+::to\+Std\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method to get the std\+::string representation of the error. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string representation of the error. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_action_error_a6e6440a9b8778efdd8885d1280dd6dc9}{Action\+Error}}.
+
+\Hypertarget{class_action_perform_error_a8615c59840d0918c3e173c939de1c9bc}\index{ActionPerformError@{ActionPerformError}!type@{type}}
+\index{type@{type}!ActionPerformError@{ActionPerformError}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \label{class_action_perform_error_a8615c59840d0918c3e173c939de1c9bc} 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} Action\+Perform\+Error\+::type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the type of the action error. 
+
+\begin{DoxyReturn}{Returns}
+The type of the action error as an Action\+Error\+Type. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_action_error_8h}{Action\+Error.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\doxysection{Action\+Error.\+h}
+\hypertarget{_action_error_8h_source}{}\label{_action_error_8h_source}\index{include/ActionError.h@{include/ActionError.h}}
+\mbox{\hyperlink{_action_error_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ ACTION\_ERROR\_H}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ ACTION\_ERROR\_H}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00010}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{00010}}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \{}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00011}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}{00011}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}{NO\_OPER\_E}},\ \textcolor{comment}{//\ Error\ creating\ object}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00012}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}{00012}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}{INVALID\_ARITY}},\ \textcolor{comment}{//\ Error\ creating\ object}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00013}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}{00013}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}{INVALID\_OPERAND\_FORMAT}},\ \textcolor{comment}{//\ Error\ creating\ object}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00014}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}{00014}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}{INVALID\_LENGTH}},\ \textcolor{comment}{//\ Error\ creating\ or\ performing}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00015}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}{00015}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}{DIVISION\_BY\_ZERO}},\ \textcolor{comment}{//\ Error\ performing}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00016}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}{00016}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT}},\ \textcolor{comment}{//\ Error\ performing}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00017}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}{00017}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}{OPERAND\_LESS\_ZERO\_POW\_FACT}},\ \textcolor{comment}{//\ Error\ performing}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a66ba597c79424ec8ddeb344c90e64140}{INTEGER\_PART\_OVERFLOW}}\ \textcolor{comment}{//\ Error\ performing\ }}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00019}\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a66ba597c79424ec8ddeb344c90e64140}{00019}}\ \};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00026}\mbox{\hyperlink{_action_error_8h_a79b9ecb83f1db2ebbdad0fea703aa565}{00026}}\ std::string\ \mbox{\hyperlink{_action_error_8h_a79b9ecb83f1db2ebbdad0fea703aa565}{errorTypeToStdString}}(\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ e);}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00031}\mbox{\hyperlink{class_action_error}{00031}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_action_error}{ActionError}}\ \{}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00032}00032\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00033}\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{00033}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}};\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00034}00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00039}\mbox{\hyperlink{class_action_error_a5ed35f9c60e2b62a3e4b4d1bcadd4381}{00039}}\ \ \ \ \ \mbox{\hyperlink{class_action_error_a5ed35f9c60e2b62a3e4b4d1bcadd4381}{ActionError}}(\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})\ :\ \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})\ \{\};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00045}\mbox{\hyperlink{class_action_error_a6e6440a9b8778efdd8885d1280dd6dc9}{00045}}\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{class_action_error_a6e6440a9b8778efdd8885d1280dd6dc9}{toStdString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00047}\mbox{\hyperlink{class_action_error_a6552f5500bb6545435cf2677b9293e98}{00047}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_action_error_a6552f5500bb6545435cf2677b9293e98}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_action_error}{ActionError}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00048}00048\ \};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00056}\mbox{\hyperlink{class_action_build_error}{00056}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_action_build_error}{ActionBuildError}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_action_error}{ActionError}}\ \{}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00057}00057\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{int}\ xmlLineNumber;\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00059}00059\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00064}\mbox{\hyperlink{class_action_build_error_a1294e90ac2d99805c8800af34ea3d2dc}{00064}}\ \ \ \ \ \mbox{\hyperlink{class_action_build_error_add451cd5377a9c9c179ccd7713de8878}{ActionBuildError}}(\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}},\ \textcolor{keywordtype}{int}\ xmlLineNumber\ =\ -\/1)\ :\ \mbox{\hyperlink{class_action_error}{ActionError}}(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}),\ xmlLineNumber(xmlLineNumber)\ \{\};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00065}00065\ \ \ \ \ :\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00066}00066\ \ \ \ \ xmlLineNumber(-\/1),}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00067}\mbox{\hyperlink{class_action_build_error_a35e34cdfd834fe10783d06f5047e5787}{00067}}\ \ \ \ \ \mbox{\hyperlink{class_action_build_error_a35e34cdfd834fe10783d06f5047e5787}{ActionError}}()}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00068}00068\ \ \ \ \ \{\};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00069}00069\ \ \ \ \ \textcolor{comment}{//\ TODO:\ добавить\ doxygen}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00070}\mbox{\hyperlink{class_action_build_error_a9784eb95c9fec7b3c0b7860dae7d677a}{00070}}\ \ \ \ \ \mbox{\hyperlink{class_action_build_error_a9784eb95c9fec7b3c0b7860dae7d677a}{ActionBuildError}}(\mbox{\hyperlink{class_action_build_error}{ActionBuildError}}\ *\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})\ :\ \mbox{\hyperlink{class_action_error}{ActionError}}(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}-\/>\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}),\ xmlLineNumber(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}-\/>xmlLineNumber)\ \{\};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ TODO:\ добавить\ doxygen}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00072}\mbox{\hyperlink{class_action_build_error_aa42be8433d876c16ae22148f8738ef5e}{00072}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_build_error_aa42be8433d876c16ae22148f8738ef5e}{type}}();}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00078}\mbox{\hyperlink{class_action_build_error_ac8df7510a21add0357a2f7f5d863be88}{00078}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_action_build_error_ac8df7510a21add0357a2f7f5d863be88}{setXmlLineNumber}}(\textcolor{keywordtype}{int}\ ln);}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00084}\mbox{\hyperlink{class_action_build_error_a1aedd340389107bda25d9cfd943835b8}{00084}}\ \ \ \ \ std::string\ \mbox{\hyperlink{class_action_build_error_a1aedd340389107bda25d9cfd943835b8}{toStdString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00086}\mbox{\hyperlink{class_action_build_error_a32eefa157cbb385efb77698bce6a6480}{00086}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_action_build_error_a32eefa157cbb385efb77698bce6a6480}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_action_error}{ActionError}}\ \&other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00088}\mbox{\hyperlink{class_action_build_error_ad824b7e568af21afbfedd0f34cf65d24}{00088}}\ \ \ \ \ \mbox{\hyperlink{class_action_build_error}{ActionBuildError}}\&\ \mbox{\hyperlink{class_action_build_error_ad824b7e568af21afbfedd0f34cf65d24}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_action_build_error}{ActionBuildError}}\ \&other);}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00089}00089\ \};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00097}\mbox{\hyperlink{class_action_perform_error}{00097}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_action_perform_error}{ActionPerformError}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_action_error}{ActionError}}\ \{}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00098}00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00099}00099\ \ \ \ \ \textcolor{keywordtype}{int}\ actionNumber;\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00100}00100\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00105}\mbox{\hyperlink{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}{00105}}\ \ \ \ \ \mbox{\hyperlink{class_action_perform_error_ab77fe0fa47125d0d574655067f1e1830}{ActionPerformError}}(\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00106}00106\ \ \ \ \ :\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00107}00107\ \ \ \ \ \mbox{\hyperlink{class_action_error}{ActionError}}(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}),\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00108}00108\ \ \ \ \ actionNumber(-\/1)\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00109}00109\ \ \ \ \ \{\};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00110}00110\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00116}\mbox{\hyperlink{class_action_perform_error_a1f4a9d95339a0384f60d5b97430d53d8}{00116}}\ \ \ \ \ \mbox{\hyperlink{class_action_perform_error_a1f4a9d95339a0384f60d5b97430d53d8}{ActionPerformError}}(\mbox{\hyperlink{class_action_perform_error}{ActionPerformError}}\ *\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00117}00117\ \ \ \ \ :\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00118}00118\ \ \ \ \ \mbox{\hyperlink{class_action_error}{ActionError}}(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}-\/>\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}),\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00119}00119\ \ \ \ \ actionNumber(\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}-\/>actionNumber)\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00120}00120\ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00127}\mbox{\hyperlink{class_action_perform_error_a8615c59840d0918c3e173c939de1c9bc}{00127}}\ \ \ \ \ \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{ActionErrorType}}\ \mbox{\hyperlink{class_action_perform_error_a8615c59840d0918c3e173c939de1c9bc}{type}}();}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00128}00128\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00133}\mbox{\hyperlink{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}{00133}}\ \ \ \ \ std::string\ \mbox{\hyperlink{class_action_perform_error_aa91467da5b48a307f917eafdc76f2ea1}{toStdString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00139}\mbox{\hyperlink{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}{00139}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_action_perform_error_a8288db08c754e061f0512ed95d3edc1a}{setActionNumber}}(\textcolor{keywordtype}{int}\ a);}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00141}\mbox{\hyperlink{class_action_perform_error_aa7534c78046237de4c8dcc79b0983677}{00141}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_action_perform_error_aa7534c78046237de4c8dcc79b0983677}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_action_error}{ActionError}}\ \&other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00142}00142\ \};}
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_action_error_8h_source_l00144}00144\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ACTION\_ERROR\_H}}
+
+\end{DoxyCode}

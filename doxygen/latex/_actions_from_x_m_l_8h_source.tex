@@ -1,0 +1,36 @@
+\doxysection{Actions\+From\+XML.\+h}
+\hypertarget{_actions_from_x_m_l_8h_source}{}\label{_actions_from_x_m_l_8h_source}\index{include/ActionsFromXML.h@{include/ActionsFromXML.h}}
+\mbox{\hyperlink{_actions_from_x_m_l_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ ACTION\_FROM\_XML\_H}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ ACTION\_FROM\_XML\_H}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <QXmlStreamReader>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <QFile>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <QHash>}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_action_8h}{Action.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00014}00014\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00024}\mbox{\hyperlink{class_actions_from_x_m_l}{00024}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_actions_from_x_m_l}{ActionsFromXML}}\ \{}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00025}00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00031}\mbox{\hyperlink{class_actions_from_x_m_l_afd2fbe87b8f0663233e1d40f786b7822}{00031}}\ \ \ \ \ \mbox{\hyperlink{class_actions_from_x_m_l_afd2fbe87b8f0663233e1d40f786b7822}{ActionsFromXML}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ XMLPath,\ QList<ActionError*>\&\ actionErrors);}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00036}\mbox{\hyperlink{class_actions_from_x_m_l_a8b7d28741a870da5cb4dbc066f13562b}{00036}}\ \ \ \ \ \mbox{\hyperlink{class_actions_from_x_m_l_a8b7d28741a870da5cb4dbc066f13562b}{\string~ActionsFromXML}}();}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00042}\mbox{\hyperlink{class_actions_from_x_m_l_abf70fca7e543ab95f4a5d84008d84878}{00042}}\ \ \ \ \ \textcolor{keyword}{const}\ QHash<int,\ const\ Action*>*\ \mbox{\hyperlink{class_actions_from_x_m_l_abf70fca7e543ab95f4a5d84008d84878}{getActions}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00044}00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00045}00045\ \ \ \ \ QHash<int,\ const\ Action*>*\ actions;\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00046}00046\ \ \ \ \ QList<ActionError*>*\ actionErrors;\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ loadActions(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ XMLPath);}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00056}00056\ \};}
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_actions_from_x_m_l_8h_source_l00058}00058\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//ACTION\_FROM\_XML\_H}}
+
+\end{DoxyCode}

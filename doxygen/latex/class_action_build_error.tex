@@ -1,0 +1,181 @@
+\doxysection{Action\+Build\+Error Class Reference}
+\hypertarget{class_action_build_error}{}\label{class_action_build_error}\index{ActionBuildError@{ActionBuildError}}
+
+
+Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} creation error.  
+
+
+
+
+{\ttfamily \#include $<$Action\+Error.\+h$>$}
+
+Inheritance diagram for Action\+Build\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_action_build_error}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_build_error_add451cd5377a9c9c179ccd7713de8878}{Action\+Build\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}, int xml\+Line\+Number=-\/1)
+\begin{DoxyCompactList}\small\item\em Line number in the XML file containing the erroneous action. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_action_build_error_a35e34cdfd834fe10783d06f5047e5787}{Action\+Error}} ()
+\item 
+\mbox{\hyperlink{class_action_build_error_a9784eb95c9fec7b3c0b7860dae7d677a}{Action\+Build\+Error}} (\mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})
+\item 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_build_error_aa42be8433d876c16ae22148f8738ef5e}{type}} ()
+\item 
+void \mbox{\hyperlink{class_action_build_error_ac8df7510a21add0357a2f7f5d863be88}{set\+Xml\+Line\+Number}} (int ln)
+\begin{DoxyCompactList}\small\item\em Setter for the line number in the XML file containing the erroneous action. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_action_build_error_a1aedd340389107bda25d9cfd943835b8}{to\+Std\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Method to get the std\+::string representation of the error. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_action_build_error_a32eefa157cbb385efb77698bce6a6480}{operator==}} (const \mbox{\hyperlink{class_action_error}{Action\+Error}} \&other) const override
+\item 
+\mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \& \mbox{\hyperlink{class_action_build_error_ad824b7e568af21afbfedd0f34cf65d24}{operator=}} (const \mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \&other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_action_error}{Action\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_error_a5ed35f9c60e2b62a3e4b4d1bcadd4381}{Action\+Error}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}})
+\begin{DoxyCompactList}\small\item\em Error type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\+: xml\+Line\+Number(-\/1)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_action_error}{Action\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \mbox{\hyperlink{class_action_error_a9830e98806b8601a1d6e59cde55d2a22}{e}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} creation error. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_big_real_number}{Big\+Real\+Number} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00056}{56}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_action_build_error_add451cd5377a9c9c179ccd7713de8878}\index{ActionBuildError@{ActionBuildError}!ActionBuildError@{ActionBuildError}}
+\index{ActionBuildError@{ActionBuildError}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{ActionBuildError()}{ActionBuildError()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_action_build_error_add451cd5377a9c9c179ccd7713de8878} 
+Action\+Build\+Error\+::\+Action\+Build\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}]{e}{, }\item[{int}]{xml\+Line\+Number}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Line number in the XML file containing the erroneous action. 
+
+Constructor for \doxylink{class_action_build_error}{Action\+Build\+Error}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e} & Error type. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00064}{64}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+\Hypertarget{class_action_build_error_a9784eb95c9fec7b3c0b7860dae7d677a}\index{ActionBuildError@{ActionBuildError}!ActionBuildError@{ActionBuildError}}
+\index{ActionBuildError@{ActionBuildError}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{ActionBuildError()}{ActionBuildError()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_action_build_error_a9784eb95c9fec7b3c0b7860dae7d677a} 
+Action\+Build\+Error\+::\+Action\+Build\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \texorpdfstring{$\ast$}{*}}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00070}{70}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_action_build_error_a35e34cdfd834fe10783d06f5047e5787}\index{ActionBuildError@{ActionBuildError}!ActionError@{ActionError}}
+\index{ActionError@{ActionError}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{ActionError()}{ActionError()}}
+{\footnotesize\ttfamily \label{class_action_build_error_a35e34cdfd834fe10783d06f5047e5787} 
+Action\+Build\+Error\+::\+Action\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00067}{67}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+\Hypertarget{class_action_build_error_ad824b7e568af21afbfedd0f34cf65d24}\index{ActionBuildError@{ActionBuildError}!operator=@{operator=}}
+\index{operator=@{operator=}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_action_build_error_ad824b7e568af21afbfedd0f34cf65d24} 
+\mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \& Action\+Build\+Error\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}} \&}]{other}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_action_build_error_a32eefa157cbb385efb77698bce6a6480}\index{ActionBuildError@{ActionBuildError}!operator==@{operator==}}
+\index{operator==@{operator==}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_action_build_error_a32eefa157cbb385efb77698bce6a6480} 
+bool Action\+Build\+Error\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_action_error}{Action\+Error}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_action_error_a6552f5500bb6545435cf2677b9293e98}{Action\+Error}}.
+
+\Hypertarget{class_action_build_error_ac8df7510a21add0357a2f7f5d863be88}\index{ActionBuildError@{ActionBuildError}!setXmlLineNumber@{setXmlLineNumber}}
+\index{setXmlLineNumber@{setXmlLineNumber}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{setXmlLineNumber()}{setXmlLineNumber()}}
+{\footnotesize\ttfamily \label{class_action_build_error_ac8df7510a21add0357a2f7f5d863be88} 
+void Action\+Build\+Error\+::set\+Xml\+Line\+Number (\begin{DoxyParamCaption}\item[{int}]{ln}{}\end{DoxyParamCaption})}
+
+
+
+Setter for the line number in the XML file containing the erroneous action. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ln} & Line number in the XML file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_action_build_error_a1aedd340389107bda25d9cfd943835b8}\index{ActionBuildError@{ActionBuildError}!toStdString@{toStdString}}
+\index{toStdString@{toStdString}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{toStdString()}{toStdString()}}
+{\footnotesize\ttfamily \label{class_action_build_error_a1aedd340389107bda25d9cfd943835b8} 
+std\+::string Action\+Build\+Error\+::to\+Std\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method to get the std\+::string representation of the error. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string representation of the error. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_action_error_a6e6440a9b8778efdd8885d1280dd6dc9}{Action\+Error}}.
+
+\Hypertarget{class_action_build_error_aa42be8433d876c16ae22148f8738ef5e}\index{ActionBuildError@{ActionBuildError}!type@{type}}
+\index{type@{type}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \label{class_action_build_error_aa42be8433d876c16ae22148f8738ef5e} 
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} Action\+Build\+Error\+::type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_action_build_error_a1294e90ac2d99805c8800af34ea3d2dc}\index{ActionBuildError@{ActionBuildError}!\_\_pad0\_\_@{\_\_pad0\_\_}}
+\index{\_\_pad0\_\_@{\_\_pad0\_\_}!ActionBuildError@{ActionBuildError}}
+\doxysubsubsection{\texorpdfstring{\_\_pad0\_\_}{\_\_pad0\_\_}}
+{\footnotesize\ttfamily \label{class_action_build_error_a1294e90ac2d99805c8800af34ea3d2dc} 
+Action\+Build\+Error\+::\+\_\+\+\_\+pad0\+\_\+\+\_\+}
+
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00064}{64}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_action_error_8h}{Action\+Error.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,105 @@
+\doxysection{include/\+Action\+Error.h File Reference}
+\hypertarget{_action_error_8h}{}\label{_action_error_8h}\index{include/ActionError.h@{include/ActionError.h}}
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_action_error}{Action\+Error}}
+\begin{DoxyCompactList}\small\item\em Class representing an \doxylink{class_action}{Action} error. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_action_build_error}{Action\+Build\+Error}}
+\begin{DoxyCompactList}\small\item\em Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} creation error. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_action_perform_error}{Action\+Perform\+Error}}
+\begin{DoxyCompactList}\small\item\em Derived class of \doxylink{class_action_error}{Action\+Error}. Class representing an \doxylink{class_action}{Action} performance error. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} \{ \newline
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}{NO\+\_\+\+OPER\+\_\+E}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}{INVALID\+\_\+\+ARITY}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}{INVALID\+\_\+\+OPERAND\+\_\+\+FORMAT}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}{INVALID\+\_\+\+LENGTH}}
+, \newline
+\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}{DIVISION\+\_\+\+BY\+\_\+\+ZERO}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}{OPERAND\+\_\+\+WITH\+\_\+\+FRACTIONAL\+\_\+\+PART\+\_\+\+POW\+\_\+\+FACT}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}{OPERAND\+\_\+\+LESS\+\_\+\+ZERO\+\_\+\+POW\+\_\+\+FACT}}
+, \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a66ba597c79424ec8ddeb344c90e64140}{INTEGER\+\_\+\+PART\+\_\+\+OVERFLOW}}
+ \}
+\begin{DoxyCompactList}\small\item\em Types of errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{_action_error_8h_a79b9ecb83f1db2ebbdad0fea703aa565}{error\+Type\+To\+Std\+String}} (\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}} e)
+\begin{DoxyCompactList}\small\item\em Function to convert Action\+Error\+Type to std\+::string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}\index{ActionError.h@{ActionError.h}!ActionErrorType@{ActionErrorType}}
+\index{ActionErrorType@{ActionErrorType}!ActionError.h@{ActionError.h}}
+\doxysubsubsection{\texorpdfstring{ActionErrorType}{ActionErrorType}}
+{\footnotesize\ttfamily \label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+enum \mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}
+
+
+
+Types of errors. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_OPER\_E@{NO\_OPER\_E}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!NO\_OPER\_E@{NO\_OPER\_E}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7868d8d1b383f9cf90899b50f119a35b}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+NO\+\_\+\+OPER\+\_\+E&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_ARITY@{INVALID\_ARITY}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_ARITY@{INVALID\_ARITY}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a39bd38d356208eb603235ba13b0c141d}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+INVALID\+\_\+\+ARITY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_OPERAND\_FORMAT@{INVALID\_OPERAND\_FORMAT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_OPERAND\_FORMAT@{INVALID\_OPERAND\_FORMAT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ac658cde252ec8528d200c9b057c8b717}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+INVALID\+\_\+\+OPERAND\+\_\+\+FORMAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_LENGTH@{INVALID\_LENGTH}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INVALID\_LENGTH@{INVALID\_LENGTH}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a9150b687e9c52039a4bd5ea5ae2e0fe9}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+INVALID\+\_\+\+LENGTH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIVISION\_BY\_ZERO@{DIVISION\_BY\_ZERO}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!DIVISION\_BY\_ZERO@{DIVISION\_BY\_ZERO}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a7d0c15b3b3581352cef95e0285634fae}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+DIVISION\+\_\+\+BY\+\_\+\+ZERO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT@{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT@{OPERAND\_WITH\_FRACTIONAL\_PART\_POW\_FACT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801ae2430fb29f4a57488c99802d5cc8b1d3}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+OPERAND\+\_\+\+WITH\+\_\+\+FRACTIONAL\+\_\+\+PART\+\_\+\+POW\+\_\+\+FACT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPERAND\_LESS\_ZERO\_POW\_FACT@{OPERAND\_LESS\_ZERO\_POW\_FACT}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!OPERAND\_LESS\_ZERO\_POW\_FACT@{OPERAND\_LESS\_ZERO\_POW\_FACT}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801abd82a3338bb914b216676934f7ccba28}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+OPERAND\+\_\+\+LESS\+\_\+\+ZERO\+\_\+\+POW\+\_\+\+FACT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INTEGER\_PART\_OVERFLOW@{INTEGER\_PART\_OVERFLOW}!ActionError.h@{ActionError.h}}\index{ActionError.h@{ActionError.h}!INTEGER\_PART\_OVERFLOW@{INTEGER\_PART\_OVERFLOW}}}\Hypertarget{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801a66ba597c79424ec8ddeb344c90e64140}\label{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801} 
+INTEGER\+\_\+\+PART\+\_\+\+OVERFLOW&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_action_error_8h_source_l00010}{10}} of file \mbox{\hyperlink{_action_error_8h_source}{Action\+Error.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_action_error_8h_a79b9ecb83f1db2ebbdad0fea703aa565}\index{ActionError.h@{ActionError.h}!errorTypeToStdString@{errorTypeToStdString}}
+\index{errorTypeToStdString@{errorTypeToStdString}!ActionError.h@{ActionError.h}}
+\doxysubsubsection{\texorpdfstring{errorTypeToStdString()}{errorTypeToStdString()}}
+{\footnotesize\ttfamily \label{_action_error_8h_a79b9ecb83f1db2ebbdad0fea703aa565} 
+std\+::string error\+Type\+To\+Std\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_error_8h_a2e5b6cf348f2d9a3b77c9b7d3b9fd801}{Action\+Error\+Type}}}]{e}{}\end{DoxyParamCaption})}
+
+
+
+Function to convert Action\+Error\+Type to std\+::string. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e} & Action\+Error\+Type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string representation of the error type. 
+\end{DoxyReturn}

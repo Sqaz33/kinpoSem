@@ -1,0 +1,111 @@
+\doxysection{Action Class Reference}
+\hypertarget{class_action}{}\label{class_action}\index{Action@{Action}}
+
+
+Class to represent an action.  
+
+
+
+
+{\ttfamily \#include $<$Action.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_action_a03b0f2161653fbef36dfbb14c235cf57}{Action}} (\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb}{Operation}} oper, const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \texorpdfstring{$\ast$}{*}term1, const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \texorpdfstring{$\ast$}{*}term2=nullptr)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_action}{Action} constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \mbox{\hyperlink{class_action_a10969803e7819e81c1d310831aafc698}{perform}} () const
+\begin{DoxyCompactList}\small\item\em Method to perform the action. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_action_ae763950297bca15077a66610ce3c2edb}{to\+Std\+String}} () const
+\begin{DoxyCompactList}\small\item\em Function to get the string representation of the action. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_action_a5c1f43f93a1c4afa4ebae2c6324cb7d7}{operator==}} (const \mbox{\hyperlink{class_action}{Action}} \&other) const
+\item 
+\mbox{\hyperlink{class_action_a4f457ccfc8336b565cadca56b36e0271}{Action}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to represent an action. 
+
+\hypertarget{class_action_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md0}{autotoc\+\_\+md0}}\label{class_action_autotoc_md0}
+\begin{DoxySeeAlso}{See also}
+
+\end{DoxySeeAlso}
+Example of an action\+: 1 + 2 = 3 term1 = 1 term2 = 2 oper = \textquotesingle{}+\textquotesingle{} perform -\/ \textquotesingle{}=\textquotesingle{} \hypertarget{class_action_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{3 -\/ perform return}{3 -\/ perform return}}\label{class_action_autotoc_md1}
+
+
+Definition at line \mbox{\hyperlink{_action_8h_source_l00071}{71}} of file \mbox{\hyperlink{_action_8h_source}{Action.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_action_a03b0f2161653fbef36dfbb14c235cf57}\index{Action@{Action}!Action@{Action}}
+\index{Action@{Action}!Action@{Action}}
+\doxysubsubsection{\texorpdfstring{Action()}{Action()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_action_a03b0f2161653fbef36dfbb14c235cf57} 
+Action\+::\+Action (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_action_8h_aa8f137f19095e0bdcf4f521e901f88bb}{Operation}}}]{oper}{, }\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \texorpdfstring{$\ast$}{*}}]{term1}{, }\item[{const \mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} \texorpdfstring{$\ast$}{*}}]{term2}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_action}{Action} constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em oper} & string representation of the operation. \\
+\hline
+\mbox{\texttt{ in}}  & {\em term1} & string representation of the first operand. \\
+\hline
+\mbox{\texttt{ in}}  & {\em term2} & string representation of the second operand.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_action_build_error}{Action\+Build\+Error}} & if the number of operands is incorrect. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_action_a4f457ccfc8336b565cadca56b36e0271}\index{Action@{Action}!Action@{Action}}
+\index{Action@{Action}!Action@{Action}}
+\doxysubsubsection{\texorpdfstring{Action()}{Action()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_action_a4f457ccfc8336b565cadca56b36e0271} 
+Action\+::\+Action (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_action_a5c1f43f93a1c4afa4ebae2c6324cb7d7}\index{Action@{Action}!operator==@{operator==}}
+\index{operator==@{operator==}!Action@{Action}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_action_a5c1f43f93a1c4afa4ebae2c6324cb7d7} 
+bool Action\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_action}{Action}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_action_a10969803e7819e81c1d310831aafc698}\index{Action@{Action}!perform@{perform}}
+\index{perform@{perform}!Action@{Action}}
+\doxysubsubsection{\texorpdfstring{perform()}{perform()}}
+{\footnotesize\ttfamily \label{class_action_a10969803e7819e81c1d310831aafc698} 
+\mbox{\hyperlink{class_big_real_number}{Big\+Real\+Number}} Action\+::perform (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Method to perform the action. 
+
+\begin{DoxyReturn}{Returns}
+Result of the action. 
+\end{DoxyReturn}
+\Hypertarget{class_action_ae763950297bca15077a66610ce3c2edb}\index{Action@{Action}!toStdString@{toStdString}}
+\index{toStdString@{toStdString}!Action@{Action}}
+\doxysubsubsection{\texorpdfstring{toStdString()}{toStdString()}}
+{\footnotesize\ttfamily \label{class_action_ae763950297bca15077a66610ce3c2edb} 
+std\+::string Action\+::to\+Std\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Function to get the string representation of the action. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the action. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_action_8h}{Action.\+h}}\end{DoxyCompactItemize}

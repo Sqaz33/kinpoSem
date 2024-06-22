@@ -1,0 +1,73 @@
+\doxysection{Std\+String\+To\+Txt Class Reference}
+\hypertarget{class_std_string_to_txt}{}\label{class_std_string_to_txt}\index{StdStringToTxt@{StdStringToTxt}}
+
+
+Class for writing strings to txt files.  
+
+
+
+
+{\ttfamily \#include $<$Std\+Strings\+To\+Txt.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_std_string_to_txt_a00c25e9afcaee4d65814d542c26349cd}{Std\+String\+To\+Txt}} (const std\+::string \&txt\+Path)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_std_string_to_txt}{Std\+String\+To\+Txt}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_std_string_to_txt_a11192a3542bec48af7ef06f9c6718160}{write}} (const QList$<$ std\+::string $>$ \&strs, bool append\+To) const
+\begin{DoxyCompactList}\small\item\em Method for writing strings to a txt file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for writing strings to txt files. 
+
+Definition at line \mbox{\hyperlink{_std_strings_to_txt_8h_source_l00014}{14}} of file \mbox{\hyperlink{_std_strings_to_txt_8h_source}{Std\+Strings\+To\+Txt.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_std_string_to_txt_a00c25e9afcaee4d65814d542c26349cd}\index{StdStringToTxt@{StdStringToTxt}!StdStringToTxt@{StdStringToTxt}}
+\index{StdStringToTxt@{StdStringToTxt}!StdStringToTxt@{StdStringToTxt}}
+\doxysubsubsection{\texorpdfstring{StdStringToTxt()}{StdStringToTxt()}}
+{\footnotesize\ttfamily \label{class_std_string_to_txt_a00c25e9afcaee4d65814d542c26349cd} 
+Std\+String\+To\+Txt\+::\+Std\+String\+To\+Txt (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{txt\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_std_string_to_txt}{Std\+String\+To\+Txt}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em txt\+Path} & Path to the txt file. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_std_string_to_txt_a11192a3542bec48af7ef06f9c6718160}\index{StdStringToTxt@{StdStringToTxt}!write@{write}}
+\index{write@{write}!StdStringToTxt@{StdStringToTxt}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily \label{class_std_string_to_txt_a11192a3542bec48af7ef06f9c6718160} 
+void Std\+String\+To\+Txt\+::write (\begin{DoxyParamCaption}\item[{const QList$<$ std\+::string $>$ \&}]{strs}{, }\item[{bool}]{append\+To}{}\end{DoxyParamCaption}) const}
+
+
+
+Method for writing strings to a txt file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em strs} & List of strings. \\
+\hline
+\mbox{\texttt{ in}}  & {\em append\+To} & Whether to append to the file\textquotesingle{}s content.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & If unable to open and/or create the txt file. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_std_strings_to_txt_8h}{Std\+Strings\+To\+Txt.\+h}}\end{DoxyCompactItemize}

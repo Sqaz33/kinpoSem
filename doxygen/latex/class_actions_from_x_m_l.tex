@@ -1,0 +1,80 @@
+\doxysection{Actions\+From\+XML Class Reference}
+\hypertarget{class_actions_from_x_m_l}{}\label{class_actions_from_x_m_l}\index{ActionsFromXML@{ActionsFromXML}}
+
+
+Class for loading operations from an XML file.  
+
+
+
+
+{\ttfamily \#include $<$Actions\+From\+XML.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_actions_from_x_m_l_afd2fbe87b8f0663233e1d40f786b7822}{Actions\+From\+XML}} (const string \&XMLPath, QList$<$ \mbox{\hyperlink{class_action_error}{Action\+Error}} \texorpdfstring{$\ast$}{*} $>$ \&action\+Errors)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_actions_from_x_m_l}{Actions\+From\+XML} constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_actions_from_x_m_l_a8b7d28741a870da5cb4dbc066f13562b}{\texorpdfstring{$\sim$}{\string~}\+Actions\+From\+XML}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_actions_from_x_m_l}{Actions\+From\+XML} destructor. \end{DoxyCompactList}\item 
+const QHash$<$ int, const \mbox{\hyperlink{class_action}{Action}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_actions_from_x_m_l_abf70fca7e543ab95f4a5d84008d84878}{get\+Actions}} () const
+\begin{DoxyCompactList}\small\item\em Method to get the list of Actions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for loading operations from an XML file. 
+
+The \doxylink{class_actions_from_x_m_l}{Actions\+From\+XML} class is responsible for reading and parsing an XML file that contains a list of operations. It extracts the relevant data to create \doxylink{class_action}{Action} objects and stores them in a hash table. This class is designed to ignore any XML tags other than those specifically defined for operations. 
+
+Definition at line \mbox{\hyperlink{_actions_from_x_m_l_8h_source_l00024}{24}} of file \mbox{\hyperlink{_actions_from_x_m_l_8h_source}{Actions\+From\+XML.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_actions_from_x_m_l_afd2fbe87b8f0663233e1d40f786b7822}\index{ActionsFromXML@{ActionsFromXML}!ActionsFromXML@{ActionsFromXML}}
+\index{ActionsFromXML@{ActionsFromXML}!ActionsFromXML@{ActionsFromXML}}
+\doxysubsubsection{\texorpdfstring{ActionsFromXML()}{ActionsFromXML()}}
+{\footnotesize\ttfamily \label{class_actions_from_x_m_l_afd2fbe87b8f0663233e1d40f786b7822} 
+Actions\+From\+XML\+::\+Actions\+From\+XML (\begin{DoxyParamCaption}\item[{const string \&}]{XMLPath}{, }\item[{QList$<$ \mbox{\hyperlink{class_action_error}{Action\+Error}} \texorpdfstring{$\ast$}{*} $>$ \&}]{action\+Errors}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_actions_from_x_m_l}{Actions\+From\+XML} constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em XMLPath} & path to the XML file. \\
+\hline
+\mbox{\texttt{ out}}  & {\em action\+Errors} & list of \doxylink{class_action}{Action} creation errors. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_actions_from_x_m_l_a8b7d28741a870da5cb4dbc066f13562b}\index{ActionsFromXML@{ActionsFromXML}!````~ActionsFromXML@{\texorpdfstring{$\sim$}{\string~}ActionsFromXML}}
+\index{````~ActionsFromXML@{\texorpdfstring{$\sim$}{\string~}ActionsFromXML}!ActionsFromXML@{ActionsFromXML}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ActionsFromXML()}{\string~ActionsFromXML()}}
+{\footnotesize\ttfamily \label{class_actions_from_x_m_l_a8b7d28741a870da5cb4dbc066f13562b} 
+Actions\+From\+XML\+::\texorpdfstring{$\sim$}{\string~}\+Actions\+From\+XML (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_actions_from_x_m_l}{Actions\+From\+XML} destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_actions_from_x_m_l_abf70fca7e543ab95f4a5d84008d84878}\index{ActionsFromXML@{ActionsFromXML}!getActions@{getActions}}
+\index{getActions@{getActions}!ActionsFromXML@{ActionsFromXML}}
+\doxysubsubsection{\texorpdfstring{getActions()}{getActions()}}
+{\footnotesize\ttfamily \label{class_actions_from_x_m_l_abf70fca7e543ab95f4a5d84008d84878} 
+const QHash$<$ int, const \mbox{\hyperlink{class_action}{Action}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} Actions\+From\+XML\+::get\+Actions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Method to get the list of Actions. 
+
+\begin{DoxyReturn}{Returns}
+List of Actions. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_actions_from_x_m_l_8h}{Actions\+From\+XML.\+h}}\end{DoxyCompactItemize}
