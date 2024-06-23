@@ -599,9 +599,12 @@ void BigRealNumber::divRemaind(
     one.setVal(1);
     d = diver;
 
+    static BigRealNumber bufR;
+    bufR.setVal(0);
     while (s >= diver) {
         s.sub(diver, s);
-        R.add(one, R);
+        R.add(one, bufR);
+        R = bufR;
     }
     Q = s;
 }
