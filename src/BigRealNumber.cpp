@@ -355,20 +355,29 @@ void BigRealNumber::add(
     // Если term1 + (-term2)
     if (!(isNegative) && term2.isNegative) {
         // res = term1 - term2
-        BigRealNumber buf = term2;
+        static BigRealNumber buf;
+        buf = term2;
         buf.isNegative = false;
         this->sub(buf, res);
         return;
     // Если -term1 + term2
     } else if (isNegative && !term2.isNegative) {
         // res = term2 - term1
-        BigRealNumber buf = *this;
+        static BigRealNumber buf;
+        buf = *this;
         buf.isNegative = false;
         term2.sub(buf, res);
         return;
     } 
     // На случай подобного: term1.add(term2, term1)
-    BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
+    BigRealNumber *rs;
+    bool isResEqThis = false;
+    if (this == &res) {
+        rs = new BigRealNumber();
+        isResEqThis = true;
+    } else {
+        rs = &res;
+    }
     rs->isNegative = isNegative;
 
     short trans = attachArrays(*this, term2,
@@ -382,6 +391,9 @@ void BigRealNumber::add(
     if (this == &res) {
         res = *rs;
     }
+    if (isResEqThis) {
+        delete rs;
+    }
 }
 
 void BigRealNumber::sub(
@@ -393,9 +405,10 @@ void BigRealNumber::sub(
    // -term1 - term2
    // -term1 - (-term2) 
 
-    // Если -term1 - term2 или term1 - (-term2a) 
+    // Если -term1 - term2 или term1 - (-term2) 
     if ((isNegative && !subtractor.isNegative) || (!(isNegative) && subtractor.isNegative)) {
-        BigRealNumber buf = subtractor;
+        static BigRealNumber buf;
+        buf = subtractor;
         buf.isNegative = isNegative;
         this->add(buf, res);
         res.isNegative = isNegative;
@@ -403,8 +416,11 @@ void BigRealNumber::sub(
     // Если -term1 - (-term2)
     } else if (isNegative && subtractor.isNegative) {
         // res = term2 - term1
-        BigRealNumber ths = *this;
-        BigRealNumber sb = subtractor;
+        static BigRealNumber ths;
+        ths = *this;
+        static BigRealNumber sb;
+        sb = subtractor;
+
         ths.isNegative = false;
         sb.isNegative = false;
         sb.sub(ths, res);
@@ -413,7 +429,14 @@ void BigRealNumber::sub(
     // Иначе вычислить term1 - term2
 
     if (*this >= subtractor) {
-        BigRealNumber *rs = this == &res ? new BigRealNumber() : &res;
+        BigRealNumber *rs;
+        bool isResEqThis = false;
+        if (this == &res) {
+            rs = new BigRealNumber();
+            isResEqThis = true;
+        } else {
+            rs = &res;
+        }
         short trans = attachArrays(*this, subtractor,
                                     *rs, true,
                                     true, 0);
@@ -423,6 +446,9 @@ void BigRealNumber::sub(
         rs->removeInsignDigits();
         if (this == &res) {
             res = *rs;
+        }
+        if (isResEqThis) {
+            delete rs;
         }
     } else {
         // res = -(term2 - term1)
@@ -463,27 +489,33 @@ void BigRealNumber::mul(
     }
     
     // Умножить начиная с младших разрядов столбиком
-    BigRealNumber buf1;
-    BigRealNumber buf2;
+    static BigRealNumber buf1;
+    buf1.setVal(0);
+    static BigRealNumber buf2;
+    static BigRealNumber buf3;
     // Дробную часть
     for (int i = fac.fractPrtLen - 1; i >= 0; i--) {
         buf2.setVal(0);
+        buf3.setVal(0);
         buf1.setVal(fac.fractPrt[i]);
         // Умножить множиемое на i-ый разряд множителя
         mul(buf1, buf2);
         // Сдвинуть результат предыдущей операции вправо
         buf2.shiftNumber(i + 1, true);
         // Прибавить к ответу
-        res.add(buf2, res);
+        res.add(buf2, buf3);
+        res = buf3;
     }
     // Целую часть
     for (int i = 0; i < fac.intPrtLen; i++) {
         buf2.setVal(0);
+        buf3.setVal(0);
         buf1.setVal(fac.intPrt[i]);
         mul(buf1, buf2);
         // Сдвинуть ... влево
         buf2.shiftNumber(i, false);
-        res.add(buf2, res);
+        res.add(buf2, buf3);
+        res = buf3;
     }
 }
 
@@ -491,16 +523,24 @@ void BigRealNumber::div(
     const BigRealNumber& diver,
     BigRealNumber& res
 ) const {
-    BigRealNumber dcp = diver; 
-    BigRealNumber ths = *this;
+    static BigRealNumber dcp; 
+    static BigRealNumber ths;
+
+    dcp = diver;
+    ths = *this;
     ths.shiftNumber(dcp.fractPrtLen, false);
     dcp.shiftNumber(dcp.fractPrtLen, false);
     ths.removeInsignDigits();
     dcp.removeInsignDigits();
 
-    BigRealNumber q; // Остаток
-    BigRealNumber r; // Целая часть
-    BigRealNumber divid; // Буфер для столбика
+    static BigRealNumber q; // Остаток
+    static BigRealNumber r; // Целая часть
+    static BigRealNumber divid; // Буфер для столбика
+
+    q.setVal(0);
+    r.setVal(0);
+    divid.setVal(0);
+
     int i = ths.intPrtLen - 1; // Начальный индекс для целой части делимого
     int j = 0; // Начальный индекс для дробной части делимого
     int fp = -1; // Индек для внесения в дробную часть результата
@@ -551,9 +591,14 @@ void BigRealNumber::divRemaind(
     BigRealNumber& R,
     BigRealNumber& Q
 ) const {
-    BigRealNumber s = *this;
-    BigRealNumber one(1);
-    BigRealNumber d = diver;
+    static BigRealNumber s;
+    static BigRealNumber one;
+    static BigRealNumber d;
+    
+    s = *this;
+    one.setVal(1);
+    d = diver;
+
     while (s >= diver) {
         s.sub(diver, s);
         R.add(one, R);
